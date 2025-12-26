@@ -1,353 +1,633 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NERVYNIA TEAM</title>
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#000;
-color:#fff;
-direction:rtl;
-}
-
-/* الصفحات */
-.page{display:none;padding:20px;}
-.page.active{display:block;}
-
-/* التنقل */
-nav{
-background:#111;
-padding:15px;
-position:sticky;
-top:0;
-z-index:100;
-border-bottom:2px solid #0af;
-}
-
-.nav-links{
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-}
-
-.nav-link{
-color:#fff;
-text-decoration:none;
-padding:8px 15px;
-border-radius:5px;
-transition:.3s;
-}
-
-.nav-link:hover,
-.nav-link.active{
-background:#0af;
-color:#000;
-}
-
-/* الرئيسية */
-header{
-text-align:center;
-padding:40px 20px;
-}
-
-h1{
-color:#0af;
-font-size:36px;
-margin-bottom:20px;
-}
-
-.hero-text{
-font-size:18px;
-margin-bottom:30px;
-line-height:1.6;
-}
-
-/* الأزرار */
-.btn{
-display:inline-block;
-padding:12px 25px;
-background:#0af;
-color:#000;
-text-decoration:none;
-border-radius:5px;
-margin:10px;
-font-weight:bold;
-border:none;
-cursor:pointer;
-}
-
-/* الكروت */
-.card{
-background:#111;
-border:1px solid #333;
-border-radius:10px;
-padding:20px;
-margin:20px auto;
-max-width:800px;
-}
-
-.card h2{
-color:#0af;
-margin-bottom:15px;
-font-size:24px;
-}
-
-/* الفريق */
-.team-grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-gap:20px;
-padding:20px;
-}
-
-.member-card{
-background:#111;
-border:1px solid #333;
-border-radius:10px;
-padding:20px;
-text-align:center;
-cursor:pointer;
-transition:.3s;
-}
-
-.member-card:hover{
-border-color:#0af;
-transform:translateY(-5px);
-}
-
-.member-name{
-color:#0af;
-font-size:22px;
-margin-bottom:5px;
-}
-
-.member-role{
-color:#ccc;
-font-size:16px;
-}
-
-/* صورة القائد */
-.leader-img{
-width:120px;
-height:120px;
-border-radius:50%;
-object-fit:cover;
-border:3px solid #0af;
-box-shadow:0 0 25px rgba(0,170,255,.7);
-margin-bottom:10px;
-}
-
-/* صفحة العضو */
-.back-btn{
-display:inline-block;
-padding:10px 20px;
-background:#222;
-color:#0af;
-text-decoration:none;
-border-radius:5px;
-margin-bottom:20px;
-}
-
-.profile-header{text-align:center;margin-bottom:30px;}
-.profile-title{color:#0af;font-size:32px;margin-bottom:10px;}
-.profile-content{background:#111;border-radius:10px;padding:20px;}
-
-.info-section{margin-bottom:20px;}
-.info-section h3{
-color:#0af;
-margin-bottom:10px;
-border-bottom:1px solid #333;
-padding-bottom:5px;
-}
-
-/* التذييل */
-footer{
-text-align:center;
-padding:30px 20px;
-margin-top:50px;
-border-top:1px solid #333;
-}
-
-/* متجاوب */
-@media(max-width:768px){
-.team-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}
-h1{font-size:28px;}
-}
-@media(max-width:480px){
-.team-grid{grid-template-columns:1fr;}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NERVYNIA TEAM</title>
+    <style>
+        /* أساسيات خفيفة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+        
+        /* مؤشر التحميل */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        
+        #loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #0af;
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* الصفحات */
+        .page {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* التنقل */
+        nav {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #0af;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.95);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 170, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-link:hover::before {
+            left: 100%;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            background: #0af;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3);
+        }
+        
+        /* الرئيسية */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(0, 170, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        h1 {
+            color: #0af;
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(0, 170, 255, 0.5); }
+            to { text-shadow: 0 0 20px rgba(0, 170, 255, 0.8), 0 0 30px rgba(0, 170, 255, 0.4); }
+        }
+        
+        .hero-text {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* الأزرار */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #0af;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 170, 255, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
+        /* الكروت */
+        .card {
+            background: rgba(17, 17, 17, 0.8);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px auto;
+            max-width: 800px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 170, 255, 0.1);
+            border-color: #0af;
+        }
+        
+        .card h2 {
+            color: #0af;
+            margin-bottom: 15px;
+            font-size: 24px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: #0af;
+        }
+        
+        /* صفحة الفريق */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .member-card {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #0af;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        
+        .member-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .member-card:hover {
+            border-color: #0af;
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 170, 255, 0.1);
+        }
+        
+        .member-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .member-card:hover .member-icon {
+            transform: scale(1.1);
+        }
+        
+        .member-name {
+            color: #0af;
+            font-size: 22px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .member-role {
+            color: #ccc;
+            font-size: 16px;
+            background: rgba(0, 170, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        /* صفحة العضو */
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #222;
+            color: #0af;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            border: 1px solid #333;
+        }
+        
+        .back-btn:hover {
+            background: #0af;
+            color: #000;
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 10px;
+            background: rgba(17, 17, 17, 0.8);
+            border: 1px solid #333;
+        }
+        
+        .profile-title {
+            color: #0af;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .profile-content {
+            background: rgba(17, 17, 17, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+            border: 1px solid #333;
+        }
+        
+        .info-section {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .info-section:last-child {
+            border-bottom: none;
+        }
+        
+        .info-section h3 {
+            color: #0af;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0af;
+            display: inline-block;
+        }
+        
+        .info-section p {
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+        
+        /* تخصيص الألوان لكل عضو */
+        .member-color-0 { border-top-color: #0af; }
+        .member-color-1 { border-top-color: #ff4d4d; }
+        .member-color-2 { border-top-color: #4dff4d; }
+        .member-color-3 { border-top-color: #ffd700; }
+        .member-color-4 { border-top-color: #9b4dff; }
+        .member-color-5 { border-top-color: #ff69b4; }
+        .member-color-6 { border-top-color: #00ced1; }
+        
+        /* التذييل */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            border-top: 1px solid #333;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer-logo {
+            color: #0af;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        /* متجاوب */
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .profile-title {
+                font-size: 28px;
+            }
+            
+            .hero-text {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                gap: 10px;
+            }
+            
+            .nav-link {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .card {
+                padding: 15px;
+                margin: 15px auto;
+            }
+        }
+        
+        /* تأثيرات الظهور عند التمرير */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-
 <body>
+    <!-- مؤشر التحميل -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
 
-<nav>
-<div class="nav-links">
-<a href="#home" class="nav-link active" onclick="showPage('home')">الرئيسية</a>
-<a href="#team" class="nav-link" onclick="showPage('team')">الفريق</a>
-<a href="#about" class="nav-link" onclick="showPage('about')">من نحن</a>
-</div>
-</nav>
+    <!-- التنقل -->
+    <nav id="mainNav">
+        <div class="nav-links">
+            <a href="#home" class="nav-link active" onclick="showPage('home')">الرئيسية</a>
+            <a href="#team" class="nav-link" onclick="showPage('team')">الفريق</a>
+            <a href="#about" class="nav-link" onclick="showPage('about')">من نحن</a>
+        </div>
+    </nav>
 
-<!-- الرئيسية -->
-<div id="home-page" class="page active">
-<header>
-<h1>NERVYNIA TEAM</h1>
-<p class="hero-text">
-فريق يعمل في الظل، بلا ضجيج، بلا وجوه.<br>
-يجمع بين العقل، السيطرة، والسرية.
-</p>
-<button class="btn" onclick="showPage('team')">تعرف على الفريق</button>
-<a href="https://wa.me/201029505953" target="_blank" class="btn">تواصل معنا</a>
-</header>
+    <!-- الصفحة الرئيسية -->
+    <div id="home-page" class="page active">
+        <header>
+            <h1>NERVYNIA TEAM</h1>
+            <p class="hero-text fade-in">
+                فريق يعمل في الظل، بلا ضجيج، بلا وجوه.<br>
+                يجمع بين العقل، السيطرة، والسرية.
+            </p>
+            <button class="btn" onclick="showPage('team')">تعرف على الفريق</button>
+            <a href="https://wa.me/201029505953" target="_blank" class="btn">تواصل معنا</a>
+        </header>
 
-<div class="card">
-<h2>تعريف الفريق</h2>
-<p>NERVYNIA ليس مجرد فريق، بل كيان يعمل في طبقات الواقع الخفية.</p>
-</div>
-</div>
+        <div class="card fade-in">
+            <h2>تعريف الفريق</h2>
+            <p>NERVYNIA ليس مجرد فريق، بل هو كيان يعمل في طبقات الواقع الخفية. نحن الظل الذي يتحرك عندما يظن الجميع أن النور قد انتصر. نحن لا نترك أثراً، ولا نصنع ضجيجاً، ولكن تأثيرنا محسوس في كل مكان.</p>
+        </div>
 
-<!-- الفريق -->
-<div id="team-page" class="page">
-<h1 style="text-align:center;margin:30px 0;">أعضاء الفريق</h1>
+        <div class="card fade-in">
+            <h2>الظلام</h2>
+            <p>في عام 2018، ولد NERVYNIA من رحم الحاجة إلى كيان غير مرئي يمكنه العمل حيث يفشل الآخرون. منذ ذلك الحين، نمونا وتطورنا، لكننا حافظنا على جوهرنا: العمل في الخفاء، التأثير في العمق.</p>
+        </div>
+        
+        <div class="card fade-in">
+            <h2>مبادئنا</h2>
+            <p>1. السرية التامة: لا وجود لنا في السجلات الرسمية.<br>
+               2. العمل الذكي: كل حركة مدروسة بعناية.<br>
+               3. التأثير العميق: لا نعمل على السطح بل في الجذور.<br>
+               4. الولاء للفريق: الفريق فوق كل اعتبار.</p>
+        </div>
+    </div>
 
-<div class="team-grid">
+    <!-- صفحة الفريق -->
+    <div id="team-page" class="page">
+        <h1 style="text-align: center; margin: 30px 0;">أعضاء الفريق</h1>
+        
+        <div class="team-grid">
+            <!-- الأعضاء -->
+            <div class="member-card member-color-0" onclick="showMember('كرولو')">
+                <div class="member-icon">🕷️</div>
+                <div class="member-name">كرولو</div>
+                <div class="member-role">العقل المدبر</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #aaa;">انقر للمزيد من التفاصيل</p>
+            </div>
 
-<!-- كرولو -->
-<div class="member-card" onclick="showMember('كرولو')">
-<img src="chrollo.jpg" class="leader-img" alt="Chrollo">
-<div class="member-name">كرولو</div>
-<div class="member-role">العقل المدبر</div>
-</div>
+            <div class="member-card member-color-1" onclick="showMember('لولوش')">
+                <div class="member-icon">♟️</div>
+                <div class="member-name">لولوش</div>
+                <div class="member-role">الاستراتيجي</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #aaa;">انقر للمزيد من التفاصيل</p>
+            </div>
 
-<div class="member-card" onclick="showMember('لولوش')">
-<div class="member-name">لولوش ♟️</div>
-<div class="member-role">الاستراتيجي</div>
-</div>
+            <div class="member-card member-color-2" onclick="showMember('آدم')">
+                <div class="member-icon">⚡</div>
+                <div class="member-name">آدم</div>
+                <div class="member-role">كاسر الأنظمة</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #aaa;">انقر للمزيد من التفاصيل</p>
+            </div>
 
-<div class="member-card" onclick="showMember('آدم')">
-<div class="member-name">آدم ⚡</div>
-<div class="member-role">كاسر الأنظمة</div>
-</div>
+            <div class="member-card member-color-3" onclick="showMember('كاتانا')">
+                <div class="member-icon">🗡️</div>
+                <div class="member-name">كاتانا</div>
+                <div class="member-role">السيف الرقمي</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #aaa;">انقر للمزيد من التفاصيل</p>
+            </div>
 
-<div class="member-card" onclick="showMember('كاتانا')">
-<div class="member-name">كاتانا 🗡️</div>
-<div class="member-role">السيف الرقمي</div>
-</div>
+            <div class="member-card member-color-4" onclick="showMember('ايزن')">
+                <div class="member-icon">🪞</div>
+                <div class="member-name">ايزن</div>
+                <div class="member-role">المحلل النفسي</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #aaa;">انقر للمزيد من التفاصيل</p>
+            </div>
 
-<div class="member-card" onclick="showMember('ايزن')">
-<div class="member-name">ايزن 🪞</div>
-<div class="member-role">المحلل النفسي</div>
-</div>
+            <div class="member-card member-color-5" onclick="showMember('ليليث')">
+                <div class="member-icon">🩸</div>
+                <div class="member-name">ليليث</div>
+                <div class="member-role">المخترقة</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #aaa;">انقر للمزيد من التفاصيل</p>
+            </div>
 
-<div class="member-card" onclick="showMember('ليليث')">
-<div class="member-name">ليليث 🩸</div>
-<div class="member-role">المخترقة</div>
-</div>
+            <div class="member-card member-color-6" onclick="showMember('ميكا')">
+                <div class="member-icon">🪽</div>
+                <div class="member-name">ميكا</div>
+                <div class="member-role">المتربص</div>
+                <p style="margin-top: 10px; font-size: 14px; color: #aaa;">انقر للمزيد من التفاصيل</p>
+            </div>
+        </div>
+    </div>
 
-<div class="member-card" onclick="showMember('ميكا')">
-<div class="member-name">ميكا 🪽</div>
-<div class="member-role">المتربص</div>
-</div>
+    <!-- صفحة من نحن -->
+    <div id="about-page" class="page">
+        <div class="card fade-in">
+            <h2>من نحن</h2>
+            <p>الهالة السوداء - The Black Halo - ليست مجرد فريق، بل هي ظل يتحرك في فضاءات لا يراها النور. نحن من نعمل في المساحات بين السطور، في الفراغات التي يظنها الآخرون غير مهمة.</p>
+        </div>
 
-</div>
-</div>
+        <div class="card fade-in">
+            <h2>فلسفتنا</h2>
+            <p>لا نؤمن بالحدود المرسومة، ولا نعترف بالنهايات المفروضة. العالم شطرنجة كبيرة، ونحن من نحرك القطع. لكن لعبتنا مختلفة، فقواعدنا نحن من نصنعها، ومسار اللعبة نحن من نحدده.</p>
+        </div>
+        
+        <div class="card fade-in">
+            <h2>رؤيتنا</h2>
+            <p>أن نكون الظل الذي يراقب، القوة التي تتحرك، الذكاء الذي يخطط. لا نسعى للسيطرة بل للتأثير، لا نريد الحكم بل التوجيه. نحن اليد الخفية التي تدفع التاريخ نحو مساره الصحيح.</p>
+        </div>
+        
+        <div class="card fade-in">
+            <h2>وسائلنا</h2>
+            <p>• الذكاء والمعلومات: جمع وتحليل البيانات هو سلاحنا الأول.<br>
+               • التكنولوجيا: نستخدم أحدث التقنيات ونطور أدواتنا الخاصة.<br>
+               • السرية: نحافظ على هويتنا مخفية ونعمل من خلف الستائر.<br>
+               • العمل الجماعي: كل عضو يكمل الآخر، والفريق وحدة واحدة.</p>
+        </div>
+    </div>
 
-<!-- العضو -->
-<div id="member-page" class="page">
-<a class="back-btn" onclick="showPage('team')">← العودة</a>
-<div class="profile-header">
-<h2 class="profile-title" id="member-title"></h2>
-<p id="member-subtitle" style="color:#0af;"></p>
-</div>
-<div class="profile-content">
-<div class="info-section">
-<h3>نبذة</h3>
-<p id="member-desc"></p>
-</div>
-<div class="info-section">
-<h3>القدرات</h3>
-<p id="member-skills"></p>
-</div>
-</div>
-</div>
+    <!-- صفحة العضو -->
+    <div id="member-page" class="page">
+        <a href="#" class="back-btn" onclick="showPage('team')">← العودة للفريق</a>
+        
+        <div class="profile-header" id="profile-header">
+            <h2 class="profile-title" id="member-title">اسم العضو</h2>
+            <p id="member-subtitle" style="color: #0af; font-size: 18px;">المنصب</p>
+        </div>
+        
+        <div class="profile-content">
+            <div class="info-section">
+                <h3>نبذة</h3>
+                <p id="member-desc">وصف العضو</p>
+            </div>
+            
+            <div class="info-section">
+                <h3>القدرات</h3>
+                <p id="member-skills">المهارات تظهر هنا</p>
+            </div>
+            
+            <div class="info-section">
+                <h3>تاريخ الانضمام</h3>
+                <p id="member-join-date">سنة الانضمام</p>
+            </div>
+            
+            <div class="info-section">
+                <h3>مشاريع بارزة</h3>
+                <p id="member-projects">المشاريع تظهر هنا</p>
+            </div>
+        </div>
+    </div>
 
-<footer>
-<p style="color:#0af;font-size:20px;">NERVYNIA</p>
-<p>الظل الذي يتحرك في صمت</p>
-</footer>
+    <!-- التذييل -->
+    <footer>
+        <p class="footer-logo">NERVYNIA</p>
+        <p>الظل الذي يتحرك في صمت | © 2023</p>
+        <p style="margin-top: 10px; margin-bottom: 15px;">التواصل: <a href="https://wa.me/201029505953" target="_blank" style="color: #0af; text-decoration: none;">واتساب</a></p>
+        <p style="font-size: 14px; color: #aaa;">كل الحقوق محفوظة. هذا الموقع لأغراض توضيحية فقط.</p>
+    </footer>
 
-<script>
-const members={
-"كرولو":{
-title:"كرولو 🕷️",
-subtitle:"العقل المدبر",
-desc:"العقل الذي ينسج كل الخيوط من الظل.",
-skills:"التخطيط 9.8/10\nالسيطرة 9.5/10"
-},
-"لولوش":{
-title:"لولوش ♟️",
-subtitle:"الاستراتيجي",
-desc:"ملك الشطرنج النفسي.",
-skills:"التحليل 9.9/10"
-},
-"آدم":{
-title:"آدم ⚡",
-subtitle:"كاسر الأنظمة",
-desc:"مخترق الدفاعات.",
-skills:"الاختراق 9.8/10"
-},
-"كاتانا":{
-title:"كاتانا 🗡️",
-subtitle:"السيف الرقمي",
-desc:"سرعة ودقة.",
-skills:"السرعة 9.9/10"
-},
-"ايزن":{
-title:"ايزن 🪞",
-subtitle:"المحلل النفسي",
-desc:"يرى ما لا يُرى.",
-skills:"التحليل النفسي 9.9/10"
-},
-"ليليث":{
-title:"ليليث 🩸",
-subtitle:"المخترقة",
-desc:"الهمس الأسود.",
-skills:"التخفي 9.6/10"
-},
-"ميكا":{
-title:"ميكا 🪽",
-subtitle:"المتربص",
-desc:"الصبر القاتل.",
-skills:"المراقبة 9.9/10"
-}
-};
-
-function showPage(id){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-document.getElementById(id+"-page").classList.add("active");
-window.scrollTo(0,0);
-}
-
-function showMember(name){
-let m=members[name];
-showPage("member");
-member-title.textContent=m.title;
-member-subtitle.textContent=m.subtitle;
-member-desc.textContent=m.desc;
-member-skills.textContent=m.skills;
-}
-</script>
-
-</body>
-    </html>
+    <script>
+        // بيانات الأعضاء المحسنة
+        const members = {
+            'كرولو': {
+                title: 'كرولو 🕷️',
+                subtitle: 'العقل المدبر | العنكبوت',
+                desc: 'العقل المدبر للفريق، من ينسج الخيوط ويرسم الخطط. لا يتكلم كثيراً، لكن كل كلمة يقولها تحمل معنى عميقاً. هو من أسس الفريق ويوجه مساره منذ البداية. يعمل في الظل ولكنه يرى كل شيء.',
+                skills: '• التخطيط الاستراتيجي: 9.8/10\n• التحليل المنطقي: 9.5/10\n• السيطرة النفسية: 8.9/10\n• القيادة: 9.7/10\n• التوقع: 9.3/10',
+                joinDate: '2018 (المؤسس)',
+                projects: '• مشروع الظل الخفي (2019)\n• عملية الشبكة العالمية (2020)\n• خطة الرد المتسلسل (2021)\n• مشروع البصيرة (2022)',
+                color: '#0af'
+            }
