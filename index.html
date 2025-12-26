@@ -1,167 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>BLACK HALO SYSTEM</title>
+<title>NERVYNIA</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root{
---blood:#8b0000;
---neon:#ff0033;
---dark:#050005;
---glass:rgba(255,255,255,0.04);
+--bg:#06080f;
+--bg2:#0b1020;
+--neon:#6df3ff;
+--purple:#7a6cff;
+--glass:rgba(255,255,255,0.05);
 }
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family: 'Segoe UI', system-ui, sans-serif;
+font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 body{
 background:
-radial-gradient(circle at 50% 20%,rgba(255,0,50,0.12),transparent 40%),
-radial-gradient(circle at 80% 80%,rgba(100,0,80,0.12),transparent 45%),
-linear-gradient(180deg,#000,#050005,#000);
+radial-gradient(circle at 20% 20%,#101736,transparent 40%),
+radial-gradient(circle at 80% 80%,#0a1b2e,transparent 45%),
+linear-gradient(180deg,var(--bg),var(--bg2));
 color:#fff;
-min-height:100vh;
 overflow-x:hidden;
 }
 
-/* ====== AI CORE BACKGROUND ====== */
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:
-repeating-linear-gradient(
-0deg,
-rgba(255,255,255,0.02),
-rgba(255,255,255,0.02) 1px,
-transparent 1px,
-transparent 3px
-);
-pointer-events:none;
-animation:scan 8s linear infinite;
-}
-
-@keyframes scan{
-0%{transform:translateY(0)}
-100%{transform:translateY(100%)}
-}
-
-/* ====== HEADER ====== */
-header{
-padding:90px 20px 60px;
+/* ===== HERO ===== */
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 text-align:center;
-position:relative;
+padding:40px 20px;
 }
 
-header h1{
-font-size:4.5rem;
-letter-spacing:12px;
-background:linear-gradient(90deg,#fff,#ff0033,#fff);
+.hero h1{
+font-size:5rem;
+letter-spacing:14px;
+background:linear-gradient(90deg,#fff,var(--neon),#fff);
 -webkit-background-clip:text;
 color:transparent;
-text-shadow:0 0 40px rgba(255,0,60,0.4);
+text-shadow:0 0 40px rgba(100,200,255,0.4);
 }
 
-header p{
-margin-top:20px;
-color:#aaa;
-letter-spacing:4px;
-font-size:0.9rem;
+.hero p{
+margin-top:25px;
+max-width:700px;
+line-height:1.8;
+color:#bbb;
+font-size:1.05rem;
 }
 
-/* ====== AI STATUS ====== */
-.ai-status{
-margin:40px auto;
-width:320px;
-padding:20px;
-border:1px solid rgba(255,0,60,0.3);
-background:var(--glass);
-backdrop-filter: blur(10px);
-border-radius:12px;
-text-align:center;
+/* ===== DARK SECTION ===== */
+.dark{
+height:300px;
+background:
+linear-gradient(180deg,transparent,#000),
+radial-gradient(circle at 50% 50%,rgba(100,200,255,0.06),transparent 60%);
 }
 
-.ai-dot{
-width:10px;
-height:10px;
-border-radius:50%;
-background:#00ff88;
-display:inline-block;
-box-shadow:0 0 15px #00ff88;
-animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-0%,100%{opacity:1}
-50%{opacity:0.3}
-}
-
-/* ====== TEAM GRID ====== */
+/* ===== TEAM ===== */
 .team{
+padding:100px 30px;
 max-width:1400px;
-margin:80px auto;
-padding:0 30px;
+margin:auto;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:50px;
 }
 
-/* ====== CARD ====== */
 .card{
-position:relative;
-padding:50px 30px;
-background:linear-gradient(180deg,rgba(20,0,10,0.8),rgba(5,0,5,0.9));
-border:1px solid rgba(255,0,60,0.25);
+background:linear-gradient(180deg,#0b1020,#050812);
+border:1px solid rgba(100,200,255,0.15);
 border-radius:22px;
+padding:35px 25px;
 text-align:center;
 cursor:pointer;
-overflow:hidden;
 transition:0.5s;
 }
 
-.card::before{
-content:"";
-position:absolute;
-inset:-1px;
-background:linear-gradient(120deg,transparent,rgba(255,0,60,0.6),transparent);
-opacity:0;
-transition:0.5s;
+.card:hover{
+transform:translateY(-12px);
+box-shadow:0 0 40px rgba(100,200,255,0.15);
 }
 
-.card:hover::before{opacity:1}
-.card:hover{transform:translateY(-12px) scale(1.02)}
+.card img{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid rgba(100,200,255,0.4);
+}
 
-.name{
-font-size:26px;
-margin-top:10px;
+.card h3{
+margin-top:20px;
 letter-spacing:3px;
-text-shadow:0 0 15px rgba(255,0,60,0.6);
 }
 
-.en{
+.card span{
+display:block;
 margin-top:6px;
-font-size:15px;
-letter-spacing:2px;
-color:#ccc;
-}
-
-.role{
-margin-top:14px;
-font-size:13px;
 color:#aaa;
+font-size:14px;
 }
 
-/* ====== MODAL ====== */
+/* ===== MODAL ===== */
 .modal{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,0.96);
+background:rgba(0,0,0,0.95);
 display:none;
 align-items:center;
 justify-content:center;
@@ -169,126 +123,178 @@ z-index:999;
 }
 
 .modal-box{
-width:90%;
-max-width:900px;
-padding:50px;
-background:linear-gradient(180deg,#0a0008,#000);
+background:linear-gradient(180deg,#0b1020,#02040a);
 border-radius:30px;
-border:1px solid rgba(255,0,60,0.4);
-position:relative;
+padding:50px;
+width:90%;
+max-width:800px;
+text-align:center;
+border:1px solid rgba(100,200,255,0.25);
+}
+
+.modal-box img{
+width:160px;
+height:160px;
+border-radius:50%;
+border:3px solid var(--neon);
+object-fit:cover;
+}
+
+.modal-box h2{
+margin-top:20px;
+letter-spacing:4px;
+}
+
+.modal-box ul{
+margin-top:20px;
+list-style:none;
+color:#bbb;
+line-height:2;
 }
 
 .close{
-position:absolute;
-top:20px;
-right:20px;
-width:45px;
-height:45px;
-border-radius:50%;
-background:rgba(255,0,60,0.2);
-display:flex;
-align-items:center;
-justify-content:center;
+margin-top:30px;
+padding:10px 30px;
+border:1px solid var(--neon);
 cursor:pointer;
-font-size:22px;
+display:inline-block;
 }
 
-/* ====== FOOTER ====== */
+/* ===== FOOTER ===== */
 footer{
-text-align:center;
 padding:50px 20px;
-color:#666;
-font-size:12px;
-letter-spacing:3px;
+text-align:center;
+color:#777;
 }
+
+a{color:inherit;text-decoration:none}
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>BLACK HALO</h1>
-<p>POST-HUMAN INTELLIGENCE ORGANIZATION</p>
+<!-- HERO -->
+<section class="hero">
+<h1>NERVYNIA</h1>
+<p>
+كيان متقدم خارج حدود الزمن.  
+سبعة عقول، سبع قوى، تحت نظام واحد لا يُرى… لكن يُحس.
+</p>
+</section>
 
-<div class="ai-status">
-<span class="ai-dot"></span>
-&nbsp; AI CORE : ONLINE
-</div>
-</header>
+<!-- DARK -->
+<section class="dark"></section>
 
+<!-- TEAM -->
 <section class="team">
 
 <div class="card" onclick="openM(0)">
-<div class="name">كرولو 🕷️</div>
-<div class="en">𝐂𝐡𝐫𝐨𝐥𝐥𝐨</div>
-<div class="role">MASTER MIND</div>
+<img src="https://i.imgur.com/8Km9tLL.png">
+<h3>كرولو</h3>
+<span>𝐂𝐡𝐫𝐨𝐥𝐥𝐨</span>
 </div>
 
 <div class="card" onclick="openM(1)">
-<div class="name">لولوش ♟️</div>
-<div class="en">𝐋𝐞𝐥𝐨𝐮𝐜𝐡</div>
-<div class="role">STRATEGIC EMPEROR</div>
+<img src="https://i.imgur.com/8Km9tLL.png">
+<h3>لولوش</h3>
+<span>𝐋𝐞𝐥𝐨𝐮𝐜𝐡</span>
 </div>
 
 <div class="card" onclick="openM(2)">
-<div class="name">كاتانا 🗡️</div>
-<div class="en">𝐊𝐚𝐭𝐚𝐧𝐚</div>
-<div class="role">EXECUTION UNIT</div>
+<img src="https://i.imgur.com/8Km9tLL.png">
+<h3>كاتانا</h3>
+<span>𝐊𝐚𝐭𝐚𝐧𝐚</span>
 </div>
 
 <div class="card" onclick="openM(3)">
-<div class="name">ايزن 🪞</div>
-<div class="en">𝐀𝐢𝐳𝐞𝐧</div>
-<div class="role">PSYCHO ANALYST</div>
+<img src="https://i.imgur.com/8Km9tLL.png">
+<h3>ايزن</h3>
+<span>𝐀𝐢𝐳𝐞𝐧</span>
 </div>
 
 <div class="card" onclick="openM(4)">
-<div class="name">ليليث 🩸</div>
-<div class="en">𝐋𝐢𝐥𝐢𝐭𝐡</div>
-<div class="role">CYBER INFILTRATOR</div>
+<img src="https://i.imgur.com/8Km9tLL.png">
+<h3>ليليث</h3>
+<span>𝐋𝐢𝐥𝐢𝐭𝐡</span>
 </div>
 
 <div class="card" onclick="openM(5)">
-<div class="name">ميكا 🪽</div>
-<div class="en">𝐌𝐢𝐤𝐚</div>
-<div class="role">OBSERVER</div>
+<img src="https://i.imgur.com/8Km9tLL.png">
+<h3>ميكا</h3>
+<span>𝐌𝐢𝐤𝐚</span>
 </div>
 
 <div class="card" onclick="openM(6)">
-<div class="name">آدم ⚡</div>
-<div class="en">𝐀𝐝𝐚𝐦</div>
-<div class="role">LIGHT ANOMALY</div>
+<img src="https://i.imgur.com/8Km9tLL.png">
+<h3>آدم</h3>
+<span>𝐀𝐝𝐚𝐦</span>
 </div>
 
 </section>
 
+<!-- MODAL -->
 <div class="modal" id="modal">
 <div class="modal-box">
-<div class="close" onclick="closeM()">×</div>
+<img id="mImg">
 <h2 id="mName"></h2>
-<p id="mDesc" style="margin-top:20px;color:#aaa"></p>
+<ul id="mFeatures"></ul>
+<div class="close" onclick="closeM()">إغلاق</div>
 </div>
 </div>
 
 <footer>
-BLACK HALO © 3000 — AI GOVERNED ENTITY
+تواصل واتساب:  
+<a href="https://wa.me/201029505953" target="_blank">اضغط هنا</a>
 </footer>
 
 <script>
 const data=[
-{n:"𝐂𝐡𝐫𝐨𝐥𝐥𝐨",d:"Central intelligence node. Decisions alter timelines."},
-{n:"𝐋𝐞𝐥𝐨𝐮𝐜𝐡",d:"Strategic foresight beyond probability matrices."},
-{n:"𝐊𝐚𝐭𝐚𝐧𝐚",d:"Execution without hesitation. Zero emotional delay."},
-{n:"𝐀𝐢𝐳𝐞𝐧",d:"Psychological manipulation architect."},
-{n:"𝐋𝐢𝐥𝐢𝐭𝐡",d:"Digital ghost. Exists between networks."},
-{n:"𝐌𝐢𝐤𝐚",d:"Observer of anomalies. Rarely intervenes."},
-{n:"𝐀𝐝𝐚𝐦",d:"Light-based anomaly. Origin unknown."}
+{
+n:"𝐂𝐡𝐫𝐨𝐥𝐥𝐨",
+f:["عقل استراتيجي خارق","قيادة غير مرئية","تحكم كامل بالمسار"],
+i:"https://i.imgur.com/8Km9tLL.png"
+},
+{
+n:"𝐋𝐞𝐥𝐨𝐮𝐜𝐡",
+f:["تخطيط بعيد المدى","قراءة الخصم","سيطرة ذهنية"],
+i:"https://i.imgur.com/8Km9tLL.png"
+},
+{
+n:"𝐊𝐚𝐭𝐚𝐧𝐚",
+f:["تنفيذ بلا تردد","دقة قاتلة","سرعة استجابة"],
+i:"https://i.imgur.com/8Km9tLL.png"
+},
+{
+n:"𝐀𝐢𝐳𝐞𝐧",
+f:["تحليل نفسي","تلاعب إدراكي","هدم الثقة"],
+i:"https://i.imgur.com/8Km9tLL.png"
+},
+{
+n:"𝐋𝐢𝐥𝐢𝐭𝐡",
+f:["اختراق رقمي","تخفي كامل","وجود شبحي"],
+i:"https://i.imgur.com/8Km9tLL.png"
+},
+{
+n:"𝐌𝐢𝐤𝐚",
+f:["مراقبة صامتة","توقع الأحداث","عدم التدخل"],
+i:"https://i.imgur.com/8Km9tLL.png"
+},
+{
+n:"𝐀𝐝𝐚𝐦",
+f:["نور غير مستقر","كشف الحقائق","تشويه الأنظمة"],
+i:"https://i.imgur.com/8Km9tLL.png"
+}
 ];
 
 function openM(i){
 document.getElementById("modal").style.display="flex";
 document.getElementById("mName").innerText=data[i].n;
-document.getElementById("mDesc").innerText=data[i].d;
+document.getElementById("mImg").src=data[i].i;
+const ul=document.getElementById("mFeatures");
+ul.innerHTML="";
+data[i].f.forEach(x=>{
+ul.innerHTML+=`<li>• ${x}</li>`;
+});
 }
 
 function closeM(){
