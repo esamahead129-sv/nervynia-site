@@ -4,212 +4,325 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NERVYNIA TEAM</title>
+<title>NERVYNIA | الظلام</title>
 
 <style>
-:root {
-  --neon: #00ffd5;
-  --bg: #000;
+/* ================== ROOT ================== */
+:root{
+  --neon:#00ffd5;
+  --purple:#7f00ff;
+  --red:#ff003c;
+  --bg:#050505;
+  --glass:rgba(0,0,0,.65);
 }
 
-* {
-  box-sizing: border-box;
-  font-family: Tahoma, Arial, sans-serif;
+/* ================== RESET ================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
-body {
-  margin: 0;
-  background: var(--bg);
-  color: #eafffb;
+/* ================== BODY ================== */
+body{
+  background:var(--bg);
+  color:#eafffb;
+  overflow-x:hidden;
 }
 
-/* عام */
-.hidden { display: none; }
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
+/* ================== MATRIX BG ================== */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  opacity:.15;
 }
 
-h1, h2 {
-  text-align: center;
-  color: var(--neon);
+/* ================== GENERAL ================== */
+.hidden{display:none;}
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:40px 20px;
 }
 
-/* زرار */
-.btn {
-  width: 100%;
-  padding: 15px;
-  margin: 10px 0;
-  background: transparent;
-  border: 2px solid var(--neon);
-  color: var(--neon);
-  font-size: 18px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.btn:hover {
-  background: var(--neon);
-  color: #000;
+.center{text-align:center}
+
+/* ================== TITLE GLITCH ================== */
+.glitch{
+  font-size:4rem;
+  font-weight:900;
+  letter-spacing:6px;
+  color:var(--neon);
+  position:relative;
+  animation:flicker 3s infinite;
 }
 
-/* كروت */
-.card {
-  border: 2px solid var(--neon);
-  border-radius: 15px;
-  padding: 20px;
-  margin: 15px 0;
-  background: rgba(0,255,213,0.05);
+.glitch::before,
+.glitch::after{
+  content:attr(data-text);
+  position:absolute;
+  inset:0;
 }
 
-/* أعضاء الفريق (تحت بعض) */
-.team-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.glitch::before{
+  color:var(--purple);
+  transform:translate(2px,-2px);
+  opacity:.7;
 }
 
-.member {
-  border: 2px solid var(--neon);
-  border-radius: 12px;
-  padding: 20px;
-  cursor: pointer;
-}
-.member:hover {
-  background: rgba(0,255,213,0.15);
+.glitch::after{
+  color:var(--red);
+  transform:translate(-2px,2px);
+  opacity:.6;
 }
 
-.member-name {
-  font-size: 22px;
-  color: var(--neon);
+@keyframes flicker{
+  0%,100%{opacity:1}
+  50%{opacity:.6}
 }
 
-/* صورة العضو */
-.photo {
-  width: 100%;
-  max-width: 300px;
-  height: 300px;
-  margin: 20px auto;
-  border: 2px dashed var(--neon);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--neon);
+/* ================== NAV ================== */
+.nav{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-bottom:50px;
+}
+
+.nav button{
+  padding:15px 35px;
+  background:transparent;
+  border:2px solid var(--neon);
+  color:var(--neon);
+  font-size:16px;
+  cursor:pointer;
+  border-radius:10px;
+  transition:.4s;
+}
+
+.nav button:hover{
+  background:var(--neon);
+  color:#000;
+  box-shadow:0 0 25px var(--neon);
+}
+
+/* ================== CARDS ================== */
+.card{
+  background:var(--glass);
+  border:2px solid var(--neon);
+  border-radius:20px;
+  padding:30px;
+  margin:25px 0;
+  box-shadow:0 0 40px rgba(0,255,213,.1);
+  animation:float 6s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
+}
+
+/* ================== TEAM ================== */
+.team{
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+}
+
+.member{
+  border:2px solid var(--neon);
+  border-radius:15px;
+  padding:25px;
+  cursor:pointer;
+  background:rgba(0,0,0,.6);
+  transition:.4s;
+}
+
+.member:hover{
+  background:rgba(0,255,213,.15);
+  transform:scale(1.03);
+  box-shadow:0 0 35px rgba(0,255,213,.4);
+}
+
+.member h3{
+  color:var(--neon);
+  font-size:26px;
+}
+
+.member span{
+  color:#aaa;
+}
+
+/* ================== PROFILE ================== */
+.photo{
+  width:280px;
+  height:280px;
+  margin:30px auto;
+  border:2px dashed var(--neon);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--neon);
+}
+
+/* ================== BUTTON ================== */
+.btn{
+  width:100%;
+  padding:18px;
+  margin-top:20px;
+  background:transparent;
+  border:2px solid var(--neon);
+  color:var(--neon);
+  font-size:18px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.4s;
+}
+
+.btn:hover{
+  background:var(--neon);
+  color:#000;
+  box-shadow:0 0 30px var(--neon);
 }
 </style>
 </head>
 
 <body>
 
-<!-- صوت الموقع (تحطه بعدين) -->
-<audio id="siteSound" loop>
-  <!-- <source src="sound.mp3" type="audio/mpeg"> -->
-</audio>
+<canvas id="matrix"></canvas>
 
-<!-- الصفحة الرئيسية -->
-<div id="home" class="container">
-  <h1>NERVYNIA TEAM</h1>
+<!-- ================== HOME ================== -->
+<div id="home" class="container center">
+  <div class="glitch" data-text="NERVYNIA TEAM">NERVYNIA TEAM</div>
+  <p style="margin-top:20px;color:#aaa">
+    نحن لا نُرى… نحن نُنفَّذ
+  </p>
+
+  <div class="nav">
+    <button onclick="goTeam()">الفريق</button>
+    <button onclick="goDark()">الظلام</button>
+    <button onclick="goWhats()">واتساب</button>
+  </div>
 
   <div class="card">
     <h2>تعريف الفريق</h2>
     <p>
-      فريق يعمل في الظل، بلا ضجيج، بلا وجوه.
-      يجمع بين العقل، السيطرة، والسرية.
-    </p>
-    <button class="btn" onclick="showTeam()">دخول تعريف الفريق</button>
-  </div>
-
-  <div class="card">
-    <h2>الظلام</h2>
-    <p>
-      (نص نشأة الفريق – هتضيفه بعدين)
+      كيان يعمل في الظل، خارج الحسابات،
+      بلا أسماء حقيقية ولا آثار رقمية.
     </p>
   </div>
-
-  <button class="btn" onclick="openWhatsApp()">التواصل عبر واتساب</button>
 </div>
 
-<!-- صفحة الفريق -->
+<!-- ================== TEAM ================== -->
 <div id="team" class="container hidden">
-  <h2>أعضاء الفريق</h2>
+  <h2 class="center">أعضاء الفريق</h2>
 
-  <div class="team-list">
-
-    <div class="member" onclick="openMember('كرولو')">
-      <div class="member-name">🕷️ كرولو</div>
-      <p>القائد – العقل المدبر</p>
+  <div class="team">
+    <div class="member" onclick="openMember('كرولو','🕷️ القائد – العقل المدبر')">
+      <h3>🕷️ كرولو</h3>
+      <span>القائد – العقل المدبر</span>
     </div>
 
-    <div class="member" onclick="openMember('لولوش')">
-      <div class="member-name">👑 لولوش</div>
-      <p>الاستراتيجي – محرك الدمى</p>
+    <div class="member" onclick="openMember('لولوش','👑 الاستراتيجي')">
+      <h3>👑 لولوش</h3>
+      <span>الاستراتيجي</span>
     </div>
 
-    <div class="member" onclick="openMember('آدم')">
-      <div class="member-name">⚡ آدم</div>
-      <p>كاسر الأنظمة</p>
+    <div class="member" onclick="openMember('آدم','⚡ كاسر الأنظمة')">
+      <h3>⚡ آدم</h3>
+      <span>كاسر الأنظمة</span>
     </div>
 
-    <div class="member" onclick="openMember('كاتانا')">
-      <div class="member-name">🗡️ كاتانا</div>
-      <p>السيف الرقمي</p>
+    <div class="member" onclick="openMember('كاتانا','🗡️ السيف الرقمي')">
+      <h3>🗡️ كاتانا</h3>
+      <span>السيف الرقمي</span>
     </div>
 
-    <div class="member" onclick="openMember('شبح')">
-      <div class="member-name">👻 شبح</div>
-      <p>المتخفي</p>
+    <div class="member" onclick="openMember('شبح','👻 المتخفي')">
+      <h3>👻 شبح</h3>
+      <span>المتخفي</span>
     </div>
-
   </div>
 
-  <button class="btn" onclick="goHome()">العودة للرئيسية</button>
+  <button class="btn" onclick="goHome()">رجوع</button>
 </div>
 
-<!-- صفحة تعريف الفرد -->
-<div id="profile" class="container hidden">
-  <h2 id="memberTitle"></h2>
+<!-- ================== PROFILE ================== -->
+<div id="profile" class="container hidden center">
+  <h2 id="pname"></h2>
+  <p id="prole"></p>
 
   <div class="photo">
-    صورة العضو (هتتحط بعدين)
+    صورة العضو
   </div>
 
   <div class="card">
-    <p id="memberDesc">
-      وصف العضو (تعدله بعدين)
+    <p>
+      وصف تفصيلي للعضو  
+      (هتكتبه بعدين)
     </p>
   </div>
 
-  <button class="btn" onclick="showTeam()">رجوع للفريق</button>
+  <button class="btn" onclick="goTeam()">رجوع للفريق</button>
 </div>
 
 <script>
-const home = document.getElementById("home");
-const team = document.getElementById("team");
-const profile = document.getElementById("profile");
-const memberTitle = document.getElementById("memberTitle");
-const memberDesc = document.getElementById("memberDesc");
+/* ========== MATRIX EFFECT ========== */
+const c=document.getElementById("matrix");
+const ctx=c.getContext("2d");
+c.width=innerWidth;
+c.height=innerHeight;
+const letters="01NERVYNIA";
+const font=16;
+const cols=c.width/font;
+const drops=[];
+for(let x=0;x<cols;x++)drops[x]=1;
 
-function showTeam() {
-  home.classList.add("hidden");
-  profile.classList.add("hidden");
-  team.classList.remove("hidden");
+function draw(){
+ctx.fillStyle="rgba(0,0,0,.05)";
+ctx.fillRect(0,0,c.width,c.height);
+ctx.fillStyle="#00ff41";
+ctx.font=font+"px monospace";
+for(let i=0;i<drops.length;i++){
+let t=letters[Math.floor(Math.random()*letters.length)];
+ctx.fillText(t,i*font,drops[i]*font);
+if(drops[i]*font>c.height && Math.random()>0.95)drops[i]=0;
+drops[i]++;
 }
-
-function goHome() {
-  team.classList.add("hidden");
-  profile.classList.add("hidden");
-  home.classList.remove("hidden");
 }
+setInterval(draw,33);
 
-function openMember(name) {
-  team.classList.add("hidden");
-  profile.classList.remove("hidden");
-  memberTitle.innerText = name;
-  memberDesc.innerText = "وصف خاص بـ " + name + " (هتكتبه بعدين)";
+/* ========== NAV ========== */
+const home=document.getElementById("home");
+const team=document.getElementById("team");
+const profile=document.getElementById("profile");
+const pname=document.getElementById("pname");
+const prole=document.getElementById("prole");
+
+function goHome(){
+team.classList.add("hidden");
+profile.classList.add("hidden");
+home.classList.remove("hidden");
 }
-
-function openWhatsApp() {
-  window.open("https://wa.me/201029505953", "_blank");
+function goTeam(){
+home.classList.add("hidden");
+profile.classList.add("hidden");
+team.classList.remove("hidden");
+}
+function openMember(n,r){
+team.classList.add("hidden");
+profile.classList.remove("hidden");
+pname.innerText=n;
+prole.innerText=r;
+}
+function goDark(){
+alert("قسم الظلام – هيتكتب بعدين");
+}
+function goWhats(){
+window.open("https://wa.me/201029505953","_blank");
 }
 </script>
 
