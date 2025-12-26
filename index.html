@@ -1,44 +1,188 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>NERVYNIA</title>
-  <style>
-    body {
-      margin: 0;
-      background: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    h1 {
-      margin-top: 100px;
-      font-size: 48px;
-      letter-spacing: 4px;
-    }
-    p {
-      max-width: 600px;
-      margin: 20px auto;
-      opacity: 0.8;
-    }
-    button {
-      background: white;
-      color: black;
-      border: none;
-      padding: 15px 30px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 30px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>NERVYNIA TEAM</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:black;
+  color:white;
+  font-family:Arial, sans-serif;
+  text-align:center;
+}
+
+/* ===== الموسيقى ===== */
+audio{display:none}
+
+/* ===== الشاشة الرئيسية ===== */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.hero h1{
+  font-size:48px;
+  letter-spacing:6px;
+}
+
+.hero p{
+  max-width:600px;
+  opacity:.8;
+  margin:20px 0;
+}
+
+.hero button{
+  padding:12px 28px;
+  background:white;
+  color:black;
+  border:none;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* ===== أسماء الفريق ===== */
+.team-section{
+  display:none;
+  padding:30px 10px;
+}
+
+.team-list{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-bottom:30px;
+}
+
+.team-list button{
+  background:transparent;
+  border:1px solid white;
+  color:white;
+  padding:10px 18px;
+  cursor:pointer;
+  letter-spacing:2px;
+}
+
+.team-list button:hover{
+  background:white;
+  color:black;
+}
+
+/* ===== كرت الشخصية ===== */
+.card img{
+  width:260px;
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(255,255,255,.2);
+}
+
+.card h2{
+  margin-top:20px;
+  letter-spacing:4px;
+}
+
+.info{
+  max-width:600px;
+  margin:20px auto;
+  opacity:.85;
+  line-height:1.8;
+}
+</style>
 </head>
+
 <body>
 
+<!-- الموسيقى العامة -->
+<audio id="bgMusic" autoplay loop>
+  <source src="music/theme.mp3" type="audio/mpeg">
+</audio>
+
+<!-- الشاشة الرئيسية -->
+<div class="hero" id="hero">
   <h1>NERVYNIA</h1>
   <p>
-    فريق غامض، قوة صامتة، حضور لا يُنسى.
+    فريق يعمل في الظل،  
+    حيث تتحول المعرفة إلى قوة  
+    والصمت إلى سلاح.
   </p>
-  <button>اكتشف الفريق</button>
+  <button onclick="enterTeam()">اكتشف الفريق</button>
+</div>
+
+<!-- شاشة الفريق -->
+<div class="team-section" id="team">
+
+  <div class="team-list">
+    <button onclick="showMember('chrollo')">𝕮𝖍𝖗𝖔𝖑𝖑𝖔</button>
+    <button onclick="showMember('katana')">𝕶𝖆𝖙𝖆𝖓𝖆</button>
+    <button onclick="showMember('nyx')">𝕹𝖞𝖝</button>
+    <button onclick="showMember('vortex')">𝖁𝖔𝖗𝖙𝖊𝖝</button>
+    <button onclick="showMember('ghost')">𝕲𝖍𝖔𝖘𝖙</button>
+  </div>
+
+  <div class="card">
+    <img id="charImg" src="images/chrollo.jpg">
+    <h2 id="charName">𝕮𝖍𝖗𝖔𝖑𝖑𝖔</h2>
+    <div class="info" id="charInfo">
+      🕷️ قائد الفريق – عبقري رقمي<br>
+      موهوب في البرمجة، فك الشفرات، التخفي الإلكتروني،  
+      صناعة هويات وأرقام وهمية،  
+      يعمل في الخفاء لأهداف إنسانية.
+    </div>
+  </div>
+
+</div>
+
+<script>
+const members={
+  chrollo:{
+    name:"𝕮𝖍𝖗𝖔𝖑𝖑𝖔",
+    img:"images/chrollo.jpg",
+    info:"🕷️ قائد الفريق – عبقري رقمي<br>موهوب في البرمجة وفك الشفرات، التخفي الإلكتروني، صناعة هويات رقمية وهمية، يعمل في الخفاء لأهداف إنسانية."
+  },
+  katana:{
+    name:"𝕶𝖆𝖙𝖆𝖓𝖆",
+    img:"images/katana.jpg",
+    info:"🗡️ مقاتل الأنظمة<br>خبير في الاختراق السريع والهجومي، لا يترك أثرًا خلفه."
+  },
+  nyx:{
+    name:"𝕹𝖞𝖝",
+    img:"images/nyx.jpg",
+    info:"🌑 مهندسة الظل<br>تتحكم في الشبكات وتراقب دون أن تُرى."
+  },
+  vortex:{
+    name:"𝖁𝖔𝖗𝖙𝖊𝖝",
+    img:"images/vortex.jpg",
+    info:"🌀 محلل البيانات<br>يرى ما وراء الأرقام ويحوّل الفوضى إلى نظام."
+  },
+  ghost:{
+    name:"𝕲𝖍𝖔𝖘𝖙",
+    img:"images/ghost.jpg",
+    info:"👁️ شبح النظام<br>يدخل ويخرج بلا أي أثر."
+  }
+};
+
+function enterTeam(){
+  document.getElementById("hero").style.display="none";
+  document.getElementById("team").style.display="block";
+}
+
+function showMember(key){
+  charImg.src=members[key].img;
+  charName.innerHTML=members[key].name;
+  charInfo.innerHTML=members[key].info;
+}
+
+document.addEventListener("click",()=>{
+  document.getElementById("bgMusic").play();
+},{once:true});
+</script>
 
 </body>
 </html>
