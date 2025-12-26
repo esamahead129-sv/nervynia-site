@@ -3,622 +3,529 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AirPods Pro - 2.3_5-pun1shm3nt.ape</title>
+    <title>محاكي لغة برمجة لڤل واحد</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
-        }
-        
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
-            padding: 40px 20px;
-            position: relative;
-        }
-        
-        .visual-effects {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-        
-        .floating-element {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            animation: float 15s infinite linear;
-        }
-        
-        .floating-element:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-        
-        .floating-element:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            right: 10%;
-            animation-delay: 5s;
-            background: rgba(139, 0, 0, 0.1);
-        }
-        
-        .floating-element:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            bottom: 20%;
-            left: 15%;
-            animation-delay: 10s;
-            background: rgba(255, 255, 255, 0.03);
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-            100% { transform: translateY(0) rotate(360deg); }
-        }
-        
-        .main-title {
-            font-size: 5rem;
-            font-weight: 300;
-            margin-bottom: 10px;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            letter-spacing: 5px;
-            position: relative;
-        }
-        
-        .main-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #8b0000, transparent);
-        }
-        
-        .subtitle {
-            font-size: 1.8rem;
-            color: #aaa;
-            margin-bottom: 40px;
-            font-weight: 300;
-            letter-spacing: 3px;
-        }
-        
-        .music-card {
-            background: rgba(20, 20, 30, 0.8);
-            border-radius: 20px;
-            padding: 30px;
-            width: 100%;
-            max-width: 600px;
-            margin: 40px auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(139, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease;
-        }
-        
-        .music-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .track-title {
-            font-size: 2.5rem;
-            color: #fff;
-            margin-bottom: 10px;
-            text-align: center;
-            font-weight: 300;
-        }
-        
-        .artist-name {
-            font-size: 1.5rem;
-            color: #8b0000;
-            margin-bottom: 30px;
-            text-align: center;
-            font-weight: 500;
-        }
-        
-        .album-art {
-            width: 250px;
-            height: 250px;
-            margin: 0 auto 30px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
-            position: relative;
-            background: linear-gradient(45deg, #0a0a0a, #8b0000);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .album-art::before {
-            content: '2.3_5';
-            font-size: 3rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: bold;
-        }
-        
-        .album-art::after {
-            content: 'pun1shm3nt.ape';
-            position: absolute;
-            bottom: 10px;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
-        .music-player {
-            margin-top: 30px;
-        }
-        
-        .player-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin-bottom: 20px;
-        }
-        
-        .control-btn {
-            background: rgba(139, 0, 0, 0.2);
-            border: 1px solid rgba(139, 0, 0, 0.5);
-            color: #fff;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .control-btn:hover {
-            background: rgba(139, 0, 0, 0.5);
-            transform: scale(1.1);
-        }
-        
-        .play-btn {
-            width: 80px;
-            height: 80px;
-            font-size: 2rem;
-            background: rgba(139, 0, 0, 0.3);
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            margin-top: 20px;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        
-        .progress {
-            height: 100%;
-            width: 30%;
-            background: linear-gradient(90deg, #8b0000, #ff0000);
-            border-radius: 3px;
-            transition: width 0.1s linear;
-        }
-        
-        .time-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-        
-        .info-section {
-            margin-top: 50px;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            border-top: 1px solid rgba(139, 0, 0, 0.5);
-        }
-        
-        .info-title {
-            font-size: 1.8rem;
-            color: #fff;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: 300;
-        }
-        
-        .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin-top: 30px;
         }
         
-        .info-card {
-            background: rgba(30, 30, 40, 0.7);
-            padding: 20px;
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .panel {
+            background-color: white;
             border-radius: 10px;
-            border-left: 3px solid #8b0000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
         }
         
-        .info-card h3 {
-            color: #8b0000;
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-        }
-        
-        .vodafone-btn {
-            display: block;
-            width: fit-content;
-            margin: 40px auto;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, #8b0000, #e60000);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
+        h1 {
+            color: #2c3e50;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
+            grid-column: 1 / -1;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
         }
         
-        .vodafone-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(139, 0, 0, 0.6);
-            background: linear-gradient(45deg, #9d0000, #ff0000);
+        h2 {
+            color: #2980b9;
+            margin-top: 0;
         }
         
-        .vodafone-link {
-            text-align: center;
-            margin-top: 10px;
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-        
-        .airpods-display {
-            margin: 50px auto;
+        textarea {
             width: 100%;
-            max-width: 500px;
-            position: relative;
-            height: 200px;
+            height: 300px;
+            font-family: monospace;
+            font-size: 16px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+            direction: ltr;
+            background-color: #f9f9f9;
         }
         
-        .airpod {
-            position: absolute;
-            width: 100px;
-            height: 200px;
-            background: radial-gradient(circle at 30% 20%, #333, #000);
-            border-radius: 50px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+        .output {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            min-height: 150px;
+            white-space: pre-wrap;
+            overflow-y: auto;
+            direction: ltr;
         }
         
-        .airpod-left {
-            left: 30%;
-            top: 0;
-            transform: rotate(-10deg);
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
         }
         
-        .airpod-right {
-            right: 30%;
-            top: 0;
-            transform: rotate(10deg);
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
         
-        .airpod-case {
-            position: absolute;
-            width: 200px;
-            height: 100px;
-            background: linear-gradient(to bottom, #222, #111);
-            border-radius: 20px;
-            top: 120px;
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
-            border: 1px solid #444;
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        button#resetBtn {
+            background-color: #e74c3c;
+        }
+        
+        button#resetBtn:hover {
+            background-color: #c0392b;
+        }
+        
+        .registers, .memory {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .register, .mem-cell {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-family: monospace;
+        }
+        
+        .register .label, .mem-cell .label {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+        
+        .register .value, .mem-cell .value {
+            font-size: 18px;
+            margin-top: 5px;
+        }
+        
+        .instructions {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            grid-column: 1 / -1;
+        }
+        
+        .instruction {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+            padding: 2px;
+            border-radius: 3px;
         }
         
         footer {
             text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-            color: #777;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-        }
-        
-        .glow-text {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
-        }
-        
-        .red-glow {
-            color: #8b0000;
-            text-shadow: 0 0 10px rgba(139, 0, 0, 0.7);
-        }
-        
-        @media (max-width: 768px) {
-            .main-title {
-                font-size: 3rem;
-            }
-            
-            .subtitle {
-                font-size: 1.3rem;
-            }
-            
-            .track-title {
-                font-size: 1.8rem;
-            }
-            
-            .album-art {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .album-art::before {
-                font-size: 2rem;
-            }
-            
-            .airpods-display {
-                transform: scale(0.8);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 2.5rem;
-            }
-            
-            .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .track-title {
-                font-size: 1.5rem;
-            }
-            
-            .artist-name {
-                font-size: 1.2rem;
-            }
-            
-            .music-card {
-                padding: 20px;
-            }
-            
-            .player-controls {
-                gap: 15px;
-            }
-            
-            .control-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-            
-            .play-btn {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-            }
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 14px;
+            grid-column: 1 / -1;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
         }
     </style>
 </head>
 <body>
-    <div class="visual-effects">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-    </div>
-    
     <div class="container">
-        <section class="hero-section">
-            <h1 class="main-title glow-text">AirPods Pro</h1>
-            <p class="subtitle">تجربة صوتية استثنائية</p>
+        <h1>محاكي لغة برمجة "لڤل واحد" (Level 1)</h1>
+        
+        <div class="panel">
+            <h2>📝 كود البرنامج</h2>
+            <textarea id="codeEditor" placeholder="اكتب برنامجك هنا...">
+; برنامج بسيط يضرب رقمين ويخزن النتيجة
+; لغة لڤل واحد - Level 1 Programming Language
+
+LOAD A, 5        ; تحميل القيمة 5 في المسجل A
+LOAD B, 3        ; تحميل القيمة 3 في المسجل B
+MULTIPLY         ; ضرب A و B (النتيجة في A)
+STORE 0x10       ; تخزين النتيجة في عنوان الذاكرة 0x10
+
+LOAD A, 10       ; تحميل قيمة جديدة في A
+ADD B            ; جمع A و B (النتيجة في A)
+STORE 0x11       ; تخزين النتيجة في عنوان الذاكرة 0x11
+
+PRINT "نتيجة الضرب:"  ; طباعة نص
+PRINTREG A       ; طباعة قيمة المسجل A
+PRINTMEM 0x10    ; طباعة قيمة من الذاكرة
+
+HALT             ; إنهاء البرنامج</textarea>
             
-            <div class="music-card">
-                <h2 class="track-title">2.3_5-pun1shm3nt.ape</h2>
-                <p class="artist-name red-glow">Mac Quayle</p>
-                
-                <div class="album-art"></div>
-                
-                <div class="music-player">
-                    <div class="player-controls">
-                        <button class="control-btn" id="prevBtn">⏮</button>
-                        <button class="control-btn play-btn" id="playBtn">▶</button>
-                        <button class="control-btn" id="nextBtn">⏭</button>
-                    </div>
-                    
-                    <div class="progress-bar" id="progressBar">
-                        <div class="progress" id="progress"></div>
-                    </div>
-                    
-                    <div class="time-info">
-                        <span id="currentTime">0:00</span>
-                        <span id="duration">0:00</span>
-                    </div>
-                </div>
+            <div class="controls">
+                <button id="runBtn">▶ تشغيل البرنامج</button>
+                <button id="stepBtn">⏭ خطوة واحدة</button>
+                <button id="resetBtn">🔄 إعادة تعيين</button>
+                <button id="exampleBtn">📋 مثال إضافي</button>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <h2>📤 الناتج</h2>
+            <div id="output" class="output"></div>
+            
+            <h2>🔄 المسجلات (Registers)</h2>
+            <div id="registers" class="registers">
+                <!-- سيتم تعبئتها بالجافاسكريبت -->
             </div>
             
-            <div class="info-section">
-                <h2 class="info-title">📞 ساعة • الرسائل • Vodafone</h2>
-                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 20px; color: #ccc;">
-                    ليك لحد 500 وحدة<br>
-                    شجع مصر علي أنا فودافون وكل لما صوتك يغلب الهيئة متكرير
-                </p>
-                
-                <a href="https://vf.eg/p?id=AFCON25" class="vodafone-btn" target="_blank">
-                    🎧 استمع الآن مع AirPods Pro
-                </a>
-                
-                <p class="vodafone-link">
-                    https://vf.eg/p?id=AFCON25
-                </p>
-                
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3>🎵 جودة الصوت</h3>
-                        <p>تجربة صوتية غامرة بدقة عالية مع تقنية الضوضاء النشطة.</p>
-                    </div>
-                    
-                    <div class="info-card">
-                        <h3>⚡ شحن سريع</h3>
-                        <p>5 دقائق شحن تعطيك ساعة كاملة من الاستماع.</p>
-                    </div>
-                    
-                    <div class="info-card">
-                        <h3>🔋 بطارية طويلة</h3>
-                        <p>حتى 6 ساعات استماع مستمر مع الشحن السريع اللاسلكي.</p>
-                    </div>
-                </div>
+            <h2>💾 الذاكرة (Memory)</h2>
+            <div id="memory" class="memory">
+                <!-- سيتم تعبئتها بالجافاسكريبت -->
             </div>
-            
-            <div class="airpods-display">
-                <div class="airpod airpod-left"></div>
-                <div class="airpod airpod-right"></div>
-                <div class="airpod-case"></div>
-            </div>
-        </section>
+        </div>
+        
+        <div class="instructions panel">
+            <h2>📖 تعليمات لغة لڤل واحد</h2>
+            <div class="instruction"><code>LOAD X, value</code> - تحميل قيمة في المسجل X (A, B, C, D)</div>
+            <div class="instruction"><code>ADD X</code> - جمع المسجل A مع المسجل X (النتيجة في A)</div>
+            <div class="instruction"><code>SUBTRACT X</code> - طرح المسجل X من المسجل A (النتيجة في A)</div>
+            <div class="instruction"><code>MULTIPLY</code> - ضرب المسجل A في المسجل B (النتيجة في A)</div>
+            <div class="instruction"><code>DIVIDE</code> - قسمة المسجل A على المسجل B (النتيجة في A)</div>
+            <div class="instruction"><code>STORE address</code> - تخزين قيمة المسجل A في عنوان الذاكرة</div>
+            <div class="instruction"><code>LOADFROM address</code> - تحميل قيمة من الذاكرة إلى المسجل A</div>
+            <div class="instruction"><code>PRINT "text"</code> - طباعة نص</div>
+            <div class="instruction"><code>PRINTREG X</code> - طباعة قيمة المسجل X</div>
+            <div class="instruction"><code>PRINTMEM address</code> - طباعة قيمة من الذاكرة</div>
+            <div class="instruction"><code>HALT</code> - إنهاء البرنامج</div>
+            <div class="instruction"><code>; تعليق</code> - أي نص بعد الفاصلة المنقوطة هو تعليق</div>
+        </div>
         
         <footer>
-            <p>AirPods Pro &copy; 2023 | تجربة 2.3_5-pun1shm3nt.ape | تصميم مخصص</p>
-            <p style="margin-top: 10px; color: #8b0000;">القوة في البساطة • الجمال في الظلام • الروح في الموسيقى</p>
+            <p>تم تطوير هذا المحاكي لتوضيح مفاهيم لغة برمجة من المستوى الأول (Level 1). اللغات من هذا النوع تكون قريبة من لغة الآلة وبسيطة جداً.</p>
         </footer>
     </div>
-    
+
     <script>
-        // حالة مشغل الموسيقى
-        let isPlaying = false;
-        let currentTime = 0;
-        let duration = 280; // 4:40 دقيقة بالثواني
-        
-        // عناصر DOM
-        const playBtn = document.getElementById('playBtn');
-        const progress = document.getElementById('progress');
-        const progressBar = document.getElementById('progressBar');
-        const currentTimeEl = document.getElementById('currentTime');
-        const durationEl = document.getElementById('duration');
-        
-        // تهيئة الوقت
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
-        }
-        
-        durationEl.textContent = formatTime(duration);
-        currentTimeEl.textContent = formatTime(currentTime);
-        
-        // محاكاة مشغل الموسيقى
-        function simulateMusicPlayer() {
-            if (isPlaying) {
-                currentTime += 1;
+        // حالة المحاكي
+        const simulator = {
+            registers: { A: 0, B: 0, C: 0, D: 0 },
+            memory: {},
+            program: [],
+            programCounter: 0,
+            output: "",
+            isRunning: false,
+            
+            init() {
+                this.reset();
+                this.updateDisplay();
+            },
+            
+            reset() {
+                this.registers = { A: 0, B: 0, C: 0, D: 0 };
+                this.memory = {};
+                this.program = [];
+                this.programCounter = 0;
+                this.output = "";
+                this.isRunning = false;
                 
-                if (currentTime >= duration) {
-                    currentTime = 0;
-                    isPlaying = false;
-                    playBtn.innerHTML = '▶';
+                // تهيئة بعض قيم الذاكرة
+                for (let i = 0x10; i <= 0x1F; i++) {
+                    this.memory[i.toString(16)] = 0;
+                }
+            },
+            
+            loadProgram(code) {
+                this.reset();
+                const lines = code.split('\n');
+                
+                for (let line of lines) {
+                    // إزالة المسافات الزائدة والتعليقات
+                    line = line.trim();
+                    const commentIndex = line.indexOf(';');
+                    if (commentIndex !== -1) {
+                        line = line.substring(0, commentIndex).trim();
+                    }
+                    
+                    if (line) {
+                        this.program.push(line);
+                    }
+                }
+            },
+            
+            executeStep() {
+                if (this.programCounter >= this.program.length) {
+                    this.output += "✅ انتهى تنفيذ البرنامج\n";
+                    this.isRunning = false;
+                    return false;
                 }
                 
-                const progressPercent = (currentTime / duration) * 100;
-                progress.style.width = `${progressPercent}%`;
-                currentTimeEl.textContent = formatTime(currentTime);
+                const instruction = this.program[this.programCounter];
+                this.programCounter++;
                 
-                // استمرار المحاكاة
-                setTimeout(simulateMusicPlayer, 1000);
-            }
-        }
-        
-        // تشغيل/إيقاف الموسيقى
-        playBtn.addEventListener('click', () => {
-            isPlaying = !isPlaying;
+                return this.executeInstruction(instruction);
+            },
             
-            if (isPlaying) {
-                playBtn.innerHTML = '⏸';
-                simulateMusicPlayer();
-            } else {
-                playBtn.innerHTML = '▶';
-            }
-        });
-        
-        // التحكم في التقدم
-        progressBar.addEventListener('click', (e) => {
-            const rect = progressBar.getBoundingClientRect();
-            const clickPosition = e.clientX - rect.left;
-            const progressBarWidth = progressBar.clientWidth;
-            const clickPercent = clickPosition / progressBarWidth;
+            executeInstruction(instruction) {
+                try {
+                    const parts = instruction.split(/\s+/);
+                    const cmd = parts[0].toUpperCase();
+                    const args = parts.slice(1).join(' ').split(',').map(arg => arg.trim());
+                    
+                    switch(cmd) {
+                        case 'LOAD':
+                            if (args.length !== 2) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const reg = args[0].toUpperCase();
+                            const value = this.parseValue(args[1]);
+                            
+                            if (!['A', 'B', 'C', 'D'].includes(reg)) {
+                                throw new Error(`مسجل غير صالح: ${reg}`);
+                            }
+                            
+                            this.registers[reg] = value;
+                            break;
+                            
+                        case 'ADD':
+                            if (args.length !== 1) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const addReg = args[0].toUpperCase();
+                            
+                            if (!['A', 'B', 'C', 'D'].includes(addReg)) {
+                                throw new Error(`مسجل غير صالح: ${addReg}`);
+                            }
+                            
+                            this.registers.A += this.registers[addReg];
+                            break;
+                            
+                        case 'SUBTRACT':
+                            if (args.length !== 1) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const subReg = args[0].toUpperCase();
+                            
+                            if (!['A', 'B', 'C', 'D'].includes(subReg)) {
+                                throw new Error(`مسجل غير صالح: ${subReg}`);
+                            }
+                            
+                            this.registers.A -= this.registers[subReg];
+                            break;
+                            
+                        case 'MULTIPLY':
+                            this.registers.A *= this.registers.B;
+                            break;
+                            
+                        case 'DIVIDE':
+                            if (this.registers.B === 0) throw new Error("خطأ: القسمة على صفر");
+                            this.registers.A = Math.floor(this.registers.A / this.registers.B);
+                            break;
+                            
+                        case 'STORE':
+                            if (args.length !== 1) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const address = this.parseAddress(args[0]);
+                            this.memory[address] = this.registers.A;
+                            break;
+                            
+                        case 'LOADFROM':
+                            if (args.length !== 1) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const loadAddress = this.parseAddress(args[0]);
+                            
+                            if (this.memory[loadAddress] === undefined) {
+                                this.memory[loadAddress] = 0;
+                            }
+                            
+                            this.registers.A = this.memory[loadAddress];
+                            break;
+                            
+                        case 'PRINT':
+                            if (!args[0]) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            let text = args.join(', ');
+                            
+                            // إزالة علامات الاقتباس إذا وجدت
+                            if (text.startsWith('"') && text.endsWith('"')) {
+                                text = text.substring(1, text.length - 1);
+                            }
+                            
+                            this.output += text + "\n";
+                            break;
+                            
+                        case 'PRINTREG':
+                            if (args.length !== 1) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const printReg = args[0].toUpperCase();
+                            
+                            if (!['A', 'B', 'C', 'D'].includes(printReg)) {
+                                throw new Error(`مسجل غير صالح: ${printReg}`);
+                            }
+                            
+                            this.output += `[${printReg}] = ${this.registers[printReg]}\n`;
+                            break;
+                            
+                        case 'PRINTMEM':
+                            if (args.length !== 1) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const printAddress = this.parseAddress(args[0]);
+                            
+                            if (this.memory[printAddress] === undefined) {
+                                this.memory[printAddress] = 0;
+                            }
+                            
+                            this.output += `[MEM 0x${printAddress}] = ${this.memory[printAddress]}\n`;
+                            break;
+                            
+                        case 'HALT':
+                            this.output += "⏹ تم إيقاف البرنامج\n";
+                            this.isRunning = false;
+                            return false;
+                            
+                        default:
+                            throw new Error(`تعليمة غير معروفة: ${cmd}`);
+                    }
+                    
+                    return true;
+                } catch (error) {
+                    this.output += `❌ خطأ: ${error.message} (في السطر ${this.programCounter})\n`;
+                    this.isRunning = false;
+                    return false;
+                }
+            },
             
-            currentTime = clickPercent * duration;
-            const progressPercent = (currentTime / duration) * 100;
-            progress.style.width = `${progressPercent}%`;
-            currentTimeEl.textContent = formatTime(currentTime);
-        });
-        
-        // أزرار التحكم
-        document.getElementById('prevBtn').addEventListener('click', () => {
-            currentTime = Math.max(0, currentTime - 10);
-            const progressPercent = (currentTime / duration) * 100;
-            progress.style.width = `${progressPercent}%`;
-            currentTimeEl.textContent = formatTime(currentTime);
-        });
-        
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            currentTime = Math.min(duration, currentTime + 10);
-            const progressPercent = (currentTime / duration) * 100;
-            progress.style.width = `${progressPercent}%`;
-            currentTimeEl.textContent = formatTime(currentTime);
-        });
-        
-        // تأثيرات التمرير البسيطة
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
+            parseValue(valueStr) {
+                // إذا كانت القيمة سداسية عشرية (تبدأ بـ 0x)
+                if (valueStr.startsWith('0x')) {
+                    return parseInt(valueStr.substring(2), 16);
+                }
+                
+                // إذا كانت قيمة عشرية
+                const num = parseInt(valueStr, 10);
+                if (isNaN(num)) throw new Error(`قيمة غير صالحة: ${valueStr}`);
+                return num;
+            },
             
-            const visualEffects = document.querySelector('.visual-effects');
-            if (visualEffects) {
-                visualEffects.style.transform = `translate3d(0px, ${rate}px, 0px)`;
+            parseAddress(addressStr) {
+                // إذا كان العنوان سداسي عشري (تبدأ بـ 0x)
+                if (addressStr.startsWith('0x')) {
+                    return addressStr.substring(2);
+                }
+                
+                // تحويل رقم عشري إلى سداسي عشري
+                const num = parseInt(addressStr, 10);
+                if (isNaN(num)) throw new Error(`عنوان غير صالح: ${addressStr}`);
+                return num.toString(16);
+            },
+            
+            run() {
+                this.isRunning = true;
+                this.output = "";
+                
+                while (this.isRunning) {
+                    if (!this.executeStep()) {
+                        break;
+                    }
+                    
+                    // وقف مؤقت لتجنب التجميد إذا كان البرنامج طويلاً
+                    if (this.programCounter > 100) {
+                        this.output += "⚠️ تم إيقاف التنفيذ بعد 100 خطوة\n";
+                        this.isRunning = false;
+                        break;
+                    }
+                }
+                
+                this.updateDisplay();
+            },
+            
+            updateDisplay() {
+                // تحديث الناتج
+                document.getElementById('output').textContent = this.output;
+                
+                // تحديث المسجلات
+                const registersDiv = document.getElementById('registers');
+                registersDiv.innerHTML = '';
+                
+                for (const [reg, value] of Object.entries(this.registers)) {
+                    const registerEl = document.createElement('div');
+                    registerEl.className = 'register';
+                    registerEl.innerHTML = `
+                        <div class="label">المسجل ${reg}</div>
+                        <div class="value">${value}</div>
+                    `;
+                    registersDiv.appendChild(registerEl);
+                }
+                
+                // تحديث الذاكرة
+                const memoryDiv = document.getElementById('memory');
+                memoryDiv.innerHTML = '';
+                
+                // عرض عناوين الذاكرة من 0x10 إلى 0x1F
+                for (let i = 0x10; i <= 0x1F; i++) {
+                    const address = i.toString(16);
+                    const value = this.memory[address] !== undefined ? this.memory[address] : 0;
+                    
+                    const memCell = document.createElement('div');
+                    memCell.className = 'mem-cell';
+                    memCell.innerHTML = `
+                        <div class="label">0x${address}</div>
+                        <div class="value">${value}</div>
+                    `;
+                    memoryDiv.appendChild(memCell);
+                }
+                
+                // تمييز سطر التعليمات الحالي في محرر النص
+                this.highlightCurrentLine();
+            },
+            
+            highlightCurrentLine() {
+                const editor = document.getElementById('codeEditor');
+                const lines = editor.value.split('\n');
+                
+                // إزالة التمييز السابق
+                const codeDisplay = document.getElementById('output');
+                
+                if (this.programCounter > 0 && this.programCounter <= lines.length) {
+                    // في الواقع، سنقوم فقط بإضافة معلومات إلى الناتج
+                    if (this.programCounter <= this.program.length) {
+                        codeDisplay.scrollTop = codeDisplay.scrollHeight;
+                    }
+                }
             }
-        });
+        };
         
-        // تأثيرات للعناصر العائمة
-        const floatingElements = document.querySelectorAll('.floating-element');
-        floatingElements.forEach(element => {
-            setInterval(() => {
-                const randomX = Math.random() * 20 - 10;
-                const randomY = Math.random() * 20 - 10;
-                element.style.transform = `translate(${randomX}px, ${randomY}px)`;
-            }, 3000);
-        });
-    </script>
-</body>
-    </html>
+        // تهيئة المحاكي عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            simulator.init();
+            
+            // معالجة الأحداث للأزرار
+            document.getElementById('runBtn').addEventListener('click', () => {
+                const code = document.getElementById('codeEditor').value;
+                simulator.loadProgram(code);
+                simulator.run(
