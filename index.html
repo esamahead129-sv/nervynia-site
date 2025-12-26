@@ -1,306 +1,205 @@
-
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>NERVYNIA</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NERVYNIA TEAM</title>
 
 <style>
-:root{
---bg:#06080f;
---bg2:#0b1020;
---neon:#6df3ff;
---purple:#7a6cff;
---glass:rgba(255,255,255,0.05);
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: black;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family: 'Segoe UI', Tahoma, sans-serif;
+/* ===== موسيقى ===== */
+audio { display: none; }
+
+/* ===== شاشة البداية ===== */
+#home {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
 }
 
-body{
-background:
-radial-gradient(circle at 20% 20%,#101736,transparent 40%),
-radial-gradient(circle at 80% 80%,#0a1b2e,transparent 45%),
-linear-gradient(180deg,var(--bg),var(--bg2));
-color:#fff;
-overflow-x:hidden;
+#home h1 {
+  font-size: 38px;
+  letter-spacing: 6px;
 }
 
-/* ===== HERO ===== */
-.hero{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:40px 20px;
+#home button {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.hero h1{
-font-size:5rem;
-letter-spacing:14px;
-background:linear-gradient(90deg,#fff,var(--neon),#fff);
--webkit-background-clip:text;
-color:transparent;
-text-shadow:0 0 40px rgba(100,200,255,0.4);
+#home button:hover {
+  background: white;
+  color: black;
 }
 
-.hero p{
-margin-top:25px;
-max-width:700px;
-line-height:1.8;
-color:#bbb;
-font-size:1.05rem;
+/* ===== قائمة الفريق ===== */
+#team {
+  display: none;
+  margin-top: 40px;
 }
 
-/* ===== DARK SECTION ===== */
-.dark{
-height:300px;
-background:
-linear-gradient(180deg,transparent,#000),
-radial-gradient(circle at 50% 50%,rgba(100,200,255,0.06),transparent 60%);
+.team-list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-/* ===== TEAM ===== */
-.team{
-padding:100px 30px;
-max-width:1400px;
-margin:auto;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:50px;
+.team-list button {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 18px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: 0.3s;
 }
 
-.card{
-background:linear-gradient(180deg,#0b1020,#050812);
-border:1px solid rgba(100,200,255,0.15);
-border-radius:22px;
-padding:35px 25px;
-text-align:center;
-cursor:pointer;
-transition:0.5s;
+.team-list button:hover {
+  background: white;
+  color: black;
 }
 
-.card:hover{
-transform:translateY(-12px);
-box-shadow:0 0 40px rgba(100,200,255,0.15);
+/* ===== صفحة الشخصية ===== */
+#profile {
+  display: none;
+  margin-top: 40px;
 }
 
-.card img{
-width:120px;
-height:120px;
-border-radius:50%;
-object-fit:cover;
-border:2px solid rgba(100,200,255,0.4);
+#profile img {
+  width: 260px;
+  filter: grayscale(100%);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(255,255,255,0.2);
 }
 
-.card h3{
-margin-top:20px;
-letter-spacing:3px;
+#profile h1 {
+  margin-top: 20px;
+  letter-spacing: 4px;
 }
 
-.card span{
-display:block;
-margin-top:6px;
-color:#aaa;
-font-size:14px;
+.info {
+  max-width: 600px;
+  margin: 20px auto;
+  line-height: 1.8;
+  opacity: 0.85;
 }
 
-/* ===== MODAL ===== */
-.modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.95);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:999;
+.exit {
+  margin-top: 25px;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 22px;
+  cursor: pointer;
 }
 
-.modal-box{
-background:linear-gradient(180deg,#0b1020,#02040a);
-border-radius:30px;
-padding:50px;
-width:90%;
-max-width:800px;
-text-align:center;
-border:1px solid rgba(100,200,255,0.25);
+.exit:hover {
+  background: white;
+  color: black;
 }
-
-.modal-box img{
-width:160px;
-height:160px;
-border-radius:50%;
-border:3px solid var(--neon);
-object-fit:cover;
-}
-
-.modal-box h2{
-margin-top:20px;
-letter-spacing:4px;
-}
-
-.modal-box ul{
-margin-top:20px;
-list-style:none;
-color:#bbb;
-line-height:2;
-}
-
-.close{
-margin-top:30px;
-padding:10px 30px;
-border:1px solid var(--neon);
-cursor:pointer;
-display:inline-block;
-}
-
-/* ===== FOOTER ===== */
-footer{
-padding:50px 20px;
-text-align:center;
-color:#777;
-}
-
-a{color:inherit;text-decoration:none}
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<section class="hero">
-<h1>NERVYNIA</h1>
-<p>
-كيان متقدم خارج حدود الزمن.  
-سبعة عقول، سبع قوى، تحت نظام واحد لا يُرى… لكن يُحس.
-</p>
-</section>
+<!-- ===== الموسيقى ===== -->
+<audio id="bgMusic" loop>
+  <source src="music/theme.mp3" type="audio/mpeg">
+</audio>
 
-<!-- DARK -->
-<section class="dark"></section>
-
-<!-- TEAM -->
-<section class="team">
-
-<div class="card" onclick="openM(0)">
-<img src="https://i.imgur.com/8Km9tLL.png">
-<h3>كرولو</h3>
-<span>𝐂𝐡𝐫𝐨𝐥𝐥𝐨</span>
+<!-- ===== شاشة البداية ===== -->
+<div id="home">
+  <h1>NERVYNIA TEAM</h1>
+  <button onclick="openTeam()">اكتشف الفريق</button>
 </div>
 
-<div class="card" onclick="openM(1)">
-<img src="https://i.imgur.com/8Km9tLL.png">
-<h3>لولوش</h3>
-<span>𝐋𝐞𝐥𝐨𝐮𝐜𝐡</span>
+<!-- ===== قائمة الفريق ===== -->
+<div id="team">
+  <div class="team-list">
+    <button onclick="openProfile('chrollo')">𝕮𝖍𝖗𝖔𝖑𝖑𝖔</button>
+    <button onclick="openProfile('katana')">𝕶𝖆𝖙𝖆𝖓𝖆</button>
+    <button onclick="openProfile('nyx')">𝕹𝖞𝖝</button>
+    <button onclick="openProfile('vortex')">𝖁𝖔𝖗𝖙𝖊𝖝</button>
+    <button onclick="openProfile('ghost')">𝕲𝖍𝖔𝖘𝖙</button>
+  </div>
 </div>
 
-<div class="card" onclick="openM(2)">
-<img src="https://i.imgur.com/8Km9tLL.png">
-<h3>كاتانا</h3>
-<span>𝐊𝐚𝐭𝐚𝐧𝐚</span>
+<!-- ===== صفحة الشخصية ===== -->
+<div id="profile">
+  <img id="pImg">
+  <h1 id="pName"></h1>
+  <div class="info" id="pInfo"></div>
+  <button class="exit" onclick="backToTeam()">خروج</button>
 </div>
-
-<div class="card" onclick="openM(3)">
-<img src="https://i.imgur.com/8Km9tLL.png">
-<h3>ايزن</h3>
-<span>𝐀𝐢𝐳𝐞𝐧</span>
-</div>
-
-<div class="card" onclick="openM(4)">
-<img src="https://i.imgur.com/8Km9tLL.png">
-<h3>ليليث</h3>
-<span>𝐋𝐢𝐥𝐢𝐭𝐡</span>
-</div>
-
-<div class="card" onclick="openM(5)">
-<img src="https://i.imgur.com/8Km9tLL.png">
-<h3>ميكا</h3>
-<span>𝐌𝐢𝐤𝐚</span>
-</div>
-
-<div class="card" onclick="openM(6)">
-<img src="https://i.imgur.com/8Km9tLL.png">
-<h3>آدم</h3>
-<span>𝐀𝐝𝐚𝐦</span>
-</div>
-
-</section>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-<div class="modal-box">
-<img id="mImg">
-<h2 id="mName"></h2>
-<ul id="mFeatures"></ul>
-<div class="close" onclick="closeM()">إغلاق</div>
-</div>
-</div>
-
-<footer>
-تواصل واتساب:  
-<a href="https://wa.me/201029505953" target="_blank">اضغط هنا</a>
-</footer>
 
 <script>
-const data=[
-{
-n:"𝐂𝐡𝐫𝐨𝐥𝐥𝐨",
-f:["عقل استراتيجي خارق","قيادة غير مرئية","تحكم كامل بالمسار"],
-i:"https://i.imgur.com/8Km9tLL.png"
-},
-{
-n:"𝐋𝐞𝐥𝐨𝐮𝐜𝐡",
-f:["تخطيط بعيد المدى","قراءة الخصم","سيطرة ذهنية"],
-i:"https://i.imgur.com/8Km9tLL.png"
-},
-{
-n:"𝐊𝐚𝐭𝐚𝐧𝐚",
-f:["تنفيذ بلا تردد","دقة قاتلة","سرعة استجابة"],
-i:"https://i.imgur.com/8Km9tLL.png"
-},
-{
-n:"𝐀𝐢𝐳𝐞𝐧",
-f:["تحليل نفسي","تلاعب إدراكي","هدم الثقة"],
-i:"https://i.imgur.com/8Km9tLL.png"
-},
-{
-n:"𝐋𝐢𝐥𝐢𝐭𝐡",
-f:["اختراق رقمي","تخفي كامل","وجود شبحي"],
-i:"https://i.imgur.com/8Km9tLL.png"
-},
-{
-n:"𝐌𝐢𝐤𝐚",
-f:["مراقبة صامتة","توقع الأحداث","عدم التدخل"],
-i:"https://i.imgur.com/8Km9tLL.png"
-},
-{
-n:"𝐀𝐝𝐚𝐦",
-f:["نور غير مستقر","كشف الحقائق","تشويه الأنظمة"],
-i:"https://i.imgur.com/8Km9tLL.png"
-}
-];
+const members = {
+  chrollo: {
+    name: "𝕮𝖍𝖗𝖔𝖑𝖑𝖔",
+    img: "images/chrollo.jpg",
+    info: "🕷️ قائد الفريق<br>موهوب في البرمجة، فك الشفرات، التخفي الإلكتروني، إنشاء هويات وأرقام وهمية، يعمل في الخفاء لأهداف إنسانية."
+  },
+  katana: {
+    name: "𝕶𝖆𝖙𝖆𝖓𝖆",
+    img: "images/katana.jpg",
+    info: "⚔️ خبير الهجوم الرقمي<br>سريع، حاد، لا يترك أثراً."
+  },
+  nyx: {
+    name: "𝕹𝖞𝖝",
+    img: "images/nyx.jpg",
+    info: "🌑 مهندسة الظل<br>مراقبة صامتة وتحكم كامل في الشبكات."
+  },
+  vortex: {
+    name: "𝖁𝖔𝖗𝖙𝖊𝖝",
+    img: "images/vortex.jpg",
+    info: "🌀 محلل البيانات<br>يرى الأنماط حيث يراها الآخرون فوضى."
+  },
+  ghost: {
+    name: "𝕲𝖍𝖔𝖘𝖙",
+    img: "images/ghost.jpg",
+    info: "👁️ شبح النظام<br>يدخل ويخرج بلا أثر."
+  }
+};
 
-function openM(i){
-document.getElementById("modal").style.display="flex";
-document.getElementById("mName").innerText=data[i].n;
-document.getElementById("mImg").src=data[i].i;
-const ul=document.getElementById("mFeatures");
-ul.innerHTML="";
-data[i].f.forEach(x=>{
-ul.innerHTML+=`<li>• ${x}</li>`;
-});
+function openTeam() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("team").style.display = "block";
 }
 
-function closeM(){
-document.getElementById("modal").style.display="none";
+function openProfile(key) {
+  document.getElementById("team").style.display = "none";
+  document.getElementById("profile").style.display = "block";
+
+  pImg.src = members[key].img;
+  pName.innerHTML = members[key].name;
+  pInfo.innerHTML = members[key].info;
 }
+
+function backToTeam() {
+  document.getElementById("profile").style.display = "none";
+  document.getElementById("team").style.display = "block";
+}
+
+/* تشغيل الصوت أول لمسة */
+document.addEventListener("click", () => {
+  document.getElementById("bgMusic").play();
+}, { once: true });
 </script>
 
 </body>
