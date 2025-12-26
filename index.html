@@ -1,206 +1,114 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>NERVYNIA TEAM</title>
+  <meta charset="UTF-8">
+  <title>NERVYNIA TEAM</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      text-align: center;
+    }
 
-<style>
-* { box-sizing: border-box; }
+    /* قائمة الأسماء */
+    .menu {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px;
+      border-bottom: 1px solid #333;
+    }
 
-body {
-  margin: 0;
-  background: black;
-  color: white;
-  font-family: Arial, sans-serif;
-  text-align: center;
-}
+    .menu button {
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
 
-/* ===== موسيقى ===== */
-audio { display: none; }
+    .menu button:hover {
+      background: #fff;
+      color: #000;
+    }
 
-/* ===== شاشة البداية ===== */
-#home {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 25px;
-}
+    /* صفحة العضو */
+    .profile {
+      display: none;
+      padding: 20px;
+    }
 
-#home h1 {
-  font-size: 38px;
-  letter-spacing: 6px;
-}
+    .profile.active {
+      display: block;
+    }
 
-#home button {
-  background: transparent;
-  border: 1px solid white;
-  color: white;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
+    .profile img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      filter: grayscale(100%);
+    }
 
-#home button:hover {
-  background: white;
-  color: black;
-}
+    .name {
+      font-size: 28px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
 
-/* ===== قائمة الفريق ===== */
-#team {
-  display: none;
-  margin-top: 40px;
-}
+    .desc {
+      margin-top: 10px;
+      line-height: 1.8;
+      color: #ccc;
+    }
 
-.team-list {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.team-list button {
-  background: transparent;
-  border: 1px solid white;
-  color: white;
-  padding: 10px 18px;
-  cursor: pointer;
-  letter-spacing: 2px;
-  transition: 0.3s;
-}
-
-.team-list button:hover {
-  background: white;
-  color: black;
-}
-
-/* ===== صفحة الشخصية ===== */
-#profile {
-  display: none;
-  margin-top: 40px;
-}
-
-#profile img {
-  width: 260px;
-  filter: grayscale(100%);
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(255,255,255,0.2);
-}
-
-#profile h1 {
-  margin-top: 20px;
-  letter-spacing: 4px;
-}
-
-.info {
-  max-width: 600px;
-  margin: 20px auto;
-  line-height: 1.8;
-  opacity: 0.85;
-}
-
-.exit {
-  margin-top: 25px;
-  background: transparent;
-  border: 1px solid white;
-  color: white;
-  padding: 10px 22px;
-  cursor: pointer;
-}
-
-.exit:hover {
-  background: white;
-  color: black;
-}
-</style>
+    audio {
+      margin-top: 20px;
+      width: 90%;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- ===== الموسيقى ===== -->
-<audio id="bgMusic" loop>
-  <source src="music/theme.mp3" type="audio/mpeg">
-</audio>
-
-<!-- ===== شاشة البداية ===== -->
-<div id="home">
-  <h1>NERVYNIA TEAM</h1>
-  <button onclick="openTeam()">اكتشف الفريق</button>
-</div>
-
-<!-- ===== قائمة الفريق ===== -->
-<div id="team">
-  <div class="team-list">
-    <button onclick="openProfile('chrollo')">𝕮𝖍𝖗𝖔𝖑𝖑𝖔</button>
-    <button onclick="openProfile('katana')">𝕶𝖆𝖙𝖆𝖓𝖆</button>
-    <button onclick="openProfile('nyx')">𝕹𝖞𝖝</button>
-    <button onclick="openProfile('vortex')">𝖁𝖔𝖗𝖙𝖊𝖝</button>
-    <button onclick="openProfile('ghost')">𝕲𝖍𝖔𝖘𝖙</button>
+  <!-- قائمة الفريق -->
+  <div class="menu">
+    <button onclick="showProfile('krullo')">كرولو</button>
+    <button onclick="showProfile('katana')">كاتانا</button>
   </div>
-</div>
 
-<!-- ===== صفحة الشخصية ===== -->
-<div id="profile">
-  <img id="pImg">
-  <h1 id="pName"></h1>
-  <div class="info" id="pInfo"></div>
-  <button class="exit" onclick="backToTeam()">خروج</button>
-</div>
+  <!-- صفحة كرولو -->
+  <div id="krullo" class="profile active">
+    <img src="krullo.jpg" alt="Krullo">
+    <div class="name">كرولو</div>
+    <div class="desc">
+      موهوب في البرمجة وفك الشفرات<br>
+      التخفي في الإلكترونيات<br>
+      صناعة هويات وأرقام رقمية وهمية<br>
+      يعمل في الخفاء لأغراض إنسانية
+    </div>
+    <audio controls>
+      <source src="krullo.mp3" type="audio/mpeg">
+    </audio>
+  </div>
 
-<script>
-const members = {
-  chrollo: {
-    name: "𝕮𝖍𝖗𝖔𝖑𝖑𝖔",
-    img: "images/chrollo.jpg",
-    info: "🕷️ قائد الفريق<br>موهوب في البرمجة، فك الشفرات، التخفي الإلكتروني، إنشاء هويات وأرقام وهمية، يعمل في الخفاء لأهداف إنسانية."
-  },
-  katana: {
-    name: "𝕶𝖆𝖙𝖆𝖓𝖆",
-    img: "images/katana.jpg",
-    info: "⚔️ خبير الهجوم الرقمي<br>سريع، حاد، لا يترك أثراً."
-  },
-  nyx: {
-    name: "𝕹𝖞𝖝",
-    img: "images/nyx.jpg",
-    info: "🌑 مهندسة الظل<br>مراقبة صامتة وتحكم كامل في الشبكات."
-  },
-  vortex: {
-    name: "𝖁𝖔𝖗𝖙𝖊𝖝",
-    img: "images/vortex.jpg",
-    info: "🌀 محلل البيانات<br>يرى الأنماط حيث يراها الآخرون فوضى."
-  },
-  ghost: {
-    name: "𝕲𝖍𝖔𝖘𝖙",
-    img: "images/ghost.jpg",
-    info: "👁️ شبح النظام<br>يدخل ويخرج بلا أثر."
-  }
-};
+  <!-- صفحة كاتانا (فاضية مؤقتًا) -->
+  <div id="katana" class="profile">
+    <img src="katana.jpg" alt="Katana">
+    <div class="name">كاتانا</div>
+    <div class="desc">
+      سيتم إضافة التعريف لاحقًا
+    </div>
+  </div>
 
-function openTeam() {
-  document.getElementById("home").style.display = "none";
-  document.getElementById("team").style.display = "block";
-}
-
-function openProfile(key) {
-  document.getElementById("team").style.display = "none";
-  document.getElementById("profile").style.display = "block";
-
-  pImg.src = members[key].img;
-  pName.innerHTML = members[key].name;
-  pInfo.innerHTML = members[key].info;
-}
-
-function backToTeam() {
-  document.getElementById("profile").style.display = "none";
-  document.getElementById("team").style.display = "block";
-}
-
-/* تشغيل الصوت أول لمسة */
-document.addEventListener("click", () => {
-  document.getElementById("bgMusic").play();
-}, { once: true });
-</script>
+  <script>
+    function showProfile(id) {
+      document.querySelectorAll('.profile').forEach(p => {
+        p.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
 
 </body>
 </html>
