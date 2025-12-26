@@ -1,167 +1,97 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NERVYNIA TEAM</title>
+<title>Ahmed Essam | Profile</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma;}
-body{background:#000;color:#fff;overflow-x:hidden}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', Tahoma;
+}
 
-/* Loader */
-#loader{position:fixed;inset:0;background:#000;display:flex;justify-content:center;align-items:center;z-index:9999;transition:.5s}
-#loader.fade-out{opacity:0;visibility:hidden}
-.spinner{width:60px;height:60px;border:4px solid #0af;border-top:4px solid transparent;border-radius:50%;animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
+body{
+  background:#0b0b0b;
+  color:#fff;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-/* Pages */
-.page{display:none;padding:20px;animation:fade .8s}
-.page.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1}}
+.profile{
+  background:linear-gradient(135deg,#111,#000);
+  border:1px solid #1f1f1f;
+  border-radius:15px;
+  padding:40px;
+  max-width:420px;
+  width:90%;
+  text-align:center;
+  box-shadow:0 0 30px rgba(0,170,255,.15);
+}
 
-/* Nav */
-nav{position:sticky;top:0;background:#000d;padding:15px;border-bottom:2px solid #0af;z-index:100}
-.nav-links{display:flex;justify-content:center;gap:15px}
-.nav-link{color:#fff;text-decoration:none;padding:8px 15px;border-radius:5px;transition:.3s}
-.nav-link:hover,.nav-link.active{background:#0af;color:#000}
+h1{
+  color:#0af;
+  font-size:32px;
+  margin-bottom:10px;
+}
 
-/* Header */
-header{text-align:center;padding:60px 20px}
-h1{color:#0af;font-size:42px;text-shadow:0 0 15px #0af}
-.hero-text{max-width:800px;margin:20px auto;line-height:1.6}
+.tag{
+  color:#aaa;
+  font-size:14px;
+  margin-bottom:25px;
+}
 
-/* Buttons */
-.btn{padding:12px 25px;background:#0af;color:#000;border:none;border-radius:5px;font-weight:bold;cursor:pointer;transition:.3s}
-.btn:hover{transform:translateY(-3px)}
+.info{
+  text-align:right;
+  line-height:2;
+  font-size:16px;
+}
 
-/* Cards */
-.card{background:#111c;border:1px solid #333;border-radius:10px;padding:25px;margin:25px auto;max-width:800px;backdrop-filter:blur(6px)}
-.card h2{color:#0af;margin-bottom:10px}
+.info span{
+  color:#0af;
+  font-weight:bold;
+}
 
-/* Team */
-.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1200px;margin:auto}
-.member-card{background:#111;border:1px solid #333;border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:.3s}
-.member-card:hover{border-color:#0af;transform:translateY(-6px)}
-.member-name{color:#0af;font-size:20px;font-weight:bold}
-.member-role{color:#ccc;font-size:14px}
+.bio{
+  margin-top:25px;
+  padding-top:20px;
+  border-top:1px solid #222;
+  color:#ddd;
+  line-height:1.8;
+}
 
-/* Member page */
-.back-btn{display:inline-block;margin-bottom:20px;color:#0af;text-decoration:none}
-.profile-header{background:#111c;padding:25px;border-radius:10px;border-top:3px solid #0af}
-.profile-title{color:#0af;font-size:34px}
-
-/* Footer */
-footer{text-align:center;padding:30px;border-top:1px solid #333;margin-top:40px}
-
-/* Mobile optimization */
-@media(max-width:480px){
-.card,.profile-header{backdrop-filter:none}
-h1{font-size:28px}
+.footer{
+  margin-top:30px;
+  font-size:13px;
+  color:#666;
 }
 </style>
 </head>
 
 <body>
 
-<div id="loader"><div class="spinner"></div></div>
+<div class="profile">
+  <h1>Ahmed Essam</h1>
+  <div class="tag">INTP • 18 Years</div>
 
-<nav>
-<div class="nav-links">
-<a class="nav-link active" onclick="showPage('home')">الرئيسية</a>
-<a class="nav-link" onclick="showPage('team')">الفريق</a>
-<a class="nav-link" onclick="showPage('about')">من نحن</a>
+  <div class="info">
+    <p><span>الدولة:</span> مصر – رأس البر</p>
+    <p><span>الهوايات:</span> السباحة، كرة القدم</p>
+  </div>
+
+  <div class="bio">
+    يحب الاستكشاف وتعلّم أشياء جديدة، يميل للتفكير والتحليل، ويسعى دائمًا لفهم ما حوله بعمق، مع الحفاظ على التوازن بين العقل والرياضة.
+  </div>
+
+  <div class="footer">
+    Personal Profile Website
+  </div>
 </div>
-</nav>
-
-<!-- HOME -->
-<div id="home-page" class="page active">
-<header>
-<h1>NERVYNIA TEAM</h1>
-<p class="hero-text">
-فريق يعمل في الظل… بلا ضجيج، بلا وجوه.<br>
-العقل قبل القوة.
-</p>
-<button class="btn" onclick="showPage('team')">تعرف على الفريق</button>
-</header>
-
-<div class="card">
-<h2>تعريف الفريق</h2>
-<p>
-NERVYNIA كيان غير مرئي، يتحرك حيث يفشل الآخرون.
-</p>
-</div>
-</div>
-
-<!-- TEAM -->
-<div id="team-page" class="page">
-<h1 style="text-align:center;margin:30px 0">أعضاء الفريق</h1>
-<div class="team-grid">
-<div class="member-card" onclick="showMember('كرولو')">
-<div style="font-size:40px">🕷️</div>
-<div class="member-name">كرولو</div>
-<div class="member-role">العقل المدبر</div>
-</div>
-
-<div class="member-card" onclick="showMember('لولوش')">
-<div style="font-size:40px">♟️</div>
-<div class="member-name">لولوش</div>
-<div class="member-role">الاستراتيجي</div>
-</div>
-
-<div class="member-card" onclick="showMember('آدم')">
-<div style="font-size:40px">⚡</div>
-<div class="member-name">آدم</div>
-<div class="member-role">كاسر الأنظمة</div>
-</div>
-</div>
-</div>
-
-<!-- ABOUT -->
-<div id="about-page" class="page">
-<div class="card">
-<h2>من نحن</h2>
-<p>
-نحن الظل… لا نُرى، لكن تأثيرنا موجود.
-</p>
-</div>
-</div>
-
-<!-- MEMBER -->
-<div id="member-page" class="page">
-<a class="back-btn" onclick="showPage('team')">← رجوع</a>
-<div class="profile-header">
-<h2 id="member-title" class="profile-title"></h2>
-<p id="member-desc"></p>
-</div>
-</div>
-
-<footer>
-<p style="color:#0af;font-size:20px">NERVYNIA</p>
-<p>الظل الذي يتحرك في صمت</p>
-</footer>
-
-<script>
-const members={
-كرولو:{title:'كرولو 🕷️',desc:'العقل المدبر، يرى الجميع ولا يُرى.'},
-لولوش:{title:'لولوش ♟️',desc:'الاستراتيجي الذي يسبق الجميع بخطوات.'},
-آدم:{title:'آدم ⚡',desc:'كاسر الأنظمة وحاكم الشيفرات.'}
-};
-
-function showPage(p){
-document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-document.getElementById(p+'-page').classList.add('active');
-document.title=p==='home'?'NERVYNIA TEAM':p==='team'?'فريق NERVYNIA':p==='about'?'من نحن - NERVYNIA':'عضو الفريق';
-}
-
-function showMember(n){
-document.getElementById('member-title').textContent=members[n].title;
-document.getElementById('member-desc').textContent=members[n].desc;
-showPage('member');
-}
-
-window.onload=()=>setTimeout(()=>document.getElementById('loader').classList.add('fade-out'),800);
-</script>
 
 </body>
 </html>
