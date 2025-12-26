@@ -1,69 +1,591 @@
-    </p>
-  </div>
-
-  <button class="btn" onclick="openWhatsApp()">التواصل واتساب</button>
-</div>
-
-<!-- صفحة الفريق -->
-<div id="team" class="container hidden">
-  <h2>أفراد الفريق</h2>
-
-  <div class="member" onclick="openMember('Chrollo')">🕷️ كرولو</div>
-  <div class="member" onclick="openMember('Lelouch')">👑 لولوش</div>
-  <div class="member" onclick="openMember('Adam')">⚡ آدم</div>
-  <div class="member" onclick="openMember('Katana')">🗡️ كاتانا</div>
-  <div class="member" onclick="openMember('Ghost')">👻 غوست</div>
-
-  <button class="btn" onclick="goHome()">العودة للرئيسية</button>
-</div>
-
-<!-- صفحة الفرد -->
-<div id="profile" class="container hidden">
-  <h2 id="memberName"></h2>
-
-  <div class="photo">
-    صورة العضو (هتتحط بعدين)
-  </div>
-
-  <div class="card">
-    <p id="memberDesc">
-      وصف العضو (هتعدله بعدين)
-    </p>
-  </div>
-
-  <button class="btn" onclick="showTeam()">رجوع للفريق</button>
-</div>
-
-<script>
-const home = document.getElementById('home');
-const team = document.getElementById('team');
-const profile = document.getElementById('profile');
-const memberName = document.getElementById('memberName');
-const memberDesc = document.getElementById('memberDesc');
-
-function showTeam() {
-  home.classList.add('hidden');
-  profile.classList.add('hidden');
-  team.classList.remove('hidden');
-}
-
-function goHome() {
-  team.classList.add('hidden');
-  profile.classList.add('hidden');
-  home.classList.remove('hidden');
-}
-
-function openMember(name) {
-  team.classList.add('hidden');
-  profile.classList.remove('hidden');
-  memberName.innerText = name;
-  memberDesc.innerText = "وصف خاص بـ " + name + " (تعدله بعدين)";
-}
-
-function openWhatsApp() {
-  window.open("https://wa.me/201029505953", "_blank");
-}
-</script>
-
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NERVYNIA | الظلام المتقدم</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== CSS RESET & VARIABLES ===== */
+        :root {
+            --neon-cyan: #00ffd5;
+            --neon-purple: #9d00ff;
+            --neon-red: #ff003c;
+            --dark-bg: #0a0a0a;
+            --matrix-green: #00ff41;
+            --gold: #ffd700;
+            --space-gradient: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            --cyber-gradient: linear-gradient(45deg, #00ffd5, #9d00ff, #ff003c);
+            --hacker-gradient: linear-gradient(90deg, #000, #00ff41, #000);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: var(--dark-bg);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 213, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(157, 0, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 40% 80%, rgba(255, 0, 60, 0.05) 0%, transparent 20%);
+        }
+        
+        /* ===== MATRIX RAIN BACKGROUND ===== */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        
+        /* ===== GLITCH EFFECT ===== */
+        .glitch {
+            position: relative;
+            animation: glitch 3s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            2% { transform: translate(-2px, 2px); }
+            4% { transform: translate(-2px, -2px); }
+            6% { transform: translate(2px, 2px); }
+            8% { transform: translate(2px, -2px); }
+            10% { transform: translate(0); }
+            100% { transform: translate(0); }
+        }
+        
+        /* ===== MAIN CONTAINER ===== */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* ===== CYBER NAVIGATION ===== */
+        .cyber-nav {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            padding: 20px;
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 15px;
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 255, 213, 0.3),
+                        inset 0 0 15px rgba(0, 255, 213, 0.1);
+        }
+        
+        .cyber-nav a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            padding: 15px 30px;
+            border: 1px solid var(--neon-cyan);
+            border-radius: 8px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .cyber-nav a:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 213, 0.4);
+        }
+        
+        .cyber-nav a.active {
+            background: var(--cyber-gradient);
+            color: white;
+            border: none;
+        }
+        
+        /* ===== CYBER HEADER ===== */
+        .cyber-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            border: 2px solid transparent;
+            border-image: var(--cyber-gradient) 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cyber-header h1 {
+            font-size: 4.5rem;
+            background: var(--cyber-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(0, 255, 213, 0.5);
+            letter-spacing: 5px;
+        }
+        
+        .cyber-header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #aaa;
+            line-height: 1.8;
+        }
+        
+        /* ===== GRID LAYOUT ===== */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        /* ===== CYBER CARDS ===== */
+        .cyber-card {
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid transparent;
+            border-image: var(--cyber-gradient) 1;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--cyber-gradient);
+        }
+        
+        .cyber-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7),
+                        0 0 50px rgba(0, 255, 213, 0.2);
+        }
+        
+        .cyber-card h3 {
+            color: var(--neon-cyan);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .cyber-card p {
+            color: #ccc;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+        
+        /* ===== TEAM MEMBER CARDS ===== */
+        .member-card {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--cyber-gradient);
+            z-index: -1;
+            border-radius: 22px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .member-card:hover::before {
+            opacity: 1;
+        }
+        
+        .member-card:hover {
+            transform: scale(1.05) rotateY(10deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8),
+                        0 0 60px rgba(0, 255, 213, 0.3);
+        }
+        
+        .member-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: var(--cyber-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .member-name {
+            font-size: 2rem;
+            color: var(--neon-cyan);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .member-role {
+            color: var(--neon-purple);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .member-desc {
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        /* ===== BUTTONS ===== */
+        .cyber-btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 3px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+            text-align: center;
+            margin: 10px;
+            cursor: pointer;
+        }
+        
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 213, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .cyber-btn:hover::before {
+            left: 100%;
+        }
+        
+        .cyber-btn:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 255, 213, 0.5);
+            transform: translateY(-5px);
+        }
+        
+        .cyber-btn.red {
+            border-color: var(--neon-red);
+            color: var(--neon-red);
+        }
+        
+        .cyber-btn.red:hover {
+            background: var(--neon-red);
+            color: white;
+        }
+        
+        /* ===== ANIMATED STATS ===== */
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 60px 0;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            border: 1px solid var(--neon-purple);
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: var(--cyber-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #aaa;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+        
+        /* ===== TERMINAL EFFECT ===== */
+        .terminal {
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 40px 0;
+            border-left: 5px solid var(--matrix-green);
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+        
+        .terminal::before {
+            content: 'root@nervynia:~$';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--dark-bg);
+            padding: 0 10px;
+            color: var(--matrix-green);
+            font-weight: bold;
+        }
+        
+        .terminal-text {
+            color: var(--matrix-green);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        /* ===== FOOTER ===== */
+        .cyber-footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 80px;
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 2px solid var(--neon-cyan);
+            position: relative;
+        }
+        
+        .cyber-footer p {
+            color: #777;
+            margin: 10px 0;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .social-icon {
+            color: var(--neon-cyan);
+            font-size: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            color: var(--neon-purple);
+            transform: translateY(-5px) scale(1.2);
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .cyber-header h1 { font-size: 2.8rem; }
+            .cyber-nav { gap: 15px; }
+            .cyber-nav a { padding: 12px 20px; }
+            .grid-container { grid-template-columns: 1fr; }
+            .stats-container { flex-direction: column; }
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .float-animation {
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--cyber-gradient);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Rain Background -->
+    <canvas id="matrix-bg"></canvas>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Cyber Navigation -->
+        <nav class="cyber-nav">
+            <a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a>
+            <a href="team.html"><i class="fas fa-users"></i> الفريق</a>
+            <a href="dark-team.html"><i class="fas fa-moon"></i> الظلام المتقدم</a>
+            <a href="about.html"><i class="fas fa-info-circle"></i> عنّا</a>
+            <a href="contact.html"><i class="fas fa-envelope"></i> الاتصال</a>
+        </nav>
+        
+        <!-- Cyber Header -->
+        <header class="cyber-header float-animation">
+            <h1 class="glitch">NERVYNIA TEAM</h1>
+            <p>نحن الظلال التي تحمي النور، والرقمية التي تُعيد صياغة الواقع. فريق يتكون من نخبة المخترقين، المبرمجين، ومهندسي الظل الذين يعملون في الخفاء لإعادة التوازن الرقمي.</p>
+        </header>
+        
+        <!-- Stats Section -->
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number" id="stat1">0</div>
+                <div class="stat-label">مهمة ناجحة</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="stat2">0</div>
+                <div class="stat-label">سطر كود مكتوب</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="stat3">0</div>
+                <div class="stat-label">ثانية اختراق أسرع</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="stat4">0</div>
+                <div class="stat-label">نظام محمي</div>
+            </div>
+        </div>
+        
+        <!-- Grid Section -->
+        <div class="grid-container">
+            <!-- Card 1 -->
+            <div class="cyber-card">
+                <h3><i class="fas fa-user-secret"></i> كرولو - العقل المدبر</h3>
+                <p>قائد الفريق وعبقري البرمجة. متخصص في فك الشفرات المعقدة، إنشاء الهويات الوهمية، والاختراق الأخلاقي. يعمل في الظل منذ 7 سنوات دون أن يترك أثرًا واحدًا.</p>
+                <div class="terminal">
+                    <div class="terminal-text">
+                        > آخر نشاط: اختراق خادم شركة مونولوج<br>
+                        > الحالة: غير مرئي<br>
+                        > الموقع: غير معروف<br>
+                        > النشاط: نشط
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="cyber-card">
+                <h3><i class="fas fa-ghost"></i> شبح - المتسلل الخفي</h3>
+                <p>المتخصص في التخفي الرقمي الكامل. يدخل الأنظمة المحصنة ويخرج دون أن يترك أي أثر. أسرع متسلل في الفريق، ينفذ المهام في أقل من 30 ثانية.</p>
+                <button class="cyber-btn" onclick="activateGhost()">تفعيل وضع الشبح</button>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="cyber-card">
+                <h3><i class="fas fa-code"></i> كاتانا - سيف الرقمية</h3>
+                <p>مبرمج هجومي لا يعرف الرحمة. يصمم أدوات اختراق مخصصة، يكتشف الثغرات في أقل من دقيقة. يتحدث 6 لغات برمجة ويتقن 15 إطار عمل أمني.</p>
+                <div class="cyber-btn red pulse-animation" onclick="showKatanaTools()">عرض أدوات كاتانا</div>
+            </div>
+        </div>
+        
+        <!-- Team Members -->
+        <h2 style="text-align:center; margin: 60px 0 40px; color: var(--neon-purple);">أعضاء الظلام المتقدم</h2>
+        
+        <div class="grid-container">
+            <!-- Member 1 -->
+            <div class="member-card" onclick="selectMember('chrollo')">
+                <div class="member-icon"><i class="fas fa-crown"></i></div>
+                <div class="member-name">كرولو</div>
+                <div class="member-role">القائد - مهندس الظلال</div>
+                <div class="member-desc">عقل الفريق الاستراتيجي. يرى ما لا يراه الآخرون ويخطط لما لا يتخيله العدو.</div>
+            </div>
+            
+            <!-- Member 2 -->
+            <div class="member-card" onclick="selectMember('lelouch')">
+                <div class="member-icon"><i class="fas fa-chess-king"></i></div>
+                <div class="member-name">لولوش</div>
+                <div class="member-role">الاستراتيجي - محرك الدمى</div>
+                <div class="member-desc">يحرك الأحداث من خلف الكواليس. يجعل الأعداء ينفذون خطته دون أن يعلموا.</div>
+            </div>
+            
+            <!-- Member 3 -->
+            <div class="member-card" onclick="selectMember('adam')">
+                <div class="member-icon"><i class="fas fa-bolt"></i></div>
+                <div class="member-name">آدم</div>
+                <div class="member-role">المفجر - كاسر الحواجز</div>
+                <div class="member-desc">يتخصص في كسر أنظمة الحماية الأكثر تعقيدًا. قوته تكمن في السرعة والدقة القاتلة.</div>
+            </div>
+            
+            <!-- Member 4 -->
+            <div class="member-card" onclick="selectMember('katana')">
+                <div class="member-icon"><i class="fas fa-crosshairs"></i></div>
+                <div class="member-name">كاتانا</div>
+                <div class="member-role">السيف الرقمي - المنفذ</div>
+                <div class="member-desc">ينفذ المهام بسرعة البرق. دقة إصابته 100% ولا يخطئ الهدف أبدًا.</div>
+            </div>
+            
+            <!-- Member 5 -->
+            <div class="member-card" onclick="selectMember('ghost')">
+                <div class="member-icon"><i class="fas fa-user-ninja"></i></div>
+                <div class="member-name">شبح</div>
+                <div class="member-role">المتخفي - العين الخفية</div>
+                <div class="member-desc">لا يرى، لا يسمع، لا يحس به أحد. يدخل ويخرج وكأنه لم يكن موجودًا.</div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div style="text-align:center; margin: 50px 0;">
+            <button class="cyber-btn" onclick="initiateDarkMode()"><i class="fas fa-moon"></i> تفعيل وضع الظلام المتقدم</button>
+            <button class="cyber-btn red" onclick="emergencyProtocol()"><i class="fas fa-skull-crossbones"></i> بروتوكول الطوارئ</button>
+            <button class="cyber-btn" onclick="connectWhatsApp()"><i class="fab fa-whatsapp"></i> الاتصال عبر واتساب</button>
+        </div>
+        
+        <!-- Terminal Log -->
+        <div class="terminal">
+            <div class="terminal-text" id="terminal-log">
+                > نظام NERVYNIA جاهز للتشغيل<br>
+                > تهيئة واجهة الظلام المتقدم...<br>
+                > تحميل بيانات الأعضاء...<br>
+                > الاتصال بالسيرفر الرئيسي...<br>
+                > جاهز لأوامرك، 
