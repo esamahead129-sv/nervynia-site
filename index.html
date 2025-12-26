@@ -1,1048 +1,628 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NERVYNIA TEAM</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<style>
-:root {
-  --neon-primary: #00ffd5;
-  --neon-secondary: #ff00ff;
-  --neon-tertiary: #ff2a6d;
-  --neon-glow: 0 0 15px rgba(0, 255, 213, 0.7), 
-               0 0 30px rgba(0, 255, 213, 0.5), 
-               0 0 45px rgba(0, 255, 213, 0.3);
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #11111a;
-  --bg-card: rgba(5, 10, 15, 0.95);
-  --bg-overlay: rgba(0, 0, 0, 0.85);
-  --text-primary: #eafffb;
-  --text-secondary: #c2e8ff;
-  --accent-red: #ff2a6d;
-  --accent-purple: #9d00ff;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Cairo', Tahoma, Arial, sans-serif;
-}
-
-body {
-  margin: 0;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  overflow-x: hidden;
-  position: relative;
-  min-height: 100vh;
-}
-
-/* تأثيرات الخلفية المتطورة */
-.background-effects {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -3;
-  overflow: hidden;
-}
-
-.neon-grid {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: 
-    linear-gradient(90deg, transparent 24px, rgba(0, 255, 213, 0.02) 25px, transparent 26px),
-    linear-gradient(0deg, transparent 24px, rgba(0, 255, 213, 0.02) 25px, transparent 26px);
-  background-size: 50px 50px;
-  opacity: 0.3;
-}
-
-.particles-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.particle {
-  position: absolute;
-  background: var(--neon-primary);
-  border-radius: 50%;
-  animation: float 20s infinite linear;
-}
-
-.particle:nth-child(odd) {
-  background: var(--neon-secondary);
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(100vh) translateX(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.3;
-  }
-  90% {
-    opacity: 0.3;
-  }
-  100% {
-    transform: translateY(-100px) translateX(100px) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-.neon-orb {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 255, 213, 0.1) 0%, transparent 70%);
-  filter: blur(40px);
-  animation: orb-float 30s infinite ease-in-out;
-}
-
-.neon-orb:nth-child(2) {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(255, 0, 255, 0.08) 0%, transparent 70%);
-  animation-delay: -15s;
-}
-
-@keyframes orb-float {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(100px, 150px) scale(1.2);
-  }
-  50% {
-    transform: translate(-150px, 50px) scale(0.8);
-  }
-  75% {
-    transform: translate(50px, -100px) scale(1.1);
-  }
-}
-
-/* شريط التنقل المتطور */
-.navbar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  background: rgba(5, 10, 15, 0.9);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(0, 255, 213, 0.2);
-  z-index: 1000;
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-logo {
-  font-size: 28px;
-  font-weight: 900;
-  background: linear-gradient(45deg, var(--neon-primary), var(--neon-secondary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-decoration: none;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(0, 255, 213, 0.3);
-}
-
-.nav-menu {
-  display: flex;
-  gap: 30px;
-}
-
-.nav-link {
-  color: var(--text-primary);
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 10px 20px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.nav-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 213, 0.2), transparent);
-  transition: right 0.6s ease;
-}
-
-.nav-link:hover {
-  color: var(--neon-primary);
-  background: rgba(0, 255, 213, 0.1);
-  box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);
-}
-
-.nav-link:hover::before {
-  right: 100%;
-}
-
-.nav-link.active {
-  color: var(--neon-primary);
-  background: rgba(0, 255, 213, 0.15);
-  border: 1px solid rgba(0, 255, 213, 0.3);
-}
-
-/* الصفحات */
-.page {
-  display: none;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: pageEnter 0.8s ease-out forwards;
-  padding-top: 100px;
-  min-height: 100vh;
-}
-
-.page.active {
-  display: block;
-}
-
-@keyframes pageEnter {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* الصفحة الرئيسية */
-.hero-section {
-  text-align: center;
-  padding: 100px 20px 150px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-title {
-  font-size: 5rem;
-  font-weight: 900;
-  background: linear-gradient(45deg, var(--neon-primary), var(--neon-secondary), var(--neon-tertiary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 30px;
-  text-shadow: 0 0 20px rgba(0, 255, 213, 0.4);
-  letter-spacing: 3px;
-  animation: titleGlow 3s ease-in-out infinite;
-}
-
-@keyframes titleGlow {
-  0%, 100% {
-    text-shadow: 0 0 20px rgba(0, 255, 213, 0.4),
-                 0 0 40px rgba(255, 0, 255, 0.2);
-  }
-  50% {
-    text-shadow: 0 0 30px rgba(0, 255, 213, 0.6),
-                 0 0 60px rgba(255, 0, 255, 0.4),
-                 0 0 80px rgba(255, 42, 109, 0.2);
-  }
-}
-
-.hero-subtitle {
-  font-size: 1.8rem;
-  color: var(--text-secondary);
-  margin-bottom: 50px;
-  line-height: 1.8;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hero-actions {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-
-/* الأزرار */
-.btn {
-  padding: 20px 45px;
-  font-size: 20px;
-  font-weight: 700;
-  text-decoration: none;
-  border-radius: 12px;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  letter-spacing: 1px;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, rgba(0, 255, 213, 0.2), rgba(255, 0, 255, 0.2));
-  border: 2px solid var(--neon-primary);
-  color: var(--neon-primary);
-}
-
-.btn-primary:hover {
-  background: linear-gradient(135deg, rgba(0, 255, 213, 0.3), rgba(255, 0, 255, 0.3));
-  box-shadow: var(--neon-glow);
-  transform: translateY(-5px);
-}
-
-.btn-secondary {
-  background: rgba(20, 20, 30, 0.8);
-  border: 2px solid var(--accent-red);
-  color: var(--accent-red);
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 42, 109, 0.2);
-  box-shadow: 0 0 20px rgba(255, 42, 109, 0.4);
-  transform: translateY(-5px);
-}
-
-.btn::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: right 0.6s ease;
-}
-
-.btn:hover::after {
-  right: 100%;
-}
-
-/* الكروت */
-.card {
-  background: var(--bg-card);
-  border: 1px solid rgba(0, 255, 213, 0.2);
-  border-radius: 20px;
-  padding: 40px;
-  margin: 30px 0;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, transparent 40%, rgba(0, 255, 213, 0.05) 100%);
-  z-index: 0;
-}
-
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 
-              0 0 30px rgba(0, 255, 213, 0.2);
-  border-color: rgba(0, 255, 213, 0.4);
-}
-
-.card-content {
-  position: relative;
-  z-index: 1;
-}
-
-.card h2 {
-  font-size: 2.5rem;
-  color: var(--neon-primary);
-  margin-bottom: 25px;
-  text-shadow: 0 0 10px rgba(0, 255, 213, 0.3);
-  position: relative;
-  display: inline-block;
-}
-
-.card h2::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  right: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, var(--neon-primary), transparent);
-  border-radius: 3px;
-}
-
-.card p {
-  color: var(--text-secondary);
-  font-size: 1.2rem;
-  line-height: 1.8;
-  margin-bottom: 20px;
-}
-
-.highlight {
-  color: var(--neon-primary);
-  font-weight: 700;
-  text-shadow: 0 0 5px rgba(0, 255, 213, 0.5);
-}
-
-/* صفحة الفريق */
-.team-header {
-  text-align: center;
-  padding: 80px 20px;
-}
-
-.team-title {
-  font-size: 4rem;
-  font-weight: 900;
-  background: linear-gradient(45deg, var(--neon-primary), var(--neon-secondary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 20px;
-  text-shadow: 0 0 20px rgba(0, 255, 213, 0.3);
-}
-
-.team-subtitle {
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 40px;
-  padding: 40px 20px 100px;
-}
-
-/* بطاقات الأعضاء */
-.member-card {
-  background: linear-gradient(145deg, rgba(10, 15, 25, 0.9), rgba(5, 10, 15, 0.95));
-  border: 1px solid rgba(0, 255, 213, 0.2);
-  border-radius: 20px;
-  padding: 40px 30px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-  text-decoration: none;
-  display: block;
-}
-
-.member-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, transparent 30%, rgba(0, 255, 213, 0.1) 100%);
-  z-index: 0;
-}
-
-.member-card::after {
-  content: '';
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  bottom: -2px;
-  left: -2px;
-  background: linear-gradient(45deg, var(--neon-primary), var(--neon-secondary), var(--neon-primary));
-  border-radius: 22px;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.member-card:hover::after {
-  opacity: 0.5;
-}
-
-.member-card:hover {
-  transform: translateY(-15px) scale(1.02);
-  border-color: transparent;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
-              0 0 40px rgba(0, 255, 213, 0.3);
-}
-
-.member-icon {
-  font-size: 4.5rem;
-  margin-bottom: 25px;
-  position: relative;
-  z-index: 1;
-  filter: drop-shadow(0 0 10px rgba(0, 255, 213, 0.5));
-}
-
-.member-name {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: var(--neon-primary);
-  margin-bottom: 10px;
-  position: relative;
-  z-index: 1;
-  text-shadow: 0 0 10px rgba(0, 255, 213, 0.5);
-}
-
-.member-role-en {
-  font-size: 1.3rem;
-  color: var(--text-secondary);
-  margin-bottom: 8px;
-  position: relative;
-  z-index: 1;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-
-.member-role-ar {
-  font-size: 1.1rem;
-  color: #aaa;
-  margin-bottom: 25px;
-  position: relative;
-  z-index: 1;
-  font-weight: 500;
-}
-
-.member-stats {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
-
-.stat-badge {
-  background: rgba(0, 255, 213, 0.15);
-  color: var(--neon-primary);
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  border: 1px solid rgba(0, 255, 213, 0.3);
-  backdrop-filter: blur(5px);
-  transition: all 0.3s ease;
-}
-
-.member-card:hover .stat-badge {
-  background: rgba(0, 255, 213, 0.25);
-  transform: translateY(-3px);
-}
-
-/* صفحة العضو */
-.member-page {
-  padding: 100px 20px;
-}
-
-.member-back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 15px 30px;
-  background: rgba(10, 15, 25, 0.8);
-  border: 1px solid rgba(0, 255, 213, 0.3);
-  color: var(--neon-primary);
-  border-radius: 10px;
-  text-decoration: none;
-  margin-bottom: 50px;
-  transition: all 0.3s ease;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.member-back-btn:hover {
-  background: rgba(0, 255, 213, 0.15);
-  box-shadow: 0 0 20px rgba(0, 255, 213, 0.2);
-  transform: translateX(5px);
-}
-
-.member-hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  margin-bottom: 80px;
-  align-items: center;
-}
-
-@media (max-width: 992px) {
-  .member-hero {
-    grid-template-columns: 1fr;
-  }
-}
-
-.member-visual {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.member-avatar {
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, rgba(0, 10, 20, 0.9), rgba(0, 20, 30, 0.9));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-shadow: 0 0 50px rgba(0, 255, 213, 0.2);
-}
-
-.member-avatar::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  bottom: -10px;
-  left: -10px;
-  background: linear-gradient(45deg, var(--neon-primary), var(--neon-secondary), var(--neon-primary));
-  border-radius: 50%;
-  z-index: -1;
-  animation: rotate 10s linear infinite;
-}
-
-.member-avatar-inner {
-  width: 94%;
-  height: 94%;
-  border-radius: 50%;
-  background: var(--bg-secondary);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--neon-primary);
-  font-size: 6rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.member-avatar-inner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, transparent 40%, rgba(0, 255, 213, 0.1) 100%);
-}
-
-.member-info {
-  padding: 40px;
-}
-
-.member-title {
-  font-size: 3.5rem;
-  font-weight: 900;
-  color: var(--neon-primary);
-  margin-bottom: 15px;
-  text-shadow: 0 0 15px rgba(0, 255, 213, 0.5);
-}
-
-.member-subtitle-en {
-  font-size: 2rem;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
-  font-weight: 700;
-}
-
-.member-subtitle-ar {
-  font-size: 1.5rem;
-  color: #aaa;
-  margin-bottom: 40px;
-  font-weight: 600;
-}
-
-.member-description {
-  font-size: 1.3rem;
-  line-height: 1.9;
-  color: var(--text-secondary);
-  margin-bottom: 40px;
-}
-
-.member-details {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  margin-top: 60px;
-}
-
-.detail-card {
-  background: rgba(10, 15, 25, 0.8);
-  border: 1px solid rgba(0, 255, 213, 0.2);
-  border-radius: 15px;
-  padding: 30px;
-  transition: all 0.3s ease;
-}
-
-.detail-card:hover {
-  border-color: rgba(0, 255, 213, 0.4);
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.detail-title {
-  font-size: 1.4rem;
-  color: var(--neon-primary);
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.detail-list {
-  list-style: none;
-}
-
-.detail-list li {
-  color: var(--text-secondary);
-  margin-bottom: 12px;
-  padding-right: 25px;
-  position: relative;
-  font-size: 1.1rem;
-}
-
-.detail-list li::before {
-  content: '▸';
-  position: absolute;
-  right: 0;
-  color: var(--neon-primary);
-  font-size: 1.2rem;
-}
-
-/* القدرات */
-.skills-section {
-  margin-top: 80px;
-}
-
-.skills-title {
-  font-size: 2.5rem;
-  color: var(--neon-primary);
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-}
-
-.skill-item {
-  background: rgba(10, 15, 25, 0.8);
-  border: 1px solid rgba(0, 255, 213, 0.2);
-  border-radius: 15px;
-  padding: 30px;
-}
-
-.skill-name {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  font-size: 1.2rem;
-  color: var(--text-primary);
-}
-
-.skill-bar {
-  height: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.skill-level {
-  height: 100%;
-  background: linear-gradient(90deg, var(--neon-primary), var(--neon-secondary));
-  border-radius: 6px;
-  position: relative;
-  animation: skillFill 1.5s ease-out forwards;
-}
-
-@keyframes skillFill {
-  from {
-    width: 0%;
-  }
-}
-
-/* التذييل */
-.footer {
-  text-align: center;
-  padding: 60px 20px;
-  margin-top: 100px;
-  border-top: 1px solid rgba(0, 255, 213, 0.2);
-  background: rgba(5, 10, 15, 0.8);
-  backdrop-filter: blur(10px);
-}
-
-.footer-logo {
-  font-size: 2.5rem;
-  font-weight: 900;
-  background: linear-gradient(45deg, var(--neon-primary), var(--neon-secondary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 20px;
-  display: inline-block;
-}
-
-.footer-tagline {
-  color: var(--text-secondary);
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-}
-
-.footer-social {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  margin-bottom: 40px;
-}
-
-.social-link {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: rgba(0, 255, 213, 0.1);
-  border: 1px solid rgba(0, 255, 213, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--neon-primary);
-  font-size: 1.5rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.social-link:hover {
-  background: rgba(0, 255, 213, 0.2);
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 255, 213, 0.2);
-}
-
-.footer-copyright {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-}
-
-/* التأثيرات الخاصة */
-.pulse {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-.glitch {
-  position: relative;
-}
-
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--bg-primary);
-}
-
-.glitch::before {
-  left: 2px;
-  text-shadow: -1px 0 var(--neon-secondary);
-  animation: glitch-1 2s infinite linear alternate-reverse;
-}
-
-.glitch::after {
-  left: -2px;
-  text-shadow: 1px 0 var(--neon-primary);
-  animation: glitch-2 3s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-1 {
-  0% {
-    clip-path: inset(20% 0 30% 0);
-  }
-  5% {
-    clip-path: inset(15% 0 35% 0);
-  }
-  10% {
-    clip-path: inset(40% 0 10% 0);
-  }
-  15% {
-    clip-path: inset(25% 0 30% 0);
-  }
-  20% {
-    clip-path: inset(40% 0 5% 0);
-  }
-  45% {
-    clip-path: inset(45% 0 15% 0);
-  }
-  50% {
-    clip-path: inset(20% 0 30% 0);
-  }
-  55% {
-    clip-path: inset(25% 0 25% 0);
-  }
-  60% {
-    clip-path: inset(15% 0 40% 0);
-  }
-  65% {
-    clip-path: inset(30% 0 20% 0);
-  }
-  70% {
-    clip-path: inset(10% 0 45% 0);
-  }
-  75% {
-    clip-path: inset(25% 0 30% 0);
-  }
-  80% {
-    clip-path: inset(35% 0 20% 0);
-  }
-  85% {
-    clip-path: inset(20% 0 35% 0);
-  }
-  90% {
-    clip-path: inset(30% 0 25% 0);
-  }
-  95% {
-    clip-path: inset(15% 0 40% 0);
-  }
-  100% {
-    clip-path: inset(40% 0 20% 0);
-  }
-}
-
-@keyframes glitch-2 {
-  0% {
-    clip-path: inset(25% 0 30% 0);
-  }
-  5% {
-    clip-path: inset(30% 0 20% 0);
-  }
-  10% {
-    clip-path: inset(15% 0 40% 0);
-  }
-  15% {
-    clip-path: inset(35% 0 15% 0);
-  }
-  20% {
-    clip-path: inset(20% 0 35% 0);
-  }
-  45% {
-    clip-path: inset(30% 0 25% 0);
-  }
-  50% {
-    clip-path: inset(15% 0 40% 0);
-  }
-  55% {
-    clip-path: inset(40% 0 10% 0);
-  }
-  60% {
-    clip-path: inset(25% 0 30% 0);
-  }
-  65% {
-    clip-path: inset(15% 0 40% 0);
-  }
-  70% {
-    clip-path: inset(30% 0 25% 0);
-  }
-  75% {
-    clip-path: inset(20% 0 35% 0);
-  }
-  80% {
-    clip-path: inset(10% 0 45% 0);
-  }
-  85% {
-    clip-path: inset(35% 0 20% 0);
-  }
-  90% {
-    clip-path: inset(25% 0 30% 0);
-  }
-  95% {
-    clip-path: inset(40% 0 15% 0);
-  }
-  100% {
-    clip-path: inset(20% 0 35% 0);
-  }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .navbar {
-    padding: 15px 20px;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .nav-menu {
-    gap: 15px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .nav-link {
-    padding: 8px 15px;
-    font-size: 16px;
-  }
-  
-  .hero-title {
-    font-size: 3.5rem;
-  }
-  
-  .team-title {
-    font-size: 3rem;
-  }
-  
-  .team-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  
-  .member-avatar {
-    width: 300px;
-    height: 300px;
-  }
-  
-  .member-title {
-    font-size: 2.8rem;
-  }
-}
-
-/* مؤشر التحميل */
-.loading-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NERVYNIA TEAM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            direction: rtl;
+        }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 5px solid #00ffd5;
+            border-top: 5px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #00ffd5;
+            box-shadow: 0 0 20px rgba(0, 255, 213, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00ffd5;
+            text-decoration: none;
+            text-shadow: 0 0 10px #00ffd5;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: rgba(0, 255, 213, 0.1);
+            color: #00ffd5;
+        }
+
+        /* Pages Container */
+        .pages-container {
+            margin-top: 80px;
+            padding: 20px;
+        }
+
+        .page {
+            display: none;
+            min-height: calc(100vh - 100px);
+            padding: 40px 0;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Home Page */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23000"/><path d="M0,50 Q25,25 50,50 T100,50" stroke="%2300ffd5" fill="none" stroke-width="0.5" opacity="0.1"/></svg>');
+        }
+
+        .hero-title {
+            font-size: 60px;
+            color: #00ffd5;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #00ffd5;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            background: transparent;
+            border: 2px solid #00ffd5;
+            color: #00ffd5;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #00ffd5;
+            color: #000;
+            box-shadow: 0 0 20px #00ffd5;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(20, 20, 30, 0.8);
+            border: 1px solid #00ffd5;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 1000px;
+            box-shadow: 0 0 20px rgba(0, 255, 213, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: #00ffd5;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .card p {
+            color: #fff;
+            line-height: 1.8;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        /* Team Page */
+        .team-title {
+            text-align: center;
+            font-size: 48px;
+            color: #00ffd5;
+            margin: 40px 0;
+            text-shadow: 0 0 15px #00ffd5;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .member-card {
+            background: rgba(20, 20, 30, 0.9);
+            border: 1px solid #00ffd5;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 213, 0.3);
+        }
+
+        .member-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .member-name {
+            font-size: 28px;
+            color: #00ffd5;
+            margin-bottom: 10px;
+        }
+
+        .member-role {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* Member Profile Page */
+        .profile-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(0, 255, 213, 0.1);
+            border: 1px solid #00ffd5;
+            color: #00ffd5;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(0, 255, 213, 0.2);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .profile-title {
+            font-size: 48px;
+            color: #00ffd5;
+            margin-bottom: 20px;
+        }
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .profile-photo {
+            background: rgba(20, 20, 30, 0.9);
+            border: 2px solid #00ffd5;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 255, 213, 0.2);
+        }
+
+        .photo-icon {
+            font-size: 100px;
+            color: #00ffd5;
+            margin-bottom: 20px;
+        }
+
+        .profile-info {
+            background: rgba(20, 20, 30, 0.9);
+            border: 1px solid #00ffd5;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 255, 213, 0.2);
+        }
+
+        .info-section {
+            margin-bottom: 30px;
+        }
+
+        .info-section h3 {
+            color: #00ffd5;
+            margin-bottom: 15px;
+            font-size: 24px;
+            border-bottom: 2px solid #00ffd5;
+            padding-bottom: 10px;
+        }
+
+        .info-section p {
+            color: #fff;
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+            border-top: 1px solid #00ffd5;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            color: #00ffd5;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00ffd5;
+        }
+
+        .footer-text {
+            color: #fff;
+            font-size: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-title {
+                font-size: 40px;
+            }
+            
+            .hero-subtitle {
+                font-size: 20px;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">NERVYNIA</a>
+            <div class="nav-links">
+                <a href="#home" class="nav-link" onclick="showPage('home')">الرئيسية</a>
+                <a href="#team" class="nav-link" onclick="showPage('team')">الفريق</a>
+                <a href="#about" class="nav-link" onclick="showPage('about')">من نحن</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pages Container -->
+    <div class="pages-container">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <section class="hero">
+                <h1 class="hero-title">NERVYNIA TEAM</h1>
+                <p class="hero-subtitle">
+                    فريق يعمل في الظل، بلا ضجيج، بلا وجوه.<br>
+                    يجمع بين العقل، السيطرة، والسرية.
+                </p>
+                <div class="buttons">
+                    <button class="btn" onclick="showPage('team')">تعرف على الفريق</button>
+                    <a href="https://wa.me/201029505953" target="_blank" class="btn">تواصل معنا</a>
+                </div>
+            </section>
+
+            <div class="card">
+                <h2>تعريف الفريق</h2>
+                <p>
+                    NERVYNIA ليس مجرد فريق، بل هو كيان يعمل في طبقات الواقع الخفية. 
+                    نحن الظل الذي يتحرك عندما يظن الجميع أن النور قد انتصر. 
+                    ننسج الخيوط في صمت، ونحرك القطع بلا ظهور، لأن القوة الحقيقية لا تحتاج إلى ضجيج.
+                </p>
+                <p>
+                    مهمتنا تتجاوز المهام العادية؛ نحن نبني، نحلل، ونخترق الأنظمة لنعيد صياغة التوازن. 
+                    كل عضو في الفريق هو جزء من آلة أكبر، تعمل بتناغم مطلق لتحقيق أهداف لا يمكن للآخرين حتى تخيلها.
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>الظلام</h2>
+                <p>
+                    في عام 2018، ولد NERVYNIA من رحم الحاجة إلى كيان غير مرئي 
+                    يمكنه العمل حيث يفشل الآخرون. بدأنا كمجموعة صغيرة من الموهوبين الذين تشاركوا رؤية واحدة: 
+                    السيطرة على اللعبة من خلف الكواليس.
+                </p>
+                <p>
+                    على مر السنين، تطورنا من مجموعة هواة إلى فريق محترف يعمل في مجالات متعددة: 
+                    الأمن السيبراني، تحليل البيانات، الاستراتيجيات المعقدة، والعمليات الخاصة. 
+                    نحن لا نؤمن بالظهور، بل نؤمن بالتأثير.
+                </p>
+            </div>
+        </div>
+
+        <!-- Team Page -->
+        <div id="team-page" class="page">
+            <h2 class="team-title">أعضاء الفريق</h2>
+            <div class="team-grid">
+                <!-- كرولو -->
+                <div class="member-card" onclick="showMember('chrollo')">
+                    <div class="member-icon">🕷️</div>
+                    <h3 class="member-name">كرولو</h3>
+                    <p class="member-role">العقل المدبر | العنكبوت</p>
+                </div>
+
+                <!-- لولوش -->
+                <div class="member-card" onclick="showMember('lelouch')">
+                    <div class="member-icon">♟️</div>
+                    <h3 class="member-name">لولوش</h3>
+                    <p class="member-role">الاستراتيجي | ملك الشطرنج</p>
+                </div>
+
+                <!-- آدم -->
+                <div class="member-card" onclick="showMember('adam')">
+                    <div class="member-icon">⚡</div>
+                    <h3 class="member-name">آدم</h3>
+                    <p class="member-role">كاسر الأنظمة</p>
+                </div>
+
+                <!-- كاتانا -->
+                <div class="member-card" onclick="showMember('katana')">
+                    <div class="member-icon">🗡️</div>
+                    <h3 class="member-name">كاتانا</h3>
+                    <p class="member-role">السيف الرقمي</p>
+                </div>
+
+                <!-- ايزن -->
+                <div class="member-card" onclick="showMember('eizen')">
+                    <div class="member-icon">🪞</div>
+                    <h3 class="member-name">ايزن</h3>
+                    <p class="member-role">المحلل النفسي | المرآة</p>
+                </div>
+
+                <!-- ليليث -->
+                <div class="member-card" onclick="showMember('lilith')">
+                    <div class="member-icon">🩸</div>
+                    <h3 class="member-name">ليليث</h3>
+                    <p class="member-role">المخترقة | الهمس الأسود</p>
+                </div>
+
+                <!-- ميكا -->
+                <div class="member-card" onclick="showMember('mika')">
+                    <div class="member-icon">🪽</div>
+                    <h3 class="member-name">ميكا</h3>
+                    <p class="member-role">المتربص | الجناح الساقط</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div id="about-page" class="page">
+            <div class="card">
+                <h2>من نحن</h2>
+                <p>
+                    الهالة السوداء - The Black Halo - ليست مجرد فريق، بل هي ظل يتحرك في فضاءات لا يراها النور. 
+                    نحن سبعة، كل منا يحمل قدرة فريدة ومساراً مختلفاً، لكننا نتحد تحت مظلة واحدة: 
+                    صناعة القدر من خلف الكواليس.
+                </p>
+                <p>
+                    نعمل في هدوء، نتحرك بلا ضجيج، نؤثر دون ظهور. لأننا نعلم أن القوة الحقيقية تكمن في القدرة 
+                    على التحكم دون أن يلمس أحد يدك.
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>فلسفتنا</h2>
+                <p>
+                    لا نؤمن بالحدود المرسومة، ولا نعترف بالنهايات المفروضة. العالم شطرنجة كبيرة، 
+                    ونحن من نحرك القطع. مهمتنا ليست الفوز بالمعارك الظاهرة، بل صياغة نتائجها قبل أن تبدأ.
+                </p>
+                <p>
+                    كل خطوة نخطوها محسوبة، كل قرار نتخذه مدروس، لأننا نعلم أن سقوط قطعة واحدة 
+                    قد يعني انهيار اللعبة بأكملها.
+                </p>
+            </div>
+        </div>
+
+        <!-- Member Profile Pages -->
+        <div id="member-chrollo" class="page">
+            <div class="profile-container">
+                <a href="javascript:void(0)" class="back-btn" onclick="showPage('team')">← العودة للفريق</a>
+                
+                <div class="profile-header">
+                    <h2 class="profile-title">كرولو 🕷️</h2>
+                    <p style="color: #00ffd5; font-size: 24px;">العقل المدبر | العنكبوت</p>
+                </div>
+                
+                <div class="profile-content">
+                    <div class="profile-photo">
+                        <div class="photo-icon">🕷️</div>
+                        <h3 style="color: #fff;">كرولو</h3>
+                        <p style="color: #aaa;">العقل المدبر</p>
+                    </div>
+                    
+                    <div class="profile-info">
+                        <div class="info-section">
+                            <h3>نبذة</h3>
+                            <p>
+                                العقل المدبر للفريق، من ينسج الخيوط ويرسم الخطط. لا يتكلم كثيراً، 
+                                لكن كل كلمة يقولها تحمل معنى عميقاً. يراقب من الظل، يحلل كل حركة، 
+                                ويخطط لعشرات الخطوات القادمة.
+                            </p>
+                        </div>
+                        
+                        <div class="info-section">
+                            <h3>القدرات</h3>
+                            <p>
+                                • التخطيط الاستراتيجي: 9.8/10<br>
+                                • التحليل المنطقي: 9.5/10<br>
+                                • السيطرة النفسية: 8.9/10<br>
+                                • إدارة المخاطر: 9.2/10
+                            </p>
+                        </div>
+                        
+                        <div class="info-section">
+                            <h3>المهام</h3>
+                            <p>
+                                • تخطيط وتنظيم عمليات الفريق<br>
+                                • اتخاذ القرارات الاستراتيجية<br>
+                                • إدارة العلاقات الخارجية<br>
+                                • تقييم المخاطر والفرص
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="member-lelouch" class="page">
+            <div class="profile-container">
+                <a href="javascript:void(0)" class="back-btn" onclick="showPage('team')">← العودة للفريق</a>
+                
+                <div class="profile-header">
+                    <h2 class="profile-title">لولوش ♟️</h2>
+                    <p style="color: #00ffd5; font-size: 24px;">الاستراتيجي | ملك الشطرنج</p>
+                </div>
+                
+                <div class="profile-content">
+                    <div class="profile-photo">
+                        <div class="photo-icon">♟️</div>
+                        <h3 style="color: #fff;">لولوش</h3>
+                        <p style="color: #aaa;">الاستراتيجي</p>
+                    </div>
+                    
+                    <div class="profile-info">
+                        <div class="info-section">
+                            <h3>نبذة</h3>
+                            <p>
+                                سيد التلاعب النفسي والاستراتيجيات المعقدة. يمكنه تحويل أي موقف لصالحه 
+                                ببضع كلمات فقط. ينظر إلى العالم كشطرنجة كبيرة، وهو من يتحكم في حركة كل قطعة.
+                            </p>
+                        </div>
+                        
+                        <div class="info-section">
+                            <h3>القدرات</h3>
+                            <p>
+                                • التخطيط التكتيكي: 9.7/10<br>
+                                • الذكاء العاطفي: 9.9/10<br>
+                                • التحليل النفسي: 9.3/10<br>
+                                • سرعة البديهة: 8.8/10
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- يمكنك إضافة صفحات باقي الأعضاء بنفس الطريقة -->
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer
