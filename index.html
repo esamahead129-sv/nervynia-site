@@ -583,3 +583,534 @@ animateMatrix();
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاكي لغة برمجة لڤل واحد</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .panel {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            grid-column: 1 / -1;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        h2 {
+            color: #2980b9;
+            margin-top: 0;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 300px;
+            font-family: monospace;
+            font-size: 16px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+            direction: ltr;
+            background-color: #f9f9f9;
+        }
+        
+        .output {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            min-height: 150px;
+            white-space: pre-wrap;
+            overflow-y: auto;
+            direction: ltr;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        button#resetBtn {
+            background-color: #e74c3c;
+        }
+        
+        button#resetBtn:hover {
+            background-color: #c0392b;
+        }
+        
+        .registers, .memory {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .register, .mem-cell {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-family: monospace;
+        }
+        
+        .register .label, .mem-cell .label {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+        
+        .register .value, .mem-cell .value {
+            font-size: 18px;
+            margin-top: 5px;
+        }
+        
+        .instructions {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            grid-column: 1 / -1;
+        }
+        
+        .instruction {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+            padding: 2px;
+            border-radius: 3px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 14px;
+            grid-column: 1 / -1;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>محاكي لغة برمجة "لڤل واحد" (Level 1)</h1>
+        
+        <div class="panel">
+            <h2>📝 كود البرنامج</h2>
+            <textarea id="codeEditor" placeholder="اكتب برنامجك هنا...">
+; برنامج بسيط يضرب رقمين ويخزن النتيجة
+; لغة لڤل واحد - Level 1 Programming Language
+
+LOAD A, 5        ; تحميل القيمة 5 في المسجل A
+LOAD B, 3        ; تحميل القيمة 3 في المسجل B
+MULTIPLY         ; ضرب A و B (النتيجة في A)
+STORE 0x10       ; تخزين النتيجة في عنوان الذاكرة 0x10
+
+LOAD A, 10       ; تحميل قيمة جديدة في A
+ADD B            ; جمع A و B (النتيجة في A)
+STORE 0x11       ; تخزين النتيجة في عنوان الذاكرة 0x11
+
+PRINT "نتيجة الضرب:"  ; طباعة نص
+PRINTREG A       ; طباعة قيمة المسجل A
+PRINTMEM 0x10    ; طباعة قيمة من الذاكرة
+
+HALT             ; إنهاء البرنامج</textarea>
+            
+            <div class="controls">
+                <button id="runBtn">▶ تشغيل البرنامج</button>
+                <button id="stepBtn">⏭ خطوة واحدة</button>
+                <button id="resetBtn">🔄 إعادة تعيين</button>
+                <button id="exampleBtn">📋 مثال إضافي</button>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <h2>📤 الناتج</h2>
+            <div id="output" class="output"></div>
+            
+            <h2>🔄 المسجلات (Registers)</h2>
+            <div id="registers" class="registers">
+                <!-- سيتم تعبئتها بالجافاسكريبت -->
+            </div>
+            
+            <h2>💾 الذاكرة (Memory)</h2>
+            <div id="memory" class="memory">
+                <!-- سيتم تعبئتها بالجافاسكريبت -->
+            </div>
+        </div>
+        
+        <div class="instructions panel">
+            <h2>📖 تعليمات لغة لڤل واحد</h2>
+            <div class="instruction"><code>LOAD X, value</code> - تحميل قيمة في المسجل X (A, B, C, D)</div>
+            <div class="instruction"><code>ADD X</code> - جمع المسجل A مع المسجل X (النتيجة في A)</div>
+            <div class="instruction"><code>SUBTRACT X</code> - طرح المسجل X من المسجل A (النتيجة في A)</div>
+            <div class="instruction"><code>MULTIPLY</code> - ضرب المسجل A في المسجل B (النتيجة في A)</div>
+            <div class="instruction"><code>DIVIDE</code> - قسمة المسجل A على المسجل B (النتيجة في A)</div>
+            <div class="instruction"><code>STORE address</code> - تخزين قيمة المسجل A في عنوان الذاكرة</div>
+            <div class="instruction"><code>LOADFROM address</code> - تحميل قيمة من الذاكرة إلى المسجل A</div>
+            <div class="instruction"><code>PRINT "text"</code> - طباعة نص</div>
+            <div class="instruction"><code>PRINTREG X</code> - طباعة قيمة المسجل X</div>
+            <div class="instruction"><code>PRINTMEM address</code> - طباعة قيمة من الذاكرة</div>
+            <div class="instruction"><code>HALT</code> - إنهاء البرنامج</div>
+            <div class="instruction"><code>; تعليق</code> - أي نص بعد الفاصلة المنقوطة هو تعليق</div>
+        </div>
+        
+        <footer>
+            <p>تم تطوير هذا المحاكي لتوضيح مفاهيم لغة برمجة من المستوى الأول (Level 1). اللغات من هذا النوع تكون قريبة من لغة الآلة وبسيطة جداً.</p>
+        </footer>
+    </div>
+
+    <script>
+        // حالة المحاكي
+        const simulator = {
+            registers: { A: 0, B: 0, C: 0, D: 0 },
+            memory: {},
+            program: [],
+            programCounter: 0,
+            output: "",
+            isRunning: false,
+            
+            init() {
+                this.reset();
+                this.updateDisplay();
+            },
+            
+            reset() {
+                this.registers = { A: 0, B: 0, C: 0, D: 0 };
+                this.memory = {};
+                this.program = [];
+                this.programCounter = 0;
+                this.output = "";
+                this.isRunning = false;
+                
+                // تهيئة بعض قيم الذاكرة
+                for (let i = 0x10; i <= 0x1F; i++) {
+                    this.memory[i.toString(16)] = 0;
+                }
+            },
+            
+            loadProgram(code) {
+                this.reset();
+                const lines = code.split('\n');
+                
+                for (let line of lines) {
+                    // إزالة المسافات الزائدة والتعليقات
+                    line = line.trim();
+                    const commentIndex = line.indexOf(';');
+                    if (commentIndex !== -1) {
+                        line = line.substring(0, commentIndex).trim();
+                    }
+                    
+                    if (line) {
+                        this.program.push(line);
+                    }
+                }
+            },
+            
+            executeStep() {
+                if (this.programCounter >= this.program.length) {
+                    this.output += "✅ انتهى تنفيذ البرنامج\n";
+                    this.isRunning = false;
+                    return false;
+                }
+                
+                const instruction = this.program[this.programCounter];
+                this.programCounter++;
+                
+                return this.executeInstruction(instruction);
+            },
+            
+            executeInstruction(instruction) {
+                try {
+                    const parts = instruction.split(/\s+/);
+                    const cmd = parts[0].toUpperCase();
+                    const args = parts.slice(1).join(' ').split(',').map(arg => arg.trim());
+                    
+                    switch(cmd) {
+                        case 'LOAD':
+                            if (args.length !== 2) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const reg = args[0].toUpperCase();
+                            const value = this.parseValue(args[1]);
+                            
+                            if (!['A', 'B', 'C', 'D'].includes(reg)) {
+                                throw new Error(`مسجل غير صالح: ${reg}`);
+                            }
+                            
+                            this.registers[reg] = value;
+                            break;
+                            
+                        case 'ADD':
+                            if (args.length !== 1) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const addReg = args[0].toUpperCase();
+                            
+                            if (!['A', 'B', 'C', 'D'].includes(addReg)) {
+                                throw new Error(`مسجل غير صالح: ${addReg}`);
+                            }
+                            
+                            this.registers.A += this.registers[addReg];
+                            break;
+                            
+                        case 'SUBTRACT':
+                            if (args.length !== 1) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const subReg = args[0].toUpperCase();
+                            
+                            if (!['A', 'B', 'C', 'D'].includes(subReg)) {
+                                throw new Error(`مسجل غير صالح: ${subReg}`);
+                            }
+                            
+                            this.registers.A -= this.registers[subReg];
+                            break;
+                            
+                        case 'MULTIPLY':
+                            this.registers.A *= this.registers.B;
+                            break;
+                            
+                        case 'DIVIDE':
+                            if (this.registers.B === 0) throw new Error("خطأ: القسمة على صفر");
+                            this.registers.A = Math.floor(this.registers.A / this.registers.B);
+                            break;
+                            
+                        case 'STORE':
+                            if (args.length !== 1) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const address = this.parseAddress(args[0]);
+                            this.memory[address] = this.registers.A;
+                            break;
+                            
+                        case 'LOADFROM':
+                            if (args.length !== 1) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const loadAddress = this.parseAddress(args[0]);
+                            
+                            if (this.memory[loadAddress] === undefined) {
+                                this.memory[loadAddress] = 0;
+                            }
+                            
+                            this.registers.A = this.memory[loadAddress];
+                            break;
+                            
+                        case 'PRINT':
+                            if (!args[0]) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            let text = args.join(', ');
+                            
+                            // إزالة علامات الاقتباس إذا وجدت
+                            if (text.startsWith('"') && text.endsWith('"')) {
+                                text = text.substring(1, text.length - 1);
+                            }
+                            
+                            this.output += text + "\n";
+                            break;
+                            
+                        case 'PRINTREG':
+                            if (args.length !== 1) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const printReg = args[0].toUpperCase();
+                            
+                            if (!['A', 'B', 'C', 'D'].includes(printReg)) {
+                                throw new Error(`مسجل غير صالح: ${printReg}`);
+                            }
+                            
+                            this.output += `[${printReg}] = ${this.registers[printReg]}\n`;
+                            break;
+                            
+                        case 'PRINTMEM':
+                            if (args.length !== 1) throw new Error(`صيغة خاطئة: ${instruction}`);
+                            const printAddress = this.parseAddress(args[0]);
+                            
+                            if (this.memory[printAddress] === undefined) {
+                                this.memory[printAddress] = 0;
+                            }
+                            
+                            this.output += `[MEM 0x${printAddress}] = ${this.memory[printAddress]}\n`;
+                            break;
+                            
+                        case 'HALT':
+                            this.output += "⏹ تم إيقاف البرنامج\n";
+                            this.isRunning = false;
+                            return false;
+                            
+                        default:
+                            throw new Error(`تعليمة غير معروفة: ${cmd}`);
+                    }
+                    
+                    return true;
+                } catch (error) {
+                    this.output += `❌ خطأ: ${error.message} (في السطر ${this.programCounter})\n`;
+                    this.isRunning = false;
+                    return false;
+                }
+            },
+            
+            parseValue(valueStr) {
+                // إذا كانت القيمة سداسية عشرية (تبدأ بـ 0x)
+                if (valueStr.startsWith('0x')) {
+                    return parseInt(valueStr.substring(2), 16);
+                }
+                
+                // إذا كانت قيمة عشرية
+                const num = parseInt(valueStr, 10);
+                if (isNaN(num)) throw new Error(`قيمة غير صالحة: ${valueStr}`);
+                return num;
+            },
+            
+            parseAddress(addressStr) {
+                // إذا كان العنوان سداسي عشري (تبدأ بـ 0x)
+                if (addressStr.startsWith('0x')) {
+                    return addressStr.substring(2);
+                }
+                
+                // تحويل رقم عشري إلى سداسي عشري
+                const num = parseInt(addressStr, 10);
+                if (isNaN(num)) throw new Error(`عنوان غير صالح: ${addressStr}`);
+                return num.toString(16);
+            },
+            
+            run() {
+                this.isRunning = true;
+                this.output = "";
+                
+                while (this.isRunning) {
+                    if (!this.executeStep()) {
+                        break;
+                    }
+                    
+                    // وقف مؤقت لتجنب التجميد إذا كان البرنامج طويلاً
+                    if (this.programCounter > 100) {
+                        this.output += "⚠️ تم إيقاف التنفيذ بعد 100 خطوة\n";
+                        this.isRunning = false;
+                        break;
+                    }
+                }
+                
+                this.updateDisplay();
+            },
+            
+            updateDisplay() {
+                // تحديث الناتج
+                document.getElementById('output').textContent = this.output;
+                
+                // تحديث المسجلات
+                const registersDiv = document.getElementById('registers');
+                registersDiv.innerHTML = '';
+                
+                for (const [reg, value] of Object.entries(this.registers)) {
+                    const registerEl = document.createElement('div');
+                    registerEl.className = 'register';
+                    registerEl.innerHTML = `
+                        <div class="label">المسجل ${reg}</div>
+                        <div class="value">${value}</div>
+                    `;
+                    registersDiv.appendChild(registerEl);
+                }
+                
+                // تحديث الذاكرة
+                const memoryDiv = document.getElementById('memory');
+                memoryDiv.innerHTML = '';
+                
+                // عرض عناوين الذاكرة من 0x10 إلى 0x1F
+                for (let i = 0x10; i <= 0x1F; i++) {
+                    const address = i.toString(16);
+                    const value = this.memory[address] !== undefined ? this.memory[address] : 0;
+                    
+                    const memCell = document.createElement('div');
+                    memCell.className = 'mem-cell';
+                    memCell.innerHTML = `
+                        <div class="label">0x${address}</div>
+                        <div class="value">${value}</div>
+                    `;
+                    memoryDiv.appendChild(memCell);
+                }
+                
+                // تمييز سطر التعليمات الحالي في محرر النص
+                this.highlightCurrentLine();
+            },
+            
+            highlightCurrentLine() {
+                const editor = document.getElementById('codeEditor');
+                const lines = editor.value.split('\n');
+                
+                // إزالة التمييز السابق
+                const codeDisplay = document.getElementById('output');
+                
+                if (this.programCounter > 0 && this.programCounter <= lines.length) {
+                    // في الواقع، سنقوم فقط بإضافة معلومات إلى الناتج
+                    if (this.programCounter <= this.program.length) {
+                        codeDisplay.scrollTop = codeDisplay.scrollHeight;
+                    }
+                }
+            }
+        };
+        
+        // تهيئة المحاكي عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            simulator.init();
+            
+            // معالجة الأحداث للأزرار
+            document.getElementById('runBtn').addEventListener('click', () => {
+                const code = document.getElementById('codeEditor').value;
+                simulator.loadProgram(code);
+                simulator.run(
