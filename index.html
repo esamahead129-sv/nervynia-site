@@ -1,298 +1,154 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>THE BLACK HALO</title>
+<title>الهالة السوداء | The Black Halo</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* ================= ROOT ================= */
-:root{
-  --bg:#050506;
-  --dark:#0b0b0d;
-  --red:#9b0000;
-  --soft:#888;
-  --light:#eee;
-}
-
-/* ================= RESET ================= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: "Cairo", Tahoma, sans-serif;
-}
-
+*{box-sizing:border-box;font-family:'Segoe UI','Cairo',sans-serif}
 body{
-  background:var(--bg);
-  color:var(--light);
-  overflow-x:hidden;
-}
-
-/* ================= GENERAL ================= */
-.hidden{display:none;}
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:60px 20px;
-}
-.center{text-align:center}
-
-/* ================= BACKGROUND EFFECT ================= */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(150,0,0,.08), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(100,0,40,.06), transparent 40%);
-  z-index:-1;
-}
-
-/* ================= TITLE ================= */
-.title{
-  font-size:3.5rem;
-  letter-spacing:8px;
-  text-shadow:0 0 25px rgba(150,0,0,.6);
-  margin-bottom:15px;
-}
-
-.subtitle{
-  color:var(--soft);
-  letter-spacing:2px;
-}
-
-/* ================= NAV ================= */
-.nav{
-  display:flex;
-  justify-content:center;
-  gap:25px;
-  margin:40px 0;
-  flex-wrap:wrap;
-}
-
-.nav button{
-  padding:14px 35px;
-  background:transparent;
-  border:1px solid var(--red);
-  color:var(--light);
-  border-radius:8px;
-  cursor:pointer;
-  transition:.4s;
-}
-
-.nav button:hover{
-  background:var(--red);
-  box-shadow:0 0 20px rgba(150,0,0,.6);
-}
-
-/* ================= CARDS ================= */
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:30px;
-}
-
+margin:0;min-height:100vh;color:#fff;overflow-x:hidden;
+background:
+linear-gradient(rgba(0,0,0,.85),rgba(10,0,5,.95)),
+radial-gradient(circle at 20% 30%,rgba(120,0,0,.15) 0%,transparent 40%),
+radial-gradient(circle at 80% 70%,rgba(80,0,40,.1) 0%,transparent 40%),#000}
+header{text-align:center;padding:80px 20px 40px}
+header h1{
+font-size:3.8rem;letter-spacing:8px;margin:0;
+background:linear-gradient(45deg,#fff,#aaa,#fff);
+-webkit-background-clip:text;color:transparent}
+header p{color:#aaa;letter-spacing:3px}
+.main-buttons{display:flex;justify-content:center;gap:30px;margin:40px auto;flex-wrap:wrap}
+.main-btn{
+padding:18px 40px;border:2px solid rgba(150,0,0,.7);
+color:#fff;text-decoration:none;border-radius:8px;letter-spacing:2px}
+.team{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:40px;padding:40px;max-width:1400px;margin:auto}
 .card{
-  background:rgba(10,0,5,.7);
-  border:1px solid rgba(150,0,0,.5);
-  border-radius:16px;
-  padding:30px;
-  cursor:pointer;
-  transition:.4s;
-}
-
-.card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 0 35px rgba(150,0,0,.4);
-}
-
-.card h3{
-  color:#fff;
-  margin-bottom:10px;
-}
-
-.card p{
-  color:var(--soft);
-  font-size:.95rem;
-}
-
-/* ================= PROFILE ================= */
-.profile-box{
-  background:rgba(10,0,5,.85);
-  border:1px solid rgba(150,0,0,.6);
-  border-radius:20px;
-  padding:40px;
-}
-
-.profile-box h2{
-  margin-bottom:10px;
-  text-shadow:0 0 15px rgba(150,0,0,.6);
-}
-
-.profile-box .role{
-  color:var(--red);
-  margin-bottom:25px;
-}
-
-.list{
-  margin-top:25px;
-}
-
-.list h4{
-  color:#ddd;
-  margin-bottom:10px;
-}
-
-.list li{
-  list-style:none;
-  margin-bottom:8px;
-  color:var(--soft);
-}
-
-/* ================= FOOTER ================= */
-footer{
-  border-top:1px solid rgba(150,0,0,.3);
-  padding:30px;
-  text-align:center;
-  color:#555;
-}
+background:rgba(10,0,5,.7);border:1px solid rgba(80,0,0,.5);
+border-radius:16px;padding:30px 20px;text-align:center;
+cursor:pointer;position:relative}
+.name{
+margin-top:40px;font-size:28px;letter-spacing:3px;
+text-shadow:0 0 10px rgba(150,0,0,.8)}
+.role{color:#bbb;font-size:14px;letter-spacing:1.5px}
+.profile-btn{
+display:inline-block;margin-top:10px;
+padding:10px 25px;border:1px solid rgba(150,0,0,.6);
+color:#ddd;border-radius:6px;text-decoration:none}
+.member-modal{
+display:none;position:fixed;inset:0;
+background:rgba(0,0,0,.95);z-index:999}
+.modal-content{
+max-width:900px;margin:40px auto;
+background:rgba(10,0,5,.95);
+padding:40px;border-radius:20px;position:relative}
+.close-modal{
+position:absolute;top:20px;left:20px;
+width:40px;height:40px;border-radius:50%;
+background:rgba(150,0,0,.5);color:#fff;
+display:flex;align-items:center;justify-content:center;
+cursor:pointer}
 </style>
 </head>
 
 <body>
 
-<!-- ================= HOME ================= -->
-<section id="home" class="container center">
-  <h1 class="title">THE BLACK HALO</h1>
-  <p class="subtitle">الهدوء… العمق… العمل من الظل</p>
+<header>
+<h1>THE BLACK HALO</h1>
+<p>سبعة… لا ينتمون للنور، يعملون في الظل منذ الأزل</p>
+</header>
 
-  <div class="nav">
-    <button onclick="show('team')">الفريق</button>
-    <button onclick="show('dark')">الظلام</button>
-  </div>
+<div class="main-buttons">
+<a href="#team" class="main-btn">تعرف على الفريق</a>
+<a href="https://wa.me/201029505953" target="_blank" class="main-btn">التواصل واتساب</a>
+</div>
+
+<section class="team" id="team">
+
+<div class="card" onclick="showMember('chrollo')">
+<div class="name">كرولو 🕷️</div>
+<div class="role">𝐂𝐡𝐫𝐨𝐥𝐥𝐨</div>
+<div class="role">العنكبوت | العقل المدبر</div>
+<a class="profile-btn">عرض الملف</a>
+</div>
+
+<div class="card" onclick="showMember('lelouch')">
+<div class="name">لولوش ♟️</div>
+<div class="role">𝐋𝐞𝐥𝐨𝐮𝐜𝐡</div>
+<div class="role">ملك الشطرنج | الاستراتيجي</div>
+<a class="profile-btn">عرض الملف</a>
+</div>
+
+<div class="card" onclick="showMember('katana')">
+<div class="name">كاتانا 🗡️</div>
+<div class="role">𝐊𝐚𝐭𝐚𝐧𝐚</div>
+<div class="role">نصل الظل | المنفذ</div>
+<a class="profile-btn">عرض الملف</a>
+</div>
+
+<div class="card" onclick="showMember('eizen')">
+<div class="name">ايزن 🪞</div>
+<div class="role">𝐀𝐢𝐳𝐞𝐧</div>
+<div class="role">المرآة | المحلل النفسي</div>
+<a class="profile-btn">عرض الملف</a>
+</div>
+
+<div class="card" onclick="showMember('lilith')">
+<div class="name">ليليث 🩸</div>
+<div class="role">𝐋𝐢𝐥𝐢𝐭𝐡</div>
+<div class="role">الهمس الأسود | المخترقة</div>
+<a class="profile-btn">عرض الملف</a>
+</div>
+
+<div class="card" onclick="showMember('mika')">
+<div class="name">ميكا 🪽</div>
+<div class="role">𝐌𝐢𝐤𝐚</div>
+<div class="role">الجناح الساقط | المتربص</div>
+<a class="profile-btn">عرض الملف</a>
+</div>
+
+<div class="card" onclick="showMember('adam')">
+<div class="name">آدم ⚡</div>
+<div class="role">𝐀𝐝𝐚𝐦</div>
+<div class="role">نور مكسور | الكاشف</div>
+<a class="profile-btn">عرض الملف</a>
+</div>
+
 </section>
 
-<!-- ================= TEAM ================= -->
-<section id="team" class="container hidden">
-  <h2 class="center">أعضاء الهالة</h2>
-
-  <div class="cards">
-
-    <div class="card" onclick="openMember('chrollo')">
-      <h3>كرولو</h3>
-      <p>العنكبوت – العقل المدبر</p>
-    </div>
-
-    <div class="card" onclick="openMember('lelouch')">
-      <h3>لولوش</h3>
-      <p>الاستراتيجي</p>
-    </div>
-
-    <div class="card" onclick="openMember('katana')">
-      <h3>كاتانا</h3>
-      <p>نصل الظل</p>
-    </div>
-
-    <div class="card" onclick="openMember('adam')">
-      <h3>آدم</h3>
-      <p>النور المكسور</p>
-    </div>
-
-  </div>
-
-  <div class="nav">
-    <button onclick="show('home')">رجوع</button>
-  </div>
-</section>
-
-<!-- ================= PROFILE ================= -->
-<section id="profile" class="container hidden">
-  <div class="profile-box">
-    <h2 id="pname"></h2>
-    <div class="role" id="prole"></div>
-
-    <p id="pdesc"></p>
-
-    <div class="list">
-      <h4>القدرات</h4>
-      <ul id="pskills"></ul>
-    </div>
-
-    <div class="nav">
-      <button onclick="show('team')">رجوع للفريق</button>
-    </div>
-  </div>
-</section>
-
-<!-- ================= DARK ================= -->
-<section id="dark" class="container hidden">
-  <h2 class="center">الظلام</h2>
-  <p class="center subtitle">
-    نحن لا نحب الضوضاء… نحب الفهم، الصمت، والمراقبة.
-  </p>
-
-  <div class="nav">
-    <button onclick="show('home')">رجوع</button>
-  </div>
-</section>
-
-<footer>
-  THE BLACK HALO © صُنع بهدوء
-</footer>
+<div id="memberModal" class="member-modal">
+<div class="modal-content"></div>
+</div>
 
 <script>
-/* ================= DATA ================= */
 const members={
-  chrollo:{
-    name:"كرولو",
-    role:"العنكبوت | العقل المدبر",
-    desc:"مؤسس الهالة السوداء. يخطط بصمت ويضرب بدقة.",
-    skills:["تحليل الأنظمة","فك الشفرات","القيادة من الظل"]
-  },
-  lelouch:{
-    name:"لولوش",
-    role:"الاستراتيجي",
-    desc:"يرى ما لا يراه الآخرون. يحرك القطع بهدوء.",
-    skills:["التخطيط","قراءة الخصوم","صناعة السيناريوهات"]
-  },
-  katana:{
-    name:"كاتانا",
-    role:"نصل الظل",
-    desc:"تنفذ بدون أثر.",
-    skills:["الاختراق السريع","إخفاء الآثار","الدقة"]
-  },
-  adam:{
-    name:"آدم",
-    role:"النور المكسور",
-    desc:"يكشف الحقيقة مهما كان الثمن.",
-    skills:["التحليل","الاستقصاء","كشف الخداع"]
-  }
+chrollo:{name:"كرولو 🕷️",role:"𝐂𝐡𝐫𝐨𝐥𝐥𝐨",desc:"العقل المدبر"},
+lelouch:{name:"لولوش ♟️",role:"𝐋𝐞𝐥𝐨𝐮𝐜𝐡",desc:"الاستراتيجي"},
+katana:{name:"كاتانا 🗡️",role:"𝐊𝐚𝐭𝐚𝐧𝐚",desc:"المنفذ"},
+eizen:{name:"ايزن 🪞",role:"𝐀𝐢𝐳𝐞𝐧",desc:"المحلل"},
+lilith:{name:"ليليث 🩸",role:"𝐋𝐢𝐥𝐢𝐭𝐡",desc:"المخترقة"},
+mika:{name:"ميكا 🪽",role:"𝐌𝐢𝐤𝐚",desc:"المتربص"},
+adam:{name:"آدم ⚡",role:"𝐀𝐝𝐚𝐦",desc:"الكاشف"}
 };
 
-/* ================= NAV ================= */
-function show(id){
-  ["home","team","profile","dark"].forEach(s=>{
-    document.getElementById(s).classList.add("hidden");
-  });
-  document.getElementById(id).classList.remove("hidden");
+function showMember(k){
+const m=members[k];
+const modal=document.getElementById("memberModal");
+modal.querySelector(".modal-content").innerHTML=`
+<div class="close-modal" onclick="closeMember()">×</div>
+<h2>${m.name}</h2>
+<p>${m.role}</p>
+<p>${m.desc}</p>`;
+modal.style.display="block";
 }
 
-function openMember(key){
-  const m=members[key];
-  document.getElementById("pname").innerText=m.name;
-  document.getElementById("prole").innerText=m.role;
-  document.getElementById("pdesc").innerText=m.desc;
-
-  const ul=document.getElementById("pskills");
-  ul.innerHTML="";
-  m.skills.forEach(s=>{
-    const li=document.createElement("li");
-    li.innerText="• "+s;
-    ul.appendChild(li);
-  });
-
-  show("profile");
+function closeMember(){
+document.getElementById("memberModal").style.display="none";
 }
 </script>
 
