@@ -6,523 +6,579 @@
 <title>NERVYNIA TEAM</title>
 
 <style>
-/* ===== RESET ===== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-  background: #000000;
-  color: #e0e0e0;
-  overflow-x: hidden;
-  min-height: 100vh;
-  position: relative;
+background:#000;
+color:#fff;
+font-family:Arial;
+overflow-x:hidden;
+min-height:100vh;
+position:relative;
 }
 
-/* ===== COSMIC BACKGROUND ===== */
-.cosmic-bg{
-  position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:-1;
-  background: 
-    linear-gradient(to bottom, #000000, #0a0a1a, #000000);
+/* MATRIX FIRE BACKGROUND */
+#matrix{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+opacity:0.7;
 }
 
-/* ===== MAIN CONTAINER ===== */
-.main-container{
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 30px 20px;
-  min-height: 100vh;
+/* CONTAINER */
+.container{
+max-width:1100px;
+margin:auto;
+padding:30px 20px;
+position:relative;
+z-index:10;
 }
 
-.hidden{ display: none !important; }
-.center{ text-align: center; }
+.hidden{display:none!important;}
 
-/* ===== HEADER ===== */
-.header{
-  text-align: center;
-  padding: 40px 0;
-  margin-bottom: 40px;
-}
-
+/* EPIC TITLE */
 .main-title{
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: #8a2be2;
-  text-shadow: 0 0 15px #8a2be2;
-  margin-bottom: 10px;
-  letter-spacing: 3px;
+font-size:4.5rem;
+font-weight:900;
+color:#fff;
+text-align:center;
+margin:40px 0 15px;
+text-transform:uppercase;
+letter-spacing:6px;
+text-shadow:
+0 0 10px #fff,
+0 0 20px #fff,
+0 0 30px #00ffea,
+0 0 40px #00ffea,
+0 0 50px #00ffea,
+0 0 60px #00ffea;
+animation:flicker 2s infinite;
 }
 
+@keyframes flicker{
+0%,19%,21%,23%,25%,54%,56%,100%{
+text-shadow:
+0 0 10px #fff,
+0 0 20px #fff,
+0 0 30px #00ffea,
+0 0 40px #00ffea,
+0 0 50px #00ffea,
+0 0 60px #00ffea;
+}
+20%,24%,55%{
+text-shadow:none;
+}
+}
+
+/* SUBTITLE */
 .tagline{
-  color: #9370db;
-  font-size: 1.2rem;
-  letter-spacing: 1px;
+color:#00ffea;
+font-size:1.2rem;
+text-align:center;
+margin-bottom:50px;
+letter-spacing:3px;
+text-shadow:0 0 10px #00ffea;
 }
 
-/* ===== NAVIGATION ===== */
-.navigation{
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin: 40px 0;
+/* FIRE NAV BUTTONS */
+.nav-buttons{
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+margin:40px 0;
 }
 
-.nav-button{
-  padding: 14px 35px;
-  background: transparent;
-  border: 1px solid #4b0082;
-  color: #ba55d3;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  transition: all 0.3s;
-  min-width: 150px;
+.nav-btn{
+padding:15px 40px;
+background:#000;
+border:none;
+color:#00ffea;
+font-size:1.1rem;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+border-radius:8px;
+border:2px solid #00ffea;
+box-shadow:0 0 15px #00ffea;
+transition:all 0.3s;
+font-weight:bold;
+text-transform:uppercase;
+letter-spacing:2px;
 }
 
-.nav-button:hover{
-  background: rgba(75, 0, 130, 0.2);
-  border-color: #8a2be2;
-  color: #d8bfd8;
-  box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+.nav-btn::before{
+content:'';
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(90deg,transparent,#00ffea,transparent);
+transition:0.5s;
 }
 
-/* ===== HOME PAGE ===== */
-.team-definition{
-  background: rgba(20, 20, 40, 0.7);
-  border: 1px solid #483d8b;
-  border-radius: 15px;
-  padding: 30px;
-  margin: 30px auto;
-  max-width: 800px;
-  line-height: 1.8;
+.nav-btn:hover::before{
+left:100%;
 }
 
-.team-definition h2{
-  color: #9370db;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-  text-align: center;
+.nav-btn:hover{
+background:#00ffea;
+color:#000;
+box-shadow:0 0 30px #00ffea,0 0 60px #00ffea;
+transform:translateY(-3px);
 }
 
-/* ===== TEAM PAGE ===== */
-.team-page{
-  padding: 20px 0;
+/* EPIC CARD */
+.epic-card{
+background:rgba(0,0,0,0.8);
+border:2px solid #00ffea;
+border-radius:15px;
+padding:30px;
+margin:30px auto;
+max-width:800px;
+box-shadow:0 0 30px rgba(0,255,234,0.3);
+position:relative;
+overflow:hidden;
 }
 
-.team-header{
-  text-align: center;
-  margin-bottom: 40px;
+.epic-card::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:5px;
+background:linear-gradient(90deg,#00ffea,#ff00ff,#00ffea);
+animation:scanline 3s linear infinite;
 }
 
-.team-header h1{
-  color: #8a2be2;
-  font-size: 2.8rem;
-  margin-bottom: 10px;
+@keyframes scanline{
+0%{transform:translateX(-100%);}
+100%{transform:translateX(100%);}
 }
 
-/* ===== TEAM MEMBERS - ORGANIZED ===== */
-.team-members{
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  margin-bottom: 40px;
+/* TEAM PAGE */
+.team-title{
+color:#00ffea;
+text-align:center;
+font-size:2.5rem;
+margin:30px 0;
+text-shadow:0 0 20px #00ffea;
 }
 
-.member-row{
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  flex-wrap: wrap;
+/* FIRE TEAM GRID */
+.team-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+margin:40px 0;
 }
 
-.member-item{
-  background: rgba(25, 25, 45, 0.8);
-  border: 1px solid #4b0082;
-  border-radius: 12px;
-  padding: 25px;
-  width: 300px;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-align: center;
+.member-card{
+background:rgba(0,20,20,0.9);
+border:2px solid #00ffea;
+border-radius:12px;
+padding:25px;
+cursor:pointer;
+transition:all 0.4s;
+position:relative;
+overflow:hidden;
+text-align:center;
 }
 
-.member-item:hover{
-  transform: translateY(-5px);
-  border-color: #8a2be2;
-  box-shadow: 0 5px 20px rgba(138, 43, 226, 0.4);
-  background: rgba(35, 35, 55, 0.9);
+.member-card:hover{
+transform:translateY(-10px) scale(1.05);
+box-shadow:0 0 40px #00ffea,0 0 80px #00ffea;
+background:rgba(0,40,40,0.9);
+border-color:#ff00ff;
 }
 
-.member-name{
-  color: #ba55d3;
-  font-size: 1.6rem;
-  margin-bottom: 10px;
-  font-weight: 600;
+.member-card::after{
+content:'';
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background:radial-gradient(circle,rgba(0,255,234,0.1) 0%,transparent 70%);
+opacity:0;
+transition:opacity 0.3s;
+}
+
+.member-card:hover::after{
+opacity:1;
+}
+
+/* STYLISH ENGLISH NAMES */
+.english-name{
+font-family:'Courier New',monospace;
+font-size:1.8rem;
+color:#00ffea;
+margin-bottom:10px;
+font-weight:bold;
+letter-spacing:2px;
+text-transform:uppercase;
+text-shadow:0 0 10px #00ffea;
+}
+
+.arabic-name{
+font-size:1.3rem;
+color:#ff00ff;
+margin-bottom:8px;
 }
 
 .member-role{
-  color: #b0c4de;
-  font-size: 1.1rem;
+color:#aaa;
+font-size:1.1rem;
 }
 
-/* ===== PROFILE PAGE ===== */
-.profile-page{
-  text-align: center;
-  padding: 40px 0;
-}
-
-.profile-header{
-  margin-bottom: 40px;
+/* PROFILE PAGE */
+.profile-container{
+text-align:center;
+padding:40px 20px;
 }
 
 .profile-header h1{
-  color: #8a2be2;
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+color:#00ffea;
+font-size:3rem;
+margin-bottom:10px;
+text-shadow:0 0 20px #00ffea;
 }
 
 .profile-header h2{
-  color: #9370db;
-  font-size: 1.8rem;
-  font-weight: normal;
+color:#ff00ff;
+font-size:1.8rem;
+margin-bottom:40px;
 }
 
-.member-photo{
-  width: 220px;
-  height: 220px;
-  margin: 30px auto;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #4b0082, #00008b);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 4.5rem;
-  border: 3px solid #8a2be2;
-  box-shadow: 0 0 30px rgba(138, 43, 226, 0.6);
+/* CYBER PHOTO */
+.cyber-photo{
+width:250px;
+height:250px;
+margin:30px auto;
+border-radius:50%;
+background:linear-gradient(45deg,#000,#00ffea,#000);
+border:3px solid #00ffea;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:5rem;
+color:#fff;
+box-shadow:
+0 0 30px #00ffea,
+0 0 60px #00ffea,
+inset 0 0 30px rgba(0,0,0,0.8);
+animation:rotate 10s linear infinite;
+position:relative;
 }
 
-.profile-info{
-  background: rgba(20, 20, 40, 0.7);
-  border: 1px solid #483d8b;
-  border-radius: 15px;
-  padding: 30px;
-  margin: 30px auto;
-  max-width: 700px;
-  line-height: 1.8;
+@keyframes rotate{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
-/* ===== CONTACT BUTTON ===== */
-.contact-section{
-  text-align: center;
-  margin-top: 50px;
-  padding-top: 30px;
-  border-top: 1px solid #2a2a4a;
+.cyber-photo::before{
+content:'';
+position:absolute;
+top:-10px;
+left:-10px;
+right:-10px;
+bottom:-10px;
+background:conic-gradient(#00ffea,#ff00ff,#00ffea);
+border-radius:50%;
+z-index:-1;
+animation:rotate 3s linear infinite reverse;
 }
 
-.whatsapp-button{
-  padding: 16px 50px;
-  background: transparent;
-  border: 1px solid #25D366;
-  color: #25D366;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: all 0.3s;
-  margin-top: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+/* EPIC BUTTONS */
+.epic-btn{
+padding:15px 50px;
+background:#000;
+border:2px solid #00ffea;
+color:#00ffea;
+font-size:1.2rem;
+cursor:pointer;
+margin:30px 10px;
+border-radius:8px;
+transition:all 0.3s;
+text-transform:uppercase;
+letter-spacing:2px;
+font-weight:bold;
+box-shadow:0 0 20px #00ffea;
 }
 
-.whatsapp-button:hover{
-  background: rgba(37, 211, 102, 0.1);
-  box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
-  transform: translateY(-2px);
+.epic-btn:hover{
+background:#00ffea;
+color:#000;
+box-shadow:0 0 40px #00ffea,0 0 80px #00ffea;
+transform:scale(1.1);
 }
 
-/* ===== BACK BUTTON ===== */
-.back-button{
-  padding: 14px 40px;
-  background: transparent;
-  border: 1px solid #483d8b;
-  color: #b0c4de;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  transition: all 0.3s;
-  margin-top: 40px;
-  display: inline-block;
+/* WHATSAPP BUTTON */
+.whatsapp-btn{
+background:#000;
+border:2px solid #25D366;
+color:#25D366;
+box-shadow:0 0 20px #25D366;
 }
 
-.back-button:hover{
-  background: rgba(72, 61, 139, 0.2);
-  border-color: #9370db;
-  box-shadow: 0 0 15px rgba(147, 112, 219, 0.3);
+.whatsapp-btn:hover{
+background:#25D366;
+color:#000;
+box-shadow:0 0 40px #25D366;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .main-title{
-    font-size: 2.5rem;
-  }
-  
-  .navigation{
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .nav-button{
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .member-item{
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .member-row{
-    flex-direction: column;
-    align-items: center;
-  }
+/* RESPONSIVE */
+@media(max-width:768px){
+.main-title{font-size:3rem;}
+.nav-buttons{flex-direction:column;align-items:center;}
+.nav-btn{width:90%;max-width:300px;}
+.team-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
 
 <body>
-<!-- Background -->
-<div class="cosmic-bg"></div>
+<!-- MATRIX FIRE BACKGROUND -->
+<canvas id="matrix"></canvas>
 
-<div class="main-container">
-  
-  <!-- ===== HOME PAGE ===== -->
-  <div id="home-page">
-    <div class="header">
-      <h1 class="main-title">NERVYNIA TEAM</h1>
-      <p class="tagline">نحن لا نُرى… نحن نُنفَّذ</p>
-    </div>
-    
-    <div class="navigation">
-      <button class="nav-button" onclick="showTeam()">الفريق</button>
-      <button class="nav-button" onclick="showDarkness()">الظلام</button>
-      <button class="nav-button" onclick="contactWhatsApp()">واتساب</button>
-    </div>
-    
-    <div class="team-definition">
-      <h2>تعريف الفريق</h2>
-      <p>
-        كيان يعمل في الظل، بلا أسماء حقيقية، بلا أثر رقمي، بلا رحمة عند التنفيذ.
-        نحن ظل في الظلام، صوت في الصمت، حضور في الغياب. نعمل حيث لا يصل الضوء،
-        وننفذ حيث لا يتوقع أحد.
-      </p>
-    </div>
-  </div>
-  
-  <!-- ===== TEAM PAGE ===== -->
-  <div id="team-page" class="hidden">
-    <div class="team-page">
-      <div class="team-header">
-        <h1>أعضاء الفريق</h1>
-        <p class="tagline">منظمون في صفوف.. مرتبون في تنفيذ</p>
-      </div>
-      
-      <div class="team-members">
-        <!-- الصف الأول: القيادة -->
-        <div class="member-row">
-          <div class="member-item" onclick="showProfile('كرولو', '🕷️ القائد – العقل المدبر')">
-            <div class="member-name">كرولو</div>
-            <div class="member-role">🕷️ القائد – العقل المدبر</div>
-          </div>
-        </div>
-        
-        <!-- الصف الثاني: الاستراتيجي -->
-        <div class="member-row">
-          <div class="member-item" onclick="showProfile('لولوش', '👑 الاستراتيجي')">
-            <div class="member-name">لولوش</div>
-            <div class="member-role">👑 الاستراتيجي</div>
-          </div>
-        </div>
-        
-        <!-- الصف الثالث: التنفيذ -->
-        <div class="member-row">
-          <div class="member-item" onclick="showProfile('كاتانا', '🗡️ السيف الرقمي')">
-            <div class="member-name">كاتانا</div>
-            <div class="member-role">🗡️ السيف الرقمي</div>
-          </div>
-        </div>
-        
-        <!-- الصف الرابع: باقي الفريق -->
-        <div class="member-row">
-          <div class="member-item" onclick="showProfile('آدم', '⚡ كاسر الأنظمة')">
-            <div class="member-name">آدم</div>
-            <div class="member-role">⚡ كاسر الأنظمة</div>
-          </div>
-          
-          <div class="member-item" onclick="showProfile('شبح', '👻 المتخفي')">
-            <div class="member-name">شبح</div>
-            <div class="member-role">👻 المتخفي</div>
-          </div>
-        </div>
-      </div>
-      
-      <div style="text-align: center;">
-        <button class="back-button" onclick="goHome()">← رجوع للرئيسية</button>
-      </div>
-    </div>
-  </div>
-  
-  <!-- ===== PROFILE PAGE ===== -->
-  <div id="profile-page" class="hidden">
-    <div class="profile-page">
-      <div class="profile-header">
-        <h1 id="profile-name"></h1>
-        <h2 id="profile-role"></h2>
-      </div>
-      
-      <div class="member-photo" id="profile-icon">
-        <!-- يتم تعبئته بالجافاسكريبت -->
-      </div>
-      
-      <div class="profile-info">
-        <p id="profile-description">
-          <!-- سيتم تعبئته بالجافاسكريبت -->
-        </p>
-      </div>
-      
-      <div style="text-align: center;">
-        <button class="back-button" onclick="goTeam()">← رجوع للفريق</button>
-      </div>
-    </div>
-  </div>
-  
-  <!-- ===== CONTACT SECTION ===== -->
-  <div class="contact-section">
-    <p>للتواصل مع الفريق:</p>
-    <button class="whatsapp-button" onclick="contactWhatsApp()">
-      📱 واتساب الفريق
-    </button>
-  </div>
-  
+<div class="container">
+<!-- HOME PAGE -->
+<div id="home-page">
+<h1 class="main-title">NERVYNIA TEAM</h1>
+<p class="tagline">WE ARE INVISIBLE... WE EXECUTE</p>
+
+<div class="nav-buttons">
+<button class="nav-btn" onclick="showTeam()">TEAM</button>
+<button class="nav-btn" onclick="showDark()">DARKNESS</button>
+<button class="nav-btn whatsapp-btn" onclick="contactWhatsApp()">WHATSAPP</button>
+</div>
+
+<div class="epic-card">
+<h2 style="color:#00ffea;text-align:center;margin-bottom:20px;">TEAM DEFINITION</h2>
+<p style="text-align:center;line-height:1.8;font-size:1.1rem;">
+An entity that operates in the shadows, without real names,
+without digital trace, without mercy in execution.
+We are ghosts in the system, executing where light doesn't reach.
+</p>
+</div>
+</div>
+
+<!-- TEAM PAGE -->
+<div id="team-page" class="hidden">
+<h1 class="team-title">TEAM MEMBERS</h1>
+
+<div class="team-grid">
+<div class="member-card" onclick="showProfile('KAROLO','كرولو','🕷️ القائد – العقل المدبر','🕷️')">
+<div class="english-name">KAROLO</div>
+<div class="arabic-name">كرولو</div>
+<div class="member-role">🕷️ القائد – العقل المدبر</div>
+</div>
+
+<div class="member-card" onclick="showProfile('LULUSH','لولوش','👑 الاستراتيجي','👑')">
+<div class="english-name">LULUSH</div>
+<div class="arabic-name">لولوش</div>
+<div class="member-role">👑 الاستراتيجي</div>
+</div>
+
+<div class="member-card" onclick="showProfile('KATANA','كاتانا','🗡️ السيف الرقمي','🗡️')">
+<div class="english-name">KATANA</div>
+<div class="arabic-name">كاتانا</div>
+<div class="member-role">🗡️ السيف الرقمي</div>
+</div>
+
+<div class="member-card" onclick="showProfile('ADAM','آدم','⚡ كاسر الأنظمة','⚡')">
+<div class="english-name">ADAM</div>
+<div class="arabic-name">آدم</div>
+<div class="member-role">⚡ كاسر الأنظمة</div>
+</div>
+
+<div class="member-card" onclick="showProfile('GHOST','شبح','👻 المتخفي','👻')">
+<div class="english-name">GHOST</div>
+<div class="arabic-name">شبح</div>
+<div class="member-role">👻 المتخفي</div>
+</div>
+</div>
+
+<div style="text-align:center;margin-top:40px;">
+<button class="epic-btn" onclick="goHome()">← BACK TO HOME</button>
+</div>
+</div>
+
+<!-- PROFILE PAGE -->
+<div id="profile-page" class="hidden">
+<div class="profile-container">
+<div class="profile-header">
+<h1 id="profile-english"></h1>
+<h2 id="profile-arabic"></h2>
+<p id="profile-role" style="color:#ff00ff;font-size:1.4rem;margin-bottom:30px;"></p>
+</div>
+
+<div class="cyber-photo" id="profile-icon">
+<!-- Icon appears here -->
+</div>
+
+<div class="epic-card" style="max-width:600px;">
+<p id="profile-desc" style="font-size:1.1rem;line-height:1.8;"></p>
+</div>
+
+<div style="text-align:center;margin-top:30px;">
+<button class="epic-btn" onclick="goTeam()">← BACK TO TEAM</button>
+<button class="epic-btn whatsapp-btn" onclick="contactWhatsApp()">CONTACT</button>
+</div>
+</div>
+</div>
 </div>
 
 <script>
-// عناصر الصفحات
-const homePage = document.getElementById('home-page');
-const teamPage = document.getElementById('team-page');
-const profilePage = document.getElementById('profile-page');
+// PAGES
+const homePage=document.getElementById('home-page');
+const teamPage=document.getElementById('team-page');
+const profilePage=document.getElementById('profile-page');
 
-// عناصر البروفايل
-const profileName = document.getElementById('profile-name');
-const profileRole = document.getElementById('profile-role');
-const profileIcon = document.getElementById('profile-icon');
-const profileDescription = document.getElementById('profile-description');
+// PROFILE ELEMENTS
+const profileEnglish=document.getElementById('profile-english');
+const profileArabic=document.getElementById('profile-arabic');
+const profileRole=document.getElementById('profile-role');
+const profileIcon=document.getElementById('profile-icon');
+const profileDesc=document.getElementById('profile-desc');
 
-// بيانات الأعضاء
-const members = {
-  'كرولو': {
-    role: '🕷️ القائد – العقل المدبر',
-    icon: '🕷️',
-    description: 'العقل المدبر والقيادي الذي يخطط كل شيء. يعمل من الظل ويدير الفريق ببراعة.'
-  },
-  'لولوش': {
-    role: '👑 الاستراتيجي',
-    icon: '👑',
-    description: 'خبير الاستراتيجيات والتخطيط. يضع الخطط المحكمة التي لا تترك مجالاً للخطأ.'
-  },
-  'كاتانا': {
-    role: '🗡️ السيف الرقمي',
-    icon: '🗡️',
-    description: 'المتخصص في التنفيذ الرقمي. سريع، حاد، ولا يترك أثراً.'
-  },
-  'آدم': {
-    role: '⚡ كاسر الأنظمة',
-    icon: '⚡',
-    description: 'خبير اختراق الأنظمة والحماية. يتعامل مع أعقد الأنظمة الأمنية.'
-  },
-  'شبح': {
-    role: '👻 المتخفي',
-    icon: '👻',
-    description: 'سيد التخفي والتنكر. يتحرك دون أن يترك أي أثر أو بصمة.'
-  }
+// MEMBER DATA
+const members={
+'KAROLO':{
+arabic:'كرولو',
+role:'🕷️ القائد – العقل المدبر',
+icon:'🕷️',
+desc:'THE MASTERMIND - The leader who plans everything from the shadows'
+},
+'LULUSH':{
+arabic:'لولوش',
+role:'👑 الاستراتيجي',
+icon:'👑',
+desc:'THE STRATEGIST - Expert in planning and execution strategies'
+},
+'KATANA':{
+arabic:'كاتانا',
+role:'🗡️ السيف الرقمي',
+icon:'🗡️',
+desc:'DIGITAL SWORD - Specialist in digital execution'
+},
+'ADAM':{
+arabic:'آدم',
+role:'⚡ كاسر الأنظمة',
+icon:'⚡',
+desc:'SYSTEM BREAKER - Expert in hacking complex systems'
+},
+'GHOST':{
+arabic:'شبح',
+role:'👻 المتخفي',
+icon:'👻',
+desc:'THE GHOST - Master of stealth and invisibility'
+}
 };
 
-// وظائف التنقل
-function showTeam() {
-  homePage.classList.add('hidden');
-  profilePage.classList.add('hidden');
-  teamPage.classList.remove('hidden');
+// NAVIGATION
+function showTeam(){
+homePage.classList.add('hidden');
+profilePage.classList.add('hidden');
+teamPage.classList.remove('hidden');
 }
 
-function showDarkness() {
-  alert('قسم الظلام - يعمل في الخفاء ولا يُرى');
+function showDark(){
+alert('DARKNESS MODE - We operate where light doesn\'t reach');
 }
 
-function contactWhatsApp() {
-  window.open('https://wa.me/201029505953', '_blank');
+function contactWhatsApp(){
+window.open('https://wa.me/201029505953','_blank');
 }
 
-function goHome() {
-  teamPage.classList.add('hidden');
-  profilePage.classList.add('hidden');
-  homePage.classList.remove('hidden');
+function goHome(){
+teamPage.classList.add('hidden');
+profilePage.classList.add('hidden');
+homePage.classList.remove('hidden');
 }
 
-function goTeam() {
-  profilePage.classList.add('hidden');
-  homePage.classList.add('hidden');
-  teamPage.classList.remove('hidden');
+function goTeam(){
+profilePage.classList.add('hidden');
+homePage.classList.add('hidden');
+teamPage.classList.remove('hidden');
 }
 
-function showProfile(name, roleText) {
-  const member = members[name];
-  
-  profileName.textContent = name;
-  profileRole.textContent = roleText;
-  profileIcon.textContent = member.icon;
-  profileDescription.textContent = member.description;
-  
-  homePage.classList.add('hidden');
-  teamPage.classList.add('hidden');
-  profilePage.classList.remove('hidden');
+function showProfile(english,arabic,roleText,icon){
+const member=members[english];
+profileEnglish.textContent=english;
+profileArabic.textContent=arabic;
+profileRole.textContent=roleText;
+profileIcon.textContent=icon;
+profileDesc.textContent=member.desc;
+homePage.classList.add('hidden');
+teamPage.classList.add('hidden');
+profilePage.classList.remove('hidden');
 }
 
-// تهيئة الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-  // إضافة بعض النجوم للخلفية
-  const bg = document.querySelector('.cosmic-bg');
-  for(let i = 0; i < 150; i++) {
-    const star = document.createElement('div');
-    star.style.position = 'absolute';
-    star.style.width = Math.random() * 3 + 'px';
-    star.style.height = star.style.width;
-    star.style.background = 'white';
-    star.style.borderRadius = '50%';
-    star.style.left = Math.random() * 100 + '%';
-    star.style.top = Math.random() * 100 + '%';
-    star.style.opacity = Math.random() * 0.7 + 0.3;
-    star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite`;
-    bg.appendChild(star);
-  }
-  
-  // إضافة CSS للنجوم المتلألئة
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
-  `;
-  document.head.appendChild(style);
+// MATRIX FIRE EFFECT
+const canvas=document.getElementById('matrix');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+const particles=[];
+const particleCount=150;
+
+class Particle{
+constructor(){
+this.x=Math.random()*canvas.width;
+this.y=Math.random()*canvas.height;
+this.size=Math.random()*3+1;
+this.speedX=Math.random()*3-1.5;
+this.speedY=Math.random()*3-1.5;
+this.color=`hsl(${Math.random()*60+170},100%,50%)`;
+}
+update(){
+this.x+=this.speedX;
+this.y+=this.speedY;
+if(this.x>canvas.width)this.x=0;
+if(this.x<0)this.x=canvas.width;
+if(this.y>canvas.height)this.y=0;
+if(this.y<0)this.y=canvas.height;
+}
+draw(){
+ctx.fillStyle=this.color;
+ctx.beginPath();
+ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+ctx.fill();
+}
+}
+
+function initMatrix(){
+for(let i=0;i<particleCount;i++){
+particles.push(new Particle());
+}
+}
+
+function animateMatrix(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+for(let i=0;i<particles.length;i++){
+particles[i].update();
+particles[i].draw();
+}
+requestAnimationFrame(animateMatrix);
+}
+
+// RESPONSIVE
+window.addEventListener('resize',function(){
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 });
+
+// START
+initMatrix();
+animateMatrix();
 </script>
 
 </body>
