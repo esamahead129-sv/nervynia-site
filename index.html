@@ -2,245 +2,184 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Level 1 Language Simulator</title>
+<title>الهالة السوداء</title>
 
 <style>
-:root{
-  --bg:#050505;
-  --neon:#00ffd5;
-  --purple:#8f00ff;
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
-*{
-  box-sizing:border-box;
-  font-family:Tahoma, Arial, sans-serif;
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.9)),
+    url("bg.jpg") center / cover no-repeat fixed;
+  color: #fff;
+  overflow-x: hidden;
 }
 
-body{
-  background:var(--bg);
-  color:#eafffb;
-  margin:0;
-  padding:20px;
+/* ====== العنوان ====== */
+header {
+  text-align: center;
+  padding: 60px 20px;
 }
 
-h1,h2{color:var(--neon);}
-
-.container{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
+header h1 {
+  font-size: 48px;
+  letter-spacing: 6px;
+  color: #fff;
+  text-shadow:
+    0 0 10px #600,
+    0 0 25px #900;
 }
 
-@media(max-width:800px){
-  .container{grid-template-columns:1fr;}
+header p {
+  color: #aaa;
+  letter-spacing: 2px;
 }
 
-.panel{
-  background:rgba(0,0,0,.7);
-  border:2px solid var(--neon);
-  border-radius:15px;
-  padding:20px;
-  box-shadow:0 0 25px rgba(0,255,213,.2);
+/* ====== الفريق ====== */
+.team {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 40px;
+  padding: 40px;
 }
 
-textarea{
-  width:100%;
-  height:280px;
-  background:#000;
-  color:var(--neon);
-  border:1px solid var(--neon);
-  padding:15px;
-  font-family:monospace;
-  font-size:15px;
-  direction:ltr;
+/* ====== الكارت ====== */
+.card {
+  position: relative;
+  background: rgba(0,0,0,.6);
+  border: 1px solid #300;
+  border-radius: 16px;
+  padding: 30px 20px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  transition: transform .5s, box-shadow .5s;
 }
 
-.output{
-  background:#000;
-  color:#00ff41;
-  padding:15px;
-  min-height:160px;
-  white-space:pre-wrap;
-  overflow:auto;
-  border:1px solid var(--neon);
+.card:hover {
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 0 0 30px rgba(150,0,0,.7);
 }
 
-button{
-  padding:10px 18px;
-  background:transparent;
-  color:var(--neon);
-  border:2px solid var(--neon);
-  cursor:pointer;
-  border-radius:8px;
-  transition:.3s;
+/* ====== الجناحات ====== */
+.wings {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
 }
 
-button:hover{
-  background:var(--neon);
-  color:#000;
-  box-shadow:0 0 20px var(--neon);
+.wing {
+  width: 60px;
+  height: 90px;
+  background: linear-gradient(#fff, #777);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  opacity: .8;
+  animation: flap 3s ease-in-out infinite;
 }
 
-.controls{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:10px;
+.wing.right {
+  transform: scaleX(-1);
+  animation-delay: .3s;
 }
 
-.registers,.memory{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
-  gap:10px;
+@keyframes flap {
+  0%,100% { transform: rotate(0deg); }
+  50% { transform: rotate(12deg); }
 }
 
-.register,.mem-cell{
-  background:#000;
-  border:1px solid var(--neon);
-  padding:10px;
-  text-align:center;
+/* ====== الاسم ====== */
+.name {
+  margin-top: 70px;
+  font-size: 26px;
+  letter-spacing: 3px;
+  color: #fff;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 15px #800,
+    0 0 30px #400;
+}
+
+/* ====== الدور ====== */
+.role {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #bbb;
+  letter-spacing: 1px;
+}
+
+/* ====== الفوتر ====== */
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+  border-top: 1px solid #200;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-<h1 style="grid-column:1/-1;text-align:center">
-محاكي لغة برمجة – Level 1
-</h1>
+<header>
+  <h1>THE BLACK HALO</h1>
+  <p>سبعة… لا ينتمون للنور</p>
+</header>
 
-<div class="panel">
-<h2>📝 الكود</h2>
-<textarea id="codeEditor">
-LOAD A, 5
-LOAD B, 3
-MULTIPLY
-STORE 0x10
+<section class="team">
 
-LOAD A, 10
-ADD B
-STORE 0x11
+  <div class="card">
+    <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
+    <div class="name">كرولو</div>
+    <div class="role">العنكبوت</div>
+  </div>
 
-PRINT "Result:"
-PRINTREG A
-PRINTMEM 0x10
-HALT
-</textarea>
+  <div class="card">
+    <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
+    <div class="name">لولوش</div>
+    <div class="role">ملك الشطرنج</div>
+  </div>
 
-<div class="controls">
-<button id="runBtn">▶ تشغيل</button>
-<button id="stepBtn">⏭ خطوة</button>
-<button id="resetBtn">🔄 إعادة</button>
-</div>
-</div>
+  <div class="card">
+    <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
+    <div class="name">كاتانا</div>
+    <div class="role">نصل الظل</div>
+  </div>
 
-<div class="panel">
-<h2>📤 الناتج</h2>
-<div id="output" class="output"></div>
+  <div class="card">
+    <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
+    <div class="name">ايزن</div>
+    <div class="role">المرآة</div>
+  </div>
 
-<h2>🔄 Registers</h2>
-<div id="registers" class="registers"></div>
+  <div class="card">
+    <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
+    <div class="name">ليليث</div>
+    <div class="role">الهمس الأسود</div>
+  </div>
 
-<h2>💾 Memory</h2>
-<div id="memory" class="memory"></div>
-</div>
-</div>
+  <div class="card">
+    <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
+    <div class="name">ميكا</div>
+    <div class="role">الجناح الساقط</div>
+  </div>
 
-<script>
-const sim={
-registers:{A:0,B:0,C:0,D:0},
-memory:{},
-program:[],
-pc:0,
-running:false,
-output:"",
+  <div class="card">
+    <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
+    <div class="name">آدم</div>
+    <div class="role">نور مكسور</div>
+  </div>
 
-reset(){
-this.registers={A:0,B:0,C:0,D:0};
-this.memory={};
-for(let i=0x10;i<=0x1F;i++)this.memory[i.toString(16)]=0;
-this.program=[];
-this.pc=0;
-this.output="";
-this.update();
-},
+</section>
 
-load(code){
-this.reset();
-code.split("\n").forEach(l=>{
-l=l.split(";")[0].trim();
-if(l)this.program.push(l);
-});
-},
-
-step(){
-if(this.pc>=this.program.length){
-this.output+="✔ انتهى البرنامج\n";
-this.running=false;
-return;
-}
-
-const ins=this.program[this.pc++].split(/\s+/);
-const cmd=ins[0].toUpperCase();
-const arg=ins.slice(1).join("").split(",");
-
-switch(cmd){
-case"LOAD":this.registers[arg[0]]=parseInt(arg[1]);break;
-case"ADD":this.registers.A+=this.registers[arg[0]];break;
-case"MULTIPLY":this.registers.A*=this.registers.B;break;
-case"STORE":this.memory[arg[0].replace("0x","")]=this.registers.A;break;
-case"PRINT":this.output+=arg.join(",").replace(/"/g,"")+"\n";break;
-case"PRINTREG":this.output+=`${arg[0]} = ${this.registers[arg[0]]}\n`;break;
-case"PRINTMEM":
-const a=arg[0].replace("0x","");
-this.output+=`MEM ${a} = ${this.memory[a]}\n`;
-break;
-case"HALT":this.output+="⏹ توقف\n";this.running=false;break;
-}
-this.update();
-},
-
-run(){
-this.running=true;
-while(this.running)this.step();
-},
-
-update(){
-document.getElementById("output").textContent=this.output;
-const r=document.getElementById("registers");
-r.innerHTML="";
-for(let k in this.registers){
-r.innerHTML+=`<div class="register">${k}: ${this.registers[k]}</div>`;
-}
-const m=document.getElementById("memory");
-m.innerHTML="";
-for(let k in this.memory){
-m.innerHTML+=`<div class="mem-cell">0x${k}: ${this.memory[k]}</div>`;
-}
-}
-};
-
-sim.reset();
-
-runBtn.onclick=()=>{
-sim.load(codeEditor.value);
-sim.run();
-};
-
-stepBtn.onclick=()=>{
-if(!sim.running){
-sim.load(codeEditor.value);
-sim.running=true;
-}
-sim.step();
-};
-
-resetBtn.onclick=()=>sim.reset();
-</script>
+<footer>
+  BLACK HALO ©
+</footer>
 
 </body>
 </html>
