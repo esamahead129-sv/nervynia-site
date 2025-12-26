@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -6,151 +5,793 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>الهالة السوداء | The Black Halo</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
-*{box-sizing:border-box;font-family:'Segoe UI','Cairo',sans-serif}
-body{
-margin:0;min-height:100vh;color:#fff;overflow-x:hidden;
-background:
-linear-gradient(rgba(0,0,0,.85),rgba(10,0,5,.95)),
-radial-gradient(circle at 20% 30%,rgba(120,0,0,.15) 0%,transparent 40%),
-radial-gradient(circle at 80% 70%,rgba(80,0,40,.1) 0%,transparent 40%),#000}
-header{text-align:center;padding:80px 20px 40px}
-header h1{
-font-size:3.8rem;letter-spacing:8px;margin:0;
-background:linear-gradient(45deg,#fff,#aaa,#fff);
--webkit-background-clip:text;color:transparent}
-header p{color:#aaa;letter-spacing:3px}
-.main-buttons{display:flex;justify-content:center;gap:30px;margin:40px auto;flex-wrap:wrap}
-.main-btn{
-padding:18px 40px;border:2px solid rgba(150,0,0,.7);
-color:#fff;text-decoration:none;border-radius:8px;letter-spacing:2px}
-.team{
-display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:40px;padding:40px;max-width:1400px;margin:auto}
-.card{
-background:rgba(10,0,5,.7);border:1px solid rgba(80,0,0,.5);
-border-radius:16px;padding:30px 20px;text-align:center;
-cursor:pointer;position:relative}
-.name{
-margin-top:40px;font-size:28px;letter-spacing:3px;
-text-shadow:0 0 10px rgba(150,0,0,.8)}
-.role{color:#bbb;font-size:14px;letter-spacing:1.5px}
-.profile-btn{
-display:inline-block;margin-top:10px;
-padding:10px 25px;border:1px solid rgba(150,0,0,.6);
-color:#ddd;border-radius:6px;text-decoration:none}
-.member-modal{
-display:none;position:fixed;inset:0;
-background:rgba(0,0,0,.95);z-index:999}
-.modal-content{
-max-width:900px;margin:40px auto;
-background:rgba(10,0,5,.95);
-padding:40px;border-radius:20px;position:relative}
-.close-modal{
-position:absolute;top:20px;left:20px;
-width:40px;height:40px;border-radius:50%;
-background:rgba(150,0,0,.5);color:#fff;
-display:flex;align-items:center;justify-content:center;
-cursor:pointer}
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', 'Cairo', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  color: #fff;
+  background: 
+    linear-gradient(rgba(0,0,0,.9), rgba(20,0,10,.95)),
+    radial-gradient(circle at 20% 30%, rgba(150,0,0,.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(100,0,50,.1) 0%, transparent 40%),
+    #000;
+  overflow-x: hidden;
+}
+
+/* الشريط العلوي */
+.top-bar {
+  background: rgba(10,0,5,.95);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(150,0,0,.5);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #ddd;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: all 0.3s;
+  border: 1px solid transparent;
+}
+
+.nav-links a:hover {
+  color: #fff;
+  border-color: rgba(150,0,0,.5);
+  background: rgba(150,0,0,.1);
+}
+
+/* الصفحة الرئيسية */
+#home-page {
+  padding: 60px 20px;
+}
+
+header {
+  text-align: center;
+  padding: 60px 20px 40px;
+}
+
+header h1 {
+  font-size: 4rem;
+  letter-spacing: 10px;
+  margin: 0 0 20px;
+  background: linear-gradient(45deg, #fff, #ccc, #fff);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(150,0,0,.3);
+}
+
+header p {
+  color: #aaa;
+  letter-spacing: 3px;
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  line-height: 1.8;
+}
+
+.main-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 50px auto;
+  flex-wrap: wrap;
+}
+
+.main-btn {
+  padding: 18px 45px;
+  border: 2px solid rgba(150,0,0,.7);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  letter-spacing: 2px;
+  font-size: 1.1rem;
+  background: rgba(20,0,10,.5);
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.main-btn:hover {
+  background: rgba(150,0,0,.2);
+  box-shadow: 0 0 20px rgba(150,0,0,.3);
+  transform: translateY(-3px);
+}
+
+/* صفحة الفريق */
+#team-page {
+  padding: 60px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.team-title {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 50px;
+  color: #fff;
+  letter-spacing: 5px;
+  position: relative;
+}
+
+.team-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  right: 50%;
+  transform: translateX(50%);
+  width: 150px;
+  height: 3px;
+  background: rgba(150,0,0,.7);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 20px 0;
+}
+
+/* بطاقة العضو */
+.member-card {
+  background: rgba(15,0,8,.8);
+  border: 1px solid rgba(100,0,0,.4);
+  border-radius: 16px;
+  padding: 30px 25px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s;
+  text-decoration: none;
+  display: block;
+}
+
+.member-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(150,0,0,.1) 100%);
+  z-index: 0;
+}
+
+.member-card:hover {
+  border-color: rgba(180,0,0,.8);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,.4), 0 0 20px rgba(150,0,0,.2);
+}
+
+.member-icon {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.member-card h3 {
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  margin: 10px 0;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.member-role-en {
+  color: #bbb;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+.member-role-ar {
+  color: #aaa;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.view-profile {
+  display: inline-block;
+  padding: 10px 25px;
+  border: 1px solid rgba(150,0,0,.6);
+  color: #ddd;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+.member-card:hover .view-profile {
+  background: rgba(150,0,0,.2);
+  color: #fff;
+}
+
+/* صفحة العضو */
+#member-page {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 25px;
+  background: rgba(20,0,10,.6);
+  border: 1px solid rgba(150,0,0,.6);
+  color: #ddd;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-bottom: 40px;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  background: rgba(150,0,0,.2);
+  color: #fff;
+}
+
+.member-header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 30px;
+  background: rgba(15,0,8,.6);
+  border-radius: 15px;
+  border: 1px solid rgba(100,0,0,.4);
+}
+
+.member-header h2 {
+  font-size: 3rem;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.member-title-en {
+  font-size: 1.8rem;
+  color: #bbb;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.member-title-ar {
+  font-size: 1.4rem;
+  color: #aaa;
+  letter-spacing: 1px;
+}
+
+.member-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+  .member-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.member-photo {
+  background: rgba(10,0,5,.8);
+  border: 2px solid rgba(150,0,0,.5);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+.photo-placeholder {
+  font-size: 8rem;
+  color: rgba(150,0,0,.3);
+}
+
+.member-info {
+  background: rgba(15,0,8,.8);
+  border: 1px solid rgba(100,0,0,.4);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+.info-section {
+  margin-bottom: 30px;
+}
+
+.info-section h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(150,0,0,.4);
+}
+
+.info-section p {
+  color: #ccc;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.stat-item {
+  background: rgba(20,0,10,.6);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(100,0,0,.3);
+}
+
+.stat-value {
+  font-size: 2rem;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* صفحة من نحن */
+#about-page {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.about-content {
+  background: rgba(15,0,8,.8);
+  border: 1px solid rgba(100,0,0,.4);
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.4);
+}
+
+.about-section {
+  margin-bottom: 40px;
+}
+
+.about-section h2 {
+  color: #fff;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.about-section p {
+  color: #ccc;
+  line-height: 1.9;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+/* الخفية */
+.hidden {
+  display: none !important;
+}
+
+/* التذييل */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 80px;
+  border-top: 1px solid rgba(150,0,0,.3);
+  color: #777;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+/* تأثيرات التمرير */
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>THE BLACK HALO</h1>
-<p>سبعة… لا ينتمون للنور، يعملون في الظل منذ الأزل</p>
-</header>
-
-<div class="main-buttons">
-<a href="#team" class="main-btn">تعرف على الفريق</a>
-<a href="https://wa.me/201029505953" target="_blank" class="main-btn">التواصل واتساب</a>
+<!-- الشريط العلوي -->
+<div class="top-bar">
+  <a href="#home" class="logo" onclick="showPage('home')">THE BLACK HALO</a>
+  <div class="nav-links">
+    <a href="#home" onclick="showPage('home')">الرئيسية</a>
+    <a href="#team" onclick="showPage('team')">الفريق</a>
+    <a href="#about" onclick="showPage('about')">من نحن</a>
+  </div>
 </div>
 
-<section class="team" id="team">
+<!-- الصفحة الرئيسية -->
+<div id="home-page" class="page">
+  <header>
+    <h1>THE BLACK HALO</h1>
+    <p>سبعة… لا ينتمون للنور، يعملون في الظل منذ الأزل.<br>
+       لا نبحث عن المجد، بل ننسج مصائرنا في صمت.<br>
+       نحن الظل الذي يتحرك عندما ينام النور.</p>
+  </header>
 
-<div class="card" onclick="showMember('chrollo')">
-<div class="name">كرولو 🕷️</div>
-<div class="role">𝐂𝐡𝐫𝐨𝐥𝐥𝐨</div>
-<div class="role">العنكبوت | العقل المدبر</div>
-<a class="profile-btn">عرض الملف</a>
+  <div class="main-buttons">
+    <a href="#team" class="main-btn" onclick="showPage('team')">
+      <i class="fas fa-users"></i> تعرف على الفريق
+    </a>
+    <a href="https://wa.me/201029505953" target="_blank" class="main-btn">
+      <i class="fab fa-whatsapp"></i> التواصل واتساب
+    </a>
+    <a href="#about" class="main-btn" onclick="showPage('about')">
+      <i class="fas fa-info-circle"></i> من نحن
+    </a>
+  </div>
 </div>
 
-<div class="card" onclick="showMember('lelouch')">
-<div class="name">لولوش ♟️</div>
-<div class="role">𝐋𝐞𝐥𝐨𝐮𝐜𝐡</div>
-<div class="role">ملك الشطرنج | الاستراتيجي</div>
-<a class="profile-btn">عرض الملف</a>
+<!-- صفحة الفريق -->
+<div id="team-page" class="page hidden">
+  <div class="team-title">أعضاء الفريق</div>
+  
+  <div class="team-grid">
+    <!-- كرولو -->
+    <a href="#member/chrollo" class="member-card" onclick="showMember('chrollo')">
+      <div class="member-icon">🕷️</div>
+      <h3>كرولو</h3>
+      <div class="member-role-en">𝐂𝐡𝐫𝐨𝐥𝐥𝐨</div>
+      <div class="member-role-ar">العنكبوت | العقل المدبر</div>
+      <div class="view-profile">عرض الملف الشخصي</div>
+    </a>
+
+    <!-- لولوش -->
+    <a href="#member/lelouch" class="member-card" onclick="showMember('lelouch')">
+      <div class="member-icon">♟️</div>
+      <h3>لولوش</h3>
+      <div class="member-role-en">𝐋𝐞𝐥𝐨𝐮𝐜𝐡</div>
+      <div class="member-role-ar">ملك الشطرنج | الاستراتيجي</div>
+      <div class="view-profile">عرض الملف الشخصي</div>
+    </a>
+
+    <!-- كاتانا -->
+    <a href="#member/katana" class="member-card" onclick="showMember('katana')">
+      <div class="member-icon">🗡️</div>
+      <h3>كاتانا</h3>
+      <div class="member-role-en">𝐊𝐚𝐭𝐚𝐧𝐚</div>
+      <div class="member-role-ar">نصل الظل | المنفذ</div>
+      <div class="view-profile">عرض الملف الشخصي</div>
+    </a>
+
+    <!-- ايزن -->
+    <a href="#member/eizen" class="member-card" onclick="showMember('eizen')">
+      <div class="member-icon">🪞</div>
+      <h3>ايزن</h3>
+      <div class="member-role-en">𝐀𝐢𝐳𝐞𝐧</div>
+      <div class="member-role-ar">المرآة | المحلل النفسي</div>
+      <div class="view-profile">عرض الملف الشخصي</div>
+    </a>
+
+    <!-- ليليث -->
+    <a href="#member/lilith" class="member-card" onclick="showMember('lilith')">
+      <div class="member-icon">🩸</div>
+      <h3>ليليث</h3>
+      <div class="member-role-en">𝐋𝐢𝐥𝐢𝐭𝐡</div>
+      <div class="member-role-ar">الهمس الأسود | المخترقة</div>
+      <div class="view-profile">عرض الملف الشخصي</div>
+    </a>
+
+    <!-- ميكا -->
+    <a href="#member/mika" class="member-card" onclick="showMember('mika')">
+      <div class="member-icon">🪽</div>
+      <h3>ميكا</h3>
+      <div class="member-role-en">𝐌𝐢𝐤𝐚</div>
+      <div class="member-role-ar">الجناح الساقط | المتربص</div>
+      <div class="view-profile">عرض الملف الشخصي</div>
+    </a>
+
+    <!-- آدم -->
+    <a href="#member/adam" class="member-card" onclick="showMember('adam')">
+      <div class="member-icon">⚡</div>
+      <h3>آدم</h3>
+      <div class="member-role-en">𝐀𝐝𝐚𝐦</div>
+      <div class="member-role-ar">نور مكسور | الكاشف</div>
+      <div class="view-profile">عرض الملف الشخصي</div>
+    </a>
+  </div>
 </div>
 
-<div class="card" onclick="showMember('katana')">
-<div class="name">كاتانا 🗡️</div>
-<div class="role">𝐊𝐚𝐭𝐚𝐧𝐚</div>
-<div class="role">نصل الظل | المنفذ</div>
-<a class="profile-btn">عرض الملف</a>
+<!-- صفحة من نحن -->
+<div id="about-page" class="page hidden">
+  <a href="#team" class="back-btn" onclick="showPage('team')">
+    <i class="fas fa-arrow-right"></i> العودة للفريق
+  </a>
+  
+  <div class="about-content">
+    <div class="about-section">
+      <h2>من نحن</h2>
+      <p>الهالة السوداء - The Black Halo - ليست مجرد فريق، بل هي ظل يتحرك في فضاءات لا يراها النور. نحن سبعة، كل منا يحمل قدرة فريدة ومساراً مختلفاً، لكننا نتحد تحت مظلة واحدة: صناعة القدر من خلف الكواليس.</p>
+      <p>نعمل في هدوء، نتحرك بلا ضجيج، نؤثر دون ظهور. لأننا نعلم أن القوة الحقيقية تكمن في القدرة على التحكم دون أن يلمس أحد يدك.</p>
+    </div>
+    
+    <div class="about-section">
+      <h2>فلسفتنا</h2>
+      <p>لا نؤمن بالحدود المرسومة، ولا نعترف بالنهايات المفروضة. العالم شطرنجة كبيرة، ونحن من نحرك القطع. مهمتنا ليست الفوز بالمعارك الظاهرة، بل صياغة نتائجها قبل أن تبدأ.</p>
+      <p>كل خطوة نخطوها محسوبة، كل قرار نتخذه مدروس، لأننا نعلم أن سقوط قطعة واحدة قد يعني انهيار اللعبة بأكملها.</p>
+    </div>
+  </div>
 </div>
 
-<div class="card" onclick="showMember('eizen')">
-<div class="name">ايزن 🪞</div>
-<div class="role">𝐀𝐢𝐳𝐞𝐧</div>
-<div class="role">المرآة | المحلل النفسي</div>
-<a class="profile-btn">عرض الملف</a>
+<!-- صفحات الأعضاء -->
+<!-- صفحة كرولو -->
+<div id="member-chrollo" class="page member-page hidden">
+  <a href="#team" class="back-btn" onclick="showPage('team')">
+    <i class="fas fa-arrow-right"></i> العودة للفريق
+  </a>
+  
+  <div class="member-header">
+    <h2>كرولو 🕷️</h2>
+    <div class="member-title-en">𝐂𝐡𝐫𝐨𝐥𝐥𝐨</div>
+    <div class="member-title-ar">العنكبوت | العقل المدبر</div>
+  </div>
+  
+  <div class="member-content">
+    <div class="member-photo">
+      <div class="photo-placeholder">🕷️</div>
+    </div>
+    
+    <div class="member-info">
+      <div class="info-section">
+        <h3>نبذة</h3>
+        <p>العقل المدبر للفريق، من ينسج الخيوط ويرسم الخطط. لا يتكلم كثيراً، لكن كل كلمة يقولها تحمل معنى عميقاً. يراقب من الظل، يحلل كل حركة، ويخطط لعشرات الخطوات القادمة.</p>
+        <p>قدرته على رؤية الصورة الكاملة وتفكيكها إلى أجزاء صغيرة تجعله القائد الطبيعي. لا يظهر إلا عندما يكون القرار مصيرياً.</p>
+      </div>
+      
+      <div class="info-section">
+        <h3>القدرات</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">9.8</div>
+            <div class="stat-label">التخطيط الاستراتيجي</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">9.5</div>
+            <div class="stat-label">التحليل المنطقي</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">8.9</div>
+            <div class="stat-label">السيطرة النفسية</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">9.2</div>
+            <div class="stat-label">إدارة المخاطر</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="card" onclick="showMember('lilith')">
-<div class="name">ليليث 🩸</div>
-<div class="role">𝐋𝐢𝐥𝐢𝐭𝐡</div>
-<div class="role">الهمس الأسود | المخترقة</div>
-<a class="profile-btn">عرض الملف</a>
+<!-- صفحة لولوش -->
+<div id="member-lelouch" class="page member-page hidden">
+  <a href="#team" class="back-btn" onclick="showPage('team')">
+    <i class="fas fa-arrow-right"></i> العودة للفريق
+  </a>
+  
+  <div class="member-header">
+    <h2>لولوش ♟️</h2>
+    <div class="member-title-en">𝐋𝐞𝐥𝐨𝐮𝐜𝐡</div>
+    <div class="member-title-ar">ملك الشطرنج | الاستراتيجي</div>
+  </div>
+  
+  <div class="member-content">
+    <div class="member-photo">
+      <div class="photo-placeholder">♟️</div>
+    </div>
+    
+    <div class="member-info">
+      <div class="info-section">
+        <h3>نبذة</h3>
+        <p>سيد التلاعب النفسي والاستراتيجيات المعقدة. يمكنه تحويل أي موقف لصالحه ببضع كلمات فقط. ينظر إلى العالم كشطرنجة كبيرة، وهو من يتحكم في حركة كل قطعة.</p>
+        <p>يتمتع بذكاء عاطفي عالٍ، يمكنه قراءة نوايا الآخرين قبل أن يتلفظوا بها. خططه دائماً ما تكون متعددة الطبقات، تحمل أكثر من معنى وأكثر من نتيجة محتملة.</p>
+      </div>
+      
+      <div class="info-section">
+        <h3>القدرات</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">9.7</div>
+            <div class="stat-label">التخطيط التكتيكي</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">9.9</div>
+            <div class="stat-label">الذكاء العاطفي</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">9.3</div>
+            <div class="stat-label">التحليل النفسي</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">8.8</div>
+            <div class="stat-label">سرعة البديهة</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="card" onclick="showMember('mika')">
-<div class="name">ميكا 🪽</div>
-<div class="role">𝐌𝐢𝐤𝐚</div>
-<div class="role">الجناح الساقط | المتربص</div>
-<a class="profile-btn">عرض الملف</a>
+<!-- صفحة كاتانا -->
+<div id="member-katana" class="page member-page hidden">
+  <a href="#team" class="back-btn" onclick="showPage('team')">
+    <i class="fas fa-arrow-right"></i> العودة للفريق
+  </a>
+  
+  <div class="member-header">
+    <h2>كاتانا 🗡️</h2>
+    <div class="member-title-en">𝐊𝐚𝐭𝐚𝐧𝐚</div>
+    <div class="member-title-ar">نصل الظل | المنفذ</div>
+  </div>
+  
+  <div class="member-content">
+    <div class="member-photo">
+      <div class="photo-placeholder">🗡️</div>
+    </div>
+    
+    <div class="member-info">
+      <div class="info-section">
+        <h3>نبذة</h3>
+        <p>السيف الذي يقطع عند الحاجة. عندما يحتاج الفريق إلى حركة حاسمة وسريعة، تكون كاتانا هي الجواب. دقتها وسرعتها أسطورية، تتحرك ببراعة في الظل وتنفذ المهام بلا تردد.</p>
+        <p>لا تؤمن بالمفاوضات الطويلة أو الخطط المعقدة، بل بالحركة الحاسمة في الوقت المناسب. هي السلاح السري الذي لا يفشل أبداً.</p>
+      </div>
+      
+      <div class="info-section">
+        <h3>القدرات</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">9.9</div>
+            <div class="stat-label">الدقة</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">9.8</div>
+            <div class="stat-label">السرعة</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">9.4</div>
+            <div class="stat-label">التخفي</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">8.7</div>
+            <div class="stat-label">التحمل</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="card" onclick="showMember('adam')">
-<div class="name">آدم ⚡</div>
-<div class="role">𝐀𝐝𝐚𝐦</div>
-<div class="role">نور مكسور | الكاشف</div>
-<a class="profile-btn">عرض الملف</a>
+<!-- صفحة ايزن -->
+<div id="member-eizen" class="page member-page hidden">
+  <a href="#team" class="back-btn" onclick="showPage('team')">
+    <i class="fas fa-arrow-right"></i> العودة للفريق
+  </a>
+  
+  <div class="member-header">
+    <h2>ايزن 🪞</h2>
+    <div class="member-title-en">𝐀𝐢𝐳𝐞𝐧</div>
+    <div class="member-title-ar">المرآة | المحلل النفسي</div>
+  </div>
+  
+  <div class="member-content">
+    <div class="member-photo">
+      <div class="photo-placeholder">🪞</div>
+    </div>
+    
+    <div class="member-info">
+      <div class="info-section">
+        <h3>نبذة</h3>
+        <p>المرآة التي تعكس النوايا الخفية. يمكنه قراءة الأفكار والمشاعر بدقة مذهلة. لا شيء يخفي عليه، كل العواطف والمخاوف والطموحات تظهر أمامه ككتاب مفتوح.</p>
+        <p>دوره في الفريق هو تحليل الشخصيات وفهم دوافعها، مما يمكن الفريق من التنبؤ بحركات الخصوم قبل حدوثها.</p>
+      </div>
+      
+      <div class="info-section">
+        <h3>القدرات</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">9.9</div>
+            <div class="stat-label">القراءة النفسية</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">9.5</div>
+            <div class="stat-label">تحليل الشخصية</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">9.2</div>
+            <div class="stat-label">الملاحظة</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">8.8</div>
+            <div class="stat-label">الاستبصار</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-</section>
-
-<div id="memberModal" class="member-modal">
-<div class="modal-content"></div>
-</div>
-
-<script>
-const members={
-chrollo:{name:"كرولو 🕷️",role:"𝐂𝐡𝐫𝐨𝐥𝐥𝐨",desc:"العقل المدبر"},
-lelouch:{name:"لولوش ♟️",role:"𝐋𝐞𝐥𝐨𝐮𝐜𝐡",desc:"الاستراتيجي"},
-katana:{name:"كاتانا 🗡️",role:"𝐊𝐚𝐭𝐚𝐧𝐚",desc:"المنفذ"},
-eizen:{name:"ايزن 🪞",role:"𝐀𝐢𝐳𝐞𝐧",desc:"المحلل"},
-lilith:{name:"ليليث 🩸",role:"𝐋𝐢𝐥𝐢𝐭𝐡",desc:"المخترقة"},
-mika:{name:"ميكا 🪽",role:"𝐌𝐢𝐤𝐚",desc:"المتربص"},
-adam:{name:"آدم ⚡",role:"𝐀𝐝𝐚𝐦",desc:"الكاشف"}
-};
-
-function showMember(k){
-const m=members[k];
-const modal=document.getElementById("memberModal");
-modal.querySelector(".modal-content").innerHTML=`
-<div class="close-modal" onclick="closeMember()">×</div>
-<h2>${m.name}</h2>
-<p>${m.role}</p>
-<p>${m.desc}</p>`;
-modal.style.display="block";
-}
-
-function closeMember(){
-document.getElementById("memberModal").style.display="none";
-}
-</script>
-
-</body>
-</html>
+<!-- صفحة ليليث -->
+<div id="member-lilith" class="page member-page hidden">
+  <a href="#team" class="back-btn" onclick="showPage('team')">
+    <i class="fas fa-arrow-right"></i> العودة للفريق
+  </a>
+  
+  <div class="member-header">
+    <h2>ليليث 🩸</h2>
+    <div class="member-title-en">𝐋𝐢𝐥𝐢𝐭𝐡</div>
+    <div class="member-title-ar">الهمس الأسود | المخترقة</div>
+  </div>
+  
+  <div class="member-content">
+    <div class="member-photo">
+      <div class="photo-placeholder">🩸</div>
+    </div>
+    
+    <div class="member-info">
+      <div class="info-section">
+        <h3>نبذة</h3>
+        <p>الهمس الذي يخترق الجدران. متخصصة في الاختراق الرقمي والنفسي، يمكنها الوصول إلى ما يعتبر مستحيلاً. تعمل في الظلام، تترك خلفها أثراً لا يمكن تعقبه.</p>
+        <p>قدرتها على التخفي والاختراق تجعلها سلاحاً لا يقدر بثمن. تعرف كل الثغرات، وتستغلها ببراعة لا تضاهى.</p>
+      </div>
+      
+      <div class="info-section">
+        <h3>القدرات</h3>
+        <div class="stats-grid">
+       
