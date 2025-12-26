@@ -2,70 +2,193 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>الهالة السوداء</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الهالة السوداء | The Black Halo</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * {
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-family: 'Segoe UI', 'Cairo', sans-serif;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   background:
-    linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.9)),
-    url("bg.jpg") center / cover no-repeat fixed;
+    linear-gradient(rgba(0,0,0,.85), rgba(10,0,5,.95)),
+    radial-gradient(circle at 20% 30%, rgba(120,0,0,0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(80,0,40,0.1) 0%, transparent 40%),
+    #000;
   color: #fff;
   overflow-x: hidden;
+  position: relative;
 }
 
-/* ====== العنوان ====== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 30% 40%, rgba(150,0,0,0.03) 2px, transparent 2px),
+    radial-gradient(circle at 70% 60%, rgba(100,0,50,0.03) 1px, transparent 1px);
+  background-size: 50px 50px, 40px 40px;
+  z-index: -1;
+  animation: float 20s infinite linear;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(20px, 20px); }
+}
+
 header {
   text-align: center;
-  padding: 60px 20px;
+  padding: 80px 20px 40px;
+  position: relative;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(150,0,0,0.7), transparent);
 }
 
 header h1 {
-  font-size: 48px;
-  letter-spacing: 6px;
-  color: #fff;
-  text-shadow:
-    0 0 10px #600,
-    0 0 25px #900;
+  font-size: 3.8rem;
+  letter-spacing: 8px;
+  margin: 0;
+  color: transparent;
+  background: linear-gradient(45deg, #fff, #aaa, #fff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 
+    0 0 15px rgba(255,255,255,0.2),
+    0 0 30px rgba(150,0,0,0.4);
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+  0% { text-shadow: 0 0 15px rgba(255,255,255,0.2), 0 0 30px rgba(150,0,0,0.4); }
+  100% { text-shadow: 0 0 20px rgba(255,255,255,0.3), 0 0 40px rgba(180,0,0,0.6), 0 0 60px rgba(150,0,0,0.3); }
 }
 
 header p {
   color: #aaa;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  font-size: 1.1rem;
+  margin-top: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
 
-/* ====== الفريق ====== */
+.main-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 40px auto;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.main-btn {
+  padding: 18px 40px;
+  background: transparent;
+  border: 2px solid rgba(150,0,0,0.7);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+  min-width: 200px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.main-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(150,0,0,0.3), transparent);
+  transition: 0.5s;
+}
+
+.main-btn:hover::before {
+  left: 100%;
+}
+
+.main-btn:hover {
+  background: rgba(150,0,0,0.2);
+  border-color: rgba(200,0,0,0.9);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(150,0,0,0.4);
+}
+
 .team {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 40px;
   padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* ====== الكارت ====== */
 .card {
   position: relative;
-  background: rgba(0,0,0,.6);
-  border: 1px solid #300;
+  background: rgba(10,0,5,0.7);
+  border: 1px solid rgba(80,0,0,0.5);
   border-radius: 16px;
   padding: 30px 20px;
   text-align: center;
-  backdrop-filter: blur(6px);
-  transition: transform .5s, box-shadow .5s;
+  backdrop-filter: blur(8px);
+  transition: all 0.5s;
+  cursor: pointer;
+  overflow: hidden;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, rgba(150,0,0,0.5), rgba(80,0,40,0.5), rgba(150,0,0,0.5));
+  z-index: -1;
+  border-radius: 18px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card:hover {
-  transform: translateY(-12px) scale(1.03);
-  box-shadow: 0 0 30px rgba(150,0,0,.7);
+  transform: translateY(-15px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.7),
+              0 0 50px rgba(150,0,0,0.3);
+  border-color: rgba(200,0,0,0.8);
 }
 
-/* ====== الجناحات ====== */
 .wings {
   position: absolute;
   top: -40px;
@@ -73,53 +196,320 @@ header p {
   transform: translateX(-50%);
   display: flex;
   gap: 10px;
+  z-index: 1;
 }
 
 .wing {
   width: 60px;
   height: 90px;
-  background: linear-gradient(#fff, #777);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(150,150,150,0.7));
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-  opacity: .8;
-  animation: flap 3s ease-in-out infinite;
+  opacity: 0.7;
+  animation: flap 3.5s ease-in-out infinite;
 }
 
 .wing.right {
   transform: scaleX(-1);
-  animation-delay: .3s;
+  animation-delay: 0.4s;
 }
 
 @keyframes flap {
-  0%,100% { transform: rotate(0deg); }
-  50% { transform: rotate(12deg); }
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(15deg); }
 }
 
-/* ====== الاسم ====== */
 .name {
   margin-top: 70px;
-  font-size: 26px;
+  font-size: 28px;
   letter-spacing: 3px;
   color: #fff;
   text-shadow:
-    0 0 5px #fff,
-    0 0 15px #800,
-    0 0 30px #400;
+    0 0 8px #fff,
+    0 0 20px rgba(150,0,0,0.8),
+    0 0 35px rgba(100,0,0,0.5);
+  margin-bottom: 10px;
 }
 
-/* ====== الدور ====== */
 .role {
-  margin-top: 10px;
-  font-size: 14px;
+  font-size: 15px;
   color: #bbb;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+.profile-btn {
+  display: inline-block;
+  padding: 10px 25px;
+  background: transparent;
+  border: 1px solid rgba(150,0,0,0.6);
+  color: #ddd;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+.profile-btn:hover {
+  background: rgba(150,0,0,0.2);
+  color: #fff;
+  border-color: rgba(200,0,0,0.9);
+}
+
+.dark-section {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 40px;
+  background: rgba(5,0,2,0.8);
+  border-radius: 20px;
+  border: 1px solid rgba(80,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.dark-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(150,0,0,0.8), transparent);
+}
+
+.dark-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #ddd;
+  margin-bottom: 40px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 15px rgba(150,0,0,0.5);
+}
+
+.dark-timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.dark-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(150,0,0,0.8), rgba(80,0,40,0.8));
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed rgba(100,0,0,0.3);
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -33px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(150,0,0,0.8);
+  border: 3px solid rgba(50,0,0,0.9);
+  box-shadow: 0 0 15px rgba(150,0,0,0.6);
+}
+
+.year {
+  color: rgba(200,0,0,0.9);
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
   letter-spacing: 1px;
 }
 
-/* ====== الفوتر ====== */
+.event {
+  color: #ccc;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
 footer {
   text-align: center;
-  padding: 30px;
+  padding: 40px 20px;
   color: #666;
-  border-top: 1px solid #200;
+  border-top: 1px solid rgba(50,0,0,0.5);
+  background: rgba(5,0,2,0.7);
+  margin-top: 60px;
+}
+
+.social-contact {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 30px;
+  background: rgba(20,0,10,0.8);
+  border: 1px solid rgba(80,0,0,0.6);
+  color: #ddd;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s;
+  font-size: 1.1rem;
+}
+
+.contact-btn:hover {
+  background: rgba(150,0,0,0.2);
+  border-color: rgba(200,0,0,0.8);
+  transform: translateY(-3px);
+  color: #fff;
+}
+
+.copyright {
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #555;
+  letter-spacing: 1px;
+}
+
+.member-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modal-content {
+  max-width: 900px;
+  margin: 40px auto;
+  background: rgba(10,0,5,0.95);
+  border-radius: 20px;
+  border: 1px solid rgba(150,0,0,0.6);
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 0 80px rgba(150,0,0,0.3);
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(150,0,0,0.3);
+  border: 1px solid rgba(200,0,0,0.6);
+  color: #ddd;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+}
+
+.close-modal:hover {
+  background: rgba(200,0,0,0.5);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.member-header {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+  align-items: center;
+}
+
+.member-photo {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  border: 3px solid rgba(150,0,0,0.7);
+  object-fit: cover;
+  box-shadow: 0 0 40px rgba(150,0,0,0.4);
+}
+
+.member-info h2 {
+  font-size: 2.8rem;
+  color: #fff;
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px rgba(150,0,0,0.6);
+}
+
+.member-info .role {
+  font-size: 1.4rem;
+  color: rgba(200,0,0,0.9);
+  margin-bottom: 20px;
+}
+
+.member-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin: 40px 0;
+}
+
+.detail-card {
+  background: rgba(20,0,10,0.7);
+  padding: 25px;
+  border-radius: 15px;
+  border-left: 4px solid rgba(150,0,0,0.8);
+}
+
+.detail-card h3 {
+  color: rgba(200,0,0,0.9);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.detail-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.detail-card li {
+  margin-bottom: 15px;
+  padding-left: 25px;
+  position: relative;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.detail-card li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: rgba(150,0,0,0.8);
+}
+
+@media (max-width: 768px) {
+  header h1 { font-size: 2.5rem; letter-spacing: 5px; }
+  .team { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); padding: 20px; }
+  .main-buttons { flex-direction: column; align-items: center; }
+  .main-btn { width: 90%; }
+  .member-header { flex-direction: column; text-align: center; }
+  .member-photo { width: 200px; height: 200px; }
+  .dark-section { padding: 20px; margin: 40px 20px; }
 }
 </style>
 </head>
@@ -128,58 +518,292 @@ footer {
 
 <header>
   <h1>THE BLACK HALO</h1>
-  <p>سبعة… لا ينتمون للنور</p>
+  <p>سبعة… لا ينتمون للنور، يعملون في الظل منذ الأزل</p>
 </header>
 
-<section class="team">
+<div class="main-buttons">
+  <a href="#team" class="main-btn"><i class="fas fa-users"></i> تعرف على الفريق</a>
+  <a href="#darkness" class="main-btn"><i class="fas fa-moon"></i> الظلام</a>
+  <a href="https://wa.me/201029505953" target="_blank" class="main-btn"><i class="fab fa-whatsapp"></i> التواصل واتساب</a>
+</div>
 
-  <div class="card">
+<section class="team" id="team">
+  
+  <div class="card" onclick="showMember('chrollo')">
     <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
     <div class="name">كرولو</div>
-    <div class="role">العنكبوت</div>
+    <div class="role">العنكبوت | العقل المدبر</div>
+    <a class="profile-btn">عرض الملف الشخصي</a>
   </div>
 
-  <div class="card">
+  <div class="card" onclick="showMember('lelouch')">
     <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
     <div class="name">لولوش</div>
-    <div class="role">ملك الشطرنج</div>
+    <div class="role">ملك الشطرنج | الاستراتيجي</div>
+    <a class="profile-btn">عرض الملف الشخصي</a>
   </div>
 
-  <div class="card">
+  <div class="card" onclick="showMember('katana')">
     <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
     <div class="name">كاتانا</div>
-    <div class="role">نصل الظل</div>
+    <div class="role">نصل الظل | المنفذ</div>
+    <a class="profile-btn">عرض الملف الشخصي</a>
   </div>
 
-  <div class="card">
+  <div class="card" onclick="showMember('eizen')">
     <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
     <div class="name">ايزن</div>
-    <div class="role">المرآة</div>
+    <div class="role">المرآة | المحلل النفسي</div>
+    <a class="profile-btn">عرض الملف الشخصي</a>
   </div>
 
-  <div class="card">
+  <div class="card" onclick="showMember('lilith')">
     <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
     <div class="name">ليليث</div>
-    <div class="role">الهمس الأسود</div>
+    <div class="role">الهمس الأسود | المخترقة</div>
+    <a class="profile-btn">عرض الملف الشخصي</a>
   </div>
 
-  <div class="card">
+  <div class="card" onclick="showMember('mika')">
     <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
     <div class="name">ميكا</div>
-    <div class="role">الجناح الساقط</div>
+    <div class="role">الجناح الساقط | المتربص</div>
+    <a class="profile-btn">عرض الملف الشخصي</a>
   </div>
 
-  <div class="card">
+  <div class="card" onclick="showMember('adam')">
     <div class="wings"><div class="wing"></div><div class="wing right"></div></div>
     <div class="name">آدم</div>
-    <div class="role">نور مكسور</div>
+    <div class="role">نور مكسور | الكاشف</div>
+    <a class="profile-btn">عرض الملف الشخصي</a>
   </div>
 
 </section>
 
+<section class="dark-section" id="darkness">
+  <h2 class="dark-title">الظلام</h2>
+  <div class="dark-timeline">
+    
+    <div class="timeline-item">
+      <div class="year">2018</div>
+      <div class="event">
+        <strong>كرولو</strong> يُكوّن النواة الأولى للفريق. كان يعمل منفرداً في الظل حتى أدرك أن بعض المهام تتطلب عقولاً متعددة. بدأ بالبحث عن شخصيات استثنائية تعمل خارج الأضواء.
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="year">2019</div>
+      <div class="event">
+        انضمام <strong>لولوش</strong>، العقل الاستراتيجي الذي كان يعمل على تحريك الأحداث من خلف الكواليس. رأى في كرولو الشريك الذي يبحث عنه. معاً خططا لجمع فريق لا يراه أحد لكنه يرى كل شيء.
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="year">2020</div>
+      <div class="event">
+        <strong>كاتانا</strong> تنضم بعد مهمة مشتركة مع كرولو. كانت تعمل كمستشارة أمنية مستقلة قبل أن تكتشف أن الأنظمة التي تحميها هي نفسها تستغل الناس. قررت الانضمام للجانب الذي يحارب من الظل.
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="year">2021</div>
+      <div class="event">
+        <strong>ليليث</strong> تجذب انتباه الفريق بعد سلسلة من الاختراقات البارعة التي لم يكتشفها أحد. كانت تعمل لحساب جهات مجهولة قبل أن يكتشف الفريق موهبتها ويقنعها بالانضمام لمشروع أكبر.
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="year">2022</div>
+      <div class="event">
+        ظهور اسم <strong>الهالة السوداء</strong> لأول مرة في الأوساط السرية. الفريق ينجز 17 مهمة معقدة دون ترك أثر. يبدأون بتطوير أدوات خاصة بهم ويعتمدون استراتيجية العمل من طبقات متعددة من التخفي.
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="year">2023</div>
+      <div class="event">
+        انضمام <strong>ايزن</strong> و<strong>ميكا</strong> و<strong>آدم</strong> يكتمل الفريق السباعي. كل منهم يجلب بعداً جديداً: التحليل النفسي، المراقبة طويلة المدى، وكشف الحقائق المخفية. يصبح الفريق كائناً واحداً بسبعة عقول.
+      </div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="year">2024 - الآن</div>
+      <div class="event">
+        <strong>الهالة السوداء</strong> تعمل على مشاريع أكبر: حماية الحقوق الرقمية، كشف الفساد المخفي في الأنظمة التقنية، ومواجهة التهديدات التي لا تستطيع الجهات الرسمية مواجهتها. هم الظل الذي يحمي النور.
+      </div>
+    </div>
+    
+  </div>
+</section>
+
 <footer>
-  BLACK HALO ©
+  <div class="social-contact">
+    <a href="https://wa.me/201029505953" target="_blank" class="contact-btn">
+      <i class="fab fa-whatsapp"></i> تواصل مع الفريق عبر واتساب
+    </a>
+  </div>
+  <div class="copyright">
+    THE BLACK HALO © 2018-2025 | الظل الذي لا يُرى، الحماية التي لا تُلمس
+  </div>
 </footer>
 
-</body>
-</html>
+<div id="memberModal" class="member-modal">
+  <div class="modal-content">
+    <div class="close-modal" onclick="closeMember()">×</div>
+  </div>
+</div>
+
+<script>
+const members = {
+  chrollo: {
+    name: "كرولو",
+    role: "العنكبوت | العقل المدبر",
+    photo: "images/chrollo.jpg",
+    desc: "مؤسس الهالة السوداء. يعمل في الظل منذ كان مراهقاً. يتقن 8 لغات برمجة ويستطيع فك أي تشفير خلال ساعات.",
+    skills: [
+      "فك الشفرات المعقدة",
+      "البرمجة المتقدمة",
+      "الهندسة العكسية",
+      "إنشاء هويات وهمية",
+      "الاستخبارات الرقمية"
+    ],
+    tools: [
+      "ShadowNet - شبكة اتصال مشفرة",
+      "CodeWeaver - فك تشفير متعدد الطبقات",
+      "Identity Forge - إنشاء شخصيات رقمية",
+      "Silent Command - نظام قيادة لا يمكن اعتراضه"
+    ],
+    missions: [
+      "فك تشفير قاعدة بيانات حكومية سرية (2019)",
+      "اختراق شبكة شركة تكنولوجيا عملاقة (2020)",
+      "حماية نشطاء من مراقبة حكومات (2021)",
+      "بناء النظام الأمني للفريق (مستمر)"
+    ]
+  },
+  
+  lelouch: {
+    name: "لولوش",
+    role: "ملك الشطرنج | الاستراتيجي",
+    photo: "images/lelouch.jpg",
+    desc: "العقل التكتيكي للفريق. يخطط لـ 50 خطوة مقدماً. يستطيع تحليل شخصية أي فرد من خلال نشاطه الرقمي.",
+    skills: [
+      "التخطيط الاستراتيجي",
+      "التحليل النفسي الرقمي",
+      "التلاعب بالمعلومات",
+      "توقع تحركات الخصوم",
+      "قيادة العمليات المعقدة"
+    ],
+    tools: [
+      "Mind Map - تحليل العلاقات والشبكات",
+      "Scenario Simulator - محاكاة السيناريوهات",
+      "Persona Analyzer - تحليل الشخصيات الرقمية",
+      "Chain Reactor - خلق تفاعلات متسلسلة"
+    ],
+    missions: [
+      "تخطيط عملية استخراج بيانات سرية (2020)",
+      "تضليل جهات مراقبة لمدة 6 أشهر (2021)",
+      "تحويل هجوم إلكتروني ضد الفريق لصالحهم (2022)",
+      "بناء شبكة مصادر داخل مؤسسات معادية (مستمر)"
+    ]
+  },
+  
+  katana: {
+    name: "كاتانا",
+    role: "نصل الظل | المنفذ",
+    photo: "images/katana.jpg",
+    desc: "تسلل إلى أول نظام وهي في السادسة عشرة. لا تترك أثراً ولا صوتاً. تنفذ المهام بسرعة البرق ودقة الساعة.",
+    skills: [
+      "الاختراق السريع",
+      "اكتشاف الثغرات",
+      "التسلل الصامت",
+      "التنقل بين الأنظمة",
+      "التغطية الرقمية"
+    ],
+    tools: [
+      "Silent Blade - أداة اختراق سريعة",
+      "Shadow Step - تنقل بين الأنظمة",
+      "Echo Eraser - مسح الآثار الرقمية",
+      "Quick Strike - هجمات سريعة ومحدودة"
+    ],
+    missions: [
+      "اختراق خادم بنكي محمي بـ 7 طبقات (2020)",
+      "سرقة بيانات من شبكة مخابرات (2021)",
+      "تعطيل نظام مراقبة جماعية (2022)",
+      "تدريب أعضاء جدد على الاختراق (مستمر)"
+    ]
+  },
+  
+  eizen: {
+    name: "ايزن",
+    role: "المرآة | المحلل النفسي",
+    photo: "images/eizen.jpg",
+    desc: "يرى ما وراء البيانات. يحلل السلوك البشري من خلال الأنماط الرقمية. يستطيع كشف الكذب من خلال كتابة الرسائل.",
+    skills: [
+      "تحليل السلوك الرقمي",
+      "كشف الاحتيال",
+      "التحقيق الإلكتروني",
+      "تحليل أنماط التواصل",
+      "التنبؤ بالتصرفات"
+    ],
+    tools: [
+      "Behavior Mirror - تحليل الأنماط السلوكية",
+      "Truth Seeker - كشف التلاعب بالمعلومات",
+      "Pattern Weaver - ربط الأحداث غير المرئية",
+      "Mind Reader - تحليل النوايا من النص"
+    ],
+    missions: [
+      "كشف عملية احتيال مالي ضخمة (2021)",
+      "تحقيق في تسريب معلومات من شركة (2022)",
+      "تحليل شخصية هدف معقد (2023)",
+      "بناء قاعدة بيانات للسلوك البشري (مستمر)"
+    ]
+  },
+  
+  lilith: {
+    name: "ليليث",
+    role: "الهمس الأسود | المخترقة",
+    photo: "images/lilith.jpg",
+    desc: "تدخل من حيث لا يتوقع أحد. تترك رسائل لكن لا تترك أدلة. متخصصة في الأنظمة المغلقة والشبكات المعزولة.",
+    skills: [
+      "اختراق الأنظمة المغلقة",
+      "المراقبة طويلة المدى",
+      "التنكر الرقمي",
+      "كسر البروتوكولات الأمنية",
+      "البقاء غير مرئية"
+    ],
+    tools: [
+      "Whisper Net - شبكة مراقبة خفية",
+      "Shadow Veil - تنكر رقمي متكامل",
+      "Silent Entry - دخول بدون ثغرات",
+      "Echo Chamber - خلق واقع بديل"
+    ],
+    missions: [
+      "المراقبة المستمرة لشبكة تجسس (2021)",
+      "اختراق نظام أمني يعمل بذكاء اصطناعي (2022)",
+      "زرع برمجيات خفية في أجهزة أعداء (2023)",
+      "تطوير طرق اختراق جديدة (مستمر)"
+    ]
+  },
+  
+  mika: {
+    name: "ميكا",
+    role: "الجناح الساقط | المتربص",
+    photo: "images/mika.jpg",
+    desc: "كان يعمل لدى جهات رسمية قبل أن يكتشف فسادها. يعرف كيف تفكر الأنظمة من الداخل. متخصص في انتظار اللحظة المناسبة.",
+    skills: [
+      "فهم هياكل الأنظمة",
+      "الصبر والانتظار",
+      "كشف نقاط الضعف البنيوية",
+      "العمل في فترات زمنية ممتدة",
+      "التحليل البطيء والدقيق"
+    ],
+    tools: [
+      "Patience Engine - مراقبة طويلة الأمد",
+      "Structure Map - تحليل الهياكل التنظيمية",
+      "Weakness Finder - اكتشاف الثغرات الهيكلية",
+      "Time Weaver - ربط الأحداث عبر الزمن"
+    ],
+    missions: [
+      "كشف فساد في وكالة أمن وطنية (2022)",
+      "مراقبة هدف لمدة 8 أشهر (2023)",
+      "اختراق ن
