@@ -1,346 +1,161 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahmed Essam | الملف الشخصي</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>Personal Profile | Ahmed Essam</title>
+
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI', Tahoma, 'Arial', sans-serif;
-}
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        background: linear-gradient(135deg, #000000, #111111);
+        color: #eaeaea;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-body{
-  background:#0b0b0b;
-  color:#fff;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(0, 50, 100, 0.05) 0%, transparent 20%),
-    radial-gradient(circle at 90% 80%, rgba(0, 150, 255, 0.05) 0%, transparent 20%);
-}
+    .profile {
+        width: 90%;
+        max-width: 800px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 0 30px rgba(0,0,0,0.7);
+        backdrop-filter: blur(10px);
+    }
 
-.profile{
-  background:linear-gradient(135deg,#111,#000);
-  border:1px solid #1f1f1f;
-  border-radius:20px;
-  padding:40px;
-  max-width:450px;
-  width:100%;
-  text-align:center;
-  box-shadow:0 0 40px rgba(0,170,255,.2);
-  position:relative;
-  overflow:hidden;
-  transition:transform 0.3s ease, box-shadow 0.3s ease;
-  animation:fadeIn 0.8s ease-out;
-}
+    .profile h1 {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 32px;
+        letter-spacing: 1px;
+    }
 
-.profile:hover {
-  transform:translateY(-5px);
-  box-shadow:0 10px 50px rgba(0,170,255,.3);
-}
+    .basic-info {
+        text-align: center;
+        font-size: 15px;
+        opacity: 0.8;
+        margin-bottom: 30px;
+    }
 
-.profile::before{
-  content:'';
-  position:absolute;
-  top:-50%;
-  left:-50%;
-  width:200%;
-  height:200%;
-  background:linear-gradient(45deg, transparent, rgba(0,170,255,0.05), transparent);
-  transform:rotate(45deg);
-  animation:shimmer 10s infinite linear;
-  z-index:0;
-}
+    .section {
+        margin-bottom: 25px;
+    }
 
-@keyframes shimmer{
-  0%{transform:rotate(45deg) translateX(-30%);}
-  100%{transform:rotate(45deg) translateX(30%);}
-}
+    .section h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        border-right: 4px solid #ffffff;
+        padding-right: 10px;
+    }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
-}
+    .section p {
+        line-height: 1.8;
+        font-size: 15px;
+        color: #dddddd;
+    }
 
-.profile-content{
-  position:relative;
-  z-index:1;
-}
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
 
-h1{
-  color:#0af;
-  font-size:36px;
-  margin-bottom:10px;
-  font-weight:700;
-  letter-spacing:-0.5px;
-  text-shadow:0 0 10px rgba(0,170,255,0.3);
-}
+    .tag {
+        background: rgba(255,255,255,0.1);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+    }
 
-.tag{
-  color:#aaa;
-  font-size:15px;
-  margin-bottom:25px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-}
-
-.tag i{
-  color:#0af;
-}
-
-.info{
-  text-align:right;
-  line-height:2.2;
-  font-size:17px;
-  margin:25px 0;
-  background:rgba(20,20,20,0.7);
-  padding:20px;
-  border-radius:12px;
-  border-right:3px solid #0af;
-  transition:border-right 0.3s ease;
-}
-
-.info:hover {
-  border-right:3px solid #0ff;
-}
-
-.info p{
-  margin-bottom:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.info span{
-  color:#0af;
-  font-weight:bold;
-  font-size:16px;
-}
-
-.info-value{
-  color:#ddd;
-  font-weight:normal;
-}
-
-.bio{
-  margin-top:25px;
-  padding-top:25px;
-  border-top:1px solid #222;
-  color:#ddd;
-  line-height:1.9;
-  font-size:16.5px;
-  text-align:justify;
-  position:relative;
-}
-
-.bio::before{
-  content:'"';
-  position:absolute;
-  top:15px;
-  right:0;
-  font-size:60px;
-  color:#0af;
-  opacity:0.3;
-  font-family:Georgia, serif;
-}
-
-.interests{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  margin-top:25px;
-  flex-wrap:wrap;
-}
-
-.interest-item{
-  background:rgba(0,100,200,0.1);
-  border:1px solid rgba(0,170,255,0.2);
-  border-radius:50px;
-  padding:8px 18px;
-  font-size:14px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  transition:all 0.3s ease;
-}
-
-.interest-item:hover{
-  background:rgba(0,100,200,0.3);
-  transform:translateY(-3px);
-}
-
-.footer{
-  margin-top:30px;
-  font-size:14px;
-  color:#777;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding-top:20px;
-  border-top:1px solid #222;
-}
-
-.contact-icons{
-  display:flex;
-  gap:15px;
-}
-
-.contact-icons a{
-  color:#777;
-  font-size:18px;
-  transition:all 0.3s ease;
-}
-
-.contact-icons a:hover{
-  color:#0af;
-  transform:scale(1.2);
-}
-
-.age-display{
-  background:linear-gradient(45deg, #0af, #0cf);
-  color:black;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto 20px;
-  font-weight:bold;
-  font-size:20px;
-  box-shadow:0 0 15px rgba(0,170,255,0.5);
-  animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-  0%{box-shadow:0 0 15px rgba(0,170,255,0.5);}
-  50%{box-shadow:0 0 25px rgba(0,170,255,0.8);}
-  100%{box-shadow:0 0 15px rgba(0,170,255,0.5);}
-}
-
-@media (max-width: 500px){
-  .profile{
-    padding:30px 25px;
-  }
-  h1{
-    font-size:30px;
-  }
-  .info p{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:5px;
-  }
-}
+    .quote {
+        margin-top: 30px;
+        padding: 20px;
+        background: rgba(0,0,0,0.4);
+        border-radius: 12px;
+        font-style: italic;
+        text-align: center;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
 </style>
 </head>
 
 <body>
 
 <div class="profile">
-  <div class="profile-content">
-    <div class="age-display">18</div>
-    
-    <h1>أحمد عصام</h1>
-    <div class="tag">
-      <i class="fas fa-brain"></i>
-      <span>INTP • 18 سنة</span>
+
+    <h1>Ahmed Essam</h1>
+    <div class="basic-info">
+        Age: 18 | Birth Year: 2007 <br>
+        مصر – رأس البر
     </div>
 
-    <div class="info">
-      <p>
-        <span>الدولة:</span>
-        <span class="info-value">مصر – رأس البر</span>
-      </p>
-      <p>
-        <span>الهوايات:</span>
-        <span class="info-value">السباحة، كرة القدم</span>
-      </p>
-    </div>
-    
-    <div class="interests">
-      <div class="interest-item">
-        <i class="fas fa-swimmer"></i>
-        <span>السباحة</span>
-      </div>
-      <div class="interest-item">
-        <i class="fas fa-futbol"></i>
-        <span>كرة القدم</span>
-      </div>
-      <div class="interest-item">
-        <i class="fas fa-search"></i>
-        <span>الاستكشاف</span>
-      </div>
-      <div class="interest-item">
-        <i class="fas fa-brain"></i>
-        <span>التحليل</span>
-      </div>
+    <div class="section">
+        <h2>الشخصية</h2>
+        <p>
+            هادئ ومنطوي، أحلل وأحلّ الأمور من حولي بعقلانية، أفضل الهدوء
+            والتفكير قبل اتخاذ أي قرار.
+        </p>
     </div>
 
-    <div class="bio">
-      يحب الاستكشاف وتعلّم أشياء جديدة، يميل للتفكير والتحليل، ويسعى دائمًا لفهم ما حوله بعمق، مع الحفاظ على التوازن بين العقل والرياضة. يبحث عن المعرفة في مختلف المجالات ويهتم بتطوير مهاراته باستمرار.
+    <div class="section">
+        <h2>أسلوب التفكير</h2>
+        <div class="tags">
+            <div class="tag">العقل</div>
+            <div class="tag">التخطيط</div>
+            <div class="tag">تجاهل ما لا يستحق</div>
+        </div>
     </div>
 
-    <div class="footer">
-      <div>الملف الشخصي</div>
-      <div class="contact-icons">
-        <a href="#"><i class="fas fa-envelope"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-      </div>
+    <div class="section">
+        <h2>الهوايات والاهتمامات</h2>
+        <div class="tags">
+            <div class="tag">السباحة</div>
+            <div class="tag">كرة القدم</div>
+            <div class="tag">قراءة الكتب</div>
+            <div class="tag">الاستكشاف</div>
+            <div class="tag">التعلم</div>
+        </div>
     </div>
-  </div>
+
+    <div class="section">
+        <h2>أسلوب العمل</h2>
+        <p>أفضل العمل الفردي وأكره الإزعاج.</p>
+    </div>
+
+    <div class="section">
+        <h2>الطموح والأهداف</h2>
+        <p>
+            هدفي أن أكون غنيًا جدًا، وأن أصبح رجل أعمال ناجح.
+            أعمل على تعلّم لغات كثيرة لتطوير نفسي وتحقيق طموحي.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>الدافع</h2>
+        <div class="tags">
+            <div class="tag">عدم الاستسلام</div>
+            <div class="tag">السعي للثراء</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>المفضلات</h2>
+        <div class="tags">
+            <div class="tag">اللون: الأسود</div>
+            <div class="tag">أحب: المال</div>
+        </div>
+    </div>
+
+    <div class="quote">
+        “عندما يكون معك المال تمتلك كل الآمال.”
+    </div>
+
 </div>
-
-<script>
-  // Add interactive hover effects
-  document.querySelectorAll('.interest-item').forEach(item => {
-    item.addEventListener('mouseenter', function() {
-      this.style.boxShadow = '0 5px 15px rgba(0,170,255,0.4)';
-    });
-    
-    item.addEventListener('mouseleave', function() {
-      this.style.boxShadow = 'none';
-    });
-  });
-  
-  // Age counter animation
-  const ageElement = document.querySelector('.age-display');
-  ageElement.addEventListener('click', function() {
-    this.style.transform = 'scale(1.1)';
-    setTimeout(() => {
-      this.style.transform = 'scale(1)';
-    }, 300);
-  });
-  
-  // Typewriter effect for the name (optional)
-  const nameElement = document.querySelector('h1');
-  const originalName = nameElement.textContent;
-  nameElement.textContent = '';
-  
-  let i = 0;
-  function typeWriter() {
-    if (i < originalName.length) {
-      nameElement.textContent += originalName.charAt(i);
-      i++;
-      setTimeout(typeWriter, 100);
-    }
-  }
-  
-  // Start typewriter effect after page loads
-  window.addEventListener('load', () => {
-    setTimeout(typeWriter, 500);
-  });
-</script>
 
 </body>
 </html>
