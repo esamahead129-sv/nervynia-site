@@ -1,641 +1,243 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فريق نيرفينيا | أعظم فريق عبر التاريخ</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #1a237e;
-            --secondary: #4a148c;
-            --accent: #00bcd4;
-            --gold: #ffd700;
-            --dark: #0d1b2a;
-            --light: #f8f9fa;
-            --success: #2e7d32;
-        }
+<meta charset="UTF-8">
+<title>NIRVANIA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Arial', sans-serif;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
 
-        body {
-            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 50%, var(--secondary) 100%);
-            color: var(--light);
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
+body{
+    min-height:100vh;
+    background: radial-gradient(circle at top, #1a0000, #000);
+    color:#fff;
+    overflow-x:hidden;
+}
 
-        /* تأثير الجسيمات في الخلفية */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
+/* ===== FIRE TITLE ===== */
+.title{
+    text-align:center;
+    margin-top:60px;
+    font-size:64px;
+    font-weight:900;
+    letter-spacing:6px;
+    color:#ff2a00;
+    text-shadow:
+        0 0 10px #ff2a00,
+        0 0 30px #ff4500,
+        0 0 60px #ff0000;
+    animation: fire 1.5s infinite alternate;
+}
 
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
+@keyframes fire{
+    from{ transform:scale(1); }
+    to{ transform:scale(1.04); }
+}
 
-        /* الشعار والرأس */
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            position: relative;
-            background: rgba(13, 27, 42, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 3px solid var(--gold);
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
+/* ===== BUTTONS ===== */
+.buttons{
+    margin-top:50px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    align-items:center;
+}
 
-        .team-name {
-            font-size: 4.5rem;
-            font-weight: 900;
-            background: linear-gradient(to right, var(--accent), var(--gold), #ff4081);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            position: relative;
-            display: inline-block;
-            animation: glow 3s ease-in-out infinite alternate;
-        }
+.btn{
+    width:260px;
+    padding:15px;
+    text-align:center;
+    font-size:20px;
+    font-weight:700;
+    border-radius:10px;
+    cursor:pointer;
+    background:#140000;
+    color:#ff3b00;
+    border:1px solid #ff3b00;
+    box-shadow:
+        0 0 15px #ff2a00,
+        inset 0 0 10px #ff0000;
+    transition:0.3s;
+}
 
-        @keyframes glow {
-            from { text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent); }
-            to { text-shadow: 0 0 20px var(--accent), 0 0 30px var(--accent), 0 0 40px var(--secondary); }
-        }
+.btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 35px #ff3b00;
+}
 
-        .team-slogan {
-            font-size: 1.5rem;
-            color: var(--gold);
-            margin-top: 10px;
-            font-style: italic;
-            border-top: 1px solid rgba(255, 215, 0, 0.3);
-            padding-top: 10px;
-            display: inline-block;
-        }
+/* ===== SECTIONS ===== */
+.section{
+    display:none;
+    padding:40px 20px;
+    max-width:900px;
+    margin:auto;
+}
 
-        /* الأزرار الرئيسية */
-        .main-menu {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 25px;
-            margin: 40px auto;
-            max-width: 1200px;
-            padding: 0 20px;
-        }
+.section h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:#ff2a00;
+    text-shadow:0 0 20px red;
+}
 
-        .menu-btn {
-            background: linear-gradient(145deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 20px 40px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            width: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
+/* ===== MEMBERS ===== */
+.members{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
 
-        .menu-btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.6s;
-            z-index: -1;
-        }
+.member{
+    padding:20px;
+    border:1px solid #ff2a00;
+    border-radius:10px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 0 20px #ff0000;
+    transition:0.3s;
+}
 
-        .menu-btn:hover:before {
-            left: 100%;
-        }
+.member:hover{
+    transform:scale(1.05);
+}
 
-        .menu-btn:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
-            background: linear-gradient(145deg, var(--secondary), var(--primary));
-        }
+/* ===== PROFILE ===== */
+.profile{
+    text-align:center;
+}
 
-        .menu-btn.active {
-            background: linear-gradient(145deg, var(--accent), #0097a7);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 188, 212, 0.4);
-        }
+.profile img{
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    border:2px solid red;
+    box-shadow:0 0 25px red;
+    margin-bottom:20px;
+}
 
-        .menu-btn i {
-            font-size: 1.5rem;
-        }
-
-        /* محتوى الصفحات */
-        .content-container {
-            max-width: 1300px;
-            margin: 40px auto;
-            padding: 0 20px;
-            min-height: 500px;
-        }
-
-        .page {
-            display: none;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeIn 0.8s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        .page-title {
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 30px;
-            text-align: center;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .page-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 50%;
-            transform: translateX(50%);
-            width: 150px;
-            height: 3px;
-            background: linear-gradient(to right, transparent, var(--accent), transparent);
-        }
-
-        /* صفحة الأعضاء */
-        .members-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .member-card {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(0, 188, 212, 0.2);
-            cursor: pointer;
-            position: relative;
-        }
-
-        .member-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 188, 212, 0.3);
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .member-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-bottom: 2px solid var(--accent);
-        }
-
-        .member-info {
-            padding: 20px;
-        }
-
-        .member-name {
-            font-size: 1.8rem;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-
-        .member-role {
-            color: var(--accent);
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .member-bio {
-            color: #ccc;
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        /* صفحة تعريف الفريق */
-        .team-info {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .team-info p {
-            margin-bottom: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 10px;
-            border-right: 4px solid var(--accent);
-        }
-
-        .milestones {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-top: 50px;
-            gap: 20px;
-        }
-
-        .milestone {
-            background: rgba(0, 188, 212, 0.1);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            width: 200px;
-            border: 1px solid rgba(0, 188, 212, 0.3);
-        }
-
-        .milestone i {
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 15px;
-        }
-
-        .milestone h3 {
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-
-        /* صفحة التواصل */
-        .contact-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            width: 100%;
-        }
-
-        .contact-card {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            width: 280px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-
-        .contact-card:hover {
-            transform: scale(1.05);
-            border-color: var(--gold);
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .contact-card i {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-
-        .contact-card h3 {
-            color: var(--gold);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        .contact-card p {
-            color: #ccc;
-            font-size: 1.1rem;
-        }
-
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: linear-gradient(145deg, #25D366, #128C7E);
-            color: white;
-            text-decoration: none;
-            padding: 18px 35px;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
-        }
-
-        .whatsapp-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(37, 211, 102, 0.5);
-        }
-
-        /* صفحة العضو المفصلة */
-        .member-detail {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .member-detail-image {
-            width: 300px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid var(--accent);
-            margin-bottom: 30px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .member-detail-name {
-            font-size: 3rem;
-            color: var(--gold);
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .member-detail-role {
-            font-size: 1.8rem;
-            color: var(--accent);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .member-detail-bio {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 15px;
-            border-right: 5px solid var(--gold);
-            margin-bottom: 30px;
-        }
-
-        .back-btn {
-            background: linear-gradient(145deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .back-btn:hover {
-            background: linear-gradient(145deg, var(--secondary), var(--primary));
-            transform: translateY(-5px);
-        }
-
-        /* الفوتر */
-        .footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 60px;
-            background: rgba(13, 27, 42, 0.9);
-            border-top: 2px solid var(--gold);
-        }
-
-        .copyright {
-            color: #aaa;
-            font-size: 1.1rem;
-        }
-
-        /* التجاوب مع الشاشات */
-        @media (max-width: 768px) {
-            .team-name {
-                font-size: 3rem;
-            }
-            
-            .menu-btn {
-                width: 100%;
-                max-width: 350px;
-            }
-            
-            .members-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .milestone {
-                width: 100%;
-                max-width: 250px;
-            }
-            
-            .contact-card {
-                width: 100%;
-                max-width: 350px;
-            }
-            
-            .member-detail-name {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .team-name {
-                font-size: 2.5rem;
-            }
-            
-            .page {
-                padding: 20px;
-            }
-            
-            .member-detail-image {
-                width: 250px;
-                height: 250px;
-            }
-        }
-    </style>
+/* BACK */
+.back{
+    margin-top:30px;
+}
+</style>
 </head>
+
 <body>
-    <!-- جسيمات الخلفية المتحركة -->
-    <div class="particles" id="particles"></div>
-    
-    <!-- رأس الصفحة -->
-    <header class="header">
-        <h1 class="team-name">نيرفينيا</h1>
-        <p class="team-slogan">أعظم فريق عبر التاريخ - لا مثيل لنا، لا منافس لنا</p>
-    </header>
-    
-    <!-- القائمة الرئيسية -->
-    <div class="main-menu">
-        <button class="menu-btn active" id="members-btn">
-            <i class="fas fa-users"></i>
-            <span>أعضاء الفريق</span>
-        </button>
-        <button class="menu-btn" id="team-info-btn">
-            <i class="fas fa-info-circle"></i>
-            <span>تعريف الفريق</span>
-        </button>
-        <button class="menu-btn" id="contact-btn">
-            <i class="fas fa-phone-alt"></i>
-            <span>التواصل معنا</span>
-        </button>
+
+<div class="title">NIRVANIA</div>
+
+<div class="buttons">
+    <div class="btn" onclick="showSection('members')">👥 Members</div>
+    <div class="btn" onclick="showSection('about')">About Nirvania</div>
+    <div class="btn" onclick="openWhats()">WhatsApp</div>
+</div>
+
+<!-- ===== MEMBERS PAGE ===== -->
+<div id="members" class="section">
+    <h2>Members</h2>
+    <div class="members">
+        <div class="member" onclick="openProfile('chrollo')">Chrollo 🕷️</div>
+        <div class="member" onclick="openProfile('lelouch')">Lelouch ♟️</div>
+        <div class="member" onclick="openProfile('katana')">Katana 🗡️</div>
+        <div class="member" onclick="openProfile('lilith')">Lilith 🩸</div>
+        <div class="member" onclick="openProfile('mika')">Mika 🪽</div>
+        <div class="member" onclick="openProfile('aizen')">Aizen 🌪️</div>
+        <div class="member" onclick="openProfile('adam')">Adam 👾</div>
     </div>
-    
-    <!-- المحتوى الرئيسي -->
-    <div class="content-container">
-        <!-- صفحة الأعضاء -->
-        <div class="page active" id="members-page">
-            <h2 class="page-title">أعضاء فريق نيرفينيا</h2>
-            <p style="text-align: center; margin-bottom: 30px; font-size: 1.2rem; color: #ccc;">
-                اختر أحد أعضاء فريقنا الأسطوري لمعرفة المزيد عنه
-            </p>
-            
-            <div class="members-grid" id="members-grid">
-                <!-- سيتم ملئها بالجافاسكريبت -->
-            </div>
-        </div>
-        
-        <!-- صفحة تعريف الفريق -->
-        <div class="page" id="team-info-page">
-            <h2 class="page-title">تعريف فريق نيرفينيا</h2>
-            <div class="team-info">
-                <p>
-                    فريق <strong>نيرفينيا</strong> ليس مجرد فريق عادي، بل هو ظاهرة استثنائية في عالم العمل الجماعي. 
-                    نحن مجموعة من العباقرة والمبدعين الذين اجتمعوا تحت راية واحدة لتحقيق المستحيل.
-                </p>
-                <p>
-                    تأسس الفريق في عام 2018 بهدف تغيير مفهوم العمل الجماعي، وتمكنا خلال سنوات قليلة من تحقيق إنجازات 
-                    كان يعتبرها الآخرون خيالاً. نحن نؤمن بأن الإبداع لا حدود له، والعمل الجماعي هو أقوى سلاح لتحقيق المستحيل.
-                </p>
-                <p>
-                    ما يميز فريق نيرفينيا هو التركيز على التميز في كل المجالات. نحن لا نكتفي بأن نكون جيدين، 
-                    بل نصر على أن نكون الأفضل دائماً. هذا ما جعلنا نكتسب لقب "أعظم فريق عبر التاريخ".
-                </p>
-                
-                <div class="milestones">
-                    <div class="milestone">
-                        <i class="fas fa-trophy"></i>
-                        <h3>50+ جائزة</h3>
-                        <p>في مختلف المجالات</p>
-                    </div>
-                    <div class="milestone">
-                        <i class="fas fa-rocket"></i>
-                        <h3>100+ مشروع</h3>
-                        <p>ناجح ومتميز</p>
-                    </div>
-                    <div class="milestone">
-                        <i class="fas fa-users"></i>
-                        <h3>12 عضو</h3>
-                        <p>من النخبة المتميزة</p>
-                    </div>
-                    <div class="milestone">
-                        <i class="fas fa-globe"></i>
-                        <h3>15 دولة</h3>
-                        <p>انتشار عالمي</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- صفحة التواصل -->
-        <div class="page" id="contact-page">
-            <h2 class="page-title">التواصل مع فريق نيرفينيا</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <i class="fab fa-whatsapp"></i>
-                        <h3>واتساب الفريق</h3>
-                        <p>للتواصل المباشر مع قيادة الفريق</p>
-                        <a href="https://wa.me/966500000000" class="whatsapp-btn" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                            ابدأ المحادثة
-                        </a>
-                    </div>
-                    
-                    <div class="contact-card">
-                        <i class="fas fa-envelope"></i>
-                        <h3>البريد الإلكتروني</h3>
-                        <p>nervinia.team@email.com</p>
-                    </div>
-                    
-                    <div class="contact-card">
-                        <i class="fas fa-phone"></i>
-                        <h3>هاتف الفريق</h3>
-                        <p>+966 50 000 0000</p>
-                    </div>
-                </div>
-                
-                <p style="text-align: center; font-size: 1.2rem; max-width: 800px; color: #ccc; margin-top: 20px;">
-                    فريق نيرفينيا دائماً متاح للتعاون مع الأفضل. نحن نؤمن بأن العظمة لا تتحقق إلا بالعمل مع العظماء. 
-                    إذا كنت تعتقد أنك تمتلك الموهبة والطموح للانضمام إلينا، فلا تتردد في التواصل.
-                </p>
-            </div>
-        </div>
-        
-        <!-- صفحة العضو المفصلة (ستظهر عند النقر على عضو) -->
-        <div class="page" id="member-detail-page">
-            <!-- سيتم ملئها بالجافاسكريبت -->
-        </div>
-    </div>
-    
-    <!-- الفوتر -->
-    <footer class="footer">
-        <p class="copyright">© 2023 فريق نيرفينيا. جميع الحقوق محفوظة. لا يسمح بنسخ أو تقليد أي جزء من هذا الفريق الأسطوري.</p>
-    </footer>
-    
-    <script>
-        // بيانات أعضاء الفريق
-        const teamMembers = [
-            {
-                id: 1,
-                name: "كريم الشمري",
-                role: "القائد العام والاستراتيجي",
-                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                bio: "قائد فريق نيرفينيا وراء كل إنجازاته الخارقة. يمتلك رؤية استراتيجية فريدة وقدرة على تحويل التحديات إلى فرص. خريج جامعة هارفارد بمرتبة الشرف، وقاد أكثر من 50 مشروعاً ناجحاً على مستوى العالم.",
-                fullBio: "كريم الشمري هو العقل المدبر وراء نجاحات فريق نيرفينيا الأسطورية. حاصل على درجة الدكتوراه في الإدارة الاستراتيجية من جامعة هارفارد، وله أكثر من 15 عاماً من الخبرة في قيادة الفرق عالية الأداء. يتمتع بمهارات قيادية استثنائية جعلت منه أسطورة في عالم العمل الجماعي. تحت قيادته، حقق فريق نيرفينيا إنجازات غير مسبوقة في مجالات التكنولوجيا، الإبداع، والابتكار. فلسفته القيادية تقوم على تمكين كل عضو لتحقيق أقصى إمكاناته، مع الحفاظ على التماسك الفريقى الذي يميز نيرفينيا عن أي فريق آخر."
-            },
-            {
-                id: 2,
-                name: "سارة العتيبي",
-                role: "مديرة الإبداع والتصميم",
-                image: "https://image
+    <div class="btn back" onclick="goHome()">Back</div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<div id="about" class="section">
+    <h2>What is Nirvania?</h2>
+    <p style="text-align:center; line-height:2; font-size:18px;">
+        Nirvania is not a team…  
+        It is a dark mindset, born from chaos and code.  
+        A digital empire built on intelligence, control, and shadows.  
+        If you enter Nirvania, you don’t leave the same.
+    </p>
+    <div class="btn back" onclick="goHome()">Back</div>
+</div>
+
+<!-- ===== PROFILES ===== -->
+<div id="profile" class="section profile">
+    <img id="pimg" src="" alt="">
+    <h2 id="pname"></h2>
+    <p id="pdesc"></p>
+    <div class="btn back" onclick="showSection('members')">Back</div>
+</div>
+
+<script>
+function hideAll(){
+    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+}
+
+function showSection(id){
+    hideAll();
+    document.getElementById(id).style.display='block';
+    window.scrollTo(0,0);
+}
+
+function goHome(){
+    hideAll();
+}
+
+function openWhats(){
+    window.open("https://wa.me/201029505953","_blank");
+}
+
+const data={
+    chrollo:{
+        name:"Chrollo",
+        img:"chrollo.jpg",
+        desc:"Leader of Nirvania. Programmer, strategist, and master of digital manipulation."
+    },
+    lelouch:{
+        name:"Lelouch",
+        img:"lelouch.jpg",
+        desc:"Mind controller. Tactical genius operating from the shadows."
+    },
+    katana:{
+        name:"Katana",
+        img:"katana.jpg",
+        desc:"Silent blade. Precision, speed, and zero mistakes."
+    },
+    lilith:{
+        name:"Lilith",
+        img:"lilith.jpg",
+        desc:"Dark presence. Psychological influence and control."
+    },
+    mika:{
+        name:"Mika",
+        img:"mika.jpg",
+        desc:"Watcher of the skies. Intelligence and surveillance."
+    },
+    aizen:{
+        name:"Aizen",
+        img:"aizen.jpg",
+        desc:"Illusion master. Nothing is what it seems."
+    },
+    adam:{
+        name:"Adam",
+        img:"adam.jpg",
+        desc:"Unknown origin. Chaos engine."
+    }
+};
+
+function openProfile(id){
+    hideAll();
+    document.getElementById('profile').style.display='block';
+    document.getElementById('pname').innerText=data[id].name;
+    document.getElementById('pdesc').innerText=data[id].desc;
+    document.getElementById('pimg').src=data[id].img;
+}
+</script>
+
+</body>
+</html>
