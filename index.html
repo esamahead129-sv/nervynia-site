@@ -3,342 +3,278 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahmed Essam | الملف الشخصي</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>NERVYNIA TEAM</title>
+
 <style>
+:root{
+    --bg:#000;
+    --card:#111;
+    --text:#fff;
+    --accent:#0af;
+}
+body.dark{
+    --bg:#02030a;
+    --card:#0b0f1a;
+    --text:#e6e6e6;
+    --accent:#7df;
+}
+
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI', Tahoma, 'Arial', sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
 }
 
 body{
-  background:#0b0b0b;
-  color:#fff;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(0, 50, 100, 0.05) 0%, transparent 20%),
-    radial-gradient(circle at 90% 80%, rgba(0, 150, 255, 0.05) 0%, transparent 20%);
+    background:var(--bg);
+    color:var(--text);
+    transition:.4s;
 }
 
-.profile{
-  background:linear-gradient(135deg,#111,#000);
-  border:1px solid #1f1f1f;
-  border-radius:20px;
-  padding:40px;
-  max-width:450px;
-  width:100%;
-  text-align:center;
-  box-shadow:0 0 40px rgba(0,170,255,.2);
-  position:relative;
-  overflow:hidden;
-  transition:transform 0.3s ease, box-shadow 0.3s ease;
-  animation:fadeIn 0.8s ease-out;
+/* NAV */
+nav{
+    background:#111;
+    padding:15px;
+    position:sticky;
+    top:0;
+    z-index:999;
+    border-bottom:2px solid var(--accent);
+}
+.nav-links{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+.nav-link{
+    color:#fff;
+    text-decoration:none;
+    padding:8px 16px;
+    border-radius:6px;
+}
+.nav-link.active,
+.nav-link:hover{
+    background:var(--accent);
+    color:#000;
 }
 
-.profile:hover {
-  transform:translateY(-5px);
-  box-shadow:0 10px 50px rgba(0,170,255,.3);
+/* زر الظلام */
+.dark-btn{
+    position:fixed;
+    bottom:90px;
+    right:20px;
+    background:#111;
+    color:var(--accent);
+    border:1px solid var(--accent);
+    padding:12px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
 }
 
-.profile::before{
-  content:'';
-  position:absolute;
-  top:-50%;
-  left:-50%;
-  width:200%;
-  height:200%;
-  background:linear-gradient(45deg, transparent, rgba(0,170,255,0.05), transparent);
-  transform:rotate(45deg);
-  animation:shimmer 10s infinite linear;
-  z-index:0;
+/* واتساب */
+.whatsapp-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25d366;
+    color:#000;
+    padding:14px 18px;
+    border-radius:50%;
+    font-size:22px;
+    text-decoration:none;
 }
 
-@keyframes shimmer{
-  0%{transform:rotate(45deg) translateX(-30%);}
-  100%{transform:rotate(45deg) translateX(30%);}
-}
+/* صفحات */
+.page{display:none;padding:20px;}
+.page.active{display:block}
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
+/* HOME */
+header{
+    text-align:center;
+    padding:60px 20px;
 }
-
-.profile-content{
-  position:relative;
-  z-index:1;
-}
-
 h1{
-  color:#0af;
-  font-size:36px;
-  margin-bottom:10px;
-  font-weight:700;
-  letter-spacing:-0.5px;
-  text-shadow:0 0 10px rgba(0,170,255,0.3);
+    color:var(--accent);
+    font-size:36px;
+}
+.hero-text{
+    margin:20px auto;
+    max-width:600px;
+    line-height:1.7;
+}
+.btn{
+    background:var(--accent);
+    color:#000;
+    border:none;
+    padding:12px 26px;
+    border-radius:6px;
+    cursor:pointer;
+    margin:10px;
 }
 
-.tag{
-  color:#aaa;
-  font-size:15px;
-  margin-bottom:25px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
+/* CARDS */
+.card{
+    background:var(--card);
+    max-width:800px;
+    margin:20px auto;
+    padding:20px;
+    border-radius:12px;
+    border:1px solid #333;
+}
+.card h2{color:var(--accent);margin-bottom:10px}
+
+/* TEAM */
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:20px;
+}
+.member-card{
+    background:var(--card);
+    border:1px solid #333;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    cursor:pointer;
+    transition:.3s;
+}
+.member-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--accent);
+}
+.member-card img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+.member-name{
+    color:var(--accent);
+    font-size:22px;
+}
+.member-role{color:#aaa}
+
+/* MEMBER PAGE */
+.profile-header{text-align:center}
+.profile-header img{
+    width:260px;
+    border-radius:15px;
+    margin:20px 0;
+}
+.profile-title{color:var(--accent);font-size:32px}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:30px;
+    border-top:1px solid #333;
+    margin-top:40px;
 }
 
-.tag i{
-  color:#0af;
-}
-
-.info{
-  text-align:right;
-  line-height:2.2;
-  font-size:17px;
-  margin:25px 0;
-  background:rgba(20,20,20,0.7);
-  padding:20px;
-  border-radius:12px;
-  border-right:3px solid #0af;
-  transition:border-right 0.3s ease;
-}
-
-.info:hover {
-  border-right:3px solid #0ff;
-}
-
-.info p{
-  margin-bottom:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.info span{
-  color:#0af;
-  font-weight:bold;
-  font-size:16px;
-}
-
-.info-value{
-  color:#ddd;
-  font-weight:normal;
-}
-
-.bio{
-  margin-top:25px;
-  padding-top:25px;
-  border-top:1px solid #222;
-  color:#ddd;
-  line-height:1.9;
-  font-size:16.5px;
-  text-align:justify;
-  position:relative;
-}
-
-.bio::before{
-  content:'"';
-  position:absolute;
-  top:15px;
-  right:0;
-  font-size:60px;
-  color:#0af;
-  opacity:0.3;
-  font-family:Georgia, serif;
-}
-
-.interests{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  margin-top:25px;
-  flex-wrap:wrap;
-}
-
-.interest-item{
-  background:rgba(0,100,200,0.1);
-  border:1px solid rgba(0,170,255,0.2);
-  border-radius:50px;
-  padding:8px 18px;
-  font-size:14px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  transition:all 0.3s ease;
-}
-
-.interest-item:hover{
-  background:rgba(0,100,200,0.3);
-  transform:translateY(-3px);
-}
-
-.footer{
-  margin-top:30px;
-  font-size:14px;
-  color:#777;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding-top:20px;
-  border-top:1px solid #222;
-}
-
-.contact-icons{
-  display:flex;
-  gap:15px;
-}
-
-.contact-icons a{
-  color:#777;
-  font-size:18px;
-  transition:all 0.3s ease;
-}
-
-.contact-icons a:hover{
-  color:#0af;
-  transform:scale(1.2);
-}
-
-.age-display{
-  background:linear-gradient(45deg, #0af, #0cf);
-  color:black;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto 20px;
-  font-weight:bold;
-  font-size:20px;
-  box-shadow:0 0 15px rgba(0,170,255,0.5);
-  animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-  0%{box-shadow:0 0 15px rgba(0,170,255,0.5);}
-  50%{box-shadow:0 0 25px rgba(0,170,255,0.8);}
-  100%{box-shadow:0 0 15px rgba(0,170,255,0.5);}
-}
-
-@media (max-width: 500px){
-  .profile{
-    padding:30px 25px;
-  }
-  h1{
-    font-size:30px;
-  }
-  .info p{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:5px;
-  }
+/* RESPONSIVE */
+@media(max-width:600px){
+    .profile-header img{width:200px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="profile">
-  <div class="profile-content">
-    <div class="age-display">18</div>
-    
-    <h1>أحمد عصام</h1>
-    <div class="tag">
-      <i class="fas fa-brain"></i>
-      <span>INTP • 18 سنة</span>
-    </div>
+<nav>
+<div class="nav-links">
+<a href="#home" class="nav-link active" onclick="showPage('home')">الرئيسية</a>
+<a href="#team" class="nav-link" onclick="showPage('team')">الفريق</a>
+<a href="#about" class="nav-link" onclick="showPage('about')">من نحن</a>
+</div>
+</nav>
 
-    <div class="info">
-      <p>
-        <span>الدولة:</span>
-        <span class="info-value">مصر – رأس البر</span>
-      </p>
-      <p>
-        <span>الهوايات:</span>
-        <span class="info-value">السباحة، كرة القدم</span>
-      </p>
-    </div>
-    
-    <div class="interests">
-      <div class="interest-item">
-        <i class="fas fa-swimmer"></i>
-        <span>السباحة</span>
-      </div>
-      <div class="interest-item">
-        <i class="fas fa-futbol"></i>
-        <span>كرة القدم</span>
-      </div>
-      <div class="interest-item">
-        <i class="fas fa-search"></i>
-        <span>الاستكشاف</span>
-      </div>
-      <div class="interest-item">
-        <i class="fas fa-brain"></i>
-        <span>التحليل</span>
-      </div>
-    </div>
+<!-- زر الظلام -->
+<button class="dark-btn" onclick="toggleDark()">🌑</button>
 
-    <div class="bio">
-      يحب الاستكشاف وتعلّم أشياء جديدة، يميل للتفكير والتحليل، ويسعى دائمًا لفهم ما حوله بعمق، مع الحفاظ على التوازن بين العقل والرياضة. يبحث عن المعرفة في مختلف المجالات ويهتم بتطوير مهاراته باستمرار.
-    </div>
+<!-- زر واتساب -->
+<a class="whatsapp-btn" target="_blank" href="https://wa.me/201029505953">💬</a>
 
-    <div class="footer">
-      <div>الملف الشخصي</div>
-      <div class="contact-icons">
-        <a href="#"><i class="fas fa-envelope"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-      </div>
-    </div>
-  </div>
+<!-- HOME -->
+<div id="home-page" class="page active">
+<header>
+<h1>NERVYNIA TEAM</h1>
+<p class="hero-text">الظل الذي يتحرك في صمت… حيث لا يصل النور.</p>
+<button class="btn" onclick="showPage('team')">أعضاء الفريق</button>
+</header>
 </div>
 
+<!-- TEAM -->
+<div id="team-page" class="page">
+<h1 style="text-align:center">أعضاء الفريق</h1>
+
+<div class="team-grid">
+
+<div class="member-card" onclick="openMember('كرولو')">
+<img src="images/kroro.jpg">
+<div class="member-name">كرولو</div>
+<div class="member-role">العقل المدبر</div>
+</div>
+
+<div class="member-card" onclick="openMember('لولوش')">
+<img src="images/lelouch.jpg">
+<div class="member-name">لولوش</div>
+<div class="member-role">الاستراتيجي</div>
+</div>
+
+<div class="member-card" onclick="openMember('آدم')">
+<img src="images/adam.jpg">
+<div class="member-name">آدم</div>
+<div class="member-role">كاسر الأنظمة</div>
+</div>
+
+</div>
+</div>
+
+<!-- MEMBER -->
+<div id="member-page" class="page">
+<button class="btn" onclick="showPage('team')">← رجوع</button>
+<div class="profile-header">
+<img id="m-img">
+<h2 class="profile-title" id="m-name"></h2>
+<p id="m-role"></p>
+</div>
+<div class="card">
+<p id="m-desc"></p>
+</div>
+</div>
+
+<footer>
+<p style="color:var(--accent)">NERVYNIA</p>
+<p>الظل الذي يتحرك في صمت</p>
+</footer>
+
 <script>
-  // Add interactive hover effects
-  document.querySelectorAll('.interest-item').forEach(item => {
-    item.addEventListener('mouseenter', function() {
-      this.style.boxShadow = '0 5px 15px rgba(0,170,255,0.4)';
-    });
-    
-    item.addEventListener('mouseleave', function() {
-      this.style.boxShadow = 'none';
-    });
-  });
-  
-  // Age counter animation
-  const ageElement = document.querySelector('.age-display');
-  ageElement.addEventListener('click', function() {
-    this.style.transform = 'scale(1.1)';
-    setTimeout(() => {
-      this.style.transform = 'scale(1)';
-    }, 300);
-  });
-  
-  // Typewriter effect for the name (optional)
-  const nameElement = document.querySelector('h1');
-  const originalName = nameElement.textContent;
-  nameElement.textContent = '';
-  
-  let i = 0;
-  function typeWriter() {
-    if (i < originalName.length) {
-      nameElement.textContent += originalName.charAt(i);
-      i++;
-      setTimeout(typeWriter, 100);
-    }
-  }
-  
-  // Start typewriter effect after page loads
-  window.addEventListener('load', () => {
-    setTimeout(typeWriter, 500);
-  });
+const data={
+"كرولو":{img:"images/kroro.jpg",role:"العقل المدبر",desc:"العقل الذي ينسج الخيوط من الظل."},
+"لولوش":{img:"images/lelouch.jpg",role:"الاستراتيجي",desc:"ملك الشطرنج في عالم بلا قواعد."},
+"آدم":{img:"images/adam.jpg",role:"كاسر الأنظمة",desc:"يكسر الحواجز حيث تفشل القوانين."}
+};
+
+function showPage(p){
+document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+document.getElementById(p+'-page').classList.add('active');
+window.scrollTo(0,0);
+}
+
+function openMember(n){
+const m=data[n];
+document.getElementById('m-img').src=m.img;
+document.getElementById('m-name').innerText=n;
+document.getElementById('m-role').innerText=m.role;
+document.getElementById('m-desc').innerText=m.desc;
+showPage('member');
+}
+
+function toggleDark(){
+document.body.classList.toggle('dark');
+}
 </script>
 
 </body>
