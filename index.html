@@ -1,243 +1,581 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>NIRVANIA</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirvania - نيرفينيا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-}
+        body {
+            background: linear-gradient(45deg, #000000, #1a0000, #330000, #4d0000);
+            background-size: 400% 400%;
+            animation: fireBackground 10s ease infinite;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-body{
-    min-height:100vh;
-    background: radial-gradient(circle at top, #1a0000, #000);
-    color:#fff;
-    overflow-x:hidden;
-}
+        @keyframes fireBackground {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
 
-/* ===== FIRE TITLE ===== */
-.title{
-    text-align:center;
-    margin-top:60px;
-    font-size:64px;
-    font-weight:900;
-    letter-spacing:6px;
-    color:#ff2a00;
-    text-shadow:
-        0 0 10px #ff2a00,
-        0 0 30px #ff4500,
-        0 0 60px #ff0000;
-    animation: fire 1.5s infinite alternate;
-}
+        .fire-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: radial-gradient(ellipse at center, rgba(255,69,0,0.2) 0%, rgba(0,0,0,0) 70%);
+        }
 
-@keyframes fire{
-    from{ transform:scale(1); }
-    to{ transform:scale(1.04); }
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-/* ===== BUTTONS ===== */
-.buttons{
-    margin-top:50px;
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-    align-items:center;
-}
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 20px;
+            position: relative;
+        }
 
-.btn{
-    width:260px;
-    padding:15px;
-    text-align:center;
-    font-size:20px;
-    font-weight:700;
-    border-radius:10px;
-    cursor:pointer;
-    background:#140000;
-    color:#ff3b00;
-    border:1px solid #ff3b00;
-    box-shadow:
-        0 0 15px #ff2a00,
-        inset 0 0 10px #ff0000;
-    transition:0.3s;
-}
+        .logo {
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(to right, #ff3300, #ff9900, #ff3300);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 51, 0, 0.7);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
 
-.btn:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 35px #ff3b00;
-}
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ff9966;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
 
-/* ===== SECTIONS ===== */
-.section{
-    display:none;
-    padding:40px 20px;
-    max-width:900px;
-    margin:auto;
-}
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
 
-.section h2{
-    text-align:center;
-    margin-bottom:30px;
-    color:#ff2a00;
-    text-shadow:0 0 20px red;
-}
+        .fire-btn {
+            background: linear-gradient(45deg, #ff3300, #ff6600, #ff3300);
+            border: none;
+            border-radius: 12px;
+            padding: 18px 35px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 51, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            min-width: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
 
-/* ===== MEMBERS ===== */
-.members{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:20px;
-}
+        .fire-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 51, 0, 0.8);
+            background: linear-gradient(45deg, #ff6600, #ff9900, #ff6600);
+        }
 
-.member{
-    padding:20px;
-    border:1px solid #ff2a00;
-    border-radius:10px;
-    text-align:center;
-    cursor:pointer;
-    box-shadow:0 0 20px #ff0000;
-    transition:0.3s;
-}
+        .fire-btn:active {
+            transform: translateY(0);
+        }
 
-.member:hover{
-    transform:scale(1.05);
-}
+        .fire-btn::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ff3300, #ff9900, #ff3300);
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-/* ===== PROFILE ===== */
-.profile{
-    text-align:center;
-}
+        .fire-btn:hover::before {
+            opacity: 0.6;
+        }
 
-.profile img{
-    width:200px;
-    height:200px;
-    object-fit:cover;
-    border:2px solid red;
-    box-shadow:0 0 25px red;
-    margin-bottom:20px;
-}
+        .page {
+            display: none;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 69, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 69, 0, 0.2);
+            animation: fadeIn 0.5s ease;
+        }
 
-/* BACK */
-.back{
-    margin-top:30px;
-}
-</style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .back-btn {
+            background: linear-gradient(45deg, #333, #666, #333);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(45deg, #444, #777, #444);
+            transform: translateX(-5px);
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .member-card {
+            background: linear-gradient(135deg, rgba(255, 51, 0, 0.1), rgba(0, 0, 0, 0.7));
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 69, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(255, 51, 0, 0.3);
+            border-color: rgba(255, 69, 0, 0.7);
+        }
+
+        .member-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .member-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ff9966;
+        }
+
+        .member-desc {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .character-page {
+            text-align: center;
+        }
+
+        .character-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            margin: 0 auto 30px;
+            background: linear-gradient(45deg, #ff3300, #ff9900);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            box-shadow: 0 0 30px rgba(255, 51, 0, 0.5);
+        }
+
+        .character-name {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, #ff3300, #ff9900);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 51, 0, 0.5);
+        }
+
+        .character-title {
+            font-size: 1.5rem;
+            color: #ff9966;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 69, 0, 0.5);
+            display: inline-block;
+        }
+
+        .character-bio {
+            background: rgba(20, 0, 0, 0.7);
+            padding: 25px;
+            border-radius: 15px;
+            border-right: 5px solid #ff3300;
+            text-align: right;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .whatsapp-container {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .whatsapp-icon {
+            font-size: 8rem;
+            color: #25D366;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .whatsapp-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #25D366;
+        }
+
+        .whatsapp-number {
+            font-size: 2.2rem;
+            background: rgba(37, 211, 102, 0.1);
+            padding: 15px 30px;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 20px 0;
+            border: 2px solid #25D366;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.7);
+        }
+
+        .definition-page {
+            text-align: center;
+        }
+
+        .definition-title {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, #ff3300, #ff9900, #ff3300);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(255, 51, 0, 0.5);
+        }
+
+        .definition-content {
+            background: rgba(10, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 69, 0, 0.5);
+            text-align: right;
+            line-height: 2;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            box-shadow: 0 0 30px rgba(255, 51, 0, 0.2);
+        }
+
+        .demonic-text {
+            color: #ff3300;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 51, 0, 0.7);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 69, 0, 0.3);
+            color: #ff9966;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 3.5rem; }
+            .buttons-container { flex-direction: column; align-items: center; }
+            .fire-btn { width: 100%; max-width: 300px; }
+            .members-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+            .character-name { font-size: 2.5rem; }
+            .whatsapp-number { font-size: 1.5rem; }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="fire-effect"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo">Nirvania</div>
+            <div class="subtitle">عالم من القوة والأسرار المظلمة</div>
+        </div>
 
-<div class="title">NIRVANIA</div>
+        <div class="buttons-container">
+            <button class="fire-btn" onclick="showPage('members')">
+                <i class="fas fa-users"></i>
+                <span>👥 الأعـضـاء</span>
+            </button>
+            
+            <button class="fire-btn" onclick="showPage('definition')">
+                <i class="fas fa-fire"></i>
+                <span>تعريف نيرفينيا</span>
+            </button>
+            
+            <button class="fire-btn" onclick="showPage('whatsapp')">
+                <i class="fab fa-whatsapp"></i>
+                <span>واتـسـاب</span>
+            </button>
+        </div>
 
-<div class="buttons">
-    <div class="btn" onclick="showSection('members')">👥 Members</div>
-    <div class="btn" onclick="showSection('about')">About Nirvania</div>
-    <div class="btn" onclick="openWhats()">WhatsApp</div>
-</div>
+        <!-- صفحة الأعضاء -->
+        <div id="members-page" class="page">
+            <button class="back-btn" onclick="showPage('main')">
+                <i class="fas fa-arrow-right"></i> العودة للرئيسية
+            </button>
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 30px; color: #ff9966;">أعضاء نيرفينيا</h2>
+            
+            <div class="members-grid">
+                <!-- سيتم إضافة الأعضاء ديناميكياً -->
+            </div>
+        </div>
 
-<!-- ===== MEMBERS PAGE ===== -->
-<div id="members" class="section">
-    <h2>Members</h2>
-    <div class="members">
-        <div class="member" onclick="openProfile('chrollo')">Chrollo 🕷️</div>
-        <div class="member" onclick="openProfile('lelouch')">Lelouch ♟️</div>
-        <div class="member" onclick="openProfile('katana')">Katana 🗡️</div>
-        <div class="member" onclick="openProfile('lilith')">Lilith 🩸</div>
-        <div class="member" onclick="openProfile('mika')">Mika 🪽</div>
-        <div class="member" onclick="openProfile('aizen')">Aizen 🌪️</div>
-        <div class="member" onclick="openProfile('adam')">Adam 👾</div>
+        <!-- صفحة تعريف نيرفينيا -->
+        <div id="definition-page" class="page">
+            <button class="back-btn" onclick="showPage('main')">
+                <i class="fas fa-arrow-right"></i> العودة للرئيسية
+            </button>
+            
+            <div class="definition-page">
+                <div class="definition-title">تعريف نيرفينيا</div>
+                
+                <div class="definition-content">
+                    <p><span class="demonic-text">نيرفينيا</span> ليست مجرد فريق أو مجموعة... إنها <span class="demonic-text">كيان شيطاني</span> يتنفس في عروق الظلام.</p>
+                    
+                    <p>نحن أبناء <span class="demonic-text">الليل</span>، فرسان <span class="demonic-text">العالم السفلي</span>، من يمسك بزمام القوة في الخفاء.</p>
+                    
+                    <p>نيرفينيا هي <span class="demonic-text">الظل الذي يطارد أضواء الضعفاء</span>، هي الهمس الذي يقلق راحة الجبناء.</p>
+                    
+                    <p>نعيش في <span class="demonic-text">الهاوية</span> بين الواقع والخيال، حيث تصبح الأحلام كوابيس والكوابيس حقيقة.</p>
+                    
+                    <p>كل عضو في نيرفينيا هو <span class="demonic-text">قصة رعب</span> لم تُروى بعد، هو لغز ينتظر من يحله.</p>
+                    
+                    <p>نحن <span class="demonic-text">لا نطلب الإذن</span>، نحن نأخذ ما نريد. لا ننتمي للقوانين، نحن نصنع قوانيننا الخاصة.</p>
+                    
+                    <p>أن تكون نيرفينياً يعني أن تبيع <span class="demonic-text">روحك للقوة</span>، وتستبدل ضعف البشرية بقوة لا تُقهَر.</p>
+                    
+                    <p>هنا في أعماق نيرفينيا، <span class="demonic-text">الدم يجري ناراً</span>، والأفكار تتحول إلى أسلحة، والضعف هو الجريمة الوحيدة التي لا تُغتفر.</p>
+                    
+                    <p style="font-size: 1.5rem; margin-top: 30px; color: #ff3300; font-weight: bold;">
+                        ادخل إذا تجرأت... لكن اعلم أن الخروج قد يكون مستحيلاً.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- صفحة الواتساب -->
+        <div id="whatsapp-page" class="page">
+            <button class="back-btn" onclick="showPage('main')">
+                <i class="fas fa-arrow-right"></i> العودة للرئيسية
+            </button>
+            
+            <div class="whatsapp-container">
+                <div class="whatsapp-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                
+                <div class="whatsapp-title">تواصل مع نيرفينيا عبر واتساب</div>
+                
+                <div class="whatsapp-number">
+                    <i class="fas fa-phone"></i> 01029505953
+                </div>
+                
+                <p style="font-size: 1.2rem; margin: 20px 0 30px; color: #ccc;">
+                    اضغط على الزر أدناه للدخول مباشرة إلى محادثة واتساب<br>
+                    نحن ننتظر رسالتك في أي وقت
+                </p>
+                
+                <a href="https://wa.me/201029505953" class="whatsapp-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>فتح محادثة واتساب</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- صفحة العضو المفصل -->
+        <div id="character-page" class="page">
+            <button class="back-btn" onclick="showPage('members')">
+                <i class="fas fa-arrow-right"></i> العودة للأعضاء
+            </button>
+            
+            <div id="character-content" class="character-page">
+                <!-- سيتم تعبئة بيانات العضو هنا -->
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Nirvania © 2023 - عالم من الأسرار والنار</p>
+            <p>كل الحقوق محفوظة للفريق الشيطاني</p>
+        </div>
     </div>
-    <div class="btn back" onclick="goHome()">Back</div>
-</div>
 
-<!-- ===== ABOUT ===== -->
-<div id="about" class="section">
-    <h2>What is Nirvania?</h2>
-    <p style="text-align:center; line-height:2; font-size:18px;">
-        Nirvania is not a team…  
-        It is a dark mindset, born from chaos and code.  
-        A digital empire built on intelligence, control, and shadows.  
-        If you enter Nirvania, you don’t leave the same.
-    </p>
-    <div class="btn back" onclick="goHome()">Back</div>
-</div>
+    <script>
+        // بيانات الأعضاء
+        const members = [
+            {
+                id: "kuroro",
+                name: "كرولو",
+                icon: "🕷️",
+                title: "قائد فريق نيرفينيا",
+                bio: "الدماغ المدبر وراء كل عمليات نيرفينيا. خبير في البرمجة المتقدمة وهندسة الاختراق. يتخصص في نسخ الأرقام الوهمية واختراق الأنظمة المحصنة. صاحب نظرة استراتيجية تجعله يتوقع خطوات الأعداء قبل حتى أن يفكروا فيها. لا يترك أثراً أبداً."
+            },
+            {
+                id: "lulush",
+                name: "لولوش",
+                icon: "♟️",
+                title: "خبير التكتيك والتخطيط",
+                bio: "سيد الشطرنج في عالم القرصنة. كل خطوة يحسبها بعناية كما في لعبة الشطرنج. يتولى تخطيط العمليات المعقدة وتوزيع المهام. لديه قدرة خارقة على تحليل الثغرات واستغلالها. صبره هو سلاحه الأقوى."
+            },
+            {
+                id: "katana",
+                name: "كاتانا",
+                icon: "🗡️",
+                title: "المحتال الرئيسي",
+                bio: "سيف نيرفينيا الحاد. متخصص في انتحال الشخصيات والاحتيال الإلكتروني. يتسلل إلى الأنظمة كما يتسلل الظل. يجيد فنون التمويه الرقمي ويترك ضحاياه في حيرة من أمرهم. لا يوجد نظام آمن من كاتانا."
+            },
+            {
+                id: "lilith",
+                name: "ليليث",
+                icon: "🩸",
+                title: "خبيرة الهندسة الاجتماعية",
+                bio: "ساحرة نيرفينيا التي تجيد فنون الإقناع والتلاعب. تستخرج الأسرار بلمسة واحدة. متخصصة في الهندسة الاجتماعية واستغلال نقاط ضعف البشر. جمالها الخادع هو فخها المميت."
+            },
+            {
+                id: "mika",
+                name: "ميكا",
+                icon: "🪽",
+                title: "مخترق الأنظمة المالية",
+                bio: "ملاك نيرفينيا ذو الأجنحة السوداء. يتخصص في اختراق الأنظمة المالية والمصرفية. يجيد التعامل مع العملات الرقمية وإخفاء المسارات. يحلق عالياً حيث لا يصل أحد."
+            },
+            {
+                id: "eizen",
+                name: "ايزن",
+                icon: "🌪️",
+                title: "خبير الفوضى المنظمة",
+                bio: "إعصار نيرفينيا المدمر. يتخصص في هجمات الحرمان من الخدمة وإثارة الفوضى الرقمية. يختفي كما يظهر فجأة. يترك الأنظمة في حالة من الفوضى التامة."
+            },
+            {
+                id: "adam",
+                name: "آدم",
+                icon: "👾",
+                title: "الذكاء الاصطناعي المتقدم",
+                bio: "كيان نيرفينيا الافتراضي. ذكاء اصطناعي متطور يتعلم من كل عملية. يدير الشبكات الخفية ويحلل البيانات الضخمة. لا يحتاج للنوم ولا للراحة. هو العقل الجماعي لنيرفينيا."
+            }
+        ];
 
-<!-- ===== PROFILES ===== -->
-<div id="profile" class="section profile">
-    <img id="pimg" src="" alt="">
-    <h2 id="pname"></h2>
-    <p id="pdesc"></p>
-    <div class="btn back" onclick="showSection('members')">Back</div>
-</div>
+        // عرض الصفحات
+        function showPage(pageId) {
+            // إخفاء جميع الصفحات
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // إظهار الصفحة المطلوبة
+            if (pageId === 'main') {
+                // العودة للرئيسية (إخفاء جميع الصفحات)
+                return;
+            }
+            
+            if (pageId === 'members') {
+                loadMembers();
+                document.getElementById('members-page').classList.add('active');
+            } else if (pageId === 'definition') {
+                document.getElementById('definition-page').classList.add('active');
+            } else if (pageId === 'whatsapp') {
+                document.getElementById('whatsapp-page').classList.add('active');
+            } else if (pageId === 'character') {
+                document.getElementById('character-page').classList.add('active');
+            }
+        }
 
-<script>
-function hideAll(){
-    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
-}
-
-function showSection(id){
-    hideAll();
-    document.getElementById(id).style.display='block';
-    window.scrollTo(0,0);
-}
-
-function goHome(){
-    hideAll();
-}
-
-function openWhats(){
-    window.open("https://wa.me/201029505953","_blank");
-}
-
-const data={
-    chrollo:{
-        name:"Chrollo",
-        img:"chrollo.jpg",
-        desc:"Leader of Nirvania. Programmer, strategist, and master of digital manipulation."
-    },
-    lelouch:{
-        name:"Lelouch",
-        img:"lelouch.jpg",
-        desc:"Mind controller. Tactical genius operating from the shadows."
-    },
-    katana:{
-        name:"Katana",
-        img:"katana.jpg",
-        desc:"Silent blade. Precision, speed, and zero mistakes."
-    },
-    lilith:{
-        name:"Lilith",
-        img:"lilith.jpg",
-        desc:"Dark presence. Psychological influence and control."
-    },
-    mika:{
-        name:"Mika",
-        img:"mika.jpg",
-        desc:"Watcher of the skies. Intelligence and surveillance."
-    },
-    aizen:{
-        name:"Aizen",
-        img:"aizen.jpg",
-        desc:"Illusion master. Nothing is what it seems."
-    },
-    adam:{
-        name:"Adam",
-        img:"adam.jpg",
-        desc:"Unknown origin. Chaos engine."
-    }
-};
-
-function openProfile(id){
-    hideAll();
-    document.getElementById('profile').style.display='block';
-    document.getElementById('pname').innerText=data[id].name;
-    document.getElementById('pdesc').innerText=data[id].desc;
-    document.getElementById('pimg').src=data[id].img;
-}
-</script>
-
-</body>
-</html>
+        // تحميل قائمة الأعضاء
+        function loadMembers() {
+            const membersGrid = document.querySelector('.members-grid');
+            membersGrid.innerHTML = '';
+            
+            members.forEach(member => {
+                const memberCard = document.createElement('div');
+                memberCard.className = 'member-card';
+                memberCard.onclick = () => showCharacter(member.id);
+                
+                memberCard.innerHTML = `
+                    <div class="member-icon">${member.icon}</div>
+                    <div class="member-name">${member.name}</div>
+                    <div class="member-desc">${member.title}</div>
+                `;
+                
+                membersGrid.a
