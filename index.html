@@ -6,176 +6,411 @@
 <title>NERVYNIA TEAM</title>
 
 <style>
-:root{
-    --bg:#000;
-    --card:#111;
-    --text:#fff;
-    --accent:#0af;
-}
-body.dark{
-    --bg:#02030a;
-    --card:#0b0f1a;
-    --text:#e6e6e6;
-    --accent:#7df;
+:root {
+    --bg: #02020a;
+    --card: #0a0a14;
+    --text: #f0f0f0;
+    --accent: #0af;
+    --glow: rgba(0, 170, 255, 0.1);
+    --shadow: rgba(0, 0, 0, 0.7);
+    --light-glow: rgba(255, 255, 255, 0.05);
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
+body.dark {
+    --bg: #010108;
+    --card: #050510;
+    --text: #e8e8e8;
+    --accent: #7df;
+    --glow: rgba(125, 255, 255, 0.15);
+    --light-glow: rgba(255, 255, 255, 0.08);
 }
 
-body{
-    background:var(--bg);
-    color:var(--text);
-    transition:.4s;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: 0.5s;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* تأثيرات خلفية ديناميكية */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, var(--glow) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, var(--glow) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, var(--light-glow) 0%, transparent 50%);
+    z-index: -1;
+    opacity: 0.6;
 }
 
 /* NAV */
-nav{
-    background:#111;
-    padding:15px;
-    position:sticky;
-    top:0;
-    z-index:999;
-    border-bottom:2px solid var(--accent);
+nav {
+    background: rgba(5, 5, 10, 0.95);
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    border-bottom: 1px solid var(--accent);
+    box-shadow: 0 0 20px var(--glow);
+    backdrop-filter: blur(10px);
 }
-.nav-links{
-    display:flex;
-    justify-content:center;
-    gap:15px;
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
-.nav-link{
-    color:#fff;
-    text-decoration:none;
-    padding:8px 16px;
-    border-radius:6px;
+
+.nav-link {
+    color: #ccc;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
+
+.nav-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    transition: 0.6s;
+}
+
+.nav-link:hover::before {
+    right: 100%;
+}
+
 .nav-link.active,
-.nav-link:hover{
-    background:var(--accent);
-    color:#000;
+.nav-link:hover {
+    background: rgba(0, 170, 255, 0.1);
+    color: var(--accent);
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
 }
 
 /* زر الظلام */
-.dark-btn{
-    position:fixed;
-    bottom:90px;
-    right:20px;
-    background:#111;
-    color:var(--accent);
-    border:1px solid var(--accent);
-    padding:12px;
-    border-radius:50%;
-    cursor:pointer;
-    font-size:18px;
+.dark-btn {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    background: rgba(10, 10, 20, 0.9);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s;
+    z-index: 100;
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.2);
+}
+
+.dark-btn:hover {
+    background: rgba(0, 170, 255, 0.1);
+    transform: rotate(30deg);
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.4);
 }
 
 /* واتساب */
-.whatsapp-btn{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:#25d366;
-    color:#000;
-    padding:14px 18px;
-    border-radius:50%;
-    font-size:22px;
-    text-decoration:none;
+.whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25d366;
+    color: #000;
+    padding: 16px 20px;
+    border-radius: 50%;
+    font-size: 24px;
+    text-decoration: none;
+    transition: all 0.3s;
+    z-index: 100;
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(37, 211, 102, 0.8);
 }
 
 /* صفحات */
-.page{display:none;padding:20px;}
-.page.active{display:block}
+.page {
+    display: none;
+    padding: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.page.active {
+    display: block;
+}
 
 /* HOME */
-header{
-    text-align:center;
-    padding:60px 20px;
+header {
+    text-align: center;
+    padding: 80px 20px;
+    position: relative;
 }
-h1{
-    color:var(--accent);
-    font-size:36px;
+
+h1 {
+    color: var(--accent);
+    font-size: 42px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px var(--glow);
+    letter-spacing: 1px;
 }
-.hero-text{
-    margin:20px auto;
-    max-width:600px;
-    line-height:1.7;
+
+.hero-text {
+    margin: 30px auto;
+    max-width: 700px;
+    line-height: 1.8;
+    font-size: 18px;
+    color: #ccc;
+    background: rgba(10, 10, 20, 0.5);
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 3px solid var(--accent);
+    box-shadow: 0 5px 15px var(--shadow);
 }
-.btn{
-    background:var(--accent);
-    color:#000;
-    border:none;
-    padding:12px 26px;
-    border-radius:6px;
-    cursor:pointer;
-    margin:10px;
+
+.btn {
+    background: rgba(0, 170, 255, 0.1);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 14px 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 15px;
+    font-weight: bold;
+    transition: all 0.3s;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    background: rgba(0, 170, 255, 0.2);
+    box-shadow: 0 0 20px var(--glow);
+    transform: translateY(-3px);
 }
 
 /* CARDS */
-.card{
-    background:var(--card);
-    max-width:800px;
-    margin:20px auto;
-    padding:20px;
-    border-radius:12px;
-    border:1px solid #333;
+.card {
+    background: linear-gradient(145deg, rgba(15, 15, 25, 0.9), rgba(5, 5, 15, 0.9));
+    max-width: 850px;
+    margin: 25px auto;
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 170, 255, 0.2);
+    box-shadow: 0 10px 30px var(--shadow);
+    position: relative;
+    overflow: hidden;
 }
-.card h2{color:var(--accent);margin-bottom:10px}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.card h2 {
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-size: 26px;
+    position: relative;
+    display: inline-block;
+}
+
+.card h2::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    right: 0;
+    width: 60%;
+    height: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+}
 
 /* TEAM */
-.team-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-    gap:20px;
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px;
 }
-.member-card{
-    background:var(--card);
-    border:1px solid #333;
-    border-radius:15px;
-    padding:20px;
-    text-align:center;
-    cursor:pointer;
-    transition:.3s;
+
+.member-card {
+    background: linear-gradient(145deg, rgba(15, 15, 25, 0.9), rgba(10, 10, 20, 0.9));
+    border: 1px solid rgba(0, 170, 255, 0.15);
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
-.member-card:hover{
-    transform:translateY(-6px);
-    border-color:var(--accent);
+
+.member-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(0, 170, 255, 0.05), transparent);
+    transform: translateX(-100%);
+    transition: 0.6s;
 }
-.member-card img{
-    width:100%;
-    height:240px;
-    object-fit:cover;
-    border-radius:12px;
-    margin-bottom:15px;
+
+.member-card:hover::before {
+    transform: translateX(100%);
 }
-.member-name{
-    color:var(--accent);
-    font-size:22px;
+
+.member-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    box-shadow: 0 15px 30px rgba(0, 170, 255, 0.15);
 }
-.member-role{color:#aaa}
+
+.member-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s;
+}
+
+.member-card:hover img {
+    border-color: var(--accent);
+    transform: scale(1.02);
+}
+
+.member-name {
+    color: var(--accent);
+    font-size: 24px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(0, 170, 255, 0.3);
+}
+
+.member-role {
+    color: #aaa;
+    font-size: 16px;
+    padding: 5px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
 
 /* MEMBER PAGE */
-.profile-header{text-align:center}
-.profile-header img{
-    width:260px;
-    border-radius:15px;
-    margin:20px 0;
+.profile-header {
+    text-align: center;
+    margin-bottom: 40px;
 }
-.profile-title{color:var(--accent);font-size:32px}
+
+.profile-header img {
+    width: 280px;
+    border-radius: 20px;
+    margin: 30px 0;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 30px rgba(0, 170, 255, 0.3);
+}
+
+.profile-title {
+    color: var(--accent);
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
+}
 
 /* FOOTER */
-footer{
-    text-align:center;
-    padding:30px;
-    border-top:1px solid #333;
-    margin-top:40px;
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(0, 170, 255, 0.2);
+    margin-top: 60px;
+    background: rgba(5, 5, 10, 0.8);
+    position: relative;
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+footer p:first-child {
+    color: var(--accent);
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px var(--glow);
+}
+
+footer p:last-child {
+    color: #aaa;
+    font-size: 16px;
+}
+
+/* تأثيرات نصية إضافية */
+.subtitle {
+    color: #aaa;
+    font-size: 18px;
+    margin-top: -10px;
+    margin-bottom: 30px;
 }
 
 /* RESPONSIVE */
-@media(max-width:600px){
-    .profile-header img{width:200px}
+@media (max-width: 768px) {
+    h1 { font-size: 32px; }
+    .hero-text { font-size: 16px; padding: 20px; }
+    .profile-header img { width: 220px; }
+    .team-grid { grid-template-columns: 1fr; }
+    .nav-links { flex-direction: column; align-items: center; }
+    .nav-link { width: 80%; text-align: center; }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 28px; }
+    .profile-header img { width: 180px; }
+    .dark-btn, .whatsapp-btn { padding: 12px; font-size: 18px; }
+    .dark-btn { bottom: 80px; }
 }
 </style>
 </head>
@@ -191,7 +426,7 @@ footer{
 </nav>
 
 <!-- زر الظلام -->
-<button class="dark-btn" onclick="toggleDark()">🌑</button>
+<button class="dark-btn" onclick="toggleDark()">🌙</button>
 
 <!-- زر واتساب -->
 <a class="whatsapp-btn" target="_blank" href="https://wa.me/201029505953">💬</a>
@@ -200,14 +435,17 @@ footer{
 <div id="home-page" class="page active">
 <header>
 <h1>NERVYNIA TEAM</h1>
-<p class="hero-text">الظل الذي يتحرك في صمت… حيث لا يصل النور.</p>
+<p class="subtitle">الظل الذي يتحرك في صمت...</p>
+<p class="hero-text">حيث لا يصل النور، نكون نحن. فريق يعمل في الخفاء، ننسج استراتيجياتنا بعناية فائقة، نتحرك حيث يتوقف الآخرون. نحن الظل الذي يرى كل شيء، والصمت الذي يتحدث بأعلى صوت.</p>
 <button class="btn" onclick="showPage('team')">أعضاء الفريق</button>
+<button class="btn" onclick="showPage('about')">من نحن</button>
 </header>
 </div>
 
 <!-- TEAM -->
 <div id="team-page" class="page">
 <h1 style="text-align:center">أعضاء الفريق</h1>
+<p style="text-align:center; color:#aaa; margin-bottom:30px;">العقول التي تشكل عالمنا الخفي</p>
 
 <div class="team-grid">
 
@@ -234,47 +472,114 @@ footer{
 
 <!-- MEMBER -->
 <div id="member-page" class="page">
-<button class="btn" onclick="showPage('team')">← رجوع</button>
+<button class="btn" onclick="showPage('team')">← رجوع للفريق</button>
 <div class="profile-header">
 <img id="m-img">
 <h2 class="profile-title" id="m-name"></h2>
-<p id="m-role"></p>
+<p id="m-role" style="color:#aaa; font-size:20px; background:rgba(0,0,0,0.3); padding:8px 20px; border-radius:20px; display:inline-block;"></p>
 </div>
 <div class="card">
-<p id="m-desc"></p>
+<p id="m-desc" style="font-size:18px; line-height:1.8;"></p>
 </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about-page" class="page">
+<h1 style="text-align:center">من نحن</h1>
+<div class="card">
+<h2>NERVYNIA TEAM</h2>
+<p style="font-size:18px; line-height:1.8; margin-bottom:20px;">
+نحن فريق يعمل في الظل، نتحرك حيث يتوقف الآخرون. مهمتنا تتجاوز المألوف، نعمل على كسر الحواجز وبناء استراتيجيات غير تقليدية. لا نؤمن بالحدود التي وضعها العالم، بل نصنع عالمنا الخاص.
+</p>
+<p style="font-size:18px; line-height:1.8;">
+نحن مجموعة من العقول التي تفضل العمل في الخفاء، ننسج خططنا بعناية فائقة، نتحرك بدقة وبصمت. وجودنا خفي ولكن تأثيرنا واضح. نحن الظل الذي يرى كل شيء، والصمت الذي يتحدث بأعلى صوت.
+</p>
+</div>
+<div class="card">
+<h2>رؤيتنا</h2>
+<p style="font-size:18px; line-height:1.8;">
+أن نكون القوة الخفية التي تشكل المستقبل، من خلال استراتيجيات غير تقليدية وعمل دؤوب في الخفاء. نؤمن أن القوة الحقيقية ليست في الظهور، بل في التأثير.
+</p>
+</div>
+<button class="btn" onclick="showPage('home')" style="display:block; margin:30px auto;">العودة للرئيسية</button>
 </div>
 
 <footer>
-<p style="color:var(--accent)">NERVYNIA</p>
-<p>الظل الذي يتحرك في صمت</p>
+<p>NERVYNIA TEAM</p>
+<p>الظل الذي يتحرك في صمت - حيث لا يصل النور</p>
 </footer>
 
 <script>
-const data={
-"كرولو":{img:"images/kroro.jpg",role:"العقل المدبر",desc:"العقل الذي ينسج الخيوط من الظل."},
-"لولوش":{img:"images/lelouch.jpg",role:"الاستراتيجي",desc:"ملك الشطرنج في عالم بلا قواعد."},
-"آدم":{img:"images/adam.jpg",role:"كاسر الأنظمة",desc:"يكسر الحواجز حيث تفشل القوانين."}
+const data = {
+"كرولو": {
+img: "images/kroro.jpg", 
+role: "العقل المدبر", 
+desc: "العقل الذي ينسج الخيوط من الظل. يرى ما لا يراه الآخرون، ويخطط لما لا يتوقعه أحد. قدرته على التحليل والتخطيط تجعله العمود الفقري للفريق. في صمته تكمن أعظم الاستراتيجيات، وفي نظراته تختبئ أعمق الأسرار."
+},
+"لولوش": {
+img: "images/lelouch.jpg", 
+role: "الاستراتيجي", 
+desc: "ملك الشطرنج في عالم بلا قواعد. لا يعترف بالمستحيل، ويصنع خططه كما يرسم الفنان تحفته. كل حركة حسابية، كل قرار مدروس. هو من يحول الظلمات إلى ممرات، والعقبات إلى فرص. استراتيجياته تتحدى المنطق السائد."
+},
+"آدم": {
+img: "images/adam.jpg", 
+role: "كاسر الأنظمة", 
+desc: "يكسر الحواجز حيث تفشل القوانين. لا يؤمن بالحدود ولا يعترف بالممنوع. قدرته على اختراق الأنظمة تجعله العنصر الأكثر خطورة في الفريق. هو من يفتح الأبواب المغلقة، ويكسر الأقفال المستعصية. حيث يقف العالم، يبدأ هو رحلته."
+}
 };
 
-function showPage(p){
-document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-document.getElementById(p+'-page').classList.add('active');
-window.scrollTo(0,0);
+function showPage(p) {
+// تحديث الروابط النشطة
+document.querySelectorAll('.nav-link').forEach(link => {
+link.classList.remove('active');
+if (link.getAttribute('href') === `#${p}`) {
+link.classList.add('active');
+}
+});
+
+document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+document.getElementById(p + '-page').classList.add('active');
+window.scrollTo(0, 0);
 }
 
-function openMember(n){
-const m=data[n];
-document.getElementById('m-img').src=m.img;
-document.getElementById('m-name').innerText=n;
-document.getElementById('m-role').innerText=m.role;
-document.getElementById('m-desc').innerText=m.desc;
+function openMember(n) {
+const m = data[n];
+document.getElementById('m-img').src = m.img;
+document.getElementById('m-name').innerText = n;
+document.getElementById('m-role').innerText = m.role;
+document.getElementById('m-desc').innerText = m.desc;
 showPage('member');
 }
 
-function toggleDark(){
+function toggleDark() {
 document.body.classList.toggle('dark');
+const darkBtn = document.querySelector('.dark-btn');
+darkBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
 }
+
+// تهيئة أولية
+document.addEventListener('DOMContentLoaded', function() {
+// إضافة تأثيرات عند التمرير
+window.addEventListener('scroll', function() {
+const cards = document.querySelectorAll('.member-card, .card');
+const scrollPosition = window.scrollY + window.innerHeight;
+    
+cards.forEach(card => {
+if (card.offsetTop < scrollPosition - 100) {
+card.style.opacity = '1';
+card.style.transform = 'translateY(0)';
+} else {
+card.style.opacity = '0.8';
+card.style.transform = 'translateY(20px)';
+}
+});
+});
+
+// تشغيل تأثيرات التمرير أول مرة
+setTimeout(() => {
+window.dispatchEvent(new Event('scroll'));
+}, 100);
+});
 </script>
 
 </body>
