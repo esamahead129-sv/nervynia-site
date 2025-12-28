@@ -349,6 +349,10 @@ canvas {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .back:hover {
@@ -490,12 +494,12 @@ canvas {
     <div class="sys-title">NIRVANIA</div>
     <div class="sys-sub">DIGITAL CORE SYSTEM - تأسس 2020</div>
     
-    <button class="sys-btn" onclick="go('members')">
+    <button class="sys-btn" onclick="goToPage('members')">
       <i class="fas fa-users btn-icon"></i>
       <span>الأعضاء</span>
     </button>
     
-    <button class="sys-btn" onclick="go('about')">
+    <button class="sys-btn" onclick="goToPage('about')">
       <i class="fas fa-info-circle btn-icon"></i>
       <span>تعريف نيرفينيا</span>
     </button>
@@ -523,49 +527,49 @@ canvas {
     </div>
     
     <div class="members-grid">
-      <div class="member-card" onclick="go('chrollo')">
+      <div class="member-card" onclick="goToPage('chrollo')">
         <div class="member-avatar">C</div>
         <div class="member-title">CHROLLO</div>
         <div class="member-role">الوحدة المركزية</div>
         <div class="member-id">رمز: 𝐶 𝐻 𝑅</div>
       </div>
       
-      <div class="member-card" onclick="go('lelouch')">
+      <div class="member-card" onclick="goToPage('lelouch')">
         <div class="member-avatar">L</div>
         <div class="member-title">LELOUCH</div>
         <div class="member-role">استراتيجيات</div>
         <div class="member-id">رمز: 𝐿 𝐸 𝐿</div>
       </div>
       
-      <div class="member-card" onclick="go('katana')">
+      <div class="member-card" onclick="goToPage('katana')">
         <div class="member-avatar">K</div>
         <div class="member-title">KATANA</div>
         <div class="member-role">تنفيذ عمليات</div>
         <div class="member-id">رمز: 𝐾 𝐴 𝑇</div>
       </div>
       
-      <div class="member-card" onclick="go('aizen')">
+      <div class="member-card" onclick="goToPage('aizen')">
         <div class="member-avatar">A</div>
         <div class="member-title">AIZEN</div>
         <div class="member-role">تحليل بيانات</div>
         <div class="member-id">رمز: 𝐴 𝐼 𝑍</div>
       </div>
       
-      <div class="member-card" onclick="go('mika')">
+      <div class="member-card" onclick="goToPage('mika')">
         <div class="member-avatar">M</div>
         <div class="member-title">MIKA</div>
         <div class="member-role">اتصالات</div>
         <div class="member-id">رمز: 𝑀 𝐼 𝐾</div>
       </div>
       
-      <div class="member-card" onclick="go('adam')">
+      <div class="member-card" onclick="goToPage('adam')">
         <div class="member-avatar">A</div>
         <div class="member-title">ADAM</div>
         <div class="member-role">تطوير النظام</div>
         <div class="member-id">رمز: 𝐴 𝐷 𝐴</div>
       </div>
       
-      <div class="member-card" onclick="go('idris')">
+      <div class="member-card" onclick="goToPage('idris')">
         <div class="member-avatar">I</div>
         <div class="member-title">IDRIS</div>
         <div class="member-role">أمن رقمي</div>
@@ -573,7 +577,7 @@ canvas {
       </div>
     </div>
     
-    <button class="back" onclick="go('home')">
+    <button class="back" onclick="goToPage('home')">
       <i class="fas fa-arrow-right"></i> العودة للرئيسية
     </button>
   </div>
@@ -624,7 +628,7 @@ canvas {
       </div>
     </div>
     
-    <button class="back" onclick="go('members')">
+    <button class="back" onclick="goToPage('members')">
       <i class="fas fa-arrow-right"></i> العودة للأعضاء
     </button>
   </div>
@@ -674,7 +678,7 @@ canvas {
       </div>
     </div>
     
-    <button class="back" onclick="go('members')">
+    <button class="back" onclick="goToPage('members')">
       <i class="fas fa-arrow-right"></i> العودة للأعضاء
     </button>
   </div>
@@ -724,7 +728,7 @@ canvas {
       </div>
     </div>
     
-    <button class="back" onclick="go('members')">
+    <button class="back" onclick="goToPage('members')">
       <i class="fas fa-arrow-right"></i> العودة للأعضاء
     </button>
   </div>
@@ -774,47 +778,45 @@ canvas {
       </div>
     </div>
     
-    <button class="back" onclick="go('members')">
+    <button class="back" onclick="goToPage('members')">
       <i class="fas fa-arrow-right"></i> العودة للأعضاء
     </button>
   </div>
 </div>
 
-<!-- ABOUT -->
-<div id="about" class="page">
+<!-- MIKA -->
+<div id="mika" class="page">
   <div class="container">
-    <div class="center">
-      <div class="sys-title">تعريف نيرفينيا</div>
-      <div class="sys-sub">النظام الرقمي المتكامل</div>
-    </div>
-    
     <div class="card">
-      <div class="desc">
-        <p style="font-size: 18px; margin-bottom: 20px;">
-          نيرفينيا نظام رقمي تأسس عام 2020 كمنصة للتحليل الرقمي والتخطيط الاستراتيجي.
-        </p>
-        
-        <p style="line-height: 1.9; text-align: right; margin-bottom: 25px;">
-          تطور النظام عبر وحدات متخصصة مغلقة حتى عام 2026، حيث طور قدرات فريدة في مجالات:
-        </p>
-        
-        <div class="stats">
-          <div class="stat-item">
-            <div class="stat-label">التحليل الرقمي</div>
-            <div class="stat-value">96%</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-label">الأمن السيبراني</div>
-            <div class="stat-value">94%</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-label">التخطيط الاستراتيجي</div>
-            <div class="stat-value">98%</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-label">تطوير الأنظمة</div>
-            <div class="stat-value">92%</div>
-          </div>
+      <div class="screen">
+        <div class="screen-content">
+          <i class="fas fa-satellite-dish" style="font-size: 50px; color: var(--accent); margin-bottom: 15px;"></i>
+          <div class="member-code">𝑀 𝐼 𝐾 𝐴</div>
+          <span>اتصالات</span>
         </div>
-        
-        <p style="line-height: 1.9; te
+      </div>
+      
+      <div class="member-name">
+        <span>MIKA</span>
+        <div class="member-symbol">𝑀 𝐼 𝐾</div>
+      </div>
+      
+      <div class="desc">
+        <p>
+          وحدة الاتصالات والتواصل. مسؤولة عن ضمان الاتصال المستمر بين جميع الوحدات.
+          متخصصة في تشفير الرسائل وإقامة قنوات اتصال آمنة.
+        </p>
+      </div>
+      
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-label">المستوى</div>
+          <div class="stat-value">9.2</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">التخصص</div>
+          <div class="stat-value">اتصالات</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">تاريخ الانضمام</div>
+          <div class="stat-value">2022</div
