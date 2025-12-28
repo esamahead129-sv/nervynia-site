@@ -10,211 +10,323 @@
 
 <style>
 /* ================== ROOT ================== */
-:root{
-    --bg-black:#050505;
-    --bg-dark:#0d0d0d;
-    --bg-card:#111;
-    --line:#1f1f1f;
-    --blue:#2f6bff;
-    --silver:#cfcfcf;
-    --soft:#9a9a9a;
-    --glow:0 0 15px rgba(47,107,255,.35);
+:root {
+    --bg-black: #050505;
+    --bg-dark: #0d0d0d;
+    --bg-card: #111;
+    --line: #1f1f1f;
+    --blue: #2f6bff;
+    --blue-glow: #3a7aff;
+    --silver: #cfcfcf;
+    --soft: #9a9a9a;
+    --glow: 0 0 15px rgba(47, 107, 255, 0.35);
+    --text-glow: 0 0 10px rgba(47, 107, 255, 0.7);
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    background:var(--bg-black);
-    color:var(--silver);
-    font-family:'Cairo', sans-serif;
-    overflow-x:hidden;
+body {
+    background: var(--bg-black);
+    color: var(--silver);
+    font-family: 'Cairo', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
 }
 
 /* ================== SPLASH ================== */
-#splash{
-    position:fixed;
-    inset:0;
-    background:radial-gradient(circle at center,#0b0b0b,#000);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
+#splash {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, #0b0b0b, #000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-#splash h1{
-    font-family:'Orbitron', sans-serif;
-    font-size:48px;
-    letter-spacing:6px;
-    color:var(--blue);
-    text-shadow:var(--glow);
-    animation:enter 2s ease forwards;
+#splash h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 48px;
+    letter-spacing: 6px;
+    background: linear-gradient(90deg, var(--silver), var(--blue-glow), var(--silver));
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: enter 2s ease forwards, glowText 3s infinite alternate;
+    text-shadow: var(--text-glow);
 }
 
-@keyframes enter{
-    from{opacity:0; transform:scale(.8);}
-    to{opacity:1; transform:scale(1);}
+@keyframes enter {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes glowText {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
 /* ================== PAGES ================== */
-.page{
-    display:none;
-    min-height:100vh;
-    padding:40px 18px 80px;
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 40px 18px 80px;
+    animation: fadeIn 0.5s ease forwards;
 }
 
-.page.active{
-    display:block;
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* ================== MAIN TITLE ================== */
-.title{
-    text-align:center;
-    margin-bottom:40px;
+.title {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
 }
 
-.title h1{
-    font-family:'Orbitron', sans-serif;
-    font-size:34px;
-    letter-spacing:4px;
-    color:var(--silver);
-    text-shadow:var(--glow);
+.title h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 34px;
+    letter-spacing: 4px;
+    color: var(--silver);
+    text-shadow: var(--glow);
+    position: relative;
+    display: inline-block;
 }
 
-.title span{
-    display:block;
-    font-size:12px;
-    color:var(--soft);
-    margin-top:6px;
+.title h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+}
+
+.title span {
+    display: block;
+    font-size: 12px;
+    color: var(--soft);
+    margin-top: 16px;
 }
 
 /* ================== BUTTONS ================== */
-.menu-btn{
-    width:100%;
-    padding:16px;
-    margin:14px 0;
-    background:linear-gradient(180deg,#0e0e0e,#090909);
-    border:1px solid var(--line);
-    border-radius:14px;
-    color:var(--silver);
-    font-size:16px;
-    position:relative;
-    overflow:hidden;
+.menu-btn {
+    width: 100%;
+    padding: 16px;
+    margin: 14px 0;
+    background: linear-gradient(180deg, #0e0e0e, #090909);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    color: var(--silver);
+    font-size: 16px;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.menu-btn::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(120deg,transparent,rgba(47,107,255,.15),transparent);
-    opacity:0;
-    transition:.4s;
+.menu-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(47, 107, 255, 0.15), transparent);
+    opacity: 0;
+    transition: 0.4s;
 }
 
-.menu-btn:hover::before{
-    opacity:1;
+.menu-btn:hover {
+    border-color: var(--blue);
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
 }
 
-.menu-btn:hover{
-    border-color:var(--blue);
-    box-shadow:var(--glow);
+.menu-btn:hover::before {
+    opacity: 1;
 }
 
 /* ================== MEMBER LIST ================== */
-.member-list button{
-    text-align:left;
-    font-family:'Orbitron', sans-serif;
-    letter-spacing:2px;
+.member-list button {
+    text-align: right;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
 }
 
 /* ================== MEMBER PAGE ================== */
-.member-card{
-    background:var(--bg-card);
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:20px;
-    box-shadow:0 0 40px rgba(0,0,0,.6);
+.member-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+    animation: cardAppear 0.6s ease forwards;
+}
+
+@keyframes cardAppear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Screen Card */
-.screen{
-    width:100%;
-    aspect-ratio:1/1;
-    border:1px solid var(--line);
-    border-radius:12px;
-    background:linear-gradient(135deg,#0b0b0b,#121212);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:22px;
-    position:relative;
+.screen {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0b0b0b, #121212);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    position: relative;
+    overflow: hidden;
 }
 
-.screen::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    box-shadow:inset 0 0 40px rgba(47,107,255,.08);
+.screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent 40%, rgba(47, 107, 255, 0.05) 50%, transparent 60%);
+    animation: scan 3s linear infinite;
 }
 
-.screen span{
-    font-family:'Orbitron', sans-serif;
-    color:#333;
-    letter-spacing:2px;
+.screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 40px rgba(47, 107, 255, 0.08);
+}
+
+.screen span {
+    font-family: 'Orbitron', sans-serif;
+    color: #333;
+    letter-spacing: 2px;
+    font-size: 14px;
+}
+
+@keyframes scan {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }
 
 /* Name */
-.member-name{
-    text-align:center;
-    font-family:'Orbitron', sans-serif;
-    font-size:28px;
-    letter-spacing:3px;
-    margin-bottom:14px;
-    color:var(--silver);
+.member-name {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+    background: linear-gradient(90deg, var(--silver), var(--blue-glow));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: var(--text-glow);
 }
 
 /* Description */
-.member-desc{
-    background:#0a0a0a;
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:18px;
+.member-desc {
+    background: #0a0a0a;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+    position: relative;
 }
 
-.member-desc p{
-    line-height:2;
-    color:#bdbdbd;
-    font-size:15px;
+.member-desc::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: 20px;
+    width: 40px;
+    height: 2px;
+    background: var(--blue);
+}
+
+.member-desc p {
+    line-height: 2;
+    color: #bdbdbd;
+    font-size: 15px;
 }
 
 /* ================== ABOUT ================== */
-.about-box{
-    background:#0c0c0c;
-    border:1px solid var(--line);
-    border-radius:18px;
-    padding:26px;
-    box-shadow:0 0 30px rgba(0,0,0,.7);
+.about-box {
+    background: #0c0c0c;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+    position: relative;
+    animation: cardAppear 0.6s ease forwards;
 }
 
-.about-box p{
-    line-height:2.1;
-    color:#cfcfcf;
+.about-box::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: 30px;
+    width: 60px;
+    height: 2px;
+    background: var(--blue);
+}
+
+.about-box p {
+    line-height: 2.1;
+    color: #cfcfcf;
+    text-align: justify;
 }
 
 /* ================== BACK ================== */
-.back{
-    margin-top:30px;
-    padding:14px;
-    background:linear-gradient(180deg,#2f6bff,#1f4fff);
-    color:#fff;
-    border:none;
-    border-radius:14px;
-    width:100%;
-    font-family:'Orbitron', sans-serif;
-    letter-spacing:2px;
+.back {
+    margin-top: 30px;
+    padding: 14px;
+    background: linear-gradient(180deg, #2f6bff, #1f4fff);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    width: 100%;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back:hover {
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 480px) {
+    #splash h1 {
+        font-size: 36px;
+        letter-spacing: 4px;
+    }
+    
+    .title h1 {
+        font-size: 28px;
+    }
+    
+    .member-name {
+        font-size: 24px;
+    }
+    
+    .menu-btn, .back {
+        padding: 14px;
+    }
 }
 </style>
 </head>
@@ -256,7 +368,7 @@ body{
     <button class="back" onclick="openPage('home')">BACK</button>
 </div>
 
-<!-- TEMPLATE MEMBER (مثال كرولو) -->
+<!-- TEMPLATE MEMBER (كرولو) -->
 <div id="chrollo" class="page">
     <div class="member-card">
         <div class="screen">
@@ -277,18 +389,72 @@ body{
     <button class="back" onclick="openPage('members')">BACK</button>
 </div>
 
-<!-- باقي الأعضاء بنفس النمط -->
-<div id="lelouch" class="page"><div class="member-card"><div class="screen"><span>IMAGE SLOT</span></div><div class="member-name">𝑳𝑬𝑳𝑶𝑼𝑪𝑯</div><div class="member-desc"><p>التحكم والسيطرة الاستراتيجية. قراءة الخصوم وصناعة القرار.</p></div></div><button class="back" onclick="openPage('members')">BACK</button></div>
+<!-- باقي الأعضاء -->
+<div id="lelouch" class="page">
+    <div class="member-card">
+        <div class="screen"><span>IMAGE SLOT</span></div>
+        <div class="member-name">𝑳𝑬𝑳𝑶𝑼𝑪𝑯</div>
+        <div class="member-desc">
+            <p>التحكم والسيطرة الاستراتيجية. قراءة الخصوم وصناعة القرار.</p>
+        </div>
+    </div>
+    <button class="back" onclick="openPage('members')">BACK</button>
+</div>
 
-<div id="katana" class="page"><div class="member-card"><div class="screen"><span>IMAGE SLOT</span></div><div class="member-name">𝑲𝑨𝑻𝑨𝑵𝑨</div><div class="member-desc"><p>وحدة التنفيذ المباشر. دقة، سرعة، بلا تردد.</p></div></div><button class="back" onclick="openPage('members')">BACK</button></div>
+<div id="katana" class="page">
+    <div class="member-card">
+        <div class="screen"><span>IMAGE SLOT</span></div>
+        <div class="member-name">𝑲𝑨𝑻𝑨𝑵𝑨</div>
+        <div class="member-desc">
+            <p>وحدة التنفيذ المباشر. دقة، سرعة، بلا تردد.</p>
+        </div>
+    </div>
+    <button class="back" onclick="openPage('members')">BACK</button>
+</div>
 
-<div id="aizen" class="page"><div class="member-card"><div class="screen"><span>IMAGE SLOT</span></div><div class="member-name">𝑨𝑰𝒁𝑬𝑵</div><div class="member-desc"><p>الهندسة النفسية، التلاعب، بناء الأوهام الرقمية.</p></div></div><button class="back" onclick="openPage('members')">BACK</button></div>
+<div id="aizen" class="page">
+    <div class="member-card">
+        <div class="screen"><span>IMAGE SLOT</span></div>
+        <div class="member-name">𝑨𝑰𝒁𝑬𝑵</div>
+        <div class="member-desc">
+            <p>الهندسة النفسية، التلاعب، بناء الأوهام الرقمية.</p>
+        </div>
+    </div>
+    <button class="back" onclick="openPage('members')">BACK</button>
+</div>
 
-<div id="mika" class="page"><div class="member-card"><div class="screen"><span>IMAGE SLOT</span></div><div class="member-name">𝑴𝑰𝑲𝑨</div><div class="member-desc"><p>التسلل، الاختفاء، العمليات الصامتة.</p></div></div><button class="back" onclick="openPage('members')">BACK</button></div>
+<div id="mika" class="page">
+    <div class="member-card">
+        <div class="screen"><span>IMAGE SLOT</span></div>
+        <div class="member-name">𝑴𝑰𝑲𝑨</div>
+        <div class="member-desc">
+            <p>التسلل، الاختفاء، العمليات الصامتة.</p>
+        </div>
+    </div>
+    <button class="back" onclick="openPage('members')">BACK</button>
+</div>
 
-<div id="adam" class="page"><div class="member-card"><div class="screen"><span>IMAGE SLOT</span></div><div class="member-name">𝑨𝑫𝑨𝑴</div><div class="member-desc"><p>التوازن. النور داخل النظام المظلم.</p></div></div><button class="back" onclick="openPage('members')">BACK</button></div>
+<div id="adam" class="page">
+    <div class="member-card">
+        <div class="screen"><span>IMAGE SLOT</span></div>
+        <div class="member-name">𝑨𝑫𝑨𝑴</div>
+        <div class="member-desc">
+            <p>التوازن. النور داخل النظام المظلم.</p>
+        </div>
+    </div>
+    <button class="back" onclick="openPage('members')">BACK</button>
+</div>
 
-<div id="idris" class="page"><div class="member-card"><div class="screen"><span>IMAGE SLOT</span></div><div class="member-name">𝑰𝑫𝑹𝑰𝑺</div><div class="member-desc"><p>مطرود من الفريق. الأسباب غير معروفة. تم عزله نهائيًا.</p></div></div><button class="back" onclick="openPage('members')">BACK</button></div>
+<div id="idris" class="page">
+    <div class="member-card">
+        <div class="screen"><span>IMAGE SLOT</span></div>
+        <div class="member-name">𝑰𝑫𝑹𝑰𝑺</div>
+        <div class="member-desc">
+            <p>مطرود من الفريق. الأسباب غير معروفة. تم عزله نهائيًا.</p>
+        </div>
+    </div>
+    <button class="back" onclick="openPage('members')">BACK</button>
+</div>
 
 <!-- ABOUT -->
 <div id="about" class="page">
@@ -307,16 +473,32 @@ body{
 </div>
 
 <script>
-setTimeout(()=>{
-    document.getElementById('splash').style.display='none';
-    openPage('home');
-},2000);
+// إخفاء الشاشة التمهيدية بعد ثانيتين
+setTimeout(() => {
+    const splash = document.getElementById('splash');
+    splash.style.opacity = '0';
+    splash.style.transition = 'opacity 0.5s ease';
+    
+    setTimeout(() => {
+        splash.style.display = 'none';
+        openPage('home');
+    }, 500);
+}, 2000);
 
-function openPage(id){
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+// وظيفة فتح الصفحات
+function openPage(id) {
+    // إخفاء جميع الصفحات
+    document.querySelectorAll('.page').forEach(p => {
+        p.classList.remove('active');
+    });
+    
+    // إظهار الصفحة المطلوبة
     document.getElementById(id).classList.add('active');
+    
+    // التمرير لأعلى الصفحة
+    window.scrollTo(0, 0);
 }
 </script>
 
 </body>
-    </html>
+</html>
