@@ -5,36 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NIRVANIA ∞ CORE SYSTEM</title>
 
-<!-- ===================== FONTS ===================== -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- ===================== STYLE ===================== -->
 <style>
-
-/* ===================================================
-   COLOR SYSTEM (STRICT)
-=================================================== */
 :root{
   --black:#000;
   --dark:#05070c;
-  --white:#ffffff;
+  --white:#fff;
   --blue:#1e90ff;
   --line:rgba(255,255,255,.08);
   --muted:rgba(255,255,255,.55);
 }
 
-/* ===================================================
-   RESET
-=================================================== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
-/* ===================================================
-   BODY
-=================================================== */
 body{
   background:var(--black);
   color:var(--white);
@@ -43,9 +27,6 @@ body{
   overflow-x:hidden;
 }
 
-/* ===================================================
-   BACKGROUND GRID (WHITE ONLY)
-=================================================== */
 body::before{
   content:"";
   position:fixed;
@@ -57,9 +38,6 @@ body::before{
   z-index:-2;
 }
 
-/* ===================================================
-   BLUE ENERGY LAYER
-=================================================== */
 body::after{
   content:"";
   position:fixed;
@@ -74,9 +52,6 @@ body::after{
   to{transform:rotate(360deg)}
 }
 
-/* ===================================================
-   PAGE SYSTEM
-=================================================== */
 .page{
   display:none;
   min-height:100vh;
@@ -95,9 +70,6 @@ body::after{
 
 .center{text-align:center}
 
-/* ===================================================
-   TITLES + DECORATION
-=================================================== */
 .title{
   font-family:'Orbitron',sans-serif;
   font-size:46px;
@@ -122,9 +94,6 @@ body::after{
   color:var(--muted);
 }
 
-/* ===================================================
-   TYPEWRITER
-=================================================== */
 .type{
   font-family:'Orbitron',sans-serif;
   font-size:18px;
@@ -140,9 +109,6 @@ body::after{
 @keyframes typing{to{width:100%}}
 @keyframes blink{50%{border-color:transparent}}
 
-/* ===================================================
-   BUTTONS
-=================================================== */
 .btn{
   width:100%;
   padding:22px;
@@ -168,27 +134,18 @@ body::after{
 }
 .btn:hover::before{opacity:.12}
 
-/* ===================================================
-   CARD
-=================================================== */
 .card{
   border:1px solid var(--line);
   padding:34px;
   margin-bottom:34px;
 }
 
-/* ===================================================
-   TEXT
-=================================================== */
 .text{
   margin-top:26px;
   line-height:2.2;
   color:var(--muted);
 }
 
-/* ===================================================
-   MEMBERS GRID
-=================================================== */
 .members{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
@@ -219,9 +176,6 @@ body::after{
   color:var(--muted);
 }
 
-/* ===================================================
-   BACK
-=================================================== */
 .back{
   margin-top:40px;
   padding:18px;
@@ -237,7 +191,7 @@ body::after{
 
 <body>
 
-<!-- ===================== HOME ===================== -->
+<!-- HOME -->
 <div id="home" class="page active center">
   <div class="title">NIR<span>VANIA</span></div>
   <div class="subtitle">DIGITAL SOVEREIGN CORE</div>
@@ -247,63 +201,59 @@ body::after{
   <button class="btn" onclick="window.open('https://wa.me/201029505953')">واتساب</button>
 </div>
 
-<!-- ===================== ABOUT ===================== -->
+<!-- ABOUT -->
 <div id="about" class="page">
   <div class="card">
     <div class="type">INITIALIZING NIRVANIA CORE...</div>
     <div class="text">
-      نيرفينيا ليست اسمًا.<br>
-      ليست واجهة.<br><br>
-      نيرفينيا **بنية فكرية رقمية** صُممت للسيطرة،
-      التحليل، وإعادة تشكيل القرار.<br><br>
-      كل عضو يمثل وحدة.<br>
-      وكل وحدة تخدم النظام الأعلى.
+      نيرفينيا ليست اسمًا.<br><br>
+      نيرفينيا **نظام**.<br>
+      شبكة عقول مترابطة،  
+      كل عضو وحدة مستقلة،  
+      وكل وحدة تخدم القلب الرقمي.
     </div>
   </div>
   <button class="back" onclick="go('home')">BACK</button>
 </div>
 
-<!-- ===================== MEMBERS ===================== -->
+<!-- MEMBERS -->
 <div id="members" class="page">
   <div class="title">MEM<span>BERS</span></div>
 
   <div class="members">
-    <div class="member" onclick="go('chrollo')"><h3>𝐂𝐇𝐑𝐎𝐋𝐋𝐎</h3><span>Strategic Core</span></div>
-    <div class="member" onclick="go('lelouch')"><h3>𝐋𝐄𝐋𝐎𝐔𝐂𝐇</h3><span>Tactical Control</span></div>
-    <div class="member" onclick="go('aizen')"><h3>𝐀𝐈𝐙𝐄𝐍</h3><span>Psychological Layer</span></div>
-    <div class="member" onclick="go('katana')"><h3>𝐊𝐀𝐓𝐀𝐍𝐀</h3><span>Combat Logic</span></div>
-    <div class="member" onclick="go('mika')"><h3>𝐌𝐈𝐊𝐀</h3><span>Signal & Media</span></div>
-    <div class="member" onclick="go('adam')"><h3>𝐀𝐃𝐀𝐌</h3><span>Security Node</span></div>
-    <div class="member" onclick="go('idris')"><h3>𝐈𝐃𝐑𝐈𝐒</h3><span>Code Architecture</span></div>
+    <div class="member" onclick="go('chrollo')"><h3>CHROLLO</h3><span>Strategic Core</span></div>
+    <div class="member" onclick="go('lelouch')"><h3>LELOUCH</h3><span>Tactical Control</span></div>
+    <div class="member" onclick="go('aizen')"><h3>AIZEN</h3><span>Psychological Layer</span></div>
+    <div class="member" onclick="go('katana')"><h3>KATANA</h3><span>Combat Logic</span></div>
+    <div class="member" onclick="go('mika')"><h3>MIKA</h3><span>Signal & Media</span></div>
+    <div class="member" onclick="go('adam')"><h3>ADAM</h3><span>Security Node</span></div>
+    <div class="member" onclick="go('idris')"><h3>IDRIS</h3><span>Code Architect</span></div>
   </div>
 
   <button class="back" onclick="go('home')">BACK</button>
 </div>
 
-<!-- ===================== MEMBER PAGES (EXAMPLE) ===================== -->
-<div id="chrollo" class="page">
-  <div class="card">
-    <div class="type">ACCESSING STRATEGIC CORE...</div>
-    <div class="text">
-      CHROLLO هو العقل الأعلى.<br>
-      يحدد الرؤية، يبني الهيكل،
-      ويتحكم في الاتجاه العام للنظام.
-    </div>
-  </div>
-  <button class="back" onclick="go('members')">BACK</button>
-</div>
+<!-- MEMBER PAGES -->
+<div id="chrollo" class="page"><div class="card"><div class="type">STRATEGIC CORE ONLINE</div><div class="text">العقل القيادي الأعلى.<br>يرسم الرؤية ويتحكم في اتجاه النظام.</div></div><button class="back" onclick="go('members')">BACK</button></div>
 
-<!-- يمكن تكرار نفس البنية لباقي الأعضاء -->
+<div id="lelouch" class="page"><div class="card"><div class="type">TACTICAL SYSTEM ACTIVE</div><div class="text">تحليل المواقف، اتخاذ القرار، السيطرة التكتيكية.</div></div><button class="back" onclick="go('members')">BACK</button></div>
 
-<!-- ===================== SCRIPT ===================== -->
+<div id="aizen" class="page"><div class="card"><div class="type">PSYCHO LAYER LOADED</div><div class="text">التحكم النفسي، الخداع، قراءة العقول.</div></div><button class="back" onclick="go('members')">BACK</button></div>
+
+<div id="katana" class="page"><div class="card"><div class="type">COMBAT LOGIC READY</div><div class="text">التنفيذ، المواجهة، القوة المباشرة.</div></div><button class="back" onclick="go('members')">BACK</button></div>
+
+<div id="mika" class="page"><div class="card"><div class="type">MEDIA SIGNAL SYNCED</div><div class="text">النشر، الإعلام، التحكم بالصورة.</div></div><button class="back" onclick="go('members')">BACK</button></div>
+
+<div id="adam" class="page"><div class="card"><div class="type">SECURITY NODE ACTIVE</div><div class="text">الحماية، الدفاع، تأمين النظام.</div></div><button class="back" onclick="go('members')">BACK</button></div>
+
+<div id="idris" class="page"><div class="card"><div class="type">CODE ARCHITECT ONLINE</div><div class="text">بناء الأكواد، الهيكلة، التطوير.</div></div><button class="back" onclick="go('members')">BACK</button></div>
+
 <script>
 function go(id){
-  document.querySelectorAll('.page')
-    .forEach(p=>p.classList.remove('active'));
-  document.getElementById(id)
-    .classList.add('active');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 </script>
 
 </body>
-</html>
+   </html>
