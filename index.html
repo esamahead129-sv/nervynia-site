@@ -3,14 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIRVANIA ∞ AI CORE</title>
+<title>NIRVANIA ∞ CORE SYSTEM</title>
 
+<!-- ===================== FONTS ===================== -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
 
+<!-- ===================== STYLE ===================== -->
 <style>
-/* ================== CORE PALETTE ================== */
+
+/* ===================================================
+   COLOR SYSTEM (STRICT)
+=================================================== */
 :root{
-  --black:#000000;
+  --black:#000;
   --dark:#05070c;
   --white:#ffffff;
   --blue:#1e90ff;
@@ -18,10 +23,18 @@
   --muted:rgba(255,255,255,.55);
 }
 
-/* ================== RESET ================== */
-*{margin:0;padding:0;box-sizing:border-box}
+/* ===================================================
+   RESET
+=================================================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-/* ================== BODY ================== */
+/* ===================================================
+   BODY
+=================================================== */
 body{
   background:var(--black);
   color:var(--white);
@@ -30,7 +43,9 @@ body{
   overflow-x:hidden;
 }
 
-/* ================== GRID BACKGROUND ================== */
+/* ===================================================
+   BACKGROUND GRID (WHITE ONLY)
+=================================================== */
 body::before{
   content:"";
   position:fixed;
@@ -38,17 +53,19 @@ body::before{
   background:
     linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-  background-size:40px 40px;
+  background-size:48px 48px;
   z-index:-2;
 }
 
-/* ================== BLUE ENERGY ================== */
+/* ===================================================
+   BLUE ENERGY LAYER
+=================================================== */
 body::after{
   content:"";
   position:fixed;
-  inset:-50%;
-  background:radial-gradient(circle at center, rgba(30,144,255,.15), transparent 60%);
-  animation:rotate 30s linear infinite;
+  inset:-60%;
+  background:radial-gradient(circle at center, rgba(30,144,255,.15), transparent 55%);
+  animation:rotate 45s linear infinite;
   z-index:-1;
 }
 
@@ -57,53 +74,85 @@ body::after{
   to{transform:rotate(360deg)}
 }
 
-/* ================== PAGES ================== */
+/* ===================================================
+   PAGE SYSTEM
+=================================================== */
 .page{
   display:none;
   min-height:100vh;
-  padding:80px 22px 140px;
+  padding:90px 24px 160px;
 }
-.page.active{display:block}
+
+.page.active{
+  display:block;
+  animation:fade .6s ease;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
 .center{text-align:center}
 
-/* ================== TITLES ================== */
-.core-title{
+/* ===================================================
+   TITLES + DECORATION
+=================================================== */
+.title{
   font-family:'Orbitron',sans-serif;
   font-size:46px;
   font-weight:900;
   letter-spacing:8px;
-  text-transform:uppercase;
-  margin-bottom:12px;
-  position:relative;
+  margin-bottom:14px;
 }
 
-.core-title span{
+.title span{
   color:var(--blue);
-  animation:pulse 2.5s infinite;
+  animation:pulse 2.6s infinite;
 }
 
 @keyframes pulse{
   0%,100%{text-shadow:0 0 10px rgba(30,144,255,.3)}
-  50%{text-shadow:0 0 30px rgba(30,144,255,.8)}
+  50%{text-shadow:0 0 32px rgba(30,144,255,.9)}
 }
 
-.sub{
-  color:var(--muted);
-  letter-spacing:4px;
+.subtitle{
   font-size:12px;
+  letter-spacing:4px;
+  color:var(--muted);
 }
 
-/* ================== BUTTONS ================== */
+/* ===================================================
+   TYPEWRITER
+=================================================== */
+.type{
+  font-family:'Orbitron',sans-serif;
+  font-size:18px;
+  letter-spacing:3px;
+  color:var(--blue);
+  white-space:nowrap;
+  overflow:hidden;
+  border-left:2px solid var(--blue);
+  width:0;
+  animation:typing 4s steps(40,end) forwards, blink .7s infinite;
+}
+
+@keyframes typing{to{width:100%}}
+@keyframes blink{50%{border-color:transparent}}
+
+/* ===================================================
+   BUTTONS
+=================================================== */
 .btn{
   width:100%;
   padding:22px;
-  margin:18px 0;
+  margin:20px 0;
   background:transparent;
   border:1px solid var(--line);
   color:var(--white);
   font-size:16px;
   letter-spacing:2px;
+  cursor:pointer;
   position:relative;
   overflow:hidden;
 }
@@ -117,60 +166,46 @@ body::after{
   transition:.4s;
   z-index:-1;
 }
-
 .btn:hover::before{opacity:.12}
 
-/* ================== CARDS ================== */
+/* ===================================================
+   CARD
+=================================================== */
 .card{
   border:1px solid var(--line);
-  padding:30px;
-  margin-bottom:30px;
+  padding:34px;
+  margin-bottom:34px;
 }
 
-/* ================== TYPEWRITER ================== */
-.type{
-  font-family:'Orbitron',sans-serif;
-  font-size:20px;
-  letter-spacing:3px;
-  color:var(--blue);
-  white-space:nowrap;
-  overflow:hidden;
-  border-left:2px solid var(--blue);
-  animation:typing 5s steps(40,end), blink .7s infinite;
-}
-
-@keyframes typing{
-  from{width:0}
-  to{width:100%}
-}
-@keyframes blink{
-  50%{border-color:transparent}
-}
-
-/* ================== TEXT ================== */
+/* ===================================================
+   TEXT
+=================================================== */
 .text{
-  margin-top:25px;
+  margin-top:26px;
   line-height:2.2;
   color:var(--muted);
 }
 
-/* ================== MEMBERS ================== */
+/* ===================================================
+   MEMBERS GRID
+=================================================== */
 .members{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:22px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:24px;
 }
 
 .member{
   border:1px solid var(--line);
-  padding:22px;
+  padding:26px;
   text-align:center;
+  cursor:pointer;
   transition:.4s;
 }
 
 .member:hover{
   border-color:var(--blue);
-  box-shadow:0 0 20px rgba(30,144,255,.25);
+  box-shadow:0 0 26px rgba(30,144,255,.25);
 }
 
 .member h3{
@@ -184,7 +219,9 @@ body::after{
   color:var(--muted);
 }
 
-/* ================== BACK ================== */
+/* ===================================================
+   BACK
+=================================================== */
 .back{
   margin-top:40px;
   padding:18px;
@@ -193,59 +230,80 @@ body::after{
   background:var(--white);
   color:var(--black);
   font-family:'Orbitron',sans-serif;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HOME -->
+<!-- ===================== HOME ===================== -->
 <div id="home" class="page active center">
-  <div class="core-title">NIR<span>VANIA</span></div>
-  <div class="sub">ARTIFICIAL INTELLIGENCE CORE</div>
+  <div class="title">NIR<span>VANIA</span></div>
+  <div class="subtitle">DIGITAL SOVEREIGN CORE</div>
 
-  <button class="btn" onclick="go('about')">ABOUT NIRVANIA</button>
-  <button class="btn" onclick="go('members')">MEMBERS</button>
+  <button class="btn" onclick="go('about')">تعريف نيرفينيا</button>
+  <button class="btn" onclick="go('members')">الفريق</button>
+  <button class="btn" onclick="window.open('https://wa.me/201029505953')">واتساب</button>
 </div>
 
-<!-- ABOUT -->
+<!-- ===================== ABOUT ===================== -->
 <div id="about" class="page">
   <div class="card">
-    <div class="type">INITIALIZING NIRVANIA CORE SYSTEM...</div>
+    <div class="type">INITIALIZING NIRVANIA CORE...</div>
     <div class="text">
-      نيرفينيا ليست مشروعًا.  
-      ليست فريقًا.  
-      <br><br>
-      نيرفينيا **بنية فكرية رقمية**  
-      صُممت للسيطرة على الفوضى،  
-      وتحويل البيانات إلى قرارات،  
-      والقرار إلى نفوذ.
-      <br><br>
-      كل ما تراه هنا ليس واجهة،  
-      بل **انعكاس لنظام يعمل في الخلفية**.
+      نيرفينيا ليست اسمًا.<br>
+      ليست واجهة.<br><br>
+      نيرفينيا **بنية فكرية رقمية** صُممت للسيطرة،
+      التحليل، وإعادة تشكيل القرار.<br><br>
+      كل عضو يمثل وحدة.<br>
+      وكل وحدة تخدم النظام الأعلى.
     </div>
   </div>
   <button class="back" onclick="go('home')">BACK</button>
 </div>
 
-<!-- MEMBERS -->
+<!-- ===================== MEMBERS ===================== -->
 <div id="members" class="page">
-  <div class="core-title">MEM<span>BERS</span></div>
+  <div class="title">MEM<span>BERS</span></div>
+
   <div class="members">
-    <div class="member"><h3>CHROLLO</h3><span>Strategic Core</span></div>
-    <div class="member"><h3>LELOUCH</h3><span>Tactical Control</span></div>
-    <div class="member"><h3>AIZEN</h3><span>Psychological Layer</span></div>
-    <div class="member"><h3>IDRIS</h3><span>Code Architecture</span></div>
+    <div class="member" onclick="go('chrollo')"><h3>𝐂𝐇𝐑𝐎𝐋𝐋𝐎</h3><span>Strategic Core</span></div>
+    <div class="member" onclick="go('lelouch')"><h3>𝐋𝐄𝐋𝐎𝐔𝐂𝐇</h3><span>Tactical Control</span></div>
+    <div class="member" onclick="go('aizen')"><h3>𝐀𝐈𝐙𝐄𝐍</h3><span>Psychological Layer</span></div>
+    <div class="member" onclick="go('katana')"><h3>𝐊𝐀𝐓𝐀𝐍𝐀</h3><span>Combat Logic</span></div>
+    <div class="member" onclick="go('mika')"><h3>𝐌𝐈𝐊𝐀</h3><span>Signal & Media</span></div>
+    <div class="member" onclick="go('adam')"><h3>𝐀𝐃𝐀𝐌</h3><span>Security Node</span></div>
+    <div class="member" onclick="go('idris')"><h3>𝐈𝐃𝐑𝐈𝐒</h3><span>Code Architecture</span></div>
   </div>
+
   <button class="back" onclick="go('home')">BACK</button>
 </div>
 
+<!-- ===================== MEMBER PAGES (EXAMPLE) ===================== -->
+<div id="chrollo" class="page">
+  <div class="card">
+    <div class="type">ACCESSING STRATEGIC CORE...</div>
+    <div class="text">
+      CHROLLO هو العقل الأعلى.<br>
+      يحدد الرؤية، يبني الهيكل،
+      ويتحكم في الاتجاه العام للنظام.
+    </div>
+  </div>
+  <button class="back" onclick="go('members')">BACK</button>
+</div>
+
+<!-- يمكن تكرار نفس البنية لباقي الأعضاء -->
+
+<!-- ===================== SCRIPT ===================== -->
 <script>
 function go(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.page')
+    .forEach(p=>p.classList.remove('active'));
+  document.getElementById(id)
+    .classList.add('active');
 }
 </script>
 
 </body>
-      </html>
+</html>
