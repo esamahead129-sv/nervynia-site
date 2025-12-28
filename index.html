@@ -1,254 +1,738 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIRVANIA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirvania - النسخة النهائية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1a237e;
+            --dark-blue: #0d1533;
+            --accent-blue: #2979ff;
+            --light-blue: #bbdefb;
+            --white: #ffffff;
+            --gray: #e0e0e0;
+            --dark-gray: #212121;
+            --success: #00c853;
+            --warning: #ff9100;
+            --danger: #ff1744;
+        }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
 
-body{
-    background:#000;
-    color:#fff;
-    overflow-x:hidden;
-}
+        body {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, #000000 100%);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-/* ===== Splash Screen ===== */
-#splash{
-    position:fixed;
-    inset:0;
-    background:linear-gradient(135deg,#000,#0a1aff,#000);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-}
+        /* الجانب الجانبي */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(13, 21, 51, 0.95);
+            border-left: 4px solid var(--accent-blue);
+            padding: 20px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            display: none;
+        }
 
-#splash h1{
-    font-size:48px;
-    letter-spacing:4px;
-    color:#00aaff;
-    animation:fade 2s ease forwards;
-}
+        .sidebar.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
 
-@keyframes fade{
-    0%{opacity:0; transform:scale(0.8);}
-    100%{opacity:1; transform:scale(1);}
-}
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
 
-/* ===== Pages ===== */
-.page{
-    display:none;
-    min-height:100vh;
-    padding:40px 20px;
-}
+        .logo-container {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--accent-blue);
+            margin-bottom: 30px;
+        }
 
-.page.active{
-    display:block;
-}
+        .main-logo {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--white);
+            text-shadow: 0 0 20px var(--accent-blue);
+            letter-spacing: 3px;
+        }
 
-/* ===== Main Menu ===== */
-.menu h2{
-    text-align:center;
-    margin-bottom:30px;
-    color:#00aaff;
-}
+        .main-tagline {
+            color: var(--light-blue);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
 
-.menu button{
-    width:100%;
-    padding:15px;
-    margin:10px 0;
-    background:#111;
-    border:1px solid #00aaff;
-    color:#fff;
-    font-size:18px;
-    border-radius:10px;
-}
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-/* ===== Member Card ===== */
-.member-intro{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:40vh;
-    background:linear-gradient(180deg,#000,#111);
-    margin-bottom:20px;
-}
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
 
-.member-intro h1{
-    color:#00aaff;
-    font-size:36px;
-}
+        .nav-link:hover {
+            background: rgba(41, 121, 255, 0.2);
+            transform: translateX(5px);
+        }
 
-.member-content{
-    text-align:center;
-}
+        .nav-link.active {
+            background: var(--accent-blue);
+            box-shadow: 0 0 15px rgba(41, 121, 255, 0.5);
+        }
 
-.member-content p{
-    margin:10px 0;
-    line-height:1.8;
-    color:#ddd;
-}
+        /* المحتوى الرئيسي */
+        .main-content {
+            margin-right: 0;
+            padding: 20px;
+            transition: margin-right 0.3s ease;
+        }
 
-/* ===== About ===== */
-.about{
-    text-align:center;
-}
+        .main-content.expanded {
+            margin-right: 280px;
+        }
 
-.about h1{
-    color:#00aaff;
-    margin-bottom:20px;
-}
+        /* شريط التنقل العلوي */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(13, 21, 51, 0.8);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
 
-.about p{
-    line-height:1.9;
-    color:#ccc;
-}
+        .menu-toggle {
+            background: var(--accent-blue);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
 
-/* ===== Back Button ===== */
-.back{
-    margin-top:30px;
-    padding:10px;
-    background:#00aaff;
-    color:#000;
-    border:none;
-    border-radius:8px;
-    width:100%;
-}
-</style>
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--accent-blue);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--primary-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .user-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* الصفحات */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* الصفحة الرئيسية */
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.3), rgba(0, 0, 0, 0.5));
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 2px solid rgba(41, 121, 255, 0.3);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(41, 121, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--light-blue);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: rgba(41, 121, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(41, 121, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(41, 121, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--light-blue);
+            font-size: 1.1rem;
+        }
+
+        /* صفحة الأعضاء */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .member-card {
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.3), rgba(0, 0, 0, 0.5));
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(41, 121, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(41, 121, 255, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        .member-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--primary-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            border: 3px solid var(--white);
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--white);
+        }
+
+        .member-rank {
+            color: var(--accent-blue);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .member-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .skill-tag {
+            background: rgba(41, 121, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: var(--light-blue);
+        }
+
+        .member-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .status-online {
+            background: rgba(0, 200, 83, 0.2);
+            color: var(--success);
+        }
+
+        .status-offline {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+        }
+
+        /* صفحة المحادثات */
+        .chat-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            height: 600px;
+        }
+
+        .chat-sidebar {
+            flex: 0 0 350px;
+            background: rgba(13, 21, 51, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(41, 121, 255, 0.3);
+            overflow-y: auto;
+        }
+
+        .chat-search {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(41, 121, 255, 0.3);
+            border-radius: 25px;
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .chat-search:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .chat-users {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chat-user:hover {
+            background: rgba(41, 121, 255, 0.2);
+        }
+
+        .chat-user.active {
+            background: var(--accent-blue);
+        }
+
+        .user-avatar-small {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--primary-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: rgba(13, 21, 51, 0.8);
+            border-radius: 15px;
+            border: 1px solid rgba(41, 121, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: 20px;
+            background: rgba(26, 35, 126, 0.3);
+            border-bottom: 1px solid rgba(41, 121, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            position: relative;
+            animation: messageIn 0.3s ease;
+        }
+
+        @keyframes messageIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.sent {
+            align-self: flex-end;
+            background: linear-gradient(135deg, var(--accent-blue), #1565c0);
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.received {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-time {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            border-top: 1px solid rgba(41, 121, 255, 0.3);
+            display: flex;
+            gap: 15px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(41, 121, 255, 0.3);
+            border-radius: 25px;
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .send-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--accent-blue);
+        }
+
+        /* صفحة التعريف */
+        .definition-content {
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.3), rgba(0, 0, 0, 0.5));
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(41, 121, 255, 0.3);
+            margin-top: 30px;
+        }
+
+        .definition-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(41, 121, 255, 0.3);
+        }
+
+        .definition-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--light-blue);
+            margin-bottom: 20px;
+        }
+
+        /* صفحة الواتساب */
+        .whatsapp-section {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.3), rgba(0, 0, 0, 0.5));
+            border-radius: 20px;
+            border: 2px solid #25D366;
+            margin-top: 30px;
+        }
+
+        .whatsapp-icon {
+            font-size: 5rem;
+            color: #25D366;
+            margin-bottom: 30px;
+        }
+
+        .whatsapp-number {
+            font-size: 2.5rem;
+            background: rgba(37, 211, 102, 0.1);
+            padding: 25px 50px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 30px 0;
+            border: 2px solid #25D366;
+            font-family: monospace;
+            color: var(--white);
+        }
+
+        /* نافذة الحوار */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: var(--dark-blue);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            border: 2px solid var(--accent-blue);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        /* الفوتر */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px 20px;
+            border-top: 1px solid rgba(41, 121, 255, 0.3);
+            color: var(--light-blue);
+            font-size: 0.9rem;
+        }
+
+        /* التجاوب */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 250px;
+            }
+            .main-content.expanded {
+                margin-right: 250px;
+            }
+            .chat-container {
+                flex-direction: column;
+                height: auto;
+            }
+            .chat-sidebar {
+                flex: none;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+            }
+            .main-content.expanded {
+                margin-right: 0;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+            .top-nav {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        /* شريط التمرير */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--light-blue);
+        }
+    </style>
 </head>
-
 <body>
-
-<!-- Splash -->
-<div id="splash">
-    <h1>NIRVANIA</h1>
-</div>
-
-<!-- Main -->
-<div id="home" class="page menu">
-    <h2>Members</h2>
-    <button onclick="openPage('members')">Members</button>
-    <button onclick="openPage('about')">About Nirvania</button>
-    <button onclick="window.open('https://wa.me/201029505953')">WhatsApp</button>
-</div>
-
-<!-- Members List -->
-<div id="members" class="page menu">
-    <button onclick="openPage('chrollo')">Chrollo</button>
-    <button onclick="openPage('lelouch')">Lelouch</button>
-    <button onclick="openPage('katana')">Katana</button>
-    <button onclick="openPage('aizen')">Aizen</button>
-    <button onclick="openPage('mika')">Mika</button>
-    <button onclick="openPage('adam')">Adam</button>
-    <button onclick="openPage('idris')">Idris</button>
-    <button class="back" onclick="openPage('home')">Back</button>
-</div>
-
-<!-- Chrollo -->
-<div id="chrollo" class="page">
-    <div class="member-intro"><h1>Chrollo</h1></div>
-    <div class="member-content">
-        <p>القائد المدبر، العقل المظلم للفريق.</p>
-        <p>يتحكم في الخطط، يقرأ الخصوم قبل أن يتحركوا.</p>
+    <!-- الجانب الجانبي -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-container">
+            <div class="main-logo">NIRVANIA</div>
+            <div class="main-tagline">الفريق المتكامل</div>
+        </div>
+        
+        <div class="nav-links">
+            <a href="#" class="nav-link active" onclick="showPage('home')">
+                <i class="fas fa-home"></i>
+                <span>الرئيسية</span>
+            </a>
+            <a href="#" class="nav-link" onclick="showPage('members')">
+                <i class="fas fa-users"></i>
+                <span>الأعضاء</span>
+            </a>
+            <a href="#" class="nav-link" onclick="showPage('chat')">
+                <i class="fas fa-comments"></i>
+                <span>المحادثات</span>
+            </a>
+            <a href="#" class="nav-link" onclick="showPage('definition')">
+                <i class="fas fa-info-circle"></i>
+                <span>تعريف نيرفينيا</span>
+            </a>
+            <a href="#" class="nav-link" onclick="showPage('whatsapp')">
+                <i class="fab fa-whatsapp"></i>
+                <span>تواصل واتساب</span>
+            </a>
+        </div>
     </div>
-    <button class="back" onclick="openPage('members')">Back</button>
-</div>
 
-<!-- Lelouch -->
-<div id="lelouch" class="page">
-    <div class="member-intro"><h1>Lelouch</h1></div>
-    <div class="member-content">
-        <p>رمز السيطرة والذكاء الاستراتيجي.</p>
-        <p>يحوّل الفوضى إلى نظام.</p>
-    </div>
-    <button class="back" onclick="openPage('members')">Back</button>
-</div>
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content" id="mainContent">
+        <!-- شريط التنقل العلوي -->
+        <div class="top-nav">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div>
+                    <div class="user-name">قائد الفريق</div>
+                    <div style="color: var(--accent-blue); font-size: 0.9rem;">Nirvania Admin</div>
+                </div>
+            </div>
+        </div>
 
-<!-- Katana -->
-<div id="katana" class="page">
-    <div class="member-intro"><h1>Katana</h1></div>
-    <div class="member-content">
-        <p>سيف الفريق.</p>
-        <p>تنفيذ بلا تردد.</p>
-    </div>
-    <button class="back" onclick="openPage('members')">Back</button>
-</div>
-
-<!-- Aizen -->
-<div id="aizen" class="page">
-    <div class="member-intro"><h1>Aizen</h1></div>
-    <div class="member-content">
-        <p>الوهم، الخداع، التحكم بالعقول.</p>
-    </div>
-    <button class="back" onclick="openPage('members')">Back</button>
-</div>
-
-<!-- Mika -->
-<div id="mika" class="page">
-    <div class="member-intro"><h1>Mika</h1></div>
-    <div class="member-content">
-        <p>الجناح الخفي.</p>
-        <p>سرعة، اختفاء، تنفيذ صامت.</p>
-    </div>
-    <button class="back" onclick="openPage('members')">Back</button>
-</div>
-
-<!-- Adam -->
-<div id="adam" class="page">
-    <div class="member-intro"><h1>Adam</h1></div>
-    <div class="member-content">
-        <p>النور وسط الظلام.</p>
-        <p>توازن الفريق.</p>
-    </div>
-    <button class="back" onclick="openPage('members')">Back</button>
-</div>
-
-<!-- Idris -->
-<div id="idris" class="page">
-    <div class="member-intro"><h1>Idris</h1></div>
-    <div class="member-content">
-        <p>مطرود من الفريق.</p>
-        <p>أسباب غير معروفة.</p>
-        <p>تم نبذه… لكن أثره ما زال موجود.</p>
-    </div>
-    <button class="back" onclick="openPage('members')">Back</button>
-</div>
-
-<!-- About -->
-<div id="about" class="page about">
-    <h1>NIRVANIA</h1>
-    <p>
-        تأسس الفريق عام 2020  
-        <br>  
-        استمر حتى 2026  
-        <br><br>
-        فريق نشأ من الفوضى،  
-        تشكّل من عقول لا تشبه غيرها،  
-        وما زال مستمرًا…  
-        <br><br>
-        قصة التأسيس الكاملة سيتم الكشف عنها قريبًا.
-    </p>
-    <button class="back" onclick="openPage('home')">Back</button>
-</div>
-
-<script>
-setTimeout(()=>{
-    document.getElementById('splash').style.display='none';
-    openPage('home');
-},2000);
-
-function openPage(id){
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-}
-</script>
-
-</body>
-</html>
+        <
