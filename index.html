@@ -4,35 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NIRVANIA ∞ CORE SYSTEM</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-:root{
-  --dark-bg: #0a0a0f;
-  --accent-1: #ff0080;
-  --accent-2: #00f7ff;
-  --accent-3: #9d00ff;
-  --accent-4: #ffd700;
+:root {
+  --primary-dark: #0a0a14;
+  --secondary-dark: #151522;
+  --accent-pink: #ff0080;
+  --accent-cyan: #00f7ff;
+  --accent-purple: #9d00ff;
+  --accent-gold: #ffd700;
   --text-primary: #ffffff;
-  --text-secondary: rgba(255,255,255,0.7);
-  --card-bg: rgba(15, 15, 25, 0.8);
-  --border-color: rgba(255,255,255,0.1);
-  --glow-1: 0 0 20px rgba(255, 0, 128, 0.3);
-  --glow-2: 0 0 20px rgba(0, 247, 255, 0.3);
-  --glow-3: 0 0 20px rgba(157, 0, 255, 0.3);
-  --glow-4: 0 0 20px rgba(255, 215, 0, 0.3);
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --card-bg: rgba(20, 20, 30, 0.8);
+  --border-color: rgba(255, 255, 255, 0.15);
+  --glow-pink: 0 0 20px rgba(255, 0, 128, 0.3);
+  --glow-cyan: 0 0 20px rgba(0, 247, 255, 0.3);
+  --glow-purple: 0 0 20px rgba(157, 0, 255, 0.3);
+  --glow-gold: 0 0 20px rgba(255, 215, 0, 0.3);
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
-  background: var(--dark-bg);
+body {
+  background: var(--primary-dark);
   color: var(--text-primary);
   font-family: 'Cairo', sans-serif;
   min-height: 100vh;
@@ -40,69 +40,20 @@ body{
   position: relative;
 }
 
-/* خلفية متحركة */
-.background-effects{
+.background-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  overflow: hidden;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 0, 128, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(0, 247, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(157, 0, 255, 0.1) 0%, transparent 50%);
+  z-index: -2;
 }
 
-.orb{
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(40px);
-  opacity: 0.15;
-  animation: float 20s infinite ease-in-out;
-}
-
-.orb-1{
-  width: 400px;
-  height: 400px;
-  background: var(--accent-1);
-  top: 10%;
-  right: 5%;
-  animation-delay: 0s;
-}
-
-.orb-2{
-  width: 300px;
-  height: 300px;
-  background: var(--accent-2);
-  bottom: 15%;
-  left: 10%;
-  animation-delay: -5s;
-}
-
-.orb-3{
-  width: 350px;
-  height: 350px;
-  background: var(--accent-3);
-  top: 50%;
-  right: 20%;
-  animation-delay: -10s;
-}
-
-.orb-4{
-  width: 250px;
-  height: 250px;
-  background: var(--accent-4);
-  bottom: 5%;
-  right: 30%;
-  animation-delay: -15s;
-}
-
-@keyframes float{
-  0%, 100%{ transform: translate(0, 0) scale(1); }
-  33%{ transform: translate(30px, -50px) scale(1.05); }
-  66%{ transform: translate(-20px, 40px) scale(0.95); }
-}
-
-/* شبكة الخلفية */
-.grid-pattern{
+.grid-pattern {
   position: fixed;
   top: 0;
   left: 0;
@@ -116,91 +67,66 @@ body{
   opacity: 0.3;
 }
 
-/* الصفحات */
-.page{
+.page {
   display: none;
   min-height: 100vh;
-  padding: 100px 20px 80px;
+  padding: 80px 20px;
   position: relative;
 }
 
-.page.active{
+.page.active {
   display: block;
-  animation: pageEnter 0.8s ease-out forwards;
+  animation: fadeIn 0.5s ease-out;
 }
 
-@keyframes pageEnter{
-  from{
+@keyframes fadeIn {
+  from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
-  to{
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 /* الصفحة الرئيسية */
-.home-container{
+.home-container {
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
+  padding-top: 40px;
 }
 
-.logo{
-  margin-bottom: 40px;
-}
-
-.main-title{
+.main-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 4.5rem;
+  font-size: 4rem;
   font-weight: 900;
-  letter-spacing: 8px;
-  margin-bottom: 10px;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
   text-transform: uppercase;
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4));
+  background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan), var(--accent-purple), var(--accent-gold));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  position: relative;
-  display: inline-block;
 }
 
-.main-title::after{
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4));
-  bottom: -10px;
-  left: 0;
-  border-radius: 2px;
-  animation: titleGlow 3s infinite alternate;
-}
-
-@keyframes titleGlow{
-  0%{ box-shadow: 0 0 10px var(--accent-1); }
-  33%{ box-shadow: 0 0 15px var(--accent-2); }
-  66%{ box-shadow: 0 0 15px var(--accent-3); }
-  100%{ box-shadow: 0 0 10px var(--accent-4); }
-}
-
-.tagline{
-  font-size: 1.2rem;
+.subtitle {
+  font-size: 1.1rem;
   color: var(--text-secondary);
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   margin-bottom: 60px;
   font-weight: 300;
 }
 
-.buttons-grid{
+.buttons-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
+  gap: 20px;
   margin-top: 40px;
 }
 
-.nav-btn{
+.nav-btn {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -208,300 +134,371 @@ body{
   color: var(--text-primary);
   font-family: 'Orbitron', sans-serif;
   font-size: 1.1rem;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   cursor: pointer;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  gap: 15px;
 }
 
-.nav-btn i{
-  font-size: 2rem;
-  margin-bottom: 15px;
+.nav-btn i {
+  font-size: 2.2rem;
 }
 
-.nav-btn::before{
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  transition: left 0.7s ease;
+.nav-btn:hover {
+  transform: translateY(-5px);
 }
 
-.nav-btn:hover::before{
-  left: 100%;
+.btn-pink {
+  border-color: var(--accent-pink);
 }
 
-.nav-btn:hover{
-  transform: translateY(-8px);
-  box-shadow: var(--glow-1);
+.btn-pink:hover {
+  box-shadow: var(--glow-pink);
 }
 
-.nav-btn:nth-child(2):hover{ box-shadow: var(--glow-2); }
-.nav-btn:nth-child(3):hover{ box-shadow: var(--glow-3); }
-.nav-btn:nth-child(4):hover{ box-shadow: var(--glow-4); }
+.btn-cyan {
+  border-color: var(--accent-cyan);
+}
 
-.btn-accent-1{ border-color: var(--accent-1); }
-.btn-accent-2{ border-color: var(--accent-2); }
-.btn-accent-3{ border-color: var(--accent-3); }
-.btn-accent-4{ border-color: var(--accent-4); }
+.btn-cyan:hover {
+  box-shadow: var(--glow-cyan);
+}
 
-.btn-accent-1 .btn-icon{ color: var(--accent-1); }
-.btn-accent-2 .btn-icon{ color: var(--accent-2); }
-.btn-accent-3 .btn-icon{ color: var(--accent-3); }
-.btn-accent-4 .btn-icon{ color: var(--accent-4); }
+.btn-purple {
+  border-color: var(--accent-purple);
+}
+
+.btn-purple:hover {
+  box-shadow: var(--glow-purple);
+}
+
+.btn-pink i {
+  color: var(--accent-pink);
+}
+
+.btn-cyan i {
+  color: var(--accent-cyan);
+}
+
+.btn-purple i {
+  color: var(--accent-purple);
+}
 
 /* صفحة التعريف */
-.about-container{
+.about-container {
   max-width: 900px;
   margin: 0 auto;
 }
 
-.terminal-card{
+.terminal-card {
   background: var(--card-bg);
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid var(--border-color);
-  padding: 40px;
+  padding: 30px;
   margin-bottom: 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-top: 4px solid var(--accent-cyan);
 }
 
-.terminal-card::before{
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-}
-
-.terminal-header{
+.terminal-header {
   display: flex;
   align-items: center;
   margin-bottom: 25px;
 }
 
-.terminal-dots{
+.terminal-dots {
   display: flex;
   gap: 8px;
   margin-left: 15px;
 }
 
-.dot{
+.dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
 }
 
-.dot-1{ background: var(--accent-1); }
-.dot-2{ background: var(--accent-2); }
-.dot-3{ background: var(--accent-3); }
-
-.terminal-title{
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.5rem;
-  color: var(--accent-2);
-  letter-spacing: 2px;
+.dot-1 {
+  background: var(--accent-pink);
 }
 
-.typewriter{
-  font-family: 'Cairo', sans-serif;
+.dot-2 {
+  background: var(--accent-cyan);
+}
+
+.dot-3 {
+  background: var(--accent-purple);
+}
+
+.terminal-title {
+  font-family: 'Orbitron', sans-serif;
   font-size: 1.4rem;
+  color: var(--accent-cyan);
+  letter-spacing: 1px;
+}
+
+.system-description {
+  font-size: 1.2rem;
   line-height: 1.8;
   color: var(--text-secondary);
-  margin-top: 20px;
 }
 
-.typewriter span{
-  color: var(--accent-1);
-  font-weight: bold;
-}
-
-.typewriter p{
+.system-description p {
   margin-bottom: 20px;
 }
 
+.highlight {
+  color: var(--accent-pink);
+  font-weight: 600;
+}
+
 /* صفحة الأعضاء */
-.members-container{
+.members-container {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.members-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 40px;
+  background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.member-card{
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.member-card {
   background: var(--card-bg);
-  border-radius: 16px;
-  padding: 30px;
+  border-radius: 12px;
+  padding: 25px;
   text-align: center;
   border: 1px solid var(--border-color);
   cursor: pointer;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-.member-card:hover{
-  transform: translateY(-10px);
+.member-card:hover {
+  transform: translateY(-8px);
 }
 
-.member-icon{
-  width: 80px;
-  height: 80px;
+.member-icon {
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   margin: 0 auto 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: white;
 }
 
-.member-card h3{
+.member-card h3 {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.5rem;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   margin-bottom: 10px;
 }
 
-.member-role{
-  font-size: 1rem;
+.member-role {
+  font-size: 0.95rem;
   color: var(--text-secondary);
   margin-bottom: 15px;
   font-weight: 300;
 }
 
-.member-desc{
+.member-desc {
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.6;
 }
 
 /* ألوان الأعضاء */
-.member-1{ border-color: var(--accent-1); }
-.member-2{ border-color: var(--accent-2); }
-.member-3{ border-color: var(--accent-3); }
-.member-4{ border-color: var(--accent-4); }
-.member-5{ border-color: #ff0080; }
-.member-6{ border-color: #00f7ff; }
-.member-7{ border-color: #9d00ff; }
+.member-1 {
+  border-color: var(--accent-pink);
+}
 
-.member-1 .member-icon{ background: linear-gradient(135deg, var(--accent-1), #cc0066); }
-.member-2 .member-icon{ background: linear-gradient(135deg, var(--accent-2), #00b8c4); }
-.member-3 .member-icon{ background: linear-gradient(135deg, var(--accent-3), #7a00cc); }
-.member-4 .member-icon{ background: linear-gradient(135deg, var(--accent-4), #ccac00); }
-.member-5 .member-icon{ background: linear-gradient(135deg, #ff0080, #99004d); }
-.member-6 .member-icon{ background: linear-gradient(135deg, #00f7ff, #009499); }
-.member-7 .member-icon{ background: linear-gradient(135deg, #9d00ff, #5c0099); }
+.member-2 {
+  border-color: var(--accent-cyan);
+}
 
-.member-1:hover{ box-shadow: var(--glow-1); }
-.member-2:hover{ box-shadow: var(--glow-2); }
-.member-3:hover{ box-shadow: var(--glow-3); }
-.member-4:hover{ box-shadow: var(--glow-4); }
-.member-5:hover{ box-shadow: 0 0 20px rgba(255, 0, 128, 0.3); }
-.member-6:hover{ box-shadow: 0 0 20px rgba(0, 247, 255, 0.3); }
-.member-7:hover{ box-shadow: 0 0 20px rgba(157, 0, 255, 0.3); }
+.member-3 {
+  border-color: var(--accent-purple);
+}
+
+.member-4 {
+  border-color: var(--accent-gold);
+}
+
+.member-5 {
+  border-color: #ff0080;
+}
+
+.member-6 {
+  border-color: #00f7ff;
+}
+
+.member-7 {
+  border-color: #9d00ff;
+}
+
+.member-1 .member-icon {
+  background: linear-gradient(135deg, var(--accent-pink), #cc0066);
+}
+
+.member-2 .member-icon {
+  background: linear-gradient(135deg, var(--accent-cyan), #00b8c4);
+}
+
+.member-3 .member-icon {
+  background: linear-gradient(135deg, var(--accent-purple), #7a00cc);
+}
+
+.member-4 .member-icon {
+  background: linear-gradient(135deg, var(--accent-gold), #ccac00);
+}
+
+.member-5 .member-icon {
+  background: linear-gradient(135deg, #ff0080, #99004d);
+}
+
+.member-6 .member-icon {
+  background: linear-gradient(135deg, #00f7ff, #009499);
+}
+
+.member-7 .member-icon {
+  background: linear-gradient(135deg, #9d00ff, #5c0099);
+}
+
+.member-1:hover {
+  box-shadow: var(--glow-pink);
+}
+
+.member-2:hover {
+  box-shadow: var(--glow-cyan);
+}
+
+.member-3:hover {
+  box-shadow: var(--glow-purple);
+}
+
+.member-4:hover {
+  box-shadow: var(--glow-gold);
+}
+
+.member-5:hover {
+  box-shadow: var(--glow-pink);
+}
+
+.member-6:hover {
+  box-shadow: var(--glow-cyan);
+}
+
+.member-7:hover {
+  box-shadow: var(--glow-purple);
+}
 
 /* صفحة تفاصيل العضو */
-.member-detail-container{
+.member-detail-container {
   max-width: 800px;
   margin: 0 auto;
 }
 
-.member-header{
+.member-header {
   display: flex;
   align-items: center;
   gap: 30px;
   margin-bottom: 40px;
 }
 
-.member-avatar{
-  width: 120px;
-  height: 120px;
+.member-avatar {
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3.5rem;
+  font-size: 2.8rem;
   color: white;
+  flex-shrink: 0;
 }
 
-.member-info h2{
+.member-info h2 {
   font-family: 'Orbitron', sans-serif;
-  font-size: 2.5rem;
-  letter-spacing: 3px;
+  font-size: 2.2rem;
+  letter-spacing: 2px;
   margin-bottom: 10px;
 }
 
-.member-info .role{
-  font-size: 1.3rem;
+.member-info .role {
+  font-size: 1.2rem;
   color: var(--text-secondary);
 }
 
 /* أزرار الرجوع */
-.back-btn{
-  background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+.back-btn {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
   border: none;
   border-radius: 10px;
-  padding: 15px 30px;
+  padding: 16px 30px;
   color: white;
   font-family: 'Orbitron', sans-serif;
   font-size: 1.1rem;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   cursor: pointer;
   margin-top: 40px;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
   max-width: 300px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.back-btn:hover{
-  transform: translateY(-5px);
+.back-btn:hover {
+  transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(255, 0, 128, 0.2);
 }
 
 /* شريط التنقل السفلي */
-.nav-bar{
+.nav-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(10, 10, 15, 0.9);
+  background: rgba(10, 10, 20, 0.95);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--border-color);
   padding: 15px 0;
-  z-index: 100;
+  z-index: 1000;
 }
 
-.nav-links{
+.nav-links {
   display: flex;
   justify-content: center;
   gap: 40px;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-.nav-item{
+.nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -509,128 +506,113 @@ body{
   text-decoration: none;
   font-size: 0.9rem;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.nav-item i{
+.nav-item i {
   font-size: 1.5rem;
   margin-bottom: 5px;
 }
 
-.nav-item.active{
-  color: var(--accent-1);
+.nav-item.active {
+  color: var(--accent-cyan);
 }
 
-.nav-item:hover{
-  color: var(--accent-2);
-}
-
-/* أنيميشن النص الكتابي */
-.typing-effect{
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 3px solid var(--accent-1);
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing{
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes blink-caret{
-  from, to { border-color: transparent }
-  50% { border-color: var(--accent-1) }
+.nav-item:hover {
+  color: var(--accent-pink);
 }
 
 /* استجابة للهواتف */
-@media (max-width: 768px){
-  .main-title{
-    font-size: 3rem;
-    letter-spacing: 4px;
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2.8rem;
+    letter-spacing: 3px;
   }
   
-  .tagline{
+  .subtitle {
     font-size: 1rem;
     letter-spacing: 2px;
   }
   
-  .buttons-grid{
+  .buttons-container {
     grid-template-columns: 1fr;
   }
   
-  .members-grid{
+  .members-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
   
-  .terminal-card{
-    padding: 25px;
+  .terminal-card {
+    padding: 20px;
   }
   
-  .member-header{
+  .member-header {
     flex-direction: column;
     text-align: center;
     gap: 20px;
   }
   
-  .nav-links{
+  .nav-links {
     gap: 20px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
   }
 }
 
-@media (max-width: 480px){
-  .main-title{
+@media (max-width: 480px) {
+  .main-title {
     font-size: 2.2rem;
   }
   
-  .page{
-    padding: 80px 15px 70px;
+  .page {
+    padding: 60px 15px 80px;
   }
   
-  .members-grid{
+  .members-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .nav-links {
+    gap: 15px;
+  }
+  
+  .nav-item {
+    font-size: 0.8rem;
+  }
+  
+  .nav-item i {
+    font-size: 1.3rem;
   }
 }
 </style>
 </head>
 
 <body>
-<!-- تأثيرات الخلفية -->
-<div class="background-effects">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-  <div class="orb orb-4"></div>
-</div>
-
+<div class="background-overlay"></div>
 <div class="grid-pattern"></div>
 
 <!-- الصفحة الرئيسية -->
 <div id="home" class="page active">
   <div class="home-container">
-    <div class="logo">
-      <h1 class="main-title">NIRVANIA</h1>
-      <div class="tagline">DIGITAL SOVEREIGNTY SYSTEM</div>
-    </div>
+    <h1 class="main-title">NIRVANIA</h1>
+    <div class="subtitle">DIGITAL SOVEREIGN CORE SYSTEM</div>
     
-    <div class="buttons-grid">
-      <button class="nav-btn btn-accent-1" onclick="go('about')">
-        <i class="fas fa-info-circle btn-icon"></i>
+    <div class="buttons-container">
+      <button class="nav-btn btn-pink" onclick="go('about')">
+        <i class="fas fa-info-circle"></i>
         تعريف النظام
       </button>
       
-      <button class="nav-btn btn-accent-2" onclick="go('members')">
-        <i class="fas fa-users btn-icon"></i>
+      <button class="nav-btn btn-cyan" onclick="go('members')">
+        <i class="fas fa-users"></i>
         فريق النخبة
       </button>
       
-      <button class="nav-btn btn-accent-3" onclick="window.open('https://wa.me/201029505953')">
-        <i class="fab fa-whatsapp btn-icon"></i>
+      <button class="nav-btn btn-purple" onclick="window.open('https://wa.me/201029505953', '_blank')">
+        <i class="fab fa-whatsapp"></i>
         التواصل عبر واتساب
-      </button>
-      
-      <button class="nav-btn btn-accent-4" onclick="showCredits()">
-        <i class="fas fa-code btn-icon"></i>
-        تفاصيل النظام
       </button>
     </div>
   </div>
@@ -649,13 +631,13 @@ body{
         <div class="terminal-title">NIRVANIA CORE SYSTEM</div>
       </div>
       
-      <div class="typewriter">
-        <p><span>> النظام:</span> نيرفينيا ليست مجرد اسم، إنها نظام متكامل.</p>
-        <p><span>> البنية:</span> شبكة من العقول المترابطة، كل عقل وحدة مستقلة.</p>
-        <p><span>> الهدف:</span> جميع الوحدات تعمل لخدمة القلب الرقمي للنظام.</p>
-        <p><span>> الفلسفة:</span> السيادة الرقمية المطلقة في فضاء المعلومات.</p>
-        <p><span>> التقنية:</span> بنية تحتية هجينة تجمع بين الذكاء البشري والرقمي.</p>
-        <p><span>> الرؤية:</span> إعادة تشكيل المستقبل الرقمي من خلال التحكم الذكي.</p>
+      <div class="system-description">
+        <p><span class="highlight">نيرفينيا</span> ليست مجرد اسم، إنها <span class="highlight">نظام متكامل</span>.</p>
+        <p><span class="highlight">البنية:</span> شبكة من العقول المترابطة، كل عقل وحدة مستقلة.</p>
+        <p><span class="highlight">الهدف:</span> جميع الوحدات تعمل لخدمة القلب الرقمي للنظام.</p>
+        <p><span class="highlight">الفلسفة:</span> السيادة الرقمية المطلقة في فضاء المعلومات.</p>
+        <p><span class="highlight">التقنية:</span> بنية تحتية هجينة تجمع بين الذكاء البشري والرقمي.</p>
+        <p><span class="highlight">الرؤية:</span> إعادة تشكيل المستقبل الرقمي من خلال التحكم الذكي.</p>
       </div>
     </div>
     
@@ -669,7 +651,7 @@ body{
 <!-- صفحة الأعضاء -->
 <div id="members" class="page">
   <div class="members-container">
-    <h1 class="main-title" style="font-size: 3rem; margin-bottom: 30px;">فريق النخبة</h1>
+    <h2 class="section-title">فريق النخبة</h2>
     
     <div class="members-grid">
       <div class="member-card member-1" onclick="go('chrollo')">
@@ -734,7 +716,7 @@ body{
   <div class="member-detail-container">
     <div class="terminal-card">
       <div class="member-header">
-        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-1), #cc0066);">
+        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-pink), #cc0066);">
           <i class="fas fa-crown"></i>
         </div>
         <div class="member-info">
@@ -743,12 +725,12 @@ body{
         </div>
       </div>
       
-      <div class="typewriter">
-        <p><span>> المنصب:</span> العقل القيادي الأعلى في نظام نيرفينيا</p>
-        <p><span>> الوظيفة:</span> رسم الرؤية الاستراتيجية الشاملة وتوجيه مسار النظام</p>
-        <p><span>> القدرات:</span> التفكير الاستراتيجي بعيد المدى، اتخاذ القرارات المصيرية</p>
-        <p><span>> الخصائص:</span> القيادة الحكيمة، الرؤية الثاقبة، التحكم في الاتجاه العام</p>
-        <p><span>> الهدف:</span> ضمان تطور النظام نحو السيادة الرقمية المطلقة</p>
+      <div class="system-description">
+        <p><span class="highlight">المنصب:</span> العقل القيادي الأعلى في نظام نيرفينيا</p>
+        <p><span class="highlight">الوظيفة:</span> رسم الرؤية الاستراتيجية الشاملة وتوجيه مسار النظام</p>
+        <p><span class="highlight">القدرات:</span> التفكير الاستراتيجي بعيد المدى، اتخاذ القرارات المصيرية</p>
+        <p><span class="highlight">الخصائص:</span> القيادة الحكيمة، الرؤية الثاقبة، التحكم في الاتجاه العام</p>
+        <p><span class="highlight">الهدف:</span> ضمان تطور النظام نحو السيادة الرقمية المطلقة</p>
       </div>
     </div>
     
@@ -763,7 +745,7 @@ body{
   <div class="member-detail-container">
     <div class="terminal-card">
       <div class="member-header">
-        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-2), #00b8c4);">
+        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-cyan), #00b8c4);">
           <i class="fas fa-chess-queen"></i>
         </div>
         <div class="member-info">
@@ -772,12 +754,12 @@ body{
         </div>
       </div>
       
-      <div class="typewriter">
-        <p><span>> المنصب:</span> مسؤول التحكم التكتيكي في نظام نيرفينيا</p>
-        <p><span>> الوظيفة:</span> تحليل المواقف المعقدة واتخاذ القرارات التكتيكية</p>
-        <p><span>> القدرات:</span> التفكير التكتيكي السريع، التخطيط الدقيق، التنفيذ الذكي</p>
-        <p><span>> الخصائص:</span> الذكاء التكتيكي، القدرة على التكيف، السيطرة الذهنية</p>
-        <p><span>> الهدف:</span> ضمان تفوق النظام في جميع المواجهات التكتيكية</p>
+      <div class="system-description">
+        <p><span class="highlight">المنصب:</span> مسؤول التحكم التكتيكي في نظام نيرفينيا</p>
+        <p><span class="highlight">الوظيفة:</span> تحليل المواقف المعقدة واتخاذ القرارات التكتيكية</p>
+        <p><span class="highlight">القدرات:</span> التفكير التكتيكي السريع، التخطيط الدقيق، التنفيذ الذكي</p>
+        <p><span class="highlight">الخصائص:</span> الذكاء التكتيكي، القدرة على التكيف، السيطرة الذهنية</p>
+        <p><span class="highlight">الهدف:</span> ضمان تفوق النظام في جميع المواجهات التكتيكية</p>
       </div>
     </div>
     
@@ -792,7 +774,7 @@ body{
   <div class="member-detail-container">
     <div class="terminal-card">
       <div class="member-header">
-        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-3), #7a00cc);">
+        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-purple), #7a00cc);">
           <i class="fas fa-brain"></i>
         </div>
         <div class="member-info">
@@ -801,13 +783,54 @@ body{
         </div>
       </div>
       
-      <div class="typewriter">
-        <p><span>> المنصب:</span> مسؤول العمليات النفسية في نظام نيرفينيا</p>
-        <p><span>> الوظيفة:</span> التحكم النفسي، الخداع الاستراتيجي، قراءة النوايا</p>
-        <p><span>> القدرات:</span> التأثير النفسي، التلاعب الذهني، التحليل السلوكي المتقدم</p>
-        <p><span>> الخصائص:</span> الغموض، الذكاء العاطفي، القدرة على التنبؤ بالسلوك</p>
-        <p><span>> الهدف:</span> السيطرة النفسية على ساحة المعركة الرقمية</p>
+      <div class="system-description">
+        <p><span class="highlight">المنصب:</span> مسؤول العمليات النفسية في نظام نيرفينيا</p>
+        <p><span class="highlight">الوظيفة:</span> التحكم النفسي، الخداع الاستراتيجي، قراءة النوايا</p>
+        <p><span class="highlight">القدرات:</span> التأثير النفسي، التلاعب الذهني، التحليل السلوكي المتقدم</p>
+        <p><span class="highlight">الخصائص:</span> الغموض، الذكاء العاطفي، القدرة على التنبؤ بالسلوك</p>
+        <p><span class="highlight">الهدف:</span> السيطرة النفسية على ساحة المعركة الرقمية</p>
       </div>
     </div>
     
-    <button class="back-btn"
+    <button class="back-btn" onclick="go('members')">
+      <i class="fas fa-arrow-right"></i>
+      العودة للفريق
+    </button>
+  </div>
+</div>
+
+<div id="katana" class="page">
+  <div class="member-detail-container">
+    <div class="terminal-card">
+      <div class="member-header">
+        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-gold), #ccac00);">
+          <i class="fas fa-fist-raised"></i>
+        </div>
+        <div class="member-info">
+          <h2>KATANA</h2>
+          <div class="role">منطق القتال</div>
+        </div>
+      </div>
+      
+      <div class="system-description">
+        <p><span class="highlight">المنصب:</span> مسؤول العمليات الميدانية في نظام نيرفينيا</p>
+        <p><span class="highlight">الوظيفة:</span> التنفيذ المباشر، المواجهة، تطبيق القوة</p>
+        <p><span class="highlight">القدرات:</span> القتال المباشر، السرعة، الدقة، الكفاءة القتالية</p>
+        <p><span class="highlight">الخصائص:</span> القوة البدنية، المهارات القتالية، السرعة في التنفيذ</p>
+        <p><span class="highlight">الهدف:</span> ضمان تنفيذ جميع العمليات الميدانية بنجاح</p>
+      </div>
+    </div>
+    
+    <button class="back-btn" onclick="go('members')">
+      <i class="fas fa-arrow-right"></i>
+      العودة للفريق
+    </button>
+  </div>
+</div>
+
+<div id="mika" class="page">
+  <div class="member-detail-container">
+    <div class="terminal-card">
+      <div class="member-header">
+        <div class="member-avatar" style="background: linear-gradient(135deg, #ff0080, #99004d);">
+    
