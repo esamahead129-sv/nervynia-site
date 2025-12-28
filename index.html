@@ -6,254 +6,808 @@
 <title>NIRVANIA ∞ CORE SYSTEM</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 :root{
-  --black:#000;
-  --dark:#05070c;
-  --white:#fff;
-  --blue:#1e90ff;
-  --line:rgba(255,255,255,.08);
-  --muted:rgba(255,255,255,.55);
+  --dark-bg: #0a0a0f;
+  --accent-1: #ff0080;
+  --accent-2: #00f7ff;
+  --accent-3: #9d00ff;
+  --accent-4: #ffd700;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.7);
+  --card-bg: rgba(15, 15, 25, 0.8);
+  --border-color: rgba(255,255,255,0.1);
+  --glow-1: 0 0 20px rgba(255, 0, 128, 0.3);
+  --glow-2: 0 0 20px rgba(0, 247, 255, 0.3);
+  --glow-3: 0 0 20px rgba(157, 0, 255, 0.3);
+  --glow-4: 0 0 20px rgba(255, 215, 0, 0.3);
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body{
-  background:var(--black);
-  color:var(--white);
-  font-family:'Cairo',sans-serif;
-  min-height:100vh;
-  overflow-x:hidden;
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  font-family: 'Cairo', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-  background-size:48px 48px;
-  z-index:-2;
+/* خلفية متحركة */
+.background-effects{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
 }
 
-body::after{
-  content:"";
-  position:fixed;
-  inset:-60%;
-  background:radial-gradient(circle at center, rgba(30,144,255,.15), transparent 55%);
-  animation:rotate 45s linear infinite;
-  z-index:-1;
+.orb{
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.15;
+  animation: float 20s infinite ease-in-out;
 }
 
-@keyframes rotate{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
+.orb-1{
+  width: 400px;
+  height: 400px;
+  background: var(--accent-1);
+  top: 10%;
+  right: 5%;
+  animation-delay: 0s;
 }
 
+.orb-2{
+  width: 300px;
+  height: 300px;
+  background: var(--accent-2);
+  bottom: 15%;
+  left: 10%;
+  animation-delay: -5s;
+}
+
+.orb-3{
+  width: 350px;
+  height: 350px;
+  background: var(--accent-3);
+  top: 50%;
+  right: 20%;
+  animation-delay: -10s;
+}
+
+.orb-4{
+  width: 250px;
+  height: 250px;
+  background: var(--accent-4);
+  bottom: 5%;
+  right: 30%;
+  animation-delay: -15s;
+}
+
+@keyframes float{
+  0%, 100%{ transform: translate(0, 0) scale(1); }
+  33%{ transform: translate(30px, -50px) scale(1.05); }
+  66%{ transform: translate(-20px, 40px) scale(0.95); }
+}
+
+/* شبكة الخلفية */
+.grid-pattern{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+/* الصفحات */
 .page{
-  display:none;
-  min-height:100vh;
-  padding:90px 24px 160px;
+  display: none;
+  min-height: 100vh;
+  padding: 100px 20px 80px;
+  position: relative;
 }
 
 .page.active{
-  display:block;
-  animation:fade .6s ease;
+  display: block;
+  animation: pageEnter 0.8s ease-out forwards;
 }
 
-@keyframes fade{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:translateY(0)}
+@keyframes pageEnter{
+  from{
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.center{text-align:center}
-
-.title{
-  font-family:'Orbitron',sans-serif;
-  font-size:46px;
-  font-weight:900;
-  letter-spacing:8px;
-  margin-bottom:14px;
+/* الصفحة الرئيسية */
+.home-container{
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.title span{
-  color:var(--blue);
-  animation:pulse 2.6s infinite;
+.logo{
+  margin-bottom: 40px;
 }
 
-@keyframes pulse{
-  0%,100%{text-shadow:0 0 10px rgba(30,144,255,.3)}
-  50%{text-shadow:0 0 32px rgba(30,144,255,.9)}
+.main-title{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 900;
+  letter-spacing: 8px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
 }
 
-.subtitle{
-  font-size:12px;
-  letter-spacing:4px;
-  color:var(--muted);
+.main-title::after{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4));
+  bottom: -10px;
+  left: 0;
+  border-radius: 2px;
+  animation: titleGlow 3s infinite alternate;
 }
 
-.type{
-  font-family:'Orbitron',sans-serif;
-  font-size:18px;
-  letter-spacing:3px;
-  color:var(--blue);
-  white-space:nowrap;
-  overflow:hidden;
-  border-left:2px solid var(--blue);
-  width:0;
-  animation:typing 4s steps(40,end) forwards, blink .7s infinite;
+@keyframes titleGlow{
+  0%{ box-shadow: 0 0 10px var(--accent-1); }
+  33%{ box-shadow: 0 0 15px var(--accent-2); }
+  66%{ box-shadow: 0 0 15px var(--accent-3); }
+  100%{ box-shadow: 0 0 10px var(--accent-4); }
 }
 
-@keyframes typing{to{width:100%}}
-@keyframes blink{50%{border-color:transparent}}
-
-.btn{
-  width:100%;
-  padding:22px;
-  margin:20px 0;
-  background:transparent;
-  border:1px solid var(--line);
-  color:var(--white);
-  font-size:16px;
-  letter-spacing:2px;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
+.tagline{
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  letter-spacing: 4px;
+  margin-bottom: 60px;
+  font-weight: 300;
 }
 
-.btn::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:var(--blue);
-  opacity:0;
-  transition:.4s;
-  z-index:-1;
-}
-.btn:hover::before{opacity:.12}
-
-.card{
-  border:1px solid var(--line);
-  padding:34px;
-  margin-bottom:34px;
+.buttons-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
 }
 
-.text{
-  margin-top:26px;
-  line-height:2.2;
-  color:var(--muted);
+.nav-btn{
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 25px 20px;
+  color: var(--text-primary);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.members{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:24px;
+.nav-btn i{
+  font-size: 2rem;
+  margin-bottom: 15px;
 }
 
-.member{
-  border:1px solid var(--line);
-  padding:26px;
-  text-align:center;
-  cursor:pointer;
-  transition:.4s;
+.nav-btn::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.7s ease;
 }
 
-.member:hover{
-  border-color:var(--blue);
-  box-shadow:0 0 26px rgba(30,144,255,.25);
+.nav-btn:hover::before{
+  left: 100%;
 }
 
-.member h3{
-  font-family:'Orbitron',sans-serif;
-  letter-spacing:3px;
-  margin-bottom:8px;
+.nav-btn:hover{
+  transform: translateY(-8px);
+  box-shadow: var(--glow-1);
 }
 
-.member span{
-  font-size:12px;
-  color:var(--muted);
+.nav-btn:nth-child(2):hover{ box-shadow: var(--glow-2); }
+.nav-btn:nth-child(3):hover{ box-shadow: var(--glow-3); }
+.nav-btn:nth-child(4):hover{ box-shadow: var(--glow-4); }
+
+.btn-accent-1{ border-color: var(--accent-1); }
+.btn-accent-2{ border-color: var(--accent-2); }
+.btn-accent-3{ border-color: var(--accent-3); }
+.btn-accent-4{ border-color: var(--accent-4); }
+
+.btn-accent-1 .btn-icon{ color: var(--accent-1); }
+.btn-accent-2 .btn-icon{ color: var(--accent-2); }
+.btn-accent-3 .btn-icon{ color: var(--accent-3); }
+.btn-accent-4 .btn-icon{ color: var(--accent-4); }
+
+/* صفحة التعريف */
+.about-container{
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.back{
-  margin-top:40px;
-  padding:18px;
-  width:100%;
-  border:none;
-  background:var(--white);
-  color:var(--black);
-  font-family:'Orbitron',sans-serif;
-  cursor:pointer;
+.terminal-card{
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  padding: 40px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-card::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+}
+
+.terminal-header{
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.terminal-dots{
+  display: flex;
+  gap: 8px;
+  margin-left: 15px;
+}
+
+.dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot-1{ background: var(--accent-1); }
+.dot-2{ background: var(--accent-2); }
+.dot-3{ background: var(--accent-3); }
+
+.terminal-title{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  color: var(--accent-2);
+  letter-spacing: 2px;
+}
+
+.typewriter{
+  font-family: 'Cairo', sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-top: 20px;
+}
+
+.typewriter span{
+  color: var(--accent-1);
+  font-weight: bold;
+}
+
+.typewriter p{
+  margin-bottom: 20px;
+}
+
+/* صفحة الأعضاء */
+.members-container{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.members-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.member-card{
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.member-card:hover{
+  transform: translateY(-10px);
+}
+
+.member-icon{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: white;
+}
+
+.member-card h3{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.member-role{
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.member-desc{
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ألوان الأعضاء */
+.member-1{ border-color: var(--accent-1); }
+.member-2{ border-color: var(--accent-2); }
+.member-3{ border-color: var(--accent-3); }
+.member-4{ border-color: var(--accent-4); }
+.member-5{ border-color: #ff0080; }
+.member-6{ border-color: #00f7ff; }
+.member-7{ border-color: #9d00ff; }
+
+.member-1 .member-icon{ background: linear-gradient(135deg, var(--accent-1), #cc0066); }
+.member-2 .member-icon{ background: linear-gradient(135deg, var(--accent-2), #00b8c4); }
+.member-3 .member-icon{ background: linear-gradient(135deg, var(--accent-3), #7a00cc); }
+.member-4 .member-icon{ background: linear-gradient(135deg, var(--accent-4), #ccac00); }
+.member-5 .member-icon{ background: linear-gradient(135deg, #ff0080, #99004d); }
+.member-6 .member-icon{ background: linear-gradient(135deg, #00f7ff, #009499); }
+.member-7 .member-icon{ background: linear-gradient(135deg, #9d00ff, #5c0099); }
+
+.member-1:hover{ box-shadow: var(--glow-1); }
+.member-2:hover{ box-shadow: var(--glow-2); }
+.member-3:hover{ box-shadow: var(--glow-3); }
+.member-4:hover{ box-shadow: var(--glow-4); }
+.member-5:hover{ box-shadow: 0 0 20px rgba(255, 0, 128, 0.3); }
+.member-6:hover{ box-shadow: 0 0 20px rgba(0, 247, 255, 0.3); }
+.member-7:hover{ box-shadow: 0 0 20px rgba(157, 0, 255, 0.3); }
+
+/* صفحة تفاصيل العضو */
+.member-detail-container{
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.member-header{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.member-avatar{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  color: white;
+}
+
+.member-info h2{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+
+.member-info .role{
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+}
+
+/* أزرار الرجوع */
+.back-btn{
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin-top: 40px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.back-btn:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(255, 0, 128, 0.2);
+}
+
+/* شريط التنقل السفلي */
+.nav-bar{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border-color);
+  padding: 15px 0;
+  z-index: 100;
+}
+
+.nav-links{
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.nav-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.nav-item i{
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.nav-item.active{
+  color: var(--accent-1);
+}
+
+.nav-item:hover{
+  color: var(--accent-2);
+}
+
+/* أنيميشن النص الكتابي */
+.typing-effect{
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid var(--accent-1);
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing{
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret{
+  from, to { border-color: transparent }
+  50% { border-color: var(--accent-1) }
+}
+
+/* استجابة للهواتف */
+@media (max-width: 768px){
+  .main-title{
+    font-size: 3rem;
+    letter-spacing: 4px;
+  }
+  
+  .tagline{
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+  
+  .buttons-grid{
+    grid-template-columns: 1fr;
+  }
+  
+  .members-grid{
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  .terminal-card{
+    padding: 25px;
+  }
+  
+  .member-header{
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .nav-links{
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px){
+  .main-title{
+    font-size: 2.2rem;
+  }
+  
+  .page{
+    padding: 80px 15px 70px;
+  }
+  
+  .members-grid{
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 </head>
 
 <body>
-
-<!-- HOME -->
-<div id="home" class="page active center">
-  <div class="title">NIR<span>VANIA</span></div>
-  <div class="subtitle">DIGITAL SOVEREIGN CORE</div>
-
-  <button class="btn" onclick="go('about')">تعريف نيرفينيا</button>
-  <button class="btn" onclick="go('members')">الفريق</button>
-  <button class="btn" onclick="window.open('https://wa.me/201029505953')">واتساب</button>
+<!-- تأثيرات الخلفية -->
+<div class="background-effects">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
 </div>
 
-<!-- ABOUT -->
-<div id="about" class="page">
-  <div class="card">
-    <div class="type">INITIALIZING NIRVANIA CORE...</div>
-    <div class="text">
-      نيرفينيا ليست اسمًا.<br><br>
-      نيرفينيا **نظام**.<br>
-      شبكة عقول مترابطة،  
-      كل عضو وحدة مستقلة،  
-      وكل وحدة تخدم القلب الرقمي.
+<div class="grid-pattern"></div>
+
+<!-- الصفحة الرئيسية -->
+<div id="home" class="page active">
+  <div class="home-container">
+    <div class="logo">
+      <h1 class="main-title">NIRVANIA</h1>
+      <div class="tagline">DIGITAL SOVEREIGNTY SYSTEM</div>
+    </div>
+    
+    <div class="buttons-grid">
+      <button class="nav-btn btn-accent-1" onclick="go('about')">
+        <i class="fas fa-info-circle btn-icon"></i>
+        تعريف النظام
+      </button>
+      
+      <button class="nav-btn btn-accent-2" onclick="go('members')">
+        <i class="fas fa-users btn-icon"></i>
+        فريق النخبة
+      </button>
+      
+      <button class="nav-btn btn-accent-3" onclick="window.open('https://wa.me/201029505953')">
+        <i class="fab fa-whatsapp btn-icon"></i>
+        التواصل عبر واتساب
+      </button>
+      
+      <button class="nav-btn btn-accent-4" onclick="showCredits()">
+        <i class="fas fa-code btn-icon"></i>
+        تفاصيل النظام
+      </button>
     </div>
   </div>
-  <button class="back" onclick="go('home')">BACK</button>
 </div>
 
-<!-- MEMBERS -->
-<div id="members" class="page">
-  <div class="title">MEM<span>BERS</span></div>
-
-  <div class="members">
-    <div class="member" onclick="go('chrollo')"><h3>CHROLLO</h3><span>Strategic Core</span></div>
-    <div class="member" onclick="go('lelouch')"><h3>LELOUCH</h3><span>Tactical Control</span></div>
-    <div class="member" onclick="go('aizen')"><h3>AIZEN</h3><span>Psychological Layer</span></div>
-    <div class="member" onclick="go('katana')"><h3>KATANA</h3><span>Combat Logic</span></div>
-    <div class="member" onclick="go('mika')"><h3>MIKA</h3><span>Signal & Media</span></div>
-    <div class="member" onclick="go('adam')"><h3>ADAM</h3><span>Security Node</span></div>
-    <div class="member" onclick="go('idris')"><h3>IDRIS</h3><span>Code Architect</span></div>
+<!-- صفحة التعريف -->
+<div id="about" class="page">
+  <div class="about-container">
+    <div class="terminal-card">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <div class="dot dot-1"></div>
+          <div class="dot dot-2"></div>
+          <div class="dot dot-3"></div>
+        </div>
+        <div class="terminal-title">NIRVANIA CORE SYSTEM</div>
+      </div>
+      
+      <div class="typewriter">
+        <p><span>> النظام:</span> نيرفينيا ليست مجرد اسم، إنها نظام متكامل.</p>
+        <p><span>> البنية:</span> شبكة من العقول المترابطة، كل عقل وحدة مستقلة.</p>
+        <p><span>> الهدف:</span> جميع الوحدات تعمل لخدمة القلب الرقمي للنظام.</p>
+        <p><span>> الفلسفة:</span> السيادة الرقمية المطلقة في فضاء المعلومات.</p>
+        <p><span>> التقنية:</span> بنية تحتية هجينة تجمع بين الذكاء البشري والرقمي.</p>
+        <p><span>> الرؤية:</span> إعادة تشكيل المستقبل الرقمي من خلال التحكم الذكي.</p>
+      </div>
+    </div>
+    
+    <button class="back-btn" onclick="go('home')">
+      <i class="fas fa-arrow-right"></i>
+      العودة للرئيسية
+    </button>
   </div>
-
-  <button class="back" onclick="go('home')">BACK</button>
 </div>
 
-<!-- MEMBER PAGES -->
-<div id="chrollo" class="page"><div class="card"><div class="type">STRATEGIC CORE ONLINE</div><div class="text">العقل القيادي الأعلى.<br>يرسم الرؤية ويتحكم في اتجاه النظام.</div></div><button class="back" onclick="go('members')">BACK</button></div>
+<!-- صفحة الأعضاء -->
+<div id="members" class="page">
+  <div class="members-container">
+    <h1 class="main-title" style="font-size: 3rem; margin-bottom: 30px;">فريق النخبة</h1>
+    
+    <div class="members-grid">
+      <div class="member-card member-1" onclick="go('chrollo')">
+        <div class="member-icon"><i class="fas fa-crown"></i></div>
+        <h3>CHROLLO</h3>
+        <div class="member-role">النواة الاستراتيجية</div>
+        <div class="member-desc">العقل القيادي الأعلى الذي يرسم الرؤية ويتحكم في اتجاه النظام</div>
+      </div>
+      
+      <div class="member-card member-2" onclick="go('lelouch')">
+        <div class="member-icon"><i class="fas fa-chess-queen"></i></div>
+        <h3>LELOUCH</h3>
+        <div class="member-role">التحكم التكتيكي</div>
+        <div class="member-desc">تحليل المواقف، اتخاذ القرار، السيطرة التكتيكية الذكية</div>
+      </div>
+      
+      <div class="member-card member-3" onclick="go('aizen')">
+        <div class="member-icon"><i class="fas fa-brain"></i></div>
+        <h3>AIZEN</h3>
+        <div class="member-role">الطبقة النفسية</div>
+        <div class="member-desc">التحكم النفسي، الخداع الاستراتيجي، قراءة العقول</div>
+      </div>
+      
+      <div class="member-card member-4" onclick="go('katana')">
+        <div class="member-icon"><i class="fas fa-fist-raised"></i></div>
+        <h3>KATANA</h3>
+        <div class="member-role">منطق القتال</div>
+        <div class="member-desc">التنفيذ المباشر، المواجهة، القوة الميدانية</div>
+      </div>
+      
+      <div class="member-card member-5" onclick="go('mika')">
+        <div class="member-icon"><i class="fas fa-broadcast-tower"></i></div>
+        <h3>MIKA</h3>
+        <div class="member-role">الإشارة والإعلام</div>
+        <div class="member-desc">النشر، التحكم بالصورة، الإعلام الرقمي</div>
+      </div>
+      
+      <div class="member-card member-6" onclick="go('adam')">
+        <div class="member-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>ADAM</h3>
+        <div class="member-role">عقدة الأمان</div>
+        <div class="member-desc">الحماية، الدفاع، تأمين النظام الرقمي</div>
+      </div>
+      
+      <div class="member-card member-7" onclick="go('idris')">
+        <div class="member-icon"><i class="fas fa-code"></i></div>
+        <h3>IDRIS</h3>
+        <div class="member-role">مهندس الأكواد</div>
+        <div class="member-desc">بناء الأكواد، الهيكلة، التطوير التقني</div>
+      </div>
+    </div>
+    
+    <button class="back-btn" onclick="go('home')">
+      <i class="fas fa-arrow-right"></i>
+      العودة للرئيسية
+    </button>
+  </div>
+</div>
 
-<div id="lelouch" class="page"><div class="card"><div class="type">TACTICAL SYSTEM ACTIVE</div><div class="text">تحليل المواقف، اتخاذ القرار، السيطرة التكتيكية.</div></div><button class="back" onclick="go('members')">BACK</button></div>
+<!-- صفحات تفاصيل الأعضاء -->
+<div id="chrollo" class="page">
+  <div class="member-detail-container">
+    <div class="terminal-card">
+      <div class="member-header">
+        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-1), #cc0066);">
+          <i class="fas fa-crown"></i>
+        </div>
+        <div class="member-info">
+          <h2>CHROLLO</h2>
+          <div class="role">النواة الاستراتيجية</div>
+        </div>
+      </div>
+      
+      <div class="typewriter">
+        <p><span>> المنصب:</span> العقل القيادي الأعلى في نظام نيرفينيا</p>
+        <p><span>> الوظيفة:</span> رسم الرؤية الاستراتيجية الشاملة وتوجيه مسار النظام</p>
+        <p><span>> القدرات:</span> التفكير الاستراتيجي بعيد المدى، اتخاذ القرارات المصيرية</p>
+        <p><span>> الخصائص:</span> القيادة الحكيمة، الرؤية الثاقبة، التحكم في الاتجاه العام</p>
+        <p><span>> الهدف:</span> ضمان تطور النظام نحو السيادة الرقمية المطلقة</p>
+      </div>
+    </div>
+    
+    <button class="back-btn" onclick="go('members')">
+      <i class="fas fa-arrow-right"></i>
+      العودة للفريق
+    </button>
+  </div>
+</div>
 
-<div id="aizen" class="page"><div class="card"><div class="type">PSYCHO LAYER LOADED</div><div class="text">التحكم النفسي، الخداع، قراءة العقول.</div></div><button class="back" onclick="go('members')">BACK</button></div>
+<div id="lelouch" class="page">
+  <div class="member-detail-container">
+    <div class="terminal-card">
+      <div class="member-header">
+        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-2), #00b8c4);">
+          <i class="fas fa-chess-queen"></i>
+        </div>
+        <div class="member-info">
+          <h2>LELOUCH</h2>
+          <div class="role">التحكم التكتيكي</div>
+        </div>
+      </div>
+      
+      <div class="typewriter">
+        <p><span>> المنصب:</span> مسؤول التحكم التكتيكي في نظام نيرفينيا</p>
+        <p><span>> الوظيفة:</span> تحليل المواقف المعقدة واتخاذ القرارات التكتيكية</p>
+        <p><span>> القدرات:</span> التفكير التكتيكي السريع، التخطيط الدقيق، التنفيذ الذكي</p>
+        <p><span>> الخصائص:</span> الذكاء التكتيكي، القدرة على التكيف، السيطرة الذهنية</p>
+        <p><span>> الهدف:</span> ضمان تفوق النظام في جميع المواجهات التكتيكية</p>
+      </div>
+    </div>
+    
+    <button class="back-btn" onclick="go('members')">
+      <i class="fas fa-arrow-right"></i>
+      العودة للفريق
+    </button>
+  </div>
+</div>
 
-<div id="katana" class="page"><div class="card"><div class="type">COMBAT LOGIC READY</div><div class="text">التنفيذ، المواجهة، القوة المباشرة.</div></div><button class="back" onclick="go('members')">BACK</button></div>
-
-<div id="mika" class="page"><div class="card"><div class="type">MEDIA SIGNAL SYNCED</div><div class="text">النشر، الإعلام، التحكم بالصورة.</div></div><button class="back" onclick="go('members')">BACK</button></div>
-
-<div id="adam" class="page"><div class="card"><div class="type">SECURITY NODE ACTIVE</div><div class="text">الحماية، الدفاع، تأمين النظام.</div></div><button class="back" onclick="go('members')">BACK</button></div>
-
-<div id="idris" class="page"><div class="card"><div class="type">CODE ARCHITECT ONLINE</div><div class="text">بناء الأكواد، الهيكلة، التطوير.</div></div><button class="back" onclick="go('members')">BACK</button></div>
-
-<script>
-function go(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-</script>
-
-</body>
-   </html>
+<div id="aizen" class="page">
+  <div class="member-detail-container">
+    <div class="terminal-card">
+      <div class="member-header">
+        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-3), #7a00cc);">
+          <i class="fas fa-brain"></i>
+        </div>
+        <div class="member-info">
+          <h2>AIZEN</h2>
+          <div class="role">الطبقة النفسية</div>
+        </div>
+      </div>
+      
+      <div class="typewriter">
+        <p><span>> المنصب:</span> مسؤول العمليات النفسية في نظام نيرفينيا</p>
+        <p><span>> الوظيفة:</span> التحكم النفسي، الخداع الاستراتيجي، قراءة النوايا</p>
+        <p><span>> القدرات:</span> التأثير النفسي، التلاعب الذهني، التحليل السلوكي المتقدم</p>
+        <p><span>> الخصائص:</span> الغموض، الذكاء العاطفي، القدرة على التنبؤ بالسلوك</p>
+        <p><span>> الهدف:</span> السيطرة النفسية على ساحة المعركة الرقمية</p>
+      </div>
+    </div>
+    
+    <button class="back-btn"
