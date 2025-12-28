@@ -3,37 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIRVANIA ∞</title>
+<title>NIRVANIA ∞ CORE</title>
 
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+/* ================= ROOT ================= */
 :root{
-  --bg:#030303;
-  --card:#0b0b0b;
-  --line:#1a1a1a;
-  --txt:#e6e6e6;
-  --muted:#9a9a9a;
-  --glow:#00ffff;
+  --bg:#020205;
+  --core:#0a0a12;
+  --card:#0e0e18;
+  --line:rgba(255,255,255,.08);
+  --txt:#eaeaff;
+  --muted:#9fa4ff;
+  --glow:#6dfcff;
+  --halo:#7f7cff;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;}
+*{margin:0;padding:0;box-sizing:border-box}
 
+/* ================= BODY ================= */
 body{
-  background:var(--bg);
+  background:radial-gradient(circle at top,#050515,#020205 70%);
   color:var(--txt);
   font-family:'Cairo',sans-serif;
-  overflow:hidden;
+  min-height:100vh;
+  overflow-x:hidden;
 }
 
-canvas{
+/* ================= BACKGROUND AURA ================= */
+body::before{
+  content:"";
   position:fixed;
-  inset:0;
+  inset:-50%;
+  background:
+    radial-gradient(circle at 30% 30%,rgba(127,124,255,.15),transparent 40%),
+    radial-gradient(circle at 70% 70%,rgba(109,252,255,.12),transparent 45%);
+  animation:aura 20s linear infinite;
   z-index:-1;
 }
 
-/* SPLASH */
+@keyframes aura{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+
+/* ================= SPLASH ================= */
 #splash{
   position:fixed;
   inset:0;
@@ -46,238 +62,193 @@ canvas{
 
 #splash h1{
   font-family:'Orbitron',sans-serif;
-  font-size:54px;
-  letter-spacing:12px;
-  animation:neon 2.5s ease forwards;
+  font-size:64px;
+  letter-spacing:14px;
+  color:var(--glow);
+  text-shadow:0 0 20px var(--glow),0 0 60px var(--halo);
+  animation:splash 3s ease forwards;
 }
 
-@keyframes neon{
-  0%{opacity:0;filter:blur(20px);}
-  40%{opacity:1;filter:blur(0);}
-  100%{opacity:0;letter-spacing:30px;}
+@keyframes splash{
+  0%{opacity:0;transform:scale(.7)}
+  40%{opacity:1;transform:scale(1)}
+  100%{opacity:0;transform:scale(1.3)}
 }
 
-/* PAGES */
+/* ================= LAYOUT ================= */
 .page{
   display:none;
-  height:100vh;
-  overflow-y:auto;
-  padding:40px 18px 120px;
+  min-height:100vh;
+  padding:50px 20px 120px;
 }
-.page.active{display:block;}
-.center{text-align:center;}
 
-.sys-title{
+.page.active{display:block}
+
+.center{text-align:center}
+
+/* ================= TITLES ================= */
+.title{
   font-family:'Orbitron',sans-serif;
-  font-size:34px;
+  font-size:42px;
   letter-spacing:6px;
-}
-.sys-sub{
-  font-size:12px;
-  color:var(--muted);
-  margin-bottom:40px;
-}
-
-/* BUTTON */
-.sys-btn{
-  width:100%;
-  padding:18px;
-  margin:14px 0;
-  background:linear-gradient(135deg,#0e0e0e,#050505);
-  border:1px solid var(--line);
-  border-radius:18px;
-  color:var(--txt);
-  font-size:16px;
-}
-
-/* GRID MEMBERS */
-.members-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:18px;
-}
-
-.member-card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:22px 14px;
-  text-align:center;
-  cursor:pointer;
-  transition:.4s;
-  position:relative;
-}
-
-.member-card:hover{
-  transform:translateY(-8px) scale(1.03);
-  box-shadow:0 0 25px rgba(0,255,255,.15);
-}
-
-.member-card i{
-  font-size:28px;
   color:var(--glow);
-  margin-bottom:12px;
+  text-shadow:0 0 15px var(--glow);
 }
 
-.member-card h3{
-  font-family:'Orbitron',sans-serif;
-  font-size:18px;
-  letter-spacing:2px;
+.subtitle{
+  margin-top:8px;
+  font-size:13px;
+  color:var(--muted);
+  letter-spacing:3px;
 }
 
-/* CARD */
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
+/* ================= BUTTONS ================= */
+.btn{
+  width:100%;
+  padding:20px;
+  margin:18px 0;
   border-radius:22px;
-  padding:22px;
+  background:linear-gradient(135deg,#0f1020,#05050a);
+  border:1px solid var(--line);
+  color:var(--txt);
+  font-size:17px;
+  position:relative;
+  overflow:hidden;
 }
 
-.screen{
+.btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.25),transparent);
+  transform:translateX(-100%);
+  transition:.6s;
+}
+
+.btn:hover::before{
+  transform:translateX(100%);
+}
+
+/* ================= CARDS ================= */
+.card{
+  background:linear-gradient(180deg,#0e0f1f,#070710);
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:26px;
+  box-shadow:0 0 40px rgba(127,124,255,.08);
+  margin-bottom:30px;
+}
+
+/* ================= CORE SCREEN ================= */
+.core{
   width:100%;
   aspect-ratio:1/1;
-  background:radial-gradient(circle,#0f0f0f,#050505);
+  border-radius:22px;
+  background:
+    radial-gradient(circle at center,rgba(109,252,255,.25),transparent 60%),
+    linear-gradient(180deg,#05050d,#020205);
   border:1px solid var(--line);
-  border-radius:16px;
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-bottom:22px;
-  color:#444;
-}
-
-.member-name{
   font-family:'Orbitron',sans-serif;
-  font-size:28px;
-  letter-spacing:4px;
-  text-align:center;
-  margin-bottom:16px;
+  color:var(--muted);
+  margin-bottom:25px;
+  box-shadow:inset 0 0 40px rgba(109,252,255,.15);
 }
 
+/* ================= TEXT ================= */
 .desc{
-  background:#060606;
+  background:#05050d;
   border:1px solid var(--line);
-  border-radius:16px;
-  padding:18px;
+  border-radius:20px;
+  padding:20px;
+  line-height:2.1;
+  color:#d8d9ff;
 }
 
-.desc p{line-height:2;color:#cfcfcf;}
-
+/* ================= BACK ================= */
 .back{
-  margin-top:30px;
-  padding:16px;
   width:100%;
+  padding:18px;
+  border-radius:20px;
   border:none;
-  border-radius:18px;
-  background:linear-gradient(90deg,#00f,#0f0,#f00);
-  color:#000;
   font-family:'Orbitron',sans-serif;
+  background:linear-gradient(90deg,#6dfcff,#7f7cff);
+  color:#000;
+}
+
+/* ================= FLOATING PARTICLES ================= */
+.particle{
+  position:fixed;
+  width:2px;
+  height:2px;
+  background:var(--glow);
+  border-radius:50%;
+  opacity:.4;
+  animation:float 10s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(110vh)}
+  to{transform:translateY(-10vh)}
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="bg"></canvas>
-
-<div id="splash"><h1>N I R V A N I A</h1></div>
+<!-- SPLASH -->
+<div id="splash"><h1>NIRVANIA</h1></div>
 
 <!-- HOME -->
 <div id="home" class="page active center">
-  <div class="sys-title">NIRVANIA</div>
-  <div class="sys-sub">DIGITAL CORE SYSTEM</div>
+  <div class="title">NIRVANIA</div>
+  <div class="subtitle">DIGITAL SOVEREIGN CORE</div>
 
-  <button class="sys-btn" onclick="go('members')">الأعضاء</button>
-  <button class="sys-btn" onclick="go('about')">تعريف الفريق</button>
-  <button class="sys-btn" onclick="window.open('https://wa.me/201029505953')">واتساب</button>
-</div>
-
-<!-- MEMBERS -->
-<div id="members" class="page">
-  <div class="center">
-    <div class="sys-title">𝐌 𝐄 𝐌 𝐁 𝐄 𝐑 𝐒</div>
-    <div class="sys-sub">CORE UNITS</div>
-  </div>
-
-  <div class="members-grid">
-    <div class="member-card" onclick="go('chrollo')">
-      <i class="fa-solid fa-brain"></i>
-      <h3>𝐂𝐇𝐑𝐎𝐋𝐋𝐎</h3>
-    </div>
-    <div class="member-card"><i class="fa-solid fa-chess-king"></i><h3>𝐋𝐄𝐋𝐎𝐔𝐂𝐇</h3></div>
-    <div class="member-card"><i class="fa-solid fa-khanda"></i><h3>𝐊𝐀𝐓𝐀𝐍𝐀</h3></div>
-    <div class="member-card"><i class="fa-solid fa-eye"></i><h3>𝐀𝐈𝐙𝐄𝐍</h3></div>
-    <div class="member-card"><i class="fa-solid fa-music"></i><h3>𝐌𝐈𝐊𝐀</h3></div>
-    <div class="member-card"><i class="fa-solid fa-user-secret"></i><h3>𝐀𝐃𝐀𝐌</h3></div>
-    <div class="member-card"><i class="fa-solid fa-code"></i><h3>𝐈𝐃𝐑𝐈𝐒</h3></div>
-  </div>
-
-  <button class="back" onclick="go('home')">BACK</button>
-</div>
-
-<!-- CHROLLO -->
-<div id="chrollo" class="page">
-  <div class="card">
-    <div class="screen">MEDIA SLOT</div>
-    <div class="member-name">𝐂𝐇𝐑𝐎𝐋𝐋𝐎</div>
-    <div class="desc">
-      <p>
-        العقل المركزي لنظام نيرفينيا.  
-        تخطيط استراتيجي – تحليل عميق – بناء نظم رقمية معقدة.  
-        المسؤول عن الهيكل العام واتخاذ القرارات العليا.
-      </p>
-    </div>
-  </div>
-  <button class="back" onclick="go('members')">BACK</button>
+  <button class="btn" onclick="go('about')">تعريف نيرفينيا</button>
+  <button class="btn">الأعضاء</button>
+  <button class="btn" onclick="window.open('https://wa.me/201029505953')">اتصال مباشر</button>
 </div>
 
 <!-- ABOUT -->
 <div id="about" class="page">
   <div class="card">
-    <div class="member-name">𝐍𝐈𝐑𝐕𝐀𝐍𝐈𝐀</div>
+    <div class="core">CORE ∞ SYSTEM</div>
     <div class="desc">
-      <p>
-        نيرفينيا فريق رقمي مستقل تأسس عام 2020.  
-        يعمل كوحدة مغلقة تعتمد على التخطيط، الإبداع، والسيطرة التقنية.  
-        كل عضو يمثل نواة مستقلة داخل النظام العام.
-      </p>
+      نيرفينيا ليست فريقًا تقليديًا،  
+      بل **نظام فكري رقمي** يعمل كوحدة مستقلة.  
+      <br><br>
+      تأسست على مبدأ السيطرة المعرفية،  
+      التخطيط العميق،  
+      وبناء الهياكل التي لا تُرى… لكن يُشعر بها.  
+      <br><br>
+      كل عنصر داخل نيرفينيا يمثل نواة،  
+      وكل نواة تخدم الكيان الأعظم.
     </div>
   </div>
   <button class="back" onclick="go('home')">BACK</button>
 </div>
 
+<!-- FLOATING PARTICLES -->
 <script>
+for(let i=0;i<60;i++){
+  let p=document.createElement("div");
+  p.className="particle";
+  p.style.left=Math.random()*100+"%";
+  p.style.animationDuration=6+Math.random()*10+"s";
+  p.style.opacity=Math.random();
+  document.body.appendChild(p);
+}
+
+/* ROUTER */
 function go(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-setTimeout(()=>document.getElementById('splash').remove(),2500);
-
-/* PARTICLES */
-const c=document.getElementById("bg"),ctx=c.getContext("2d");
-let w,h,particles=[];
-function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
-resize();onresize=resize;
-
-for(let i=0;i<140;i++){
-  particles.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3});
-}
-
-function draw(){
-  ctx.clearRect(0,0,w,h);
-  particles.forEach(p=>{
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0||p.x>w)p.vx*=-1;
-    if(p.y<0||p.y>h)p.vy*=-1;
-    ctx.fillStyle="rgba(0,255,255,.15)";
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,2,0,Math.PI*2);
-    ctx.fill();
-  });
-  requestAnimationFrame(draw);
-}
-draw();
+/* SPLASH REMOVE */
+setTimeout(()=>document.getElementById("splash").remove(),3000);
 </script>
 
 </body>
