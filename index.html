@@ -1,793 +1,519 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIRVANIA ∞ CORE SYSTEM</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<style>
-:root {
-  --primary-dark: #0a0a14;
-  --secondary-dark: #151522;
-  --accent-pink: #ff0080;
-  --accent-cyan: #00f7ff;
-  --accent-purple: #9d00ff;
-  --accent-gold: #ffd700;
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --card-bg: rgba(20, 20, 30, 0.85);
-  --border-color: rgba(255, 255, 255, 0.15);
-  --glow-pink: 0 0 20px rgba(255, 0, 128, 0.3);
-  --glow-cyan: 0 0 20px rgba(0, 247, 255, 0.3);
-  --glow-purple: 0 0 20px rgba(157, 0, 255, 0.3);
-  --glow-gold: 0 0 20px rgba(255, 215, 0, 0.3);
+<!DOCTYPE html>  <html lang="ar" dir="rtl">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>NERVYNIA TEAM</title>  
+<link rel="preconnect" href="https://fonts.googleapis.com">  
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">  
+<style>  
+:root {  
+  --neon-primary: #00ffd5;  
+  --neon-secondary: #ff00ff;  
+  --neon-glow: 0 0 10px rgba(0, 255, 213, 0.7), 0 0 20px rgba(0, 255, 213, 0.5);  
+  --bg-primary: #0a0a0f;  
+  --bg-secondary: #11111a;  
+  --bg-card: rgba(5, 10, 15, 0.9);  
+}  {
+box-sizing: border-box;
+font-family: 'Cairo', Tahoma, Arial, sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 body {
-  background: var(--primary-dark);
-  color: var(--text-primary);
-  font-family: 'Cairo', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
+margin: 0;
+background: var(--bg-primary);
+color: #eafffb;
+overflow-x: hidden;
+position: relative;
 }
 
-/* خلفيات الصفحات المختلفة */
-.page-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-  opacity: 0;
-  transition: opacity 0.8s ease;
+/* تأثيرات الخلفية */
+body::before {
+content: '';
+position: fixed;
+top: 0;
+right: 0;
+width: 100%;
+height: 100%;
+background:
+radial-gradient(circle at 20% 30%, rgba(0, 255, 213, 0.05) 0%, transparent 20%),
+radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.03) 0%, transparent 20%),
+radial-gradient(circle at 40% 80%, rgba(0, 255, 213, 0.04) 0%, transparent 20%);
+z-index: -1;
+pointer-events: none;
 }
 
-#home-bg {
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(255, 0, 128, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(0, 247, 255, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(157, 0, 255, 0.15) 0%, transparent 50%),
-    var(--primary-dark);
-  opacity: 1;
+/* عام */
+.hidden {
+display: none !important;
+opacity: 0;
+transform: translateY(20px);
 }
 
-#about-bg {
-  background: 
-    linear-gradient(135deg, rgba(10, 10, 20, 0.95) 0%, rgba(20, 10, 30, 0.95) 100%);
-  opacity: 1;
-}
-
-#members-bg,
-#chrollo-bg,
-#lelouch-bg,
-#aizen-bg,
-#katana-bg,
-#mika-bg,
-#adam-bg,
-#idris-bg {
-  background: 
-    linear-gradient(135deg, rgba(15, 15, 25, 0.95) 0%, rgba(25, 15, 35, 0.95) 100%);
-  opacity: 1;
-}
-
-.grid-pattern {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  z-index: -1;
-  opacity: 0.3;
-}
-
-.page {
-  display: none;
-  min-height: 100vh;
-  padding: 80px 20px 100px;
-  position: relative;
-}
-
-.page.active {
-  display: block;
-  animation: fadeIn 0.5s ease-out;
+.fade-in {
+animation: fadeIn 0.8s ease-out forwards;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
 }
 
-/* الصفحة الرئيسية */
-.home-container {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-  padding-top: 40px;
+.container {
+max-width: 1000px;
+margin: auto;
+padding: 20px;
+position: relative;
+z-index: 1;
 }
 
+/* العنوان الرئيسي */
 .main-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 4rem;
-  font-weight: 900;
-  letter-spacing: 4px;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan), var(--accent-purple), var(--accent-gold));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+text-align: center;
+font-size: 3.5rem;
+font-weight: 800;
+color: transparent;
+background: linear-gradient(90deg, var(--neon-primary), var(--neon-secondary));
+-webkit-background-clip: text;
+background-clip: text;
+margin: 20px 0 30px;
+text-shadow: 0 0 15px rgba(0, 255, 213, 0.4);
+letter-spacing: 2px;
+position: relative;
+padding-bottom: 15px;
 }
 
-.subtitle {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  letter-spacing: 3px;
-  margin-bottom: 60px;
-  font-weight: 300;
+.main-title::after {
+content: '';
+position: absolute;
+bottom: 0;
+right: 50%;
+transform: translateX(50%);
+width: 200px;
+height: 3px;
+background: linear-gradient(90deg, transparent, var(--neon-primary), transparent);
 }
 
-.buttons-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: 40px;
+h2 {
+text-align: center;
+color: var(--neon-primary);
+font-size: 2.2rem;
+margin-bottom: 25px;
+text-shadow: 0 0 10px rgba(0, 255, 213, 0.5);
+position: relative;
+padding-bottom: 10px;
 }
 
-.nav-btn {
-  background: rgba(30, 30, 40, 0.6);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 25px 20px;
-  color: var(--text-primary);
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  backdrop-filter: blur(10px);
+h2::after {
+content: '';
+position: absolute;
+bottom: 0;
+right: 50%;
+transform: translateX(50%);
+width: 100px;
+height: 2px;
+background: var(--neon-primary);
+box-shadow: 0 0 8px var(--neon-primary);
 }
 
-.nav-btn i {
-  font-size: 2.2rem;
+/* أزرار */
+.btn {
+width: 100%;
+padding: 18px;
+margin: 15px 0;
+background: transparent;
+border: 2px solid var(--neon-primary);
+color: var(--neon-primary);
+font-size: 20px;
+font-weight: 600;
+border-radius: 12px;
+cursor: pointer;
+transition: all 0.4s ease;
+position: relative;
+overflow: hidden;
+z-index: 1;
 }
 
-.nav-btn:hover {
-  transform: translateY(-5px);
-  background: rgba(40, 40, 50, 0.8);
+.btn::before {
+content: '';
+position: absolute;
+top: 0;
+right: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(0, 255, 213, 0.2), transparent);
+transition: right 0.6s ease;
+z-index: -1;
 }
 
-.btn-pink {
-  border-color: var(--accent-pink);
+.btn:hover {
+background: rgba(0, 255, 213, 0.1);
+box-shadow: var(--neon-glow);
+transform: translateY(-3px);
 }
 
-.btn-pink:hover {
-  box-shadow: var(--glow-pink);
+.btn:hover::before {
+right: 100%;
 }
 
-.btn-cyan {
-  border-color: var(--accent-cyan);
+/* كروت */
+.card {
+border: 1px solid rgba(0, 255, 213, 0.3);
+border-radius: 20px;
+padding: 25px;
+margin: 25px 0;
+background: var(--bg-card);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+backdrop-filter: blur(5px);
+transition: transform 0.4s, box-shadow 0.4s;
 }
 
-.btn-cyan:hover {
-  box-shadow: var(--glow-cyan);
+.card:hover {
+transform: translateY(-5px);
+box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 255, 213, 0.2);
 }
 
-.btn-purple {
-  border-color: var(--accent-purple);
+/* قائمة الفريق */
+.team-list {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+gap: 25px;
+margin: 30px 0;
 }
 
-.btn-purple:hover {
-  box-shadow: var(--glow-purple);
+.member {
+border: 1px solid rgba(0, 255, 213, 0.4);
+border-radius: 18px;
+padding: 25px;
+cursor: pointer;
+background: rgba(10, 15, 25, 0.8);
+transition: all 0.4s ease;
+position: relative;
+overflow: hidden;
 }
 
-.btn-pink i {
-  color: var(--accent-pink);
+.member::before {
+content: '';
+position: absolute;
+top: 0;
+right: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(135deg, transparent 30%, rgba(0, 255, 213, 0.05) 100%);
+z-index: 0;
 }
 
-.btn-cyan i {
-  color: var(--accent-cyan);
+.member:hover {
+background: rgba(15, 25, 40, 0.9);
+border-color: var(--neon-primary);
+box-shadow: var(--neon-glow);
+transform: translateY(-8px);
 }
 
-.btn-purple i {
-  color: var(--accent-purple);
+.member-name {
+font-size: 26px;
+color: var(--neon-primary);
+font-weight: 700;
+margin-bottom: 10px;
+position: relative;
+z-index: 1;
+text-shadow: 0 0 8px rgba(0, 255, 213, 0.5);
 }
 
-/* صفحة التعريف */
-.about-container {
-  max-width: 900px;
-  margin: 0 auto;
+.member p {
+color: #c2e8ff;
+font-size: 16px;
+line-height: 1.6;
+position: relative;
+z-index: 1;
 }
 
-.terminal-card {
-  background: var(--card-bg);
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  padding: 30px;
-  margin-bottom: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border-top: 4px solid var(--accent-cyan);
-  backdrop-filter: blur(10px);
+/* صورة العضو */
+.photo-container {
+width: 100%;
+max-width: 320px;
+height: 320px;
+margin: 30px auto;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+overflow: hidden;
+background: linear-gradient(145deg, rgba(0, 10, 20, 0.9), rgba(0, 20, 30, 0.9));
+box-shadow: 0 0 30px rgba(0, 255, 213, 0.3);
 }
 
-.terminal-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 25px;
+.photo-container::before {
+content: '';
+position: absolute;
+top: -2px;
+right: -2px;
+bottom: -2px;
+left: -2px;
+background: linear-gradient(45deg, var(--neon-primary), var(--neon-secondary), var(--neon-primary));
+border-radius: 50%;
+z-index: -1;
+animation: rotate 3s linear infinite;
 }
 
-.terminal-dots {
-  display: flex;
-  gap: 8px;
-  margin-left: 15px;
+@keyframes rotate {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
 }
 
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+.photo-placeholder {
+width: 94%;
+height: 94%;
+border-radius: 50%;
+background: var(--bg-secondary);
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--neon-primary);
+font-size: 18px;
+font-weight: 600;
+text-align: center;
+padding: 20px;
 }
 
-.dot-1 {
-  background: var(--accent-pink);
+/* الوصف */
+.member-description {
+font-size: 18px;
+line-height: 1.8;
+color: #d4f7ff;
+background: rgba(5, 15, 25, 0.7);
+padding: 25px;
+border-radius: 15px;
+border-right: 3px solid var(--neon-primary);
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.dot-2 {
-  background: var(--accent-cyan);
+/* شعار الفريق */
+.logo {
+text-align: center;
+margin: 20px 0;
 }
 
-.dot-3 {
-  background: var(--accent-purple);
+.logo-icon {
+font-size: 4rem;
+color: var(--neon-primary);
+text-shadow: 0 0 20px var(--neon-primary);
+margin-bottom: 10px;
 }
 
-.terminal-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.4rem;
-  color: var(--accent-cyan);
-  letter-spacing: 1px;
-}
-
-.system-description {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  color: var(--text-secondary);
-}
-
-.system-description p {
-  margin-bottom: 20px;
-}
-
+/* تأثيرات النص */
 .highlight {
-  color: var(--accent-pink);
-  font-weight: 600;
+color: var(--neon-primary);
+font-weight: 700;
 }
 
-/* صفحة الأعضاء */
-.members-container {
-  max-width: 1200px;
-  margin: 0 auto;
+.tagline {
+text-align: center;
+font-size: 1.3rem;
+color: rgba(255, 255, 255, 0.8);
+margin-bottom: 40px;
+font-style: italic;
+letter-spacing: 1px;
 }
 
-.section-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2.5rem;
-  text-align: center;
-  margin-bottom: 40px;
-  background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* التذييل */
+.footer {
+text-align: center;
+margin-top: 50px;
+padding: 20px;
+color: rgba(255, 255, 255, 0.5);
+font-size: 14px;
+border-top: 1px solid rgba(0, 255, 213, 0.1);
 }
 
-.members-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
-  margin-bottom: 40px;
+/* تأثيرات دخول */
+@keyframes float {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-10px); }
 }
 
-.member-card {
-  background: rgba(25, 25, 35, 0.8);
-  border-radius: 12px;
-  padding: 25px;
-  text-align: center;
-  border: 1px solid var(--border-color);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
+.floating {
+animation: float 4s ease-in-out infinite;
 }
 
-.member-card:hover {
-  transform: translateY(-8px);
-  background: rgba(30, 30, 40, 0.9);
-}
-
-.member-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  margin: 0 auto 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: white;
-}
-
-.member-card h3 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-}
-
-.member-role {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  margin-bottom: 15px;
-  font-weight: 300;
-}
-
-.member-desc {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-/* صفحات تفاصيل الأعضاء */
-.member-detail-container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.member-header {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  margin-bottom: 40px;
-}
-
-.member-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.8rem;
-  color: white;
-  flex-shrink: 0;
-}
-
-.member-info h2 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2.2rem;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
-
-.member-info .role {
-  font-size: 1.2rem;
-  color: var(--text-secondary);
-}
-
-/* ألوان الأعضاء */
-.member-1 { border-color: var(--accent-pink); }
-.member-2 { border-color: var(--accent-cyan); }
-.member-3 { border-color: var(--accent-purple); }
-.member-4 { border-color: var(--accent-gold); }
-.member-5 { border-color: #ff0080; }
-.member-6 { border-color: #00f7ff; }
-.member-7 { border-color: #9d00ff; }
-
-.member-1 .member-icon { background: linear-gradient(135deg, var(--accent-pink), #cc0066); }
-.member-2 .member-icon { background: linear-gradient(135deg, var(--accent-cyan), #00b8c4); }
-.member-3 .member-icon { background: linear-gradient(135deg, var(--accent-purple), #7a00cc); }
-.member-4 .member-icon { background: linear-gradient(135deg, var(--accent-gold), #ccac00); }
-.member-5 .member-icon { background: linear-gradient(135deg, #ff0080, #99004d); }
-.member-6 .member-icon { background: linear-gradient(135deg, #00f7ff, #009499); }
-.member-7 .member-icon { background: linear-gradient(135deg, #9d00ff, #5c0099); }
-
-.member-1:hover { box-shadow: var(--glow-pink); }
-.member-2:hover { box-shadow: var(--glow-cyan); }
-.member-3:hover { box-shadow: var(--glow-purple); }
-.member-4:hover { box-shadow: var(--glow-gold); }
-.member-5:hover { box-shadow: var(--glow-pink); }
-.member-6:hover { box-shadow: var(--glow-cyan); }
-.member-7:hover { box-shadow: var(--glow-purple); }
-
-/* أزرار الرجوع */
-.back-btn {
-  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
-  border: none;
-  border-radius: 10px;
-  padding: 16px 30px;
-  color: white;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-  cursor: pointer;
-  margin-top: 40px;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  width: 100%;
-  max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 5px 15px rgba(157, 0, 255, 0.2);
-}
-
-.back-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(157, 0, 255, 0.3);
-}
-
-/* شريط التنقل السفلي */
-.nav-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(10, 10, 20, 0.95);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid var(--border-color);
-  padding: 15px 0;
-  z-index: 1000;
-}
-
-.nav-links {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.nav-item i {
-  font-size: 1.5rem;
-  margin-bottom: 5px;
-}
-
-.nav-item.active {
-  color: var(--accent-cyan);
-}
-
-.nav-item:hover {
-  color: var(--accent-pink);
-}
-
-/* استجابة للهواتف */
-@media (max-width: 768px) {
-  .main-title {
-    font-size: 2.8rem;
-    letter-spacing: 3px;
-  }
-  
-  .subtitle {
-    font-size: 1rem;
-    letter-spacing: 2px;
-  }
-  
-  .buttons-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .members-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-  
-  .terminal-card {
-    padding: 20px;
-  }
-  
-  .member-header {
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
-  }
-  
-  .nav-links {
-    gap: 20px;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .main-title {
-    font-size: 2.2rem;
-  }
-  
-  .page {
-    padding: 60px 15px 80px;
-  }
-  
-  .members-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .nav-links {
-    gap: 15px;
-  }
-  
-  .nav-item {
-    font-size: 0.8rem;
-  }
-  
-  .nav-item i {
-    font-size: 1.3rem;
-  }
+/* تفاصيل العضو */
+.role-badge {
+display: inline-block;
+background: rgba(0, 255, 213, 0.15);
+color: var(--neon-primary);
+padding: 5px 15px;
+border-radius: 20px;
+font-size: 14px;
+margin-top: 10px;
+border: 1px solid rgba(0, 255, 213, 0.3);
 }
 </style>
-</head>
 
-<body>
-<!-- خلفيات الصفحات -->
-<div id="home-bg" class="page-bg active"></div>
-<div id="about-bg" class="page-bg"></div>
-<div id="members-bg" class="page-bg"></div>
-<div id="chrollo-bg" class="page-bg"></div>
-<div id="lelouch-bg" class="page-bg"></div>
-<div id="aizen-bg" class="page-bg"></div>
-<div id="katana-bg" class="page-bg"></div>
-<div id="mika-bg" class="page-bg"></div>
-<div id="adam-bg" class="page-bg"></div>
-<div id="idris-bg" class="page-bg"></div>
+</head>  <body>  <!-- الصفحة الرئيسية -->  <div id="home" class="container fade-in">  
+  <div class="logo">  
+    <div class="logo-icon">🕶️</div>  
+    <h1 class="main-title floating">NERVYNIA TEAM</h1>  
+  </div>    <div class="tagline">  
+    فريق يعمل في الظل، بلا ضجيج، بلا وجوه.<br>  
+    يجمع بين العقل، السيطرة، والسرية.  
+  </div>    <div class="card">  
+    <h2>تعريف الفريق</h2>  
+    <p>  
+      <span class="highlight">NERVYNIA</span> ليس مجرد فريق، بل هو كيان يعمل في طبقات الواقع الخفية.   
+      نحن الظل الذي يتحرك عندما يظن الجميع أن النور قد انتصر.   
+      ننسج الخيوط في صمت، ونحرك القطع بلا ظهور، لأن القوة الحقيقية لا تحتاج إلى ضجيج.  
+    </p>  
+    <p>  
+      مهمتنا تتجاوز المهام العادية؛ نحن نبني، نحلل، ونخترق الأنظمة لنعيد صياغة التوازن.   
+      كل عضو في الفريق هو جزء من آلة أكبر، تعمل بتناغم مطلق لتحقيق أهداف لا يمكن للآخرين حتى تخيلها.  
+    </p>  
+    <button class="btn" onclick="showTeam()">دخول إلى أعضاء الفريق</button>  
+  </div>    <div class="card">  
+    <h2>الظلام</h2>  
+    <p>  
+      في عام 2018، ولد <span class="highlight">NERVYNIA</span> من رحم الحاجة إلى كيان غير مرئي   
+      يمكنه العمل حيث يفشل الآخرون. بدأنا كمجموعة صغيرة من الموهوبين الذين تشاركوا رؤية واحدة:   
+      السيطرة على اللعبة من خلف الكواليس.  
+    </p>  
+    <p>  
+      على مر السنين، تطورنا من مجموعة هواة إلى فريق محترف يعمل في مجالات متعددة:   
+      الأمن السيبراني، تحليل البيانات، الاستراتيجيات المعقدة، والعمليات الخاصة.   
+      نحن لا نؤمن بالظهور، بل نؤمن بالتأثير.  
+    </p>  
+  </div>  <button class="btn" onclick="openWhatsApp()">التواصل عبر واتساب</button>
 
-<div class="grid-pattern"></div>
+  <div class="footer">  
+    NERVYNIA TEAM © 2023 | الظل الذي يتحرك في صمت  
+  </div>  
+</div>  <!-- صفحة الفريق -->  <div id="team" class="container hidden">  
+  <h2 class="main-title">أعضاء الفريق</h2>    <div class="team-list">  
+    <div class="member" onclick="openMember('كرولو', 'القائد – العقل المدبر', 'كرولو هو العقل الاستراتيجي الذي يدير الفريق من الظل. قدراته التحليلية غير العادية تمكنه من رؤية عشرات الخطوات إلى الأمام. هو من يخطط للعمليات المعقدة ويضمن تنفيذها بدقة متناهية. لا يظهر إلا عندما يكون القرار مصيرياً.')">  
+      <div class="member-name">🕷️ كرولو</div>  
+      <p>القائد – العقل المدبر</p>  
+      <div class="role-badge">الاستراتيجية العليا</div>  
+    </div>  <div class="member" onclick="openMember('لولوش', 'الاستراتيجي – محرك الدمى', 'لولوش هو سيد التلاعب النفسي والاستراتيجيات المعقدة. يمكنه تحليل أي شخص أو نظام واكتشاف نقاط الضعف الخفية. هو من يصمم السيناريوهات التي يتبعها الآخرون دون أن يدركوا أنهم جزء من خطته.')">  
+  <div class="member-name">👑 لولوش</div>  
+  <p>الاستراتيجي – محرك الدمى</p>  
+  <div class="role-badge">التحليل النفسي</div>  
+</div>  
 
-<!-- الصفحة الرئيسية -->
-<div id="home" class="page active">
-  <div class="home-container">
-    <h1 class="main-title">NIRVANIA</h1>
-    <div class="subtitle">DIGITAL SOVEREIGN CORE SYSTEM</div>
-    
-    <div class="buttons-container">
-      <button class="nav-btn btn-pink" onclick="go('about')">
-        <i class="fas fa-info-circle"></i>
-        تعريف النظام
-      </button>
-      
-      <button class="nav-btn btn-cyan" onclick="go('members')">
-        <i class="fas fa-users"></i>
-        فريق النخبة
-      </button>
-      
-      <button class="nav-btn btn-purple" onclick="window.open('https://wa.me/201029505953', '_blank')">
-        <i class="fab fa-whatsapp"></i>
-        التواصل عبر واتساب
-      </button>
-    </div>
-  </div>
+<div class="member" onclick="openMember('آدم', 'كاسر الأنظمة', 'آدم هو الخبير في اختراق الأنظمة والدفاعات الإلكترونية. يمكنه اختراق أي حاجز واختراق أي قاعدة بيانات. هو المسؤول عن فتح الأبواب المغلقة وجمع المعلومات المستحيلة.')">  
+  <div class="member-name">⚡ آدم</div>  
+  <p>كاسر الأنظمة</p>  
+  <div class="role-badge">الأمن السيبراني</div>  
+</div>  
+
+<div class="member" onclick="openMember('كاتانا', 'السيف الرقمي', 'كاتانا هي المقاتلة في العالم الرقمي. تتخصص في العمليات السريعة والحاسمة. عندما يحتاج الفريق إلى تحرك حاسم وفوري، تكون كاتانا هي الجواب. سرعتها ودقتها أسطورية بين من يعرفونها.')">  
+  <div class="member-name">🗡️ كاتانا</div>  
+  <p>السيف الرقمي</p>  
+  <div class="role-badge">العمليات الخاصة</div>  
+</div>  
+
+<div class="member" onclick="openMember('شبح', 'المتخفي', 'شبح هو الخبير في التخفي والتحرك دون أثر. يمكنه الدخول إلى أي مكان والخروج منه دون أن يترك أي دليل على وجوده. هو العين الخفية التي تراقب كل شيء دون أن يتم اكتشافها.')">  
+  <div class="member-name">👻 شبح</div>  
+  <p>المتخفي</p>  
+  <div class="role-badge">المراقبة والتخفي</div>  
 </div>
 
-<!-- صفحة التعريف -->
-<div id="about" class="page">
-  <div class="about-container">
-    <div class="terminal-card">
-      <div class="terminal-header">
-        <div class="terminal-dots">
-          <div class="dot dot-1"></div>
-          <div class="dot dot-2"></div>
-          <div class="dot dot-3"></div>
-        </div>
-        <div class="terminal-title">NIRVANIA CORE SYSTEM</div>
-      </div>
-      
-      <div class="system-description">
-        <p><span class="highlight">نيرفينيا</span> ليست مجرد اسم، إنها <span class="highlight">نظام متكامل</span>.</p>
-        <p><span class="highlight">البنية:</span> شبكة من العقول المترابطة، كل عقل وحدة مستقلة.</p>
-        <p><span class="highlight">الهدف:</span> جميع الوحدات تعمل لخدمة القلب الرقمي للنظام.</p>
-        <p><span class="highlight">الفلسفة:</span> السيادة الرقمية المطلقة في فضاء المعلومات.</p>
-        <p><span class="highlight">التقنية:</span> بنية تحتية هجينة تجمع بين الذكاء البشري والرقمي.</p>
-        <p><span class="highlight">الرؤية:</span> إعادة تشكيل المستقبل الرقمي من خلال التحكم الذكي.</p>
-      </div>
-    </div>
-    
-    <button class="back-btn" onclick="go('home')">
-      <i class="fas fa-arrow-right"></i>
-      العودة للرئيسية
-    </button>
-  </div>
-</div>
+  </div>  <button class="btn" onclick="goHome()">العودة للرئيسية</button>
 
-<!-- صفحة الأعضاء -->
-<div id="members" class="page">
-  <div class="members-container">
-    <h2 class="section-title">فريق النخبة</h2>
-    
-    <div class="members-grid">
-      <div class="member-card member-1" onclick="go('chrollo')">
-        <div class="member-icon"><i class="fas fa-crown"></i></div>
-        <h3>CHROLLO</h3>
-        <div class="member-role">النواة الاستراتيجية</div>
-        <div class="member-desc">العقل القيادي الأعلى الذي يرسم الرؤية ويتحكم في اتجاه النظام</div>
-      </div>
-      
-      <div class="member-card member-2" onclick="go('lelouch')">
-        <div class="member-icon"><i class="fas fa-chess-queen"></i></div>
-        <h3>LELOUCH</h3>
-        <div class="member-role">التحكم التكتيكي</div>
-        <div class="member-desc">تحليل المواقف، اتخاذ القرار، السيطرة التكتيكية الذكية</div>
-      </div>
-      
-      <div class="member-card member-3" onclick="go('aizen')">
-        <div class="member-icon"><i class="fas fa-brain"></i></div>
-        <h3>AIZEN</h3>
-        <div class="member-role">الطبقة النفسية</div>
-        <div class="member-desc">التحكم النفسي، الخداع الاستراتيجي، قراءة العقول</div>
-      </div>
-      
-      <div class="member-card member-4" onclick="go('katana')">
-        <div class="member-icon"><i class="fas fa-fist-raised"></i></div>
-        <h3>KATANA</h3>
-        <div class="member-role">منطق القتال</div>
-        <div class="member-desc">التنفيذ المباشر، المواجهة، القوة الميدانية</div>
-      </div>
-      
-      <div class="member-card member-5" onclick="go('mika')">
-        <div class="member-icon"><i class="fas fa-broadcast-tower"></i></div>
-        <h3>MIKA</h3>
-        <div class="member-role">الإشارة والإعلام</div>
-        <div class="member-desc">النشر، التحكم بالصورة، الإعلام الرقمي</div>
-      </div>
-      
-      <div class="member-card member-6" onclick="go('adam')">
-        <div class="member-icon"><i class="fas fa-shield-alt"></i></div>
-        <h3>ADAM</h3>
-        <div class="member-role">عقدة الأمان</div>
-        <div class="member-desc">الحماية، الدفاع، تأمين النظام الرقمي</div>
-      </div>
-      
-      <div class="member-card member-7" onclick="go('idris')">
-        <div class="member-icon"><i class="fas fa-code"></i></div>
-        <h3>IDRIS</h3>
-        <div class="member-role">مهندس الأكواد</div>
-        <div class="member-desc">بناء الأكواد، الهيكلة، التطوير التقني</div>
-      </div>
-    </div>
-    
-    <button class="back-btn" onclick="go('home')">
-      <i class="fas fa-arrow-right"></i>
-      العودة للرئيسية
-    </button>
-  </div>
-</div>
+</div>  <!-- صفحة تعريف الفرد -->  <div id="profile" class="container hidden">  
+  <h2 id="memberTitle" class="main-title"></h2>    <div class="photo-container">  
+    <div class="photo-placeholder" id="memberPhoto">  
+      صورة العضو (قريباً)  
+    </div>  
+  </div>    <div class="member-description" id="memberDesc"></div>  <button class="btn" onclick="showTeam()">رجوع إلى قائمة الفريق</button>
 
-<!-- صفحات تفاصيل الأعضاء -->
-<div id="chrollo" class="page">
-  <div class="member-detail-container">
-    <div class="terminal-card">
-      <div class="member-header">
-        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-pink), #cc0066);">
-          <i class="fas fa-crown"></i>
-        </div>
-        <div class="member-info">
-          <h2>CHROLLO</h2>
-          <div class="role">النواة الاستراتيجية</div>
-        </div>
-      </div>
-      
-      <div class="system-description">
-        <p><span class="highlight">المنصب:</span> العقل القيادي الأعلى في نظام نيرفينيا</p>
-        <p><span class="highlight">الوظيفة:</span> رسم الرؤية الاستراتيجية الشاملة وتوجيه مسار النظام</p>
-        <p><span class="highlight">القدرات:</span> التفكير الاستراتيجي بعيد المدى، اتخاذ القرارات المصيرية</p>
-        <p><span class="highlight">الخصائص:</span> القيادة الحكيمة، الرؤية الثاقبة، التحكم في الاتجاه العام</p>
-        <p><span class="highlight">الهدف:</span> ضمان تطور النظام نحو السيادة الرقمية المطلقة</p>
-      </div>
-    </div>
+</div>  <script>  
+const home = document.getElementById("home");  
+const team = document.getElementById("team");  
+const profile = document.getElementById("profile");  
+const memberTitle = document.getElementById("memberTitle");  
+const memberDesc = document.getElementById("memberDesc");  
+const memberPhoto = document.getElementById("memberPhoto");  
+  
+function showTeam() {  
+  home.classList.add("hidden");  
+  profile.classList.add("hidden");  
     
-    <button class="back-btn" onclick="go('members')">
-      <i class="fas fa-arrow-right"></i>
-      العودة للفريق
-    </button>
-  </div>
-</div>
-
-<div id="lelouch" class="page">
-  <div class="member-detail-container">
-    <div class="terminal-card">
-      <div class="member-header">
-        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-cyan), #00b8c4);">
-          <i class="fas fa-chess-queen"></i>
-        </div>
-        <div class="member-info">
-          <h2>LELOUCH</h2>
-          <div class="role">التحكم التكتيكي</div>
-        </div>
-      </div>
-      
-      <div class="system-description">
-        <p><span class="highlight">المنصب:</span> مسؤول التحكم التكتيكي في نظام نيرفينيا</p>
-        <p><span class="highlight">الوظيفة:</span> تحليل المواقف المعقدة واتخاذ القرارات التكتيكية</p>
-        <p><span class="highlight">القدرات:</span> التفكير التكتيكي السريع، التخطيط الدقيق، التنفيذ الذكي</p>
-        <p><span class="highlight">الخصائص:</span> الذكاء التكتيكي، القدرة على التكيف، السيطرة الذهنية</p>
-        <p><span class="highlight">الهدف:</span> ضمان تفوق النظام في جميع المواجهات التكتيكية</p>
-      </div>
-    </div>
+  setTimeout(() => {  
+    team.classList.remove("hidden");  
+    team.classList.add("fade-in");  
+  }, 50);  
+}  
+  
+function goHome() {  
+  team.classList.add("hidden");  
+  profile.classList.add("hidden");  
     
-    <button class="back-btn" onclick="go('members')">
-      <i class="fas fa-arrow-right"></i>
-      العودة للفريق
-    </button>
-  </div>
-</div>
-
-<div id="aizen" class="page">
-  <div class="member-detail-container">
-    <div class="terminal-card">
-      <div class="member-header">
-        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-purple), #7a00cc);">
-          <i class="fas fa-brain"></i>
-        </div>
-        <div class="member-info">
-          <h2>AIZEN</h2>
-          <div class="role">الطبقة النفسية</div>
-        </div>
-      </div>
-      
-      <div class="system-description">
-        <p><span class="highlight">المنصب:</span> مسؤول العمليات النفسية في نظام نيرفينيا</p>
-        <p><span class="highlight">الوظيفة:</span> التحكم النفسي، الخداع الاستراتيجي، قراءة النوايا</p>
-        <p><span class="highlight">القدرات:</span> التأثير النفسي، التلاعب الذهني، التحليل السلوكي المتقدم</p>
-        <p><span class="highlight">الخصائص:</span> الغموض، الذكاء العاطفي، القدرة على التنبؤ بالسلوك</p>
-        <p><span class="highlight">الهدف:</span> السيطرة النفسية على ساحة المعركة الرقمية</p>
-      </div>
-    </div>
+  setTimeout(() => {  
+    home.classList.remove("hidden");  
+    home.classList.add("fade-in");  
+  }, 50);  
+}  
+  
+function openMember(name, role, description) {  
+  team.classList.add("hidden");  
     
-    <button class="back-btn" onclick="go('members')">
-      <i class="fas fa-arrow-right"></i>
-      العودة للفريق
-    </button>
-  </div>
-</div>
-
-<div id="katana" class="page">
-  <div class="member-detail-container">
-    <div class="terminal-card">
-      <div class="member-header">
-        <div class="member-avatar" style="background: linear-gradient(135deg, var(--accent-gold), #ccac00);">
-          <i class="fas fa-fist-raised"></i>
-        </div>
-        <div class="member-i
+  setTimeout(() => {  
+    profile.classList.remove("hidden");  
+    profile.classList.add("fade-in");  
+      
+    memberTitle.innerText = name;  
+    memberDesc.innerText = description;  
+    memberPhoto.innerHTML = `${name}<br><small>${role}</small>`;  
+  }, 50);  
+}  
+  
+function openWhatsApp() {  
+  window.open("https://wa.me/201029505953", "_blank");  
+}  
+  
+// تأثيرات عند تحميل الصفحة  
+document.addEventListener('DOMContentLoaded', function() {  
+  // إضافة تأثيرات عشوائية للخلفية  
+  setInterval(() => {  
+    const x = Math.random() * 100;  
+    const y = Math.random() * 100;  
+    const size = Math.random() * 50 + 20;  
+      
+    const glow = document.createElement('div');  
+    glow.style.position = 'fixed';  
+    glow.style.top = `${y}%`;  
+    glow.style.right = `${x}%`;  
+    glow.style.width = `${size}px`;  
+    glow.style.height = `${size}px`;  
+    glow.style.background = `radial-gradient(circle, rgba(0,255,213,0.1) 0%, transparent 70%)`;  
+    glow.style.borderRadius = '50%';  
+    glow.style.zIndex = '-1';  
+    glow.style.pointerEvents = 'none';  
+    glow.style.animation = `fadeInOut ${Math.random() * 3 + 2}s ease-in-out`;  
+      
+    document.body.appendChild(glow);  
+      
+    setTimeout(() => {  
+      glow.remove();  
+    }, 3000);  
+  }, 800);  
+});  
+  
+// إضافة أسلوب CSS للوميض  
+const style = document.createElement('style');  
+style.textContent = `  
+@keyframes fadeInOut {  
+  0% { opacity: 0; transform: scale(0.5); }  
+  50% { opacity: 0.3; transform: scale(1); }  
+  100% { opacity: 0; transform: scale(0.5); }  
+}  
+`;  
+document.head.appendChild(style);  
+</script>  </body>  
+</html>
