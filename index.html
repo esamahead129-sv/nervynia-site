@@ -17,21 +17,26 @@
         }
         
         :root {
-            --primary: #1a237e;
-            --secondary: #283593;
-            --accent: #3949ab;
-            --light: #e8eaf6;
-            --dark: #0d153a;
-            --text: #333;
-            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #00d2ff;
+            --dark-bg: #0f0f23;
+            --card-bg: #1a1a2e;
+            --light-text: #f0f0f0;
+            --medium-text: #b8b8b8;
+            --border: #2d2d4d;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             --transition: all 0.3s ease;
         }
         
         body {
-            background-color: #f5f7ff;
-            color: var(--text);
+            background-color: var(--dark-bg);
+            color: var(--light-text);
             line-height: 1.6;
             overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(106, 17, 203, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(37, 117, 252, 0.1) 0%, transparent 20%);
         }
         
         .container {
@@ -67,16 +72,16 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            border: 5px solid white;
+            border: 5px solid rgba(255, 255, 255, 0.2);
             margin: 0 auto 20px;
-            background: linear-gradient(45deg, var(--accent), #5c6bc0);
+            background: linear-gradient(45deg, var(--primary), var(--accent));
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 60px;
             position: relative;
             z-index: 2;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .profile-info {
@@ -93,18 +98,34 @@
         .tagline {
             font-size: 1.2rem;
             opacity: 0.9;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            background: rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-top: 10px;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-info i {
+            margin-left: 8px;
+            color: var(--accent);
         }
         
         /* Navigation Styles */
         nav {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 20px;
             box-shadow: var(--shadow);
             margin: -20px auto 40px;
             position: relative;
             z-index: 10;
             max-width: 900px;
+            border: 1px solid var(--border);
         }
         
         .nav-list {
@@ -125,7 +146,7 @@
             display: block;
             padding: 20px 15px;
             text-decoration: none;
-            color: var(--dark);
+            color: var(--medium-text);
             font-weight: 600;
             border-bottom: 4px solid transparent;
             transition: var(--transition);
@@ -133,13 +154,13 @@
         }
         
         .nav-link:hover {
-            background-color: var(--light);
-            color: var(--primary);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--accent);
         }
         
         .nav-link.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
+            color: var(--accent);
+            border-bottom-color: var(--accent);
         }
         
         .nav-icon {
@@ -152,11 +173,12 @@
         .content-section {
             display: none;
             padding: 40px;
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 20px;
             box-shadow: var(--shadow);
             margin-bottom: 40px;
             animation: fadeIn 0.5s ease;
+            border: 1px solid var(--border);
         }
         
         .content-section.active {
@@ -169,11 +191,11 @@
         }
         
         h2 {
-            color: var(--primary);
+            color: var(--accent);
             font-size: 2rem;
             margin-bottom: 25px;
             padding-bottom: 15px;
-            border-bottom: 2px solid var(--light);
+            border-bottom: 2px solid var(--border);
             position: relative;
         }
         
@@ -184,7 +206,7 @@
             right: 0;
             width: 100px;
             height: 2px;
-            background-color: var(--accent);
+            background: linear-gradient(to left, var(--primary), var(--accent));
         }
         
         .info-grid {
@@ -195,17 +217,29 @@
         }
         
         .info-card {
-            background: linear-gradient(135deg, #f8f9ff, #eef1ff);
+            background: linear-gradient(135deg, rgba(42, 42, 62, 0.8), rgba(26, 26, 46, 0.9));
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: var(--transition);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to left, var(--primary), var(--accent));
         }
         
         .info-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
         }
         
         .info-card i {
@@ -215,19 +249,30 @@
         }
         
         .info-card h3 {
-            color: var(--secondary);
+            color: var(--light-text);
             margin-bottom: 10px;
             font-size: 1.5rem;
+        }
+        
+        .info-card p {
+            color: var(--medium-text);
         }
         
         /* Hobbies Section */
         .hobby-card {
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #f8f9ff, #eef1ff);
+            background: linear-gradient(135deg, rgba(42, 42, 62, 0.8), rgba(26, 26, 46, 0.9));
             border-radius: 15px;
             padding: 25px;
             margin-bottom: 20px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        
+        .hobby-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
         
         .hobby-icon {
@@ -242,6 +287,7 @@
             color: white;
             font-size: 2rem;
             flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.2);
         }
         
         /* Games Section */
@@ -255,20 +301,27 @@
             display: flex;
             align-items: flex-end;
             color: white;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        
+        .game-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
         }
         
         .game-overlay {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
             padding: 20px;
             width: 100%;
         }
         
         .minecraft-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');
         }
         
         .rdr2-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');
         }
         
         /* Comics & Anime Section */
@@ -281,13 +334,15 @@
         .media-card {
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: var(--transition);
+            border: 1px solid var(--border);
+            background-color: rgba(26, 26, 46, 0.8);
         }
         
         .media-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
         }
         
         .media-img {
@@ -298,22 +353,50 @@
         
         .media-content {
             padding: 20px;
-            background-color: white;
+        }
+        
+        .media-content h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .media-content p {
+            color: var(--medium-text);
         }
         
         /* Footer */
         footer {
-            background-color: var(--dark);
-            color: white;
+            background-color: #0a0a1a;
+            color: var(--medium-text);
             text-align: center;
             padding: 30px 0;
             margin-top: 50px;
             border-radius: 30px 30px 0 0;
+            border-top: 1px solid var(--border);
         }
         
         .flag {
             font-size: 2rem;
             margin: 10px 0;
+        }
+        
+        .footer-contact {
+            background: rgba(255, 255, 255, 0.05);
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 50px;
+            margin: 15px 0;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+        }
+        
+        .footer-contact a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-contact a:hover {
+            color: white;
         }
         
         /* Responsive Design */
@@ -339,6 +422,26 @@
                 margin-left: 0;
                 margin-bottom: 15px;
             }
+            
+            .contact-info {
+                font-size: 0.9rem;
+                padding: 6px 15px;
+            }
+        }
+        
+        /* Neon effect for special elements */
+        .neon-text {
+            text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent), 0 0 15px var(--accent);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 210, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
         }
     </style>
 </head>
@@ -346,13 +449,17 @@
     <!-- Header Section -->
     <header>
         <div class="container">
-            <div class="profile-img">
+            <div class="profile-img pulse">
                 <span>141</span>
             </div>
             <div class="profile-info">
-                <h1>ᴀɴᴀs</h1>
+                <h1 class="neon-text">ᴀɴᴀs</h1>
                 <p class="tagline">مغربي | 16-17 سنة | الرمز: 141</p>
                 <div class="flag">🇲🇦</div>
+                <div class="contact-info">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+212 784-002549</span>
+                </div>
             </div>
         </div>
     </header>
@@ -383,6 +490,12 @@
                     <a href="#about" class="nav-link" data-section="about">
                         <i class="fas fa-user nav-icon"></i>
                         <span>معلومات عامة</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link" data-section="contact">
+                        <i class="fas fa-phone-alt nav-icon"></i>
+                        <span>التواصل</span>
                     </a>
                 </li>
             </ul>
@@ -487,84 +600,4 @@
                     <i class="fas fa-id-card"></i>
                     <h3>الرمز</h3>
                     <p>الرمز الخاص به هو 141، والذي يمثل هويته الرقمية.</p>
-                </div>
-                
-                <div class="info-card">
-                    <i class="fas fa-heart"></i>
-                    <h3>الشخصية</h3>
-                    <p>شاب مغامر يحب التحدي والإبداع، يجمع بين الاهتمامات الرياضية والترفيهية.</p>
-                </div>
-                
-                <div class="info-card">
-                    <i class="fas fa-globe"></i>
-                    <h3>الاهتمامات</h3>
-                    <p>يجمع بين الرياضة والترفيه الرقمي، مما يعكس شخصية متوازنة بين النشاط البدني والعقلي.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <h3>Anas - الملف الشخصي</h3>
-            <p>مغربي | 16-17 سنة | الرمز: 141</p>
-            <div class="flag">🇲🇦</div>
-            <p>© 2023 - جميع الحقوق محفوظة</p>
-        </div>
-    </footer>
-
-    <script>
-        // Navigation functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const contentSections = document.querySelectorAll('.content-section');
-            
-            // Set active section based on click
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Remove active class from all links and sections
-                    navLinks.forEach(item => item.classList.remove('active'));
-                    contentSections.forEach(section => section.classList.remove('active'));
-                    
-                    // Add active class to clicked link
-                    this.classList.add('active');
-                    
-                    // Show corresponding section
-                    const sectionId = this.getAttribute('data-section');
-                    document.getElementById(sectionId).classList.add('active');
-                });
-            });
-            
-            // Add hover effects to cards
-            const cards = document.querySelectorAll('.info-card, .media-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-            
-            // Add animation to hobby cards on load
-            const hobbyCards = document.querySelectorAll('.hobby-card');
-            hobbyCards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    
-                    setTimeout(() => {
-                        card.style.transition = 'all 0.5s ease';
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 100);
-                }, index * 200);
-            });
-        });
-    </script>
-</body>
-</html>
+           
