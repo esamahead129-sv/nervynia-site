@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anas - الملف الشخصي</title>
+    <title>ᴀɴᴀs - الملف الشخصي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +20,7 @@
             --primary: #6a11cb;
             --secondary: #2575fc;
             --accent: #00d2ff;
+            --whatsapp: #25D366;
             --dark-bg: #0f0f23;
             --card-bg: #1a1a2e;
             --light-text: #f0f0f0;
@@ -82,6 +83,13 @@
             position: relative;
             z-index: 2;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 210, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
         }
         
         .profile-info {
@@ -93,6 +101,7 @@
             font-size: 2.5rem;
             margin-bottom: 10px;
             font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
         }
         
         .tagline {
@@ -114,6 +123,20 @@
         .contact-info i {
             margin-left: 8px;
             color: var(--accent);
+        }
+        
+        .whatsapp-contact {
+            background-color: rgba(37, 211, 102, 0.15);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            color: #d0ffdd;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .whatsapp-contact:hover {
+            background-color: rgba(37, 211, 102, 0.25);
+            transform: translateY(-3px);
         }
         
         /* Navigation Styles */
@@ -209,6 +232,18 @@
             background: linear-gradient(to left, var(--primary), var(--accent));
         }
         
+        h2 i {
+            margin-left: 10px;
+        }
+        
+        .section-intro {
+            color: var(--medium-text);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border);
+        }
+        
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -225,6 +260,7 @@
             border: 1px solid var(--border);
             position: relative;
             overflow: hidden;
+            height: 100%;
         }
         
         .info-card::before {
@@ -256,46 +292,93 @@
         
         .info-card p {
             color: var(--medium-text);
+            line-height: 1.7;
+        }
+        
+        /* Personal Info Cards */
+        .personal-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .personal-info-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 10px;
+            border-right: 4px solid var(--accent);
+        }
+        
+        .personal-info-label {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .personal-info-value {
+            color: var(--light-text);
+            font-size: 1.1rem;
         }
         
         /* Hobbies Section */
+        .hobbies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
         .hobby-card {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             background: linear-gradient(135deg, rgba(42, 42, 62, 0.8), rgba(26, 26, 46, 0.9));
             border-radius: 15px;
             padding: 25px;
-            margin-bottom: 20px;
             border: 1px solid var(--border);
             transition: var(--transition);
+            height: 100%;
         }
         
         .hobby-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
         
         .hobby-icon {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(45deg, var(--primary), var(--accent));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 20px;
+            margin-bottom: 20px;
             color: white;
-            font-size: 2rem;
-            flex-shrink: 0;
+            font-size: 1.8rem;
             box-shadow: 0 5px 15px rgba(0, 210, 255, 0.2);
         }
         
+        .hobby-card h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
         /* Games Section */
+        .games-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
         .game-card {
             position: relative;
             border-radius: 15px;
             overflow: hidden;
-            height: 250px;
+            height: 280px;
             background-size: cover;
             background-position: center;
             display: flex;
@@ -312,8 +395,14 @@
         
         .game-overlay {
             background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
-            padding: 20px;
+            padding: 25px;
             width: 100%;
+        }
+        
+        .game-overlay h3 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
         }
         
         .minecraft-bg {
@@ -324,11 +413,12 @@
             background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');
         }
         
-        /* Comics & Anime Section */
-        .media-grid {
+        /* Media Section */
+        .media-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
+            margin-top: 20px;
         }
         
         .media-card {
@@ -338,6 +428,7 @@
             transition: var(--transition);
             border: 1px solid var(--border);
             background-color: rgba(26, 26, 46, 0.8);
+            height: 100%;
         }
         
         .media-card:hover {
@@ -358,10 +449,68 @@
         .media-content h3 {
             color: var(--accent);
             margin-bottom: 10px;
+            font-size: 1.4rem;
         }
         
-        .media-content p {
-            color: var(--medium-text);
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .contact-card {
+            background: linear-gradient(135deg, rgba(42, 42, 62, 0.8), rgba(26, 26, 46, 0.9));
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .whatsapp-card {
+            border-top: 5px solid var(--whatsapp);
+        }
+        
+        .whatsapp-card i {
+            color: var(--whatsapp);
+        }
+        
+        .whatsapp-btn {
+            display: inline-block;
+            background-color: var(--whatsapp);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-btn i {
+            font-size: 1.2rem;
+            margin-left: 8px;
+            margin-bottom: 0;
         }
         
         /* Footer */
@@ -399,6 +548,43 @@
             color: white;
         }
         
+        .copyright {
+            margin-top: 20px;
+            color: var(--medium-text);
+            font-size: 0.9rem;
+        }
+        
+        /* Floating WhatsApp Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background-color: var(--whatsapp);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: var(--transition);
+            animation: float 3s ease-in-out infinite;
+            text-decoration: none;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating-whatsapp:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-list {
@@ -413,52 +599,58 @@
                 padding: 25px;
             }
             
-            .hobby-card {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hobby-icon {
-                margin-left: 0;
-                margin-bottom: 15px;
+            .profile-img {
+                width: 120px;
+                height: 120px;
+                font-size: 50px;
             }
             
             .contact-info {
                 font-size: 0.9rem;
                 padding: 6px 15px;
             }
+            
+            .floating-whatsapp {
+                width: 50px;
+                height: 50px;
+                font-size: 1.7rem;
+                bottom: 20px;
+                left: 20px;
+            }
         }
         
-        /* Neon effect for special elements */
-        .neon-text {
-            text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent), 0 0 15px var(--accent);
+        /* Section Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
         
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 210, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/212784002549" class="floating-whatsapp" target="_blank" title="تواصل مع Anas عبر واتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <!-- Header Section -->
     <header>
         <div class="container">
-            <div class="profile-img pulse">
+            <div class="profile-img">
                 <span>141</span>
             </div>
             <div class="profile-info">
-                <h1 class="neon-text">ᴀɴᴀs</h1>
+                <h1>ᴀɴᴀs</h1>
                 <p class="tagline">مغربي | 16-17 سنة | الرمز: 141</p>
                 <div class="flag">🇲🇦</div>
-                <div class="contact-info">
-                    <i class="fas fa-phone-alt"></i>
-                    <span>+212 784-002549</span>
+                <div class="contact-info whatsapp-contact" onclick="window.open('https://wa.me/212784002549', '_blank')">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>+212 784-002549 (انقر للتواصل عبر واتساب)</span>
                 </div>
             </div>
         </div>
@@ -469,135 +661,16 @@
         <div class="container">
             <ul class="nav-list">
                 <li class="nav-item">
-                    <a href="#hobbies" class="nav-link active" data-section="hobbies">
+                    <a href="#personal" class="nav-link active" data-section="personal">
+                        <i class="fas fa-user-circle nav-icon"></i>
+                        <span>البيانات الشخصية</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#hobbies" class="nav-link" data-section="hobbies">
                         <i class="fas fa-basketball-ball nav-icon"></i>
                         <span>الهوايات</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#games" class="nav-link" data-section="games">
-                        <i class="fas fa-gamepad nav-icon"></i>
-                        <span>الألعاب الإلكترونية</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#comics-anime" class="nav-link" data-section="comics-anime">
-                        <i class="fas fa-tv nav-icon"></i>
-                        <span>القصص المصورة والأنمي</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link" data-section="about">
-                        <i class="fas fa-user nav-icon"></i>
-                        <span>معلومات عامة</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link" data-section="contact">
-                        <i class="fas fa-phone-alt nav-icon"></i>
-                        <span>التواصل</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Hobbies Section -->
-        <section id="hobbies" class="content-section active">
-            <h2><i class="fas fa-basketball-ball"></i> الهوايات</h2>
-            <p>إليكم الهوايات التي يمارسها Anas بانتظام:</p>
-            
-            <div class="hobby-card">
-                <div class="hobby-icon">
-                    <i class="fas fa-basketball-ball"></i>
-                </div>
-                <div class="hobby-content">
-                    <h3>كرة السلة</h3>
-                    <p>رياضة جماعية يحبها Anas لمتعة اللعب الجماعي والتحدي الذي تقدمه. كرة السلة تساعد على تطوير اللياقة البدنية والعمل الجماعي.</p>
-                </div>
-            </div>
-            
-            <div class="hobby-card">
-                <div class="hobby-icon">
-                    <i class="fas fa-mountain"></i>
-                </div>
-                <div class="hobby-content">
-                    <h3>تسلق الجبال</h3>
-                    <p>هواية تعكس شغف Anas بالمغامرة والتحدي. تسلق الجبال يمنحه فرصة استكشاف الطبيعة والتواصل معها، ويطور مهارات التحمل والتخطيط.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Games Section -->
-        <section id="games" class="content-section">
-            <h2><i class="fas fa-gamepad"></i> الألعاب الإلكترونية</h2>
-            <p>الألعاب المفضلة لدى Anas والتي يقضي وقتاً ممتعاً فيها:</p>
-            
-            <div class="info-grid">
-                <div class="game-card minecraft-bg">
-                    <div class="game-overlay">
-                        <h3>Minecraft</h3>
-                        <p>لعبة إبداعية تسمح للاعب ببناء عالمه الخاص باستخدام المكعبات. تعزز الإبداع والتخطيط وحل المشكلات.</p>
-                    </div>
-                </div>
-                
-                <div class="game-card rdr2-bg">
-                    <div class="game-overlay">
-                        <h3>Red Dead Redemption 2</h3>
-                        <p>لعبة أكشن ومغامرات في عالم الغرب الأمريكي المفتوح. تتميز بقصة غنية وعالم تفاعلي مفصّل.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Comics & Anime Section -->
-        <section id="comics-anime" class="content-section">
-            <h2><i class="fas fa-tv"></i> القصص المصورة والأنمي</h2>
-            <p>مجالات الترفيه المفضلة لدى Anas:</p>
-            
-            <div class="media-grid">
-                <div class="media-card">
-                    <div class="media-img" style="background-image: url('https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="media-content">
-                        <h3>القصص المصورة</h3>
-                        <p>يحب Anas قراءة القصص المصورة (الكوميكس) لمختلف الأبطال الخارقين والقصص الملحمية.</p>
-                    </div>
-                </div>
-                
-                <div class="media-card">
-                    <div class="media-img" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="media-content">
-                        <h3>الأنمي</h3>
-                        <p>يستمتع بمشاهدة الأنمي الياباني بمختلف أنواعه، خاصة الأنمي ذو القصص المعقدة والتطور الشخصي للشخصيات.</p>
-                    </div>
-                </div>
-                
-                <div class="media-card">
-                    <div class="media-img" style="background-image: url('https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="media-content">
-                        <h3>المسلسلات</h3>
-                        <p>إلى جانب الأنمي، يتابع Anas المسلسلات التلفزيونية ذات القصص المشوقة والتطور الدرامي.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="content-section">
-            <h2><i class="fas fa-user"></i> معلومات عامة</h2>
-            <p>بعض المعلومات الإضافية عن Anas:</p>
-            
-            <div class="info-grid">
-                <div class="info-card">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>الدولة والجنسية</h3>
-                    <p>مغربي 🇲🇦، يعتز بجذوره وثقافته المغربية العريقة.</p>
-                </div>
-                
-                <div class="info-card">
-                    <i class="fas fa-id-card"></i>
-                    <h3>الرمز</h3>
-                    <p>الرمز الخاص به هو 141، والذي يمثل هويته الرقمية.</p>
-           
+   
