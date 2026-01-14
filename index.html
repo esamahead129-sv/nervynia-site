@@ -3,427 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anas - الملف الشخصي</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>إشعار هام - الشركة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cairo', sans-serif;
         }
         
         body {
-            background: #0a0a16;
-            color: #f0f0f0;
+            background-color: #ffffff;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* تأثيرات خلفية ديناميكية */
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%);
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 15%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+        
+        .circle-3 {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            left: 15%;
+            animation-delay: 10s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-30px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(20px) rotate(240deg);
+            }
+        }
+        
+        /* شعار الشركة */
+        .company-logo {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .company-logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            border-radius: 2px;
+        }
+        
+        /* بطاقة الإشعار الرئيسية */
+        .notification-card {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .notification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .notification-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+        }
+        
+        /* العنوان الرئيسي */
+        .main-title {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        /* رسالة الإغلاق */
+        .message {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 35px;
+            line-height: 1.8;
+            padding: 0 10px;
+        }
+        
+        /* شعار الإغلاق */
+        .closure-icon {
+            font-size: 5rem;
+            color: #e74c3c;
+            margin-bottom: 25px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* قسم التحديث */
+        .update-section {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-right: 5px solid #3498db;
+            text-align: right;
+        }
+        
+        .update-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .update-details {
+            font-size: 1.3rem;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        /* التوقيع */
+        .signature {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ddd;
+            text-align: left;
+        }
+        
+        .signature-name {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .signature-title {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            font-weight: 600;
+        }
+        
+        /* التنبيه الهام */
+        .important-note {
+            background-color: #fff9e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            border-right: 5px solid #f39c12;
+            text-align: right;
+        }
+        
+        .important-note h3 {
+            color: #d35400;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .important-note p {
+            color: #7d6608;
+            font-size: 1.2rem;
             line-height: 1.6;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* تأثيرات النص */
+        .highlight {
+            color: #3498db;
+            font-weight: 700;
         }
         
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-            border-radius: 0 0 30px 30px;
+        .glow {
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
         }
         
-        .profile-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            border: 5px solid rgba(255,255,255,0.2);
-            margin: 0 auto 20px;
-            background: linear-gradient(45deg, #6a11cb, #00d2ff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 50px;
-            font-weight: bold;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            opacity: 0.9;
-        }
-        
-        .whatsapp-contact {
-            display: inline-block;
-            background: rgba(37, 211, 102, 0.2);
-            color: #25D366;
-            padding: 12px 25px;
-            border-radius: 50px;
-            margin-top: 15px;
-            text-decoration: none;
-            border: 2px solid rgba(37, 211, 102, 0.4);
-            font-weight: bold;
-        }
-        
-        /* Navigation */
-        nav {
-            background: #1a1a2e;
-            border-radius: 15px;
-            margin: 20px auto 30px;
-            max-width: 800px;
-            border: 1px solid #2d2d4d;
-        }
-        
-        .nav-list {
-            display: flex;
-            list-style: none;
-            justify-content: center;
-            padding: 0;
-        }
-        
-        .nav-item {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .nav-link {
-            display: block;
-            padding: 20px 15px;
-            text-decoration: none;
-            color: #b8b8b8;
-            font-weight: 600;
-            border-bottom: 4px solid transparent;
-            transition: all 0.3s;
-        }
-        
-        .nav-link:hover {
-            background: rgba(255,255,255,0.05);
-            color: #00d2ff;
-        }
-        
-        .nav-link.active {
-            color: #00d2ff;
-            border-bottom-color: #00d2ff;
-        }
-        
-        .nav-icon {
-            display: block;
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-        
-        /* Content Sections */
-        .content-section {
-            display: none;
-            background: #1a1a2e;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            border: 1px solid #2d2d4d;
-            animation: fadeIn 0.5s;
-        }
-        
-        .content-section.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h2 {
-            color: #00d2ff;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #2d2d4d;
-        }
-        
-        /* Hobbies Section */
-        .hobby-card {
-            background: rgba(42, 42, 62, 0.5);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid #2575fc;
-        }
-        
-        .hobby-card h3 {
-            color: #fff;
-            margin-bottom: 10px;
-        }
-        
-        .hobby-card p {
-            color: #b8b8b8;
-        }
-        
-        /* Games Section */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .game-card {
-            background: rgba(42, 42, 62, 0.5);
-            border-radius: 10px;
-            padding: 20px;
-            border: 1px solid #2d2d4d;
-        }
-        
-        .game-card h3 {
-            color: #fff;
-            margin-bottom: 10px;
-        }
-        
-        /* Media Section */
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .media-card {
-            background: rgba(42, 42, 62, 0.5);
-            border-radius: 10px;
-            padding: 20px;
-        }
-        
-        /* About Section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .about-card {
-            background: rgba(42, 42, 62, 0.5);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .about-card i {
-            font-size: 2.5rem;
-            color: #00d2ff;
-            margin-bottom: 15px;
-        }
-        
-        /* Footer */
-        footer {
-            background: #0a0a1a;
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 40px;
-            border-top: 1px solid #2d2d4d;
-        }
-        
-        .footer-contact {
-            display: inline-block;
-            background: rgba(255,255,255,0.05);
-            padding: 10px 25px;
-            border-radius: 50px;
-            margin: 15px 0;
-        }
-        
-        .footer-contact a {
-            color: #00d2ff;
-            text-decoration: none;
-        }
-        
-        /* Responsive */
+        /* التكيف مع الشاشات الصغيرة */
         @media (max-width: 768px) {
-            .nav-list {
-                flex-direction: column;
+            .company-logo {
+                font-size: 3rem;
             }
             
-            .content-section {
-                padding: 20px;
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .message {
+                font-size: 1.2rem;
+            }
+            
+            .notification-card {
+                padding: 25px 20px;
+            }
+            
+            .closure-icon {
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .company-logo {
+                font-size: 2.5rem;
+            }
+            
+            .main-title {
+                font-size: 1.7rem;
+            }
+            
+            .update-title {
+                font-size: 1.5rem;
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="profile-img">141</div>
-            <div class="profile-info">
-                <h1>ᴀɴᴀs</h1>
-                <p class="tagline">مغربي | 16-17 سنة | الرمز: 141</p>
-                <a href="https://wa.me/212784002549" class="whatsapp-contact" target="_blank">
-                    <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
-                </a>
-            </div>
+    <!-- تأثيرات الخلفية -->
+    <div class="background-effects">
+        <div class="floating-circle circle-1"></div>
+        <div class="floating-circle circle-2"></div>
+        <div class="floating-circle circle-3"></div>
+    </div>
+    
+    <!-- شعار الشركة -->
+    <div class="company-logo glow">شركة النظم المتطورة</div>
+    
+    <!-- بطاقة الإشعار -->
+    <div class="notification-card">
+        <div class="closure-icon">
+            <i class="fas fa-exclamation-triangle"></i>
         </div>
-    </header>
-
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a href="#hobbies" class="nav-link active" data-section="hobbies">
-                        <i class="fas fa-basketball-ball nav-icon"></i>
-                        <span>الهوايات</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#games" class="nav-link" data-section="games">
-                        <i class="fas fa-gamepad nav-icon"></i>
-                        <span>الألعاب</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#media" class="nav-link" data-section="media">
-                        <i class="fas fa-tv nav-icon"></i>
-                        <span>الترفيه</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link" data-section="about">
-                        <i class="fas fa-user nav-icon"></i>
-                        <span>معلومات عامة</span>
-                    </a>
-                </li>
-            </ul>
+        
+        <h1 class="main-title">
+            <span class="highlight">إشعار هام</span>: إغلاق مؤقت لجميع المواقع
+        </h1>
+        
+        <div class="message">
+            تحياتي كرولو،<br>
+            يود فريق <span class="highlight">شركة النظم المتطورة</span> إعلامكم بأنه يتم حاليًا إغلاق جميع المواقع الإلكترونية التابعة للشركة بشكل مؤقت لإجراء تحديثات وتطويرات ضرورية لتحسين تجربة المستخدم وضمان تقديم خدمات بأعلى مستويات الجودة.
         </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Hobbies Section -->
-        <section id="hobbies" class="content-section active">
-            <h2>الهوايات</h2>
-            <div class="hobby-card">
-                <h3>كرة السلة</h3>
-                <p>رياضة جماعية يحبها Anas لمتعة اللعب الجماعي والتحدي.</p>
-            </div>
-            <div class="hobby-card">
-                <h3>تسلق الجبال</h3>
-                <p>هواية تعكس شغف Anas بالمغامرة والتحدي.</p>
-            </div>
-        </section>
-
-        <!-- Games Section -->
-        <section id="games" class="content-section">
-            <h2>الألعاب الإلكترونية</h2>
-            <div class="games-grid">
-                <div class="game-card">
-                    <h3>Minecraft</h3>
-                    <p>لعبة إبداعية تسمح للاعب ببناء عالمه الخاص.</p>
-                </div>
-                <div class="game-card">
-                    <h3>Red Dead Redemption 2</h3>
-                    <p>لعبة أكشن ومغامرات في عالم الغرب الأمريكي.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Media Section -->
-        <section id="media" class="content-section">
-            <h2>الترفيه</h2>
-            <div class="media-grid">
-                <div class="media-card">
-                    <h3>القصص المصورة 🐦</h3>
-                    <p>يحب قراءة القصص المصورة لمختلف الأبطال الخارقين.</p>
-                </div>
-                <div class="media-card">
-                    <h3>الأنمي</h3>
-                    <p>يستمتع بمشاهدة الأنمي الياباني بمختلف أنواعه.</p>
-                </div>
-                <div class="media-card">
-                    <h3>المسلسلات</h3>
-                    <p>يتابع المسلسلات التلفزيونية ذات القصص المشوقة.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="content-section">
-            <h2>معلومات عامة</h2>
-            <div class="about-grid">
-                <div class="about-card">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>الدولة والجنسية</h3>
-                    <p>مغربي 🇲🇦</p>
-                </div>
-                <div class="about-card">
-                    <i class="fas fa-id-card"></i>
-                    <h3>الرمز</h3>
-                    <p>141</p>
-                </div>
-                <div class="about-card">
-                    <i class="fas fa-heart"></i>
-                    <h3>الشخصية</h3>
-                    <p>مغامر يحب التحدي والإبداع</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <h3>Anas - الملف الشخصي</h3>
-            <p>مغربي | 16-17 سنة | الرمز: 141</p>
-            <div class="footer-contact">
-                <a href="https://wa.me/212784002549" target="_blank">
-                    <i class="fab fa-whatsapp"></i> +212 784-002549
-                </a>
-            </div>
-            <p>© 2023 - جميع الحقوق محفوظة</p>
+        
+        <div class="update-section">
+            <h2 class="update-title"><i class="fas fa-sync-alt"></i> عملية التحديث الجارية</h2>
+            <p class="update-details">
+                يتم حاليًا تحديث موقع إلكتروني مبني على نظام <span class="highlight">الڤل</span> المتطور، حيث نقوم بإدخال تحسينات كبيرة على الواجهة والخلفية التقنية للموقع لضمان سرعة وأمان أكبر لتجربتكم.
+            </p>
         </div>
-    </footer>
-
+        
+        <div class="message">
+            نعمل على تقديم الإصدار الجديد بأفضل شكل احترافي، حيث سيظهر المحتوى بشكل أنيق ومنظم مع تأثيرات بصرية متميزة تعكس هوية شركتنا واهتمامنا بأدق التفاصيل.
+        </div>
+        
+        <div class="important-note">
+            <h3><i class="fas fa-lightbulb"></i> ملاحظة هامة</h3>
+            <p>
+                نؤكد أن عملية التطوير هذه تهدف لخدمتكم بشكل أفضل، وسيتم إعادة فتح جميع المواقع بأحدث التقنيات وأفضل الواجهات خلال الساعات القادمة. نعتذر عن أي إزعاج قد تسبب به هذا الإغلاق المؤقت.
+            </p>
+        </div>
+        
+        <div class="signature">
+            <div class="signature-name">كارولو محمد</div>
+            <div class="signature-title">مدير التطوير والعمليات التقنية</div>
+            <div class="signature-title">شركة النظم المتطورة</div>
+        </div>
+    </div>
+    
     <script>
-        // تصحيح كود التنقل
+        // إضافة تأثيرات تفاعلية إضافية
         document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const contentSections = document.querySelectorAll('.content-section');
+            const notificationCard = document.querySelector('.notification-card');
+            const circles = document.querySelectorAll('.floating-circle');
             
-            // دالة لتبديل الأقسام
-            function switchSection(sectionId) {
-                // إخفاء جميع الأقسام
-                contentSections.forEach(section => {
-                    section.classList.remove('active');
-                });
+            // تأثير عند تحميل الصفحة
+            setTimeout(() => {
+                notificationCard.style.opacity = '1';
+                notificationCard.style.transform = 'translateY(0)';
+            }, 300);
+            
+            // تغيير لون الدوائر العائمة عند التمرير
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.scrollY;
                 
-                // إظهار القسم المطلوب
-                const targetSection = document.getElementById(sectionId);
-                if (targetSection) {
-                    targetSection.classList.add('active');
-                }
-                
-                // تحديث الروابط النشطة
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('data-section') === sectionId) {
-                        link.classList.add('active');
+                circles.forEach((circle, index) => {
+                    const speed = 0.5 + (index * 0.1);
+                    const yPos = -scrollPosition * speed * 0.1;
+                    circle.style.transform = `translateY(${yPos}px)`;
+                    
+                    // تغيير اللون بناء على موضع التمرير
+                    if (scrollPosition > 100) {
+                        circle.style.background = 'linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(52, 152, 219, 0.1) 100%)';
+                    } else {
+                        circle.style.background = 'linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%)';
                     }
-                });
-            }
-            
-            // إضافة مستمعي الأحداث للروابط
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const sectionId = this.getAttribute('data-section');
-                    switchSection(sectionId);
                 });
             });
             
-            // تهيئة القسم الأول كنشط
-            if (contentSections.length > 0) {
-                switchSection('hobbies');
+            // تأثير كتابة النص بشكل تدريجي (للشعار)
+            const companyLogo = document.querySelector('.company-logo');
+            const originalText = companyLogo.textContent;
+            companyLogo.textContent = '';
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < originalText.length) {
+                    companyLogo.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
             }
+            
+            // بدء تأثير الكتابة بعد تحميل الصفحة
+            setTimeout(typeWriter, 500);
         });
     </script>
 </body>
